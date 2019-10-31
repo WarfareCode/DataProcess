@@ -152,6 +152,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DataProcess.cpp" />
+    <ClCompile Include="Scenario.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Scenario.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
