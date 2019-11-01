@@ -1,12 +1,12 @@
-/****************************************************************
-*	Copyright(c)2019-2020 ËÄ´¨´óÑ§µç×ÓĞÅÏ¢Ñ§ÔºÖÇÄÜ¿ØÖÆÑĞ¾¿Ëù
+ï»¿/****************************************************************
+*	Copyright(c)2019-2020 å››å·å¤§å­¦ç”µå­ä¿¡æ¯å­¦é™¢æ™ºèƒ½æ§åˆ¶ç ”ç©¶æ‰€
 *	All right reserved.
 *
-*	ÎÄ¼şÃû³Æ£ºScenario.cpp
-*	¹¦ÄÜ£ºÌá¹©XML½âÎöÊı¾İ·â×°ÀàÊµÏÖ³ÌĞò
-*	µ±Ç°°æ±¾£º1.0
-*	×÷Õß£ºº«Â¶
-*	Íê³ÉÈÕÆÚ£º
+*	æ–‡ä»¶åç§°ï¼šScenario.cpp
+*	åŠŸèƒ½ï¼šæä¾›XMLè§£ææ•°æ®å°è£…ç±»å®ç°ç¨‹åº
+*	å½“å‰ç‰ˆæœ¬ï¼š1.0
+*	ä½œè€…ï¼šéŸ©éœ²
+*	å®Œæˆæ—¥æœŸï¼š
 ******************************************************************/
 
 #include "Scenario.hpp"
@@ -106,7 +106,7 @@ namespace sce
 
 	const unsigned int & Rf_values::getPhaseOrder(void) const
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_phaseOrder; 
 	}
 	const unsigned int & Rf_values::getNumberOfPulses(void) const
@@ -148,11 +148,11 @@ namespace sce
 	}
 
 	/************************Rf**********************************/
-	//ÓÉÓÚÄ¬ÈÏ¹¹Ôìº¯ÊıÉĞÎ´½øĞĞValuesÖµ³õÊ¼»¯£¬ËùÒÔµ÷ÓÃÄ¬ÈÏ¹¹ÔìºóÓ¦¾¡¿ìÌí¼ÓValuesÖµ
+	//ç”±äºé»˜è®¤æ„é€ å‡½æ•°å°šæœªè¿›è¡ŒValueså€¼åˆå§‹åŒ–ï¼Œæ‰€ä»¥è°ƒç”¨é»˜è®¤æ„é€ ååº”å°½å¿«æ·»åŠ Valueså€¼
 	Rf::Rf(void)
 	{
 	}
-	//ÓÉÓÚÄ¬ÈÏ¹¹Ôìº¯ÊıÉĞÎ´½øĞĞValuesÖµ³õÊ¼»¯£¬ËùÒÔµ÷ÓÃÄ¬ÈÏ¹¹ÔìºóÓ¦¾¡¿ìÌí¼ÓValuesÖµ
+	//ç”±äºé»˜è®¤æ„é€ å‡½æ•°å°šæœªè¿›è¡ŒValueså€¼åˆå§‹åŒ–ï¼Œæ‰€ä»¥è°ƒç”¨é»˜è®¤æ„é€ ååº”å°½å¿«æ·»åŠ Valueså€¼
 	Rf::Rf(const unsigned long &rfmin,
 		const unsigned long &rfmax,
 		const RfType &rftype)
@@ -269,7 +269,7 @@ namespace sce
 
 	//inline const Rf_values& Rf::operator[](unsigned int valuesOrder) const
 	//{
-	//	// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+	//	// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 	//	return Rf::getRfValues(valuesOrder);
 	//}
 
@@ -337,11 +337,11 @@ namespace sce
 	}
 	
 	/***************************PW************************************/
-	//ÓÉÓÚÄ¬ÈÏ¹¹Ôìº¯ÊıÉĞÎ´½øĞĞValuesÖµ³õÊ¼»¯£¬ËùÒÔµ÷ÓÃÄ¬ÈÏ¹¹ÔìºóÓ¦¾¡¿ìÌí¼ÓValuesÖµ
+	//ç”±äºé»˜è®¤æ„é€ å‡½æ•°å°šæœªè¿›è¡ŒValueså€¼åˆå§‹åŒ–ï¼Œæ‰€ä»¥è°ƒç”¨é»˜è®¤æ„é€ ååº”å°½å¿«æ·»åŠ Valueså€¼
 	Pw::Pw(void)
 	{
 	}
-	//ÓÉÓÚÄ¬ÈÏ¹¹Ôìº¯ÊıÉĞÎ´½øĞĞValuesÖµ³õÊ¼»¯£¬ËùÒÔµ÷ÓÃÄ¬ÈÏ¹¹ÔìºóÓ¦¾¡¿ìÌí¼ÓValuesÖµ
+	//ç”±äºé»˜è®¤æ„é€ å‡½æ•°å°šæœªè¿›è¡ŒValueså€¼åˆå§‹åŒ–ï¼Œæ‰€ä»¥è°ƒç”¨é»˜è®¤æ„é€ ååº”å°½å¿«æ·»åŠ Valueså€¼
 	Pw::Pw(const unsigned long &pwmin,
 		const unsigned long &pwmax,
 		const PwType &pwtype)
@@ -466,7 +466,7 @@ namespace sce
 
 	//inline const Pw_values & Pw::operator[](unsigned int valuesOrder) const
 	//{
-	//	// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+	//	// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 	//	return Pw::getPwValues(valuesOrder);
 	//}
 
@@ -533,11 +533,11 @@ namespace sce
 	}
 
 	/***************************Pri************************************/
-	//ÓÉÓÚÄ¬ÈÏ¹¹Ôìº¯ÊıÉĞÎ´½øĞĞValuesÖµ³õÊ¼»¯£¬ËùÒÔµ÷ÓÃÄ¬ÈÏ¹¹ÔìºóÓ¦¾¡¿ìÌí¼ÓValuesÖµ
+	//ç”±äºé»˜è®¤æ„é€ å‡½æ•°å°šæœªè¿›è¡ŒValueså€¼åˆå§‹åŒ–ï¼Œæ‰€ä»¥è°ƒç”¨é»˜è®¤æ„é€ ååº”å°½å¿«æ·»åŠ Valueså€¼
 	Pri::Pri(void)
 	{
 	}
-	//ÓÉÓÚ¹¹Ôìº¯ÊıÉĞÎ´½øĞĞValuesÖµ³õÊ¼»¯£¬ËùÒÔµ÷ÓÃÄ¬ÈÏ¹¹ÔìºóÓ¦¾¡¿ìÌí¼ÓValuesÖµ
+	//ç”±äºæ„é€ å‡½æ•°å°šæœªè¿›è¡ŒValueså€¼åˆå§‹åŒ–ï¼Œæ‰€ä»¥è°ƒç”¨é»˜è®¤æ„é€ ååº”å°½å¿«æ·»åŠ Valueså€¼
 	Pri::Pri(const unsigned long &primin,
 		const unsigned long &primax,
 		const PriType &pritype)
@@ -595,7 +595,7 @@ namespace sce
 
 	std::vector<Pri_values>& Pri::getPriValues(void)
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_values;
 	}
 
@@ -665,7 +665,7 @@ namespace sce
 
 	//inline const Pri_values & Pri::operator[](unsigned int valuesOrder) const
 	//{
-	//	// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+	//	// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 	//	return Pri::getPriValues(valuesOrder);
 	//}
 
@@ -750,7 +750,7 @@ namespace sce
 	}
 	
 	/**************************Radar_Mode**********************************/
-	//ÓÉÓÚÄ¬ÈÏ¹¹Ôìº¯ÊıÉĞÎ´½øĞĞValuesÖµ³õÊ¼»¯£¬ËùÒÔµ÷ÓÃÄ¬ÈÏ¹¹ÔìºóÓ¦¾¡¿ìÌí¼ÓValuesÖµ
+	//ç”±äºé»˜è®¤æ„é€ å‡½æ•°å°šæœªè¿›è¡ŒValueså€¼åˆå§‹åŒ–ï¼Œæ‰€ä»¥è°ƒç”¨é»˜è®¤æ„é€ ååº”å°½å¿«æ·»åŠ Valueså€¼
 	Radar_Mode::Radar_Mode(void)
 	{
 	}
@@ -848,7 +848,7 @@ namespace sce
 	}
 
 	/***************************Emitter*********************************/
-	//ÓÉÓÚÄ¬ÈÏ¹¹Ôìº¯ÊıÉĞÎ´½øĞĞRadarModeÖµ³õÊ¼»¯£¬ËùÒÔµ÷ÓÃÄ¬ÈÏ¹¹ÔìºóÓ¦¾¡¿ìÍê³ÉRadarModeÖµ³õÊ¼»¯²Ù×÷
+	//ç”±äºé»˜è®¤æ„é€ å‡½æ•°å°šæœªè¿›è¡ŒRadarModeå€¼åˆå§‹åŒ–ï¼Œæ‰€ä»¥è°ƒç”¨é»˜è®¤æ„é€ ååº”å°½å¿«å®ŒæˆRadarModeå€¼åˆå§‹åŒ–æ“ä½œ
 	Emitter::Emitter(void)
 	{
 	}
@@ -873,13 +873,13 @@ namespace sce
 
 	const std::string& Emitter::getName(void) const
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_name;
 	}
 
 	const std::shared_ptr<Radar_Mode> Emitter::getRadarMode(unsigned int valueOrder) const
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		assert(valueOrder>= m_ptrRadarMode.size());
 		if (valueOrder<m_ptrRadarMode.size())
 		{
@@ -940,19 +940,19 @@ namespace sce
 
 	const std::string & Weapon::getName(void) const
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_name;
 	}
 
 	const unsigned long & Weapon::getCEPR(void) const
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_cepr;
 	}
 
 	const unsigned long & Weapon::getWeaponAreaCoverage(void) const
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_weaponAreaCoverage;
 	}
 
@@ -993,25 +993,25 @@ namespace sce
 
 	const std::string & Site::getName(void) const
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_name;
 	}
 
 	const double & Site::getAltitude(void) const
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_altitude;
 	}
 
 	const double & Site::getLatitude(void) const
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_latitude;
 	}
 
 	const double & Site::getLongitude(void) const
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_longitude;
 	}
 
@@ -1059,31 +1059,31 @@ namespace sce
 
 	const double & Point::getAltitude(void) const
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_altitude;
 	}
 
 	const double & Point::getLatitude(void) const
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_latitude;
 	}
 
 	const double & Point::getLongitude(void) const
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_longitude;
 	}
 
 	const double & Point::getTmin(void) const
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_tmin;
 	}
 
 	const double & Point::getTmax(void) const
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_tmax;
 	}
 
@@ -1139,7 +1139,7 @@ namespace sce
 	{
 	}
 
-	//´Ë¹¹Ôìº¯ÊıÓ¦¸ÃÔÚMissionTypeÎªSupportÊ±²ÅÓÃ´Ë¹¹Ôìº¯Êı£¬µ«Ò»ÈçÇ°ÃæËùËµ£¬²»±£Ö¤°²È«ĞÔ
+	//æ­¤æ„é€ å‡½æ•°åº”è¯¥åœ¨MissionTypeä¸ºSupportæ—¶æ‰ç”¨æ­¤æ„é€ å‡½æ•°ï¼Œä½†ä¸€å¦‚å‰é¢æ‰€è¯´ï¼Œä¸ä¿è¯å®‰å…¨æ€§
 	Mission::Mission(const MissionType &missionType,
 		const Point &startPoint,
 		const Point &endPoint)
@@ -1155,19 +1155,19 @@ namespace sce
 
 	const MissionType & Mission::getMissionType(void) const
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_type;
 	}
 
 	Point & Mission::getStartPoint(void)
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_startPoint;
 	}
 
 	Point & Mission::getEndPoint(void)
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		return m_endPoint;
 	}
 
@@ -1178,7 +1178,7 @@ namespace sce
 
 	Point & Mission::getTargetPoint(unsigned int pointOrder)
 	{
-		// TODO: ÔÚ´Ë´¦²åÈë return Óï¾ä
+		// TODO: åœ¨æ­¤å¤„æ’å…¥ return è¯­å¥
 		assert(pointOrder >= m_targetPoints.size());
 		if (pointOrder<m_targetPoints.size())
 		{
@@ -1187,8 +1187,8 @@ namespace sce
 		throw Error("can't return this value (doesn't exist)");
 	}
 
-	//Çë×¢Òâ£¬µ±Ê¹ÓÃÄ¬ÈÏ¹¹Ôìº¯ÊıÊ±£¬Ìí¼ÓµÚÒ»¸öÀà¶ÔÏóÊ±£¬²»Ó¦¸ÃÖ±½ÓÊ¹ÓÃaddº¯Êı£¬
-	//ÒòÎªÄ¬ÈÏ¹¹ÔìÒÑ¾­³õÊ¼»¯ÁËÒ»¸öËæ»úµÄ¶ÔÏóÔÚÈİÆ÷ÖĞ£¬´ËÊ±Ó¦¸Ã¶ÔÕâ¸ö³õÊ¼»¯¶ÔÏó½øĞĞ±à¼­Ê¹Æä³ÉÎª´ıÌí¼ÓµÄ¶ÔÏó¡£
+	//è¯·æ³¨æ„ï¼Œå½“ä½¿ç”¨é»˜è®¤æ„é€ å‡½æ•°æ—¶ï¼Œæ·»åŠ ç¬¬ä¸€ä¸ªç±»å¯¹è±¡æ—¶ï¼Œä¸åº”è¯¥ç›´æ¥ä½¿ç”¨addå‡½æ•°ï¼Œ
+	//å› ä¸ºé»˜è®¤æ„é€ å·²ç»åˆå§‹åŒ–äº†ä¸€ä¸ªéšæœºçš„å¯¹è±¡åœ¨å®¹å™¨ä¸­ï¼Œæ­¤æ—¶åº”è¯¥å¯¹è¿™ä¸ªåˆå§‹åŒ–å¯¹è±¡è¿›è¡Œç¼–è¾‘ä½¿å…¶æˆä¸ºå¾…æ·»åŠ çš„å¯¹è±¡ã€‚
 	void Mission::addTargetPoint(const Point &targetPoint)
 	{
 		m_targetPoints.push_back(targetPoint);
