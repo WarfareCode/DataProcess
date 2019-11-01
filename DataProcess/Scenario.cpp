@@ -209,12 +209,18 @@ namespace sce
 		return m_type;
 	}
 
+	std::vector<Rf_values>& Rf::getRfValues(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_values;
+	}
+
 	bool Rf::isValuesEmpty()
 	{
 		return m_values.empty() ? true : false;
 	}
 
-	Rf_values & Rf::getRfValues(unsigned int valueOrder)
+	Rf_values & Rf::getRfValue(unsigned int valueOrder)
 	{
 		assert(valueOrder >= m_values.size());
 		if (valueOrder<m_values.size())
@@ -265,6 +271,11 @@ namespace sce
 	void Rf::setRfType(const RfType & rftype)
 	{
 		m_type = rftype;
+	}
+
+	void Rf::setRfValues(const std::vector<Rf_values>&rfValues)
+	{
+		m_values = rfValues;
 	}
 
 	//inline const Rf_values& Rf::operator[](unsigned int valuesOrder) const
@@ -403,12 +414,18 @@ namespace sce
 		return m_type;
 	}
 
+	std::vector<Pw_values>& Pw::getPwValues(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_values;
+	}
+
 	bool Pw::isValuesEmpty()
 	{
 		return m_values.empty() ? true : false;
 	}
 
-	Pw_values & Pw::getPwValues(unsigned int valueOrder)
+	Pw_values & Pw::getPwValue(unsigned int valueOrder)
 	{
 		assert(valueOrder >= m_values.size());
 		if (valueOrder<m_values.size())
@@ -461,6 +478,11 @@ namespace sce
 	void Pw::setPwType(const PwType & pwtype)
 	{
 		m_type = pwtype;
+	}
+
+	void Pw::setPwValues(const std::vector<Pw_values>&pwValues)
+	{
+		m_values = pwValues;
 	}
 
 
@@ -819,22 +841,22 @@ namespace sce
 		m_modeType = modeType;
 	}
 
-	void Radar_Mode::setRf(const Rf & rf)
+	//这里Rf,Pw,Pri的方法中不在用const修饰是考虑到其类成员函数中的
+	//getValues(void)返回值为非常量应用，这里用const修饰Rf类对象
+	//的应用会发生常量值与非常量属性值不匹配的情况，后续在深入整理
+	void Radar_Mode::setRf(Rf & rf)
 	{
-		m_rf = rf;
+		m_rf=rf;
+		// m_rf.setRfValues(rf.getRfValues());
+		
 	}
-
-	void Radar_Mode::setPw(const Pw & pw)
+	void Radar_Mode::setPw(Pw & pw)
 	{
 		m_pw = pw;
 	}
-
-	void Radar_Mode::setPri(const Pri & pri)
+	void Radar_Mode::setPri(Pri & pri)
 	{
-		m_pri.setPriMax(pri.getPriMax());
-		m_pri.setPriMin(pri.getPriMin());
-		m_pri.setPriType(pri.getPriType());
-		m_pri.getPriValues();
+		m_pri=pri;
 	}
 
 	void Radar_Mode::setScan(const Scan & scan)
@@ -875,6 +897,12 @@ namespace sce
 	{
 		// TODO: 在此处插入 return 语句
 		return m_name;
+	}
+
+	std::vector<std::shared_ptr<Radar_Mode>>& Emitter::getRadarModes(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_ptrRadarMode;
 	}
 
 	const std::shared_ptr<Radar_Mode> Emitter::getRadarMode(unsigned int valueOrder) const
@@ -918,6 +946,11 @@ namespace sce
 	void Emitter::setName(const std::string & name)
 	{
 		m_name = name;
+	}
+
+	void Emitter::setRadarModes(std::vector<std::shared_ptr<Radar_Mode>>&ptrRadarModes)
+	{
+		m_ptrRadarMode = ptrRadarModes;
 	}
 	
 	/*********************Weapon*********************************/
@@ -1171,6 +1204,12 @@ namespace sce
 		return m_endPoint;
 	}
 
+	std::vector<Point>& Mission::getTargetPoint(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_targetPoints;
+	}
+
 	bool Mission::isTargetPointEmpty(void)
 	{
 		return m_targetPoints.empty()?true:false;
@@ -1223,20 +1262,409 @@ namespace sce
 
 	void Mission::setStartPoint(const Point &startPoint)
 	{
-		m_startPoint.setAltitude(startPoint.getAltitude());
-		m_startPoint.setLatitude(startPoint.getLatitude());
-		m_startPoint.setLongitude(startPoint.getLongitude());
-		m_startPoint.setTmax(startPoint.getTmax());
-		m_startPoint.setTmin(startPoint.getTmin());
+		m_startPoint=startPoint;
 	}
 
 	void Mission::setEndPoint(const Point &endPoint)
 	{
-		m_endPoint.setAltitude(endPoint.getAltitude());
-		m_endPoint.setLatitude(endPoint.getLatitude());
-		m_endPoint.setLongitude(endPoint.getLongitude());
-		m_endPoint.setTmax(endPoint.getTmax());
-		m_endPoint.setTmin(endPoint.getTmin());
+		m_endPoint=endPoint;
+	}
+
+	void Mission::setTargetPoint(const std::vector<Point>& targetPoints)
+	{
+		m_targetPoints = targetPoints;
+	}
+
+	/***********************OwnPlatform************************************/
+	OwnPlatform::OwnPlatform(void)
+	{
+	}
+
+	OwnPlatform::OwnPlatform(const std::string &name,
+		const OwnPlatformType &ownPlatformType,
+		const double &maxAcceleration,
+		const double &maxDeceleration,
+		const double &maxClimbRate,
+		const double &maxDiveRate,
+		const double &maxSpeed,
+		const double &maxTurnRadius,
+		const Mission &mission)
+		:m_name(name)
+		,m_type(ownPlatformType)
+		,m_maxAcceleration(maxAcceleration)
+		,m_maxDeceleration(maxDeceleration)
+		,m_maxClimbRate(maxClimbRate)
+		,m_maxDiveRate(maxDiveRate)
+		,m_maxSpeed(maxSpeed)
+		,m_maxTurnRadius(maxTurnRadius)
+		,m_mission(mission)
+	{
+
+	}
+
+	OwnPlatform::~OwnPlatform(void)
+	{
+	}
+
+	const std::string & OwnPlatform::getName(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_name;
+	}
+
+	const OwnPlatformType & OwnPlatform::getType(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_type;
+	}
+
+	const double & OwnPlatform::getMaxAcceleration(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_maxAcceleration;
+	}
+
+	const double & OwnPlatform::getMaxDeceleration(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_maxDeceleration;
+	}
+
+	const double & OwnPlatform::getMaxClimbRate(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_maxClimbRate;
+	}
+
+	const double & OwnPlatform::getMaxDiveRate(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_maxDiveRate;
+	}
+
+	const double & OwnPlatform::getMaxSpeed(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_maxSpeed;
+	}
+
+	const double & OwnPlatform::getMaxTurnRadius(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_maxTurnRadius;
+	}
+
+	Mission & OwnPlatform::getMission(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_mission;
+	}
+
+	void OwnPlatform::setName(const std::string &name)
+	{
+		m_name = name;
+	}
+
+	void OwnPlatform::setType(const OwnPlatformType &ownPlatformType)
+	{
+		m_type = ownPlatformType;
+	}
+
+	void OwnPlatform::setMaxAcceleration(const double &maxAcceleration)
+	{
+		m_maxAcceleration = maxAcceleration;
+	}
+
+	void OwnPlatform::setMaxDeceleration(const double &maxDeceleration)
+	{
+		m_maxDeceleration = maxDeceleration;
+	}
+
+	void OwnPlatform::setMaxClimbRate(const double &maxClimbRate)
+	{
+		m_maxClimbRate = maxClimbRate;
+	}
+
+	void OwnPlatform::setMaxDiveRate(const double &maxDiveRate)
+	{
+		m_maxDiveRate = maxDiveRate;
+	}
+
+	void OwnPlatform::setMaxSpeed(const double &maxSpeed)
+	{
+		m_maxSpeed = maxSpeed;
+	}
+
+	void OwnPlatform::setMaxTurnRadius(const double &maxTurnRadius)
+	{
+		m_maxTurnRadius = maxTurnRadius;
+	}
+
+	void OwnPlatform::setMission(const Mission &mission)
+	{
+		m_mission = mission;
+	}
+
+	/****************************Esm***************************/
+	Esm::Esm(void)
+	{
+	}
+
+	Esm::Esm(const std::string &name,
+		const double &dwellFreqResolution,
+		const unsigned int &tuningStep,
+		const unsigned long &rfCovMin,
+		const unsigned long &rfCovMax,
+		const unsigned int &numPulsesAcquisition,
+		const unsigned int &numPulsesAlarm)
+		:m_name(name)
+		,m_dwellFreqResolution(dwellFreqResolution)
+		,m_tuningStep(tuningStep)
+		,m_rfCovMin(rfCovMin)
+		,m_rfCovMax(rfCovMax)
+		,m_numPulsesAcquisition(numPulsesAcquisition)
+		,m_numPulsesAlarm(numPulsesAlarm)
+	{
+	}
+
+	Esm::~Esm(void)
+	{
+	}
+
+	const std::string & Esm::getName(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_name;
+	}
+
+	const double & Esm::getDwellFreqResolution(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_dwellFreqResolution;
+	}
+
+	const unsigned int & Esm::getTuningStep(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_tuningStep;
+	}
+
+	const unsigned long & Esm::getRfCovMin(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_rfCovMin;
+	}
+
+	const unsigned long & Esm::getRfCovMax(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_rfCovMax;
+	}
+
+	const unsigned int & Esm::getNumPulsesAcquisition(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_numPulsesAcquisition;
+	}
+
+	const unsigned int & Esm::getNumPulsesAlarm(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_numPulsesAlarm;
+	}
+
+	void Esm::setName(const std::string &name)
+	{
+		m_name = name;
+	}
+
+	void Esm::setDwellFreqResolution(const double &dwellFreqResolution)
+	{
+		m_dwellFreqResolution = dwellFreqResolution;
+	}
+
+	void Esm::setTuningStep(const int &tuningStep)
+	{
+		m_tuningStep = tuningStep;
+	}
+
+	void Esm::setRfCovMin(const long &rfCovMin)
+	{
+		m_rfCovMin = rfCovMin;
+	}
+
+	void Esm::setRfCovMax(const long &rfCovMax)
+	{
+		m_rfCovMax = rfCovMax;
+	}
+
+	void Esm::setNumPulsesAcquisition(const int &numPulsesAcquisition)
+	{
+		m_numPulsesAcquisition = numPulsesAcquisition;
+	}
+
+	void Esm::setNumPulsesAlarm(const int &numPulsesAlarm)
+	{
+		m_numPulsesAlarm = numPulsesAlarm;
+	}
+
+	/********************Ecm********************************/
+	Ecm::Ecm(void)
+	{
+	}
+
+	Ecm::Ecm(const std::string &name,
+		const unsigned long &pt,
+		const unsigned int &gain,
+		const unsigned long &rfmin,
+		const unsigned long &rfmax,
+		const Tech& techName)
+		:m_name(name)
+		, m_pt(pt)
+		, m_gain(gain)
+		, m_rfMin(rfmin)
+		, m_rfMax(rfmax)
+		, m_techName{ techName }
+	{
+	}
+
+	Ecm::Ecm(const std::string &name,
+		const unsigned long &pt,
+		const unsigned int &gain,
+		const unsigned long &rfmin,
+		const unsigned long &rfmax,
+		const std::vector<Tech>&techName) 
+		:m_name(name)
+		,m_pt(pt)
+		,m_gain(gain)
+		,m_rfMin(rfmin)
+		,m_rfMax(rfmax)
+		,m_techName(techName)
+	{
+	}
+
+	Ecm::~Ecm(void)
+	{
+	}
+
+	const std::string & Ecm::getName(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_name;
+	}
+
+	const unsigned long & Ecm::getPt(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_pt;
+	}
+
+	const unsigned int & Ecm::getGain(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_gain;
+	}
+
+	const unsigned long & Ecm::getRfMin(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_rfMin;
+	}
+
+	const unsigned long & Ecm::getRfMax(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_rfMax;
+	}
+
+	std::vector<Tech>& Ecm::getTechs(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_techName;
+	}
+
+	bool Ecm::isTechEmpty(void)
+	{
+		return m_techName.size()?true:false;
+	}
+
+	const Tech & Ecm::getTech(const unsigned int & order)
+	{
+		// TODO: 在此处插入 return 语句
+		assert(order>=m_techName.size());
+		if (order<m_techName.size())
+		{
+			return m_techName[order];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	void Ecm::addTech(const Tech &tech)
+	{
+		m_techName.push_back(tech);
+	}
+
+	bool Ecm::setTech(const unsigned int & pos, const Tech &tech)
+	{
+		assert(pos>=m_techName.size());
+		if (pos<m_techName.size())
+		{
+			m_techName[pos] = tech;
+			return true;
+		}
+		return false;
+	}
+
+	bool Ecm::insertTech(const unsigned int & pos, const Tech &tech)
+	{
+		assert(pos > m_techName.size());
+		if (pos<=m_techName.size())
+		{
+			m_techName.insert(m_techName.begin()+pos,tech);
+			return true;
+		}
+		return false;
+	}
+
+	bool Ecm::deleteTech(const unsigned int & pos)
+	{
+		assert(pos >= m_techName.size());
+		if (pos<m_techName.size())
+		{
+			m_techName.erase(m_techName.begin()+pos);
+			return true;
+		}
+		return false;
+	}
+
+	void Ecm::setName(const std::string &name)
+	{
+		m_name = name;
+	}
+
+	void Ecm::setPt(const unsigned long &pt)
+	{
+		m_pt = pt;
+	}
+
+	void Ecm::setGain(const unsigned int &gain)
+	{
+		m_gain = gain;
+	}
+
+	void Ecm::setRfMin(const unsigned long &rfMin)
+	{
+		m_rfMin = rfMin;
+	}
+
+	void Ecm::setRfMax(const unsigned long &rfMax)
+	{
+		m_rfMax = rfMax;
+	}
+
+	void Ecm::setTechs(const std::vector<Tech>& techs)
+	{
+		m_techName = techs;
 	}
 
 }

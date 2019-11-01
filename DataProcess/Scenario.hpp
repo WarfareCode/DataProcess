@@ -95,7 +95,7 @@ namespace sce
 		double m_latitude=0.0, m_longitude=0.0;
 	};
 
-	enum PlatformType
+	enum class PlatformType
 	{
 		LAND = 0,
 		AIR = 1,
@@ -162,7 +162,7 @@ namespace sce
 		unsigned long m_sweepTime = 0;
 	};
 
-	enum RfType
+	enum class RfType
 	{
 		BURST = 0,
 		FIX=1
@@ -205,7 +205,7 @@ namespace sce
 
 		//根据values的索引值获取不同values的对象。
 		//在获取values前应判断容器是否为空
-		Rf_values& getRfValues(unsigned int valueOrder);
+		Rf_values& getRfValue(unsigned int valueOrder);
 
 		//add Rf_values
 		void addRfValues(Rf_values &);
@@ -270,7 +270,7 @@ namespace sce
 		unsigned long m_sweepTime=0;
 	};
 
-	enum PwType
+	enum class PwType
 	{
 		FIX = 0
 	};
@@ -373,7 +373,7 @@ namespace sce
 		unsigned long m_sweepTime=0;
 	};
 
-	enum PriType
+	enum class PriType
 	{
 		STAGGER = 0,
 		SWITCHING=1,
@@ -446,7 +446,7 @@ namespace sce
 		//const Pri_values &operator[](unsigned int valuesOrder) const;
 	};
 
-	enum ScanType
+	enum class ScanType
 	{
 		SECTORIAL=0
 	};
@@ -500,7 +500,7 @@ namespace sce
 		unsigned long m_max=50000;
 	};
 
-	enum ModeType
+	enum class ModeType
 	{
 		PULSE=0
 	};
@@ -534,9 +534,9 @@ namespace sce
 		//set method
 		void setModeCode(const std::string &);
 		void setModeType(const ModeType &);
-		void setRf(const Rf &);
-		void setPw(const Pw &);
-		void setPri(const Pri &);
+		void setRf(Rf &);
+		void setPw(Pw &);
+		void setPri(Pri &);
 		void setScan(const Scan &);
 		void setErp(const Erp &);
 
@@ -563,6 +563,10 @@ namespace sce
 
 		//get method
 		const std::string& getName(void) const ;
+
+		//获取RadarMode容器对象
+		std::vector<std::shared_ptr<Radar_Mode>>& getRadarModes(void);
+
 		const std::shared_ptr<Radar_Mode> getRadarMode(unsigned int valueOrder) const ;
 
 		//add method
@@ -576,6 +580,8 @@ namespace sce
 
 		//set method
 		void setName(const std::string& name);
+
+		void setRadarModes(std::vector<std::shared_ptr<Radar_Mode>>&);
 
 	private:
 		std::string m_name{"Emitter1"};
@@ -661,7 +667,7 @@ namespace sce
 		double m_tmax{ 0.0 };
 	};
 	
-	enum MissionType
+	enum class MissionType
 	{
 		STRIKE = 0,
 		SUPPORT=1
@@ -688,6 +694,8 @@ namespace sce
 		Point& getStartPoint(void);
 		Point& getEndPoint(void);
 
+		std::vector<Point>& getTargetPoint(void);
+		
 		bool isTargetPointEmpty(void);
 
 		//返回非常量引用可以连续调用成员变量类的成员函数
@@ -702,6 +710,7 @@ namespace sce
 		void setMissionType(const MissionType&);
 		void setStartPoint(const Point&);
 		void setEndPoint(const Point&);
+		void setTargetPoint(const std::vector<Point>&);
 
 
 	private:
@@ -711,17 +720,150 @@ namespace sce
 		std::vector<Point> m_targetPoints{Point()};
 	};
 		
+	enum class OwnPlatformType
+	{
+		AIR=0
+		
+	};
+
 	class OwnPlatform
 	{
 	public:
-		OwnPlatform();
-		~OwnPlatform();
+		OwnPlatform(void);
+		OwnPlatform(const std::string&, const OwnPlatformType&,const double&, const double&, const double&, const double&, const double&, const double&, const Mission&);
+		~OwnPlatform(void);
+
+		const std::string& getName(void) const;
+		const OwnPlatformType& getType(void) const;
+		const double& getMaxAcceleration(void)const;
+		const double& getMaxDeceleration(void)const;
+		const double& getMaxClimbRate(void)const;
+		const double& getMaxDiveRate(void)const;
+		const double& getMaxSpeed(void)const;
+		const double& getMaxTurnRadius(void)const;
+
+		Mission& getMission(void);
+
+		void setName(const std::string&);
+		void setType(const OwnPlatformType&);
+		void setMaxAcceleration(const double&);
+		void setMaxDeceleration(const double&);
+		void setMaxClimbRate(const double&);
+		void setMaxDiveRate(const double&);
+		void setMaxSpeed(const double&);
+		void setMaxTurnRadius(const double&);
+
+		void setMission(const Mission&);
+
 
 	private:
-
+		std::string m_name{"Platform 1"};
+		OwnPlatformType m_type=OwnPlatformType::AIR;
+		double m_maxAcceleration{9.8};
+		double m_maxDeceleration{9.8};
+		double m_maxClimbRate{30.0};
+		double m_maxDiveRate{30.0};
+		double m_maxSpeed{340.0};
+		double m_maxTurnRadius{10000};
+		Mission m_mission{Mission()};
 	};
 
-	
+	class Esm
+	{
+	public:
+		Esm(void);
+		Esm(const std::string&, const double&, const unsigned int&, const unsigned long&, const unsigned long&, const unsigned int&, const unsigned int&);
+		~Esm(void);
+
+		const std::string& getName(void);
+		const double& getDwellFreqResolution(void);
+		const unsigned int& getTuningStep(void);
+		const unsigned long& getRfCovMin(void);
+		const unsigned long& getRfCovMax(void);
+		const unsigned int& getNumPulsesAcquisition(void);
+		const unsigned int& getNumPulsesAlarm(void);
+
+		void setName(const std::string&);
+		void setDwellFreqResolution(const double&);
+		void setTuningStep(const int&);
+		void setRfCovMin(const long&);
+		void setRfCovMax(const long&);
+		void setNumPulsesAcquisition(const int&);
+		void setNumPulsesAlarm(const int&);
+		
+	private:
+		std::string m_name{ "Esm1" };
+		double m_dwellFreqResolution{100.0};
+		unsigned int m_tuningStep{ 20 };
+		unsigned long m_rfCovMin{ 500 };
+		unsigned long m_rfCovMax{ 12000 };
+		unsigned int m_numPulsesAcquisition{200};
+		unsigned int m_numPulsesAlarm{100};
+	};
+
+	enum class Tech
+	{
+		NOISE = 0,
+		VGPO = 1,
+		FT = 2,
+		RGPO = 3
+	};
+
+	class Ecm
+	{
+	public:
+		Ecm(void);
+
+		Ecm(const std::string&, const unsigned long&, const unsigned int&, const unsigned long&, const unsigned long&, const Tech&);
+
+		Ecm(const std::string&, const unsigned long&, const unsigned int&, const unsigned long&, const unsigned long&, const std::vector<Tech>&);
+		~Ecm(void);
+
+		const std::string& getName(void);
+		const unsigned long& getPt(void);
+		const unsigned int& getGain(void);
+		const unsigned long& getRfMin(void);
+		const unsigned long& getRfMax(void);
+
+		//获取装填所有Tech的容器对象
+		std::vector<Tech>& getTechs(void);
+
+		//判断装填所有Tech的容器中是否为空
+		bool isTechEmpty(void);
+
+		//根据索引值找寻对应的Tech
+		const Tech& getTech(const unsigned int& order);
+
+		//add Tech
+		void addTech(const Tech&);
+
+		//对单个Tech进行设置，更改
+		bool setTech(const unsigned int& pos, const Tech&);
+
+		//insert Tech
+		bool insertTech(const unsigned int& pos, const Tech&);
+
+		//delete Tech
+		bool deleteTech(const unsigned int& pos);
+
+		//set method
+		void setName(const std::string&);
+		void setPt(const unsigned long&);
+		void setGain(const unsigned int&);
+		void setRfMin(const unsigned long&);
+		void setRfMax(const unsigned long&);
+
+		//以容器为单位，整体赋值修改
+		void setTechs(const std::vector<Tech>&);
+
+	private:
+		std::string m_name{ "Ecm1" };
+		unsigned long m_pt{ 20000 };
+		unsigned int m_gain{ 10 };
+		unsigned long m_rfMin{ 9000 };
+		unsigned long m_rfMax{ 9500 };
+		std::vector<Tech> m_techName{Tech::NOISE};
+	};
 
 }
 
