@@ -209,7 +209,7 @@ namespace sce
 		return m_type;
 	}
 
-	std::vector<Rf_values>& Rf::getRfValues(void)
+	std::vector<Rf_values>& Rf::getAllRfValues(void)
 	{
 		// TODO: 在此处插入 return 语句
 		return m_values;
@@ -220,7 +220,7 @@ namespace sce
 		return m_values.empty() ? true : false;
 	}
 
-	Rf_values & Rf::getRfValue(unsigned int valueOrder)
+	Rf_values & Rf::getRfValue(const unsigned int& valueOrder)
 	{
 		assert(valueOrder >= m_values.size());
 		if (valueOrder<m_values.size())
@@ -230,14 +230,25 @@ namespace sce
 		throw Error("can't return this value (doesn't exist)");
 	}
 
-	void Rf::addRfValues(Rf_values & rfvalues)
+	void Rf::addRfValues(const Rf_values & rfvalues)
 	{
 		m_values.push_back(rfvalues);
 	}
 
-	bool Rf::insertRfValues(unsigned int pos, Rf_values & rfvalues)
+	bool Rf::setRfValues(const unsigned int & pos, const Rf_values &rfValues)
 	{
-		assert(pos <= m_values.size());
+		assert(pos >= m_values.size());
+		if (pos < m_values.size())
+		{
+			m_values[pos]=rfValues;
+			return true;
+		}
+		return false;
+	}
+
+	bool Rf::insertRfValues(const unsigned int& pos, const Rf_values & rfvalues)
+	{
+		assert(pos > m_values.size());
 		if (pos <= m_values.size())
 		{
 			m_values.insert(m_values.begin() + pos, rfvalues);
@@ -246,7 +257,7 @@ namespace sce
 		return false;
 	}
 
-	bool Rf::deleteRfValues(unsigned int pos)
+	bool Rf::deleteRfValues(const unsigned int& pos)
 	{
 		assert(pos >= m_values.size());
 		if (pos<m_values.size())
@@ -273,7 +284,7 @@ namespace sce
 		m_type = rftype;
 	}
 
-	void Rf::setRfValues(const std::vector<Rf_values>&rfValues)
+	void Rf::setAllRfValues(const std::vector<Rf_values>&rfValues)
 	{
 		m_values = rfValues;
 	}
@@ -414,7 +425,7 @@ namespace sce
 		return m_type;
 	}
 
-	std::vector<Pw_values>& Pw::getPwValues(void)
+	std::vector<Pw_values>& Pw::getAllPwValues(void)
 	{
 		// TODO: 在此处插入 return 语句
 		return m_values;
@@ -439,6 +450,17 @@ namespace sce
 	void Pw::addPriValues(Pw_values & pwvalues)
 	{
 		m_values.push_back(pwvalues);
+	}
+
+	bool Pw::setPwValues(const unsigned int & pos, const Pw_values &pwValues)
+	{
+		assert(pos >= m_values.size());
+		if (pos < m_values.size())
+		{
+			m_values[pos] = pwValues;
+			return true;
+		}
+		return false;
 	}
 
 	bool Pw::insertPwValues(unsigned int pos, Pw_values & pwvalues)
@@ -480,7 +502,7 @@ namespace sce
 		m_type = pwtype;
 	}
 
-	void Pw::setPwValues(const std::vector<Pw_values>&pwValues)
+	void Pw::setAllPwValues(const std::vector<Pw_values>&pwValues)
 	{
 		m_values = pwValues;
 	}
@@ -615,7 +637,7 @@ namespace sce
 		return m_type;
 	}
 
-	std::vector<Pri_values>& Pri::getPriValues(void)
+	std::vector<Pri_values>& Pri::getAllPriValues(void)
 	{
 		// TODO: 在此处插入 return 语句
 		return m_values;
@@ -657,6 +679,17 @@ namespace sce
 		m_values.push_back(privalues);
 	}
 
+	bool Pri::setPriValues(const unsigned int & pos, const Pri_values &priValues)
+	{
+		assert(pos >= m_values.size());
+		if (pos < m_values.size())
+		{
+			m_values[pos] = priValues;
+			return true;
+		}
+		return false;
+	}
+
 	bool Pri::insertPriValues(unsigned int pos, Pri_values & privalues)
 	{
 		assert(pos > m_values.size());
@@ -680,7 +713,7 @@ namespace sce
 		return false;
 	}
 
-	void Pri::setPriValues(const std::vector<Pri_values>&priValues)
+	void Pri::setAllPriValues(const std::vector<Pri_values>&priValues)
 	{
 		m_values=priValues;
 	}
@@ -899,13 +932,13 @@ namespace sce
 		return m_name;
 	}
 
-	std::vector<std::shared_ptr<Radar_Mode>>& Emitter::getRadarModes(void)
+	std::vector<std::shared_ptr<Radar_Mode>>& Emitter::getAllPtr2RadarModes(void)
 	{
 		// TODO: 在此处插入 return 语句
 		return m_ptrRadarMode;
 	}
 
-	const std::shared_ptr<Radar_Mode> Emitter::getRadarMode(unsigned int valueOrder) const
+	const std::shared_ptr<Radar_Mode> Emitter::getPtr2RadarMode(unsigned int valueOrder) const
 	{
 		// TODO: 在此处插入 return 语句
 		assert(valueOrder>= m_ptrRadarMode.size());
@@ -921,7 +954,18 @@ namespace sce
 		m_ptrRadarMode.push_back(ptr_radarmode);
 	}
 
-	bool Emitter::insertRadarMode(unsigned int pos, std::shared_ptr<Radar_Mode> ptr_radarmode)
+	bool Emitter::setPtr2RadarMode(unsigned int & pos, std::shared_ptr<Radar_Mode> ptr_radarmode)
+	{
+		assert(pos>=m_ptrRadarMode.size());
+		if (pos < m_ptrRadarMode.size())
+		{
+			m_ptrRadarMode[pos]=ptr_radarmode;
+			return true;
+		}
+		return false;
+	}
+
+	bool Emitter::insertRadarMode(unsigned int& pos, std::shared_ptr<Radar_Mode> ptr_radarmode)
 	{
 		assert(pos>m_ptrRadarMode.size());
 		if (pos<=m_ptrRadarMode.size())
@@ -932,7 +976,7 @@ namespace sce
 		return false;
 	}
 
-	bool Emitter::deleteRadarMode(unsigned int pos)
+	bool Emitter::deleteRadarMode(unsigned int& pos)
 	{
 		assert(pos>=m_ptrRadarMode.size());
 		if (pos < m_ptrRadarMode.size())
@@ -948,7 +992,7 @@ namespace sce
 		m_name = name;
 	}
 
-	void Emitter::setRadarModes(std::vector<std::shared_ptr<Radar_Mode>>&ptrRadarModes)
+	void Emitter::setAllPtr2RadarModes(std::vector<std::shared_ptr<Radar_Mode>>&ptrRadarModes)
 	{
 		m_ptrRadarMode = ptrRadarModes;
 	}
@@ -1204,7 +1248,7 @@ namespace sce
 		return m_endPoint;
 	}
 
-	std::vector<Point>& Mission::getTargetPoint(void)
+	std::vector<Point>& Mission::getAllTargetPoints(void)
 	{
 		// TODO: 在此处插入 return 语句
 		return m_targetPoints;
@@ -1215,7 +1259,7 @@ namespace sce
 		return m_targetPoints.empty()?true:false;
 	}
 
-	Point & Mission::getTargetPoint(unsigned int pointOrder)
+	Point & Mission::getTargetPoint(unsigned int& pointOrder)
 	{
 		// TODO: 在此处插入 return 语句
 		assert(pointOrder >= m_targetPoints.size());
@@ -1233,7 +1277,18 @@ namespace sce
 		m_targetPoints.push_back(targetPoint);
 	}
 
-	bool Mission::insertTargetPoint(unsigned int pos, const Point &targetPoint)
+	bool Mission::setTargetPoint(unsigned int& pos, const Point &targetPoint)
+	{
+		assert(pos >= m_targetPoints.size());
+		if (pos < m_targetPoints.size())
+		{
+			m_targetPoints[pos]= targetPoint;
+			return true;
+		}
+		return false;
+	}
+
+	bool Mission::insertTargetPoint(unsigned int& pos, const Point &targetPoint)
 	{
 		assert(pos > m_targetPoints.size());
 		if (pos <= m_targetPoints.size())
@@ -1244,7 +1299,7 @@ namespace sce
 		return false;
 	}
 
-	bool Mission::deleteTargetPoint(unsigned int pos)
+	bool Mission::deleteTargetPoint(unsigned int& pos)
 	{
 		assert(pos>=m_targetPoints.size());
 		if (pos<m_targetPoints.size())
@@ -1270,7 +1325,7 @@ namespace sce
 		m_endPoint=endPoint;
 	}
 
-	void Mission::setTargetPoint(const std::vector<Point>& targetPoints)
+	void Mission::setAllTargetPoints(const std::vector<Point>& targetPoints)
 	{
 		m_targetPoints = targetPoints;
 	}
@@ -1577,7 +1632,7 @@ namespace sce
 		return m_rfMax;
 	}
 
-	std::vector<Tech>& Ecm::getTechs(void)
+	std::vector<Tech>& Ecm::getAllTechs(void)
 	{
 		// TODO: 在此处插入 return 语句
 		return m_techName;
@@ -1662,9 +1717,736 @@ namespace sce
 		m_rfMax = rfMax;
 	}
 
-	void Ecm::setTechs(const std::vector<Tech>& techs)
+	void Ecm::setAllTechs(const std::vector<Tech>& techs)
 	{
 		m_techName = techs;
 	}
 
+	/*************************WarPoint********************************/
+	WayPoint::WayPoint(void)
+	{
+	}
+
+	WayPoint::WayPoint(const unsigned int &index,
+		const double &altitude,
+		const double &latitude,
+		const double &longitude,
+		const double &time,
+		const double &velocity,
+		const double &acceleration)
+		:m_index(index)
+		,m_altitude(altitude)
+		,m_latitude(latitude)
+		,m_longitude(longitude)
+		,m_time(time)
+		,m_velocity(velocity)
+		,m_acceleration(acceleration)
+	{
+	}
+
+	WayPoint::~WayPoint(void)
+	{
+	}
+
+	const unsigned int & WayPoint::getIndex(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_index;
+	}
+
+	const double & WayPoint::getAltitude(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_altitude;
+	}
+
+	const double & WayPoint::getLatitude(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_latitude;
+	}
+
+	const double & WayPoint::getLongitude(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_longitude;
+	}
+
+	const double & WayPoint::getTime(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_time;
+	}
+
+	const double & WayPoint::getVelocity(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_velocity;
+	}
+
+	const double & WayPoint::getAcceleration(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_acceleration;
+	}
+
+	void WayPoint::setIndex(const unsigned int &index)
+	{
+		m_index = index;
+	}
+
+	void WayPoint::setAltitude(const double &altitude)
+	{
+		m_altitude = altitude;
+	}
+
+	void WayPoint::setLatitude(const double &latitude)
+	{
+		m_latitude = latitude;
+	}
+
+	void WayPoint::setLongitude(const double &longitude)
+	{
+		m_longitude = longitude;
+	}
+
+	void WayPoint::setTime(const double &time)
+	{
+		m_time = time;
+	}
+
+	void WayPoint::setVelocity(const double &velocity)
+	{
+		m_velocity = velocity;
+	}
+
+	void WayPoint::setAcceleration(const double &acceleration)
+	{
+		m_acceleration = acceleration;
+	}
+
+	/************************Route*****************************/
+	Route::Route(void)
+	{
+
+	}
+
+	Route::Route(const std::string &name,
+		const WayPoint &wayPoint)
+		:m_name(name)
+		, m_wayPoints{ wayPoint }
+	{
+	}
+
+	Route::Route(const std::string &name,
+		const std::vector<WayPoint>&wayPoints)
+		:m_name(name)
+		,m_wayPoints(wayPoints)
+	{
+	}
+
+	Route::~Route(void)
+	{
+	}
+
+	const std::string & Route::getName(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_name;
+	}
+
+	WayPoint & Route::getWayPoint(const unsigned int &index)
+	{
+		// TODO: 在此处插入 return 语句
+		assert(index >= m_wayPoints.size());
+		if (index<m_wayPoints.size())
+		{
+			return m_wayPoints[index];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	std::vector<WayPoint> & Route::getAllWayPoints(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_wayPoints;
+	}
+
+	void Route::addWayPoint(const WayPoint &wayPoint)
+	{
+		m_wayPoints.push_back(wayPoint);
+	}
+
+	bool Route::insertWayPoint(const unsigned int &pos, const WayPoint &wayPoint)
+	{
+		assert(pos > m_wayPoints.size());
+		if (pos<=m_wayPoints.size())
+		{
+			m_wayPoints.insert(m_wayPoints.begin()+pos,wayPoint);
+			return true;
+		}
+		return false;
+	}
+
+	bool Route::setWayPoint(const unsigned int &index, const WayPoint &wayPoint)
+	{
+		assert(index >= m_wayPoints.size());
+		if (index < m_wayPoints.size())
+		{
+			m_wayPoints[index]= wayPoint;
+			return true;
+		}
+		return false;
+	}
+
+	bool Route::deleteWayPoint(const unsigned int &index)
+	{
+		assert(index >= m_wayPoints.size());
+		if (index < m_wayPoints.size())
+		{
+			m_wayPoints.erase(m_wayPoints.begin()+index);
+			return true;
+		}
+		return false;
+	}
+
+	void Route::setName(const std::string &name)
+	{
+		m_name = name;
+	}
+
+	void Route::setAllWayPoints(const std::vector<WayPoint>& wayPoints)
+	{
+		m_wayPoints = wayPoints;
+	}
+
+	/***************************Location********************************/
+	Location::Location(void)
+	{
+	}
+
+	Location::Location(const double &altitude,
+		const double &latitude,
+		const double &longitude)
+		:m_altitude(altitude)
+		,m_latitude(latitude)
+		,m_longitude(longitude)
+	{
+	}
+
+	Location::~Location(void)
+	{
+	}
+
+	const double & Location::getAltitude(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_altitude;
+	}
+
+	const double & Location::getLatitude(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_latitude;
+	}
+
+	const double & Location::getLongitude(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_longitude;
+	}
+
+	void Location::setAltitude(const double &altitude)
+	{
+		m_altitude = altitude;
+	}
+
+	void Location::setLatitude(const double &latitude)
+	{
+		m_latitude = latitude;
+	}
+
+	void Location::setLongitude(const double &longitude)
+	{
+		m_longitude = longitude;
+	}
+
+	/*********************DwellSquence***********************************/
+	DwellSquence::DwellSquence(void)
+	{
+	}
+
+	DwellSquence::DwellSquence(const unsigned int &index,
+		const unsigned long &minFreq,
+		const unsigned long &maxFreq,
+		const double &startTime,
+		const double &endTime)
+		:m_index(index)
+		,m_minFreq(minFreq)
+		,m_maxFreq(maxFreq)
+		,m_startTime(startTime)
+		,m_endTime(endTime)
+	{
+	}
+
+	DwellSquence::~DwellSquence(void)
+	{
+	}
+
+	const unsigned int & DwellSquence::getIndex(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_index;
+	}
+
+	const unsigned long & DwellSquence::getMinFreq(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_minFreq;
+	}
+
+	const unsigned long & DwellSquence::getMaxFreq(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_maxFreq;
+	}
+
+	const double & DwellSquence::getStartTime(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_startTime;
+	}
+
+	const double & DwellSquence::getEndTime(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_endTime;
+	}
+
+	void DwellSquence::setIndex(const unsigned int &index)
+	{
+		m_index = index;
+	}
+
+	void DwellSquence::setMinFreq(const unsigned long &minFreq)
+	{
+		m_minFreq = minFreq;
+	}
+
+	void DwellSquence::setMaxFreq(const unsigned long &maxFreq)
+	{
+		m_maxFreq=maxFreq;
+	}
+
+	void DwellSquence::setStartTime(const double &startTime)
+	{
+		m_startTime = startTime;
+	}
+
+	void DwellSquence::setEndTime(const double &endTime)
+	{
+		m_endTime = endTime;
+	}
+
+	/***********************EsmStrategySection*********************************/
+	EsmStrategySection::EsmStrategySection(void)
+	{
+	}
+
+	EsmStrategySection::EsmStrategySection(const double &startTime,
+		const double &endTime,
+		const Location &startLocation,
+		const Location &endLocation,
+		const DwellSquence &dwellsquence)
+		:m_startTime(startTime)
+		,m_endTime(endTime)
+		,m_startLocation(startLocation)
+		,m_endLocation(endLocation)
+		,m_dwellSquences{ dwellsquence }
+	{
+	}
+
+	EsmStrategySection::EsmStrategySection(const double &startTime,
+		const double &endTime,
+		const Location &startLocation,
+		const Location &endLocation,
+		const std::vector<DwellSquence>&dwellsquences)
+		:m_startTime(startTime)
+		,m_endTime(endTime)
+		,m_startLocation(startLocation)
+		,m_endLocation(endLocation)
+		,m_dwellSquences(dwellsquences)
+	{
+	}
+
+	EsmStrategySection::~EsmStrategySection(void)
+	{
+	}
+
+	const double & EsmStrategySection::getStartTime(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_startTime;
+	}
+
+	const double & EsmStrategySection::getEndTime(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_endTime;
+	}
+
+	Location & EsmStrategySection::getStartLocation(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_startLocation;
+	}
+
+	Location & EsmStrategySection::getEndLocation(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_endLocation;
+	}
+
+	DwellSquence & EsmStrategySection::getDwellSquence(const unsigned int & index)
+	{
+		// TODO: 在此处插入 return 语句
+		assert(index >= m_dwellSquences.size());
+		if (index<m_dwellSquences.size())
+		{
+			return m_dwellSquences[index];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	std::vector<DwellSquence>& EsmStrategySection::getAllDwellSquences(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_dwellSquences;
+	}
+
+	void EsmStrategySection::addDwellSquence(const DwellSquence &dwellsquence)
+	{
+		m_dwellSquences.push_back(dwellsquence);
+	}
+
+	bool EsmStrategySection::insertDwellSquence(const unsigned int & pos, const DwellSquence &dwellsquence)
+	{
+		assert(pos > m_dwellSquences.size());
+		if (pos <= m_dwellSquences.size())
+		{
+			m_dwellSquences.insert(m_dwellSquences.begin() + pos, dwellsquence);
+			return true;
+		}
+		return false;
+	}
+
+	bool EsmStrategySection::setDwellSquence(const unsigned int & pos, const DwellSquence &dwellsquence)
+	{
+		assert(pos >= m_dwellSquences.size());
+		if (pos < m_dwellSquences.size())
+		{
+			m_dwellSquences[pos]= dwellsquence;
+			return true;
+		}
+		return false;
+	}
+
+	bool EsmStrategySection::deleteDwellSquence(const unsigned int & index)
+	{
+		assert(index >= m_dwellSquences.size());
+		if (index < m_dwellSquences.size())
+		{
+			m_dwellSquences.erase(m_dwellSquences.begin()+index);
+			return true;
+		}
+		return false;
+	}
+
+	void EsmStrategySection::setDwellSquences(const std::vector<DwellSquence>& dwellsquences)
+	{
+		m_dwellSquences = dwellsquences;
+	}
+
+	void EsmStrategySection::setStartTime(const double &startTime)
+	{
+		m_startTime = startTime;
+	}
+
+	void EsmStrategySection::setEndTime(const double &endTime)
+	{
+		m_endTime = endTime;
+	}
+
+	void EsmStrategySection::setStartLocation(const Location &startLocation)
+	{
+		m_startLocation = startLocation;
+	}
+
+	void EsmStrategySection::setEndLocation(const Location &endLocation)
+	{
+		m_endLocation = endLocation;
+	}
+	
+	/********************EsmStrategy*********************************/
+	EsmStrategy::EsmStrategy(void)
+	{
+	}
+
+	EsmStrategy::EsmStrategy(const std::string &name,
+		const std::shared_ptr<EsmStrategySection>&ptrEsmStrategySection)
+		:m_name(name)
+		, m_ptrSections{ ptrEsmStrategySection }
+	{
+	}
+
+	EsmStrategy::EsmStrategy(const std::string &name,
+		const std::vector<std::shared_ptr<EsmStrategySection>>&ptrEsmStrategySections)
+		:m_name(name)
+		,m_ptrSections(ptrEsmStrategySections)
+	{
+	}
+
+	EsmStrategy::~EsmStrategy(void)
+	{
+	}
+
+	const std::string & EsmStrategy::getName(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_name;
+	}
+
+	std::vector<std::shared_ptr<EsmStrategySection>>& EsmStrategy::getAllPtr2Sections(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_ptrSections;
+	}
+
+	const std::shared_ptr<EsmStrategySection> EsmStrategy::getPtr2Section(unsigned int & pos) const
+	{
+		assert(pos >= m_ptrSections.size());
+		if (pos<m_ptrSections.size())
+		{
+			return m_ptrSections[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	void EsmStrategy::addSection(const std::shared_ptr<EsmStrategySection> ptrSection)
+	{
+		m_ptrSections.push_back(ptrSection);
+	}
+
+	bool EsmStrategy::setPtr2Section(unsigned int & pos, std::shared_ptr<EsmStrategySection> ptrSection)
+	{
+		assert(pos >= m_ptrSections.size());
+		if (pos<m_ptrSections.size())
+		{
+			m_ptrSections[pos] = ptrSection;
+			return true;
+		}
+		return false;
+	}
+
+	bool EsmStrategy::insertSection(unsigned int & pos, std::shared_ptr<EsmStrategySection> ptrSection)
+	{
+		assert(pos > m_ptrSections.size());
+		if (pos<=m_ptrSections.size())
+		{
+			m_ptrSections.insert(m_ptrSections.begin() +pos, ptrSection);
+			return true;
+		}
+		return false;
+	}
+
+	bool EsmStrategy::deleteSection(unsigned int & pos)
+	{
+		assert(pos >= m_ptrSections.size());
+		if (pos < m_ptrSections.size())
+		{
+			m_ptrSections.erase(m_ptrSections.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	void EsmStrategy::setName(const std::string & name)
+	{
+		m_name = name;
+	}
+
+	void EsmStrategy::setAllPtr2Sections(std::vector<std::shared_ptr<EsmStrategySection>>&ptrAllSections)
+	{
+		m_ptrSections = ptrAllSections;
+	}
+
+	/*************************EcmStrategySection**********************************/
+	EcmStrategySection::EcmStrategySection(void)
+	{
+	}
+
+	EcmStrategySection::EcmStrategySection(const double &startTime,
+		const double &endTime,
+		const Location &startLocation,
+		const Location &endLocation,
+		const Tech &techName)
+		:m_startTime(startTime)
+		,m_endTime(endTime)
+		,m_startLocation(startLocation)
+		,m_endLocation(endLocation)
+		,m_tech(techName)
+	{
+	}
+
+	EcmStrategySection::~EcmStrategySection(void)
+	{
+	}
+
+	const double & EcmStrategySection::getStartTime(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_startTime;
+	}
+
+	const double & EcmStrategySection::getEndTime(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_endTime;
+	}
+
+	const Location & EcmStrategySection::getStartLocation(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_startLocation;
+	}
+
+	const Location & EcmStrategySection::getEndLocation(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_endLocation;
+	}
+
+	const Tech & EcmStrategySection::getTechName(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_tech;
+	}
+
+	void EcmStrategySection::setStartTime(const double &startTime)
+	{
+		m_startTime = startTime;
+	}
+
+	void EcmStrategySection::setEndTime(const double &endTime)
+	{
+		m_endTime = endTime;
+	}
+
+	void EcmStrategySection::setStartLocation(const Location &startLocation)
+	{
+		m_startLocation = startLocation;
+	}
+
+	void EcmStrategySection::setEndLocation(const Location &endLocation)
+	{
+		m_endLocation = endLocation;
+	}
+
+	void EcmStrategySection::setTechName(const Tech &techName)
+	{
+		m_tech = techName;
+	}
+
+	/***************************EcmStrategy******************************/
+	EcmStrategy::EcmStrategy(void)
+	{
+	}
+
+	EcmStrategy::EcmStrategy(const std::string &name,
+		const std::shared_ptr<EcmStrategySection>&ptrEcmStrategySection)
+		:m_name(name)
+		, m_ptrSections{ ptrEcmStrategySection }
+	{
+	}
+
+	EcmStrategy::EcmStrategy(const std::string &name,
+		const std::vector<std::shared_ptr<EcmStrategySection>>&ptrEcmStrategySections)
+		: m_name(name)
+		, m_ptrSections(ptrEcmStrategySections)
+	{
+	}
+
+	EcmStrategy::~EcmStrategy(void)
+	{
+	}
+
+	const std::string & EcmStrategy::getName(void) const
+	{
+		// TODO: 在此处插入 return 语句
+		return m_name;
+	}
+
+	std::vector<std::shared_ptr<EcmStrategySection>>& EcmStrategy::getAllPtr2Sections(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_ptrSections;
+	}
+
+	const std::shared_ptr<EcmStrategySection> EcmStrategy::getPtr2Section(unsigned int & pos) const
+	{
+		assert(pos >= m_ptrSections.size());
+		if (pos<m_ptrSections.size())
+		{
+			return m_ptrSections[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	void EcmStrategy::addSection(const std::shared_ptr<EcmStrategySection> ptrSection)
+	{
+		m_ptrSections.push_back(ptrSection);
+	}
+
+	bool EcmStrategy::setPtr2Section(unsigned int & pos, std::shared_ptr<EcmStrategySection> ptrSection)
+	{
+		assert(pos >= m_ptrSections.size());
+		if (pos<m_ptrSections.size())
+		{
+			m_ptrSections[pos] = ptrSection;
+			return true;
+		}
+		return false;
+	}
+
+	bool EcmStrategy::insertSection(unsigned int & pos, std::shared_ptr<EcmStrategySection> ptrSection)
+	{
+		assert(pos > m_ptrSections.size());
+		if (pos <= m_ptrSections.size())
+		{
+			m_ptrSections.insert(m_ptrSections.begin() + pos, ptrSection);
+			return true;
+		}
+		return false;
+	}
+
+	bool EcmStrategy::deleteSection(unsigned int & pos)
+	{
+		assert(pos >= m_ptrSections.size());
+		if (pos < m_ptrSections.size())
+		{
+			m_ptrSections.erase(m_ptrSections.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	void EcmStrategy::setName(const std::string & name)
+	{
+		m_name = name;
+	}
+
+	void EcmStrategy::setAllPtr2Sections(std::vector<std::shared_ptr<EcmStrategySection>>&ptrAllSections)
+	{
+		m_ptrSections = ptrAllSections;
+	}
 }

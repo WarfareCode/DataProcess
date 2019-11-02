@@ -40,6 +40,20 @@ namespace sce
 	class Ecm;
 	class WayPoint;
 	class Route;
+	class Location;
+	class DwellSquence;
+	class EsmStrategySection;
+	class EsmStrategy;
+	class EcmStrategySection;
+	class EcmStrategy;
+	class PlatformSiteRelation;
+	class PlatformEmitterRelation;
+	class PlatformWeaponRelation;
+	class OwnPlatformEsmRelation;
+	class EsmEsmStrategyRelation;
+	class OwnPlatformEcmRelation;
+	class EcmEcmStrategyRelation;
+	class OwnPlatformRouteRelation;
 
 	class Error : public std::runtime_error
 	{
@@ -198,23 +212,26 @@ namespace sce
 		const RfType& getRfType(void) const;
 
 		//获取容纳Pri_values的容器对象
-		std::vector<Rf_values>& getRfValues(void);
+		std::vector<Rf_values>& getAllRfValues(void);
 
 		//判断Pri_values值不为空
 		bool isValuesEmpty();
 
 		//根据values的索引值获取不同values的对象。
 		//在获取values前应判断容器是否为空
-		Rf_values& getRfValue(unsigned int valueOrder);
+		Rf_values& getRfValue(const unsigned int& valueOrder);
 
 		//add Rf_values
-		void addRfValues(Rf_values &);
+		void addRfValues(const Rf_values &);
+
+		//Values值设置/替换
+		bool setRfValues(const unsigned int& pos, const Rf_values &);
 
 		//insert Rf_values
-		bool insertRfValues(unsigned int pos, Rf_values &);
+		bool insertRfValues(const unsigned int& pos, const Rf_values &);
 
 		//delete Rf_values
-		bool deleteRfValues(unsigned int pos);
+		bool deleteRfValues(const unsigned int& pos);
 
 		//set method
 		void setRfMin(const unsigned long &);
@@ -222,7 +239,7 @@ namespace sce
 		void setRfType(const RfType &);
 
 		//赋值覆盖，可用此成员函数覆盖住默认构造函数初始化的对象
-		void setRfValues(const std::vector<Rf_values>&);
+		void setAllRfValues(const std::vector<Rf_values>&);
 		
 	private:
 		unsigned long m_min=9000;
@@ -302,7 +319,7 @@ namespace sce
 		const PwType& getPwType(void) const;
 
 		//获取容纳Pri_values的容器对象
-		std::vector<Pw_values>& getPwValues(void);
+		std::vector<Pw_values>& getAllPwValues(void);
 
 		//判断Pri_values值不为空
 		bool isValuesEmpty();
@@ -313,6 +330,9 @@ namespace sce
 
 		//add Pw_values
 		void addPriValues(Pw_values &);
+
+		//Values值设置/替换
+		bool setPwValues(const unsigned int& pos, const Pw_values &);
 
 		//insert Pw_values
 		bool insertPwValues(unsigned int pos, Pw_values &);
@@ -326,7 +346,7 @@ namespace sce
 		void setPwType(const PwType &);
 
 		//赋值覆盖，可用此成员函数覆盖住默认构造函数初始化的对象
-		void setPwValues(const std::vector<Pw_values>&);
+		void setAllPwValues(const std::vector<Pw_values>&);
 
 	private:
 		unsigned long m_min=20;
@@ -410,7 +430,7 @@ namespace sce
 		const PriType& getPriType(void) const;
 
 		//获取容纳Pri_values的容器对象
-		std::vector<Pri_values>& getPriValues(void);
+		std::vector<Pri_values>& getAllPriValues(void);
 
 		//判断Pri_values值不为空
 		bool isValuesEmpty();
@@ -427,6 +447,9 @@ namespace sce
 		//add Pri_values
 		void addPriValues(Pri_values &);
 
+		//Values值设置/替换
+		bool setPriValues(const unsigned int& pos, const Pri_values &);
+
 		//insert Pri_values
 		bool insertPriValues(unsigned int pos, Pri_values &);
 		
@@ -434,7 +457,7 @@ namespace sce
 		bool deletePriValues(unsigned int pos);
 
 		//赋值覆盖，可用此成员函数覆盖住默认构造函数初始化的对象
-		void setPriValues(const std::vector<Pri_values>&);
+		void setAllPriValues(const std::vector<Pri_values>&);
 		
 	private:
 		unsigned long m_min=90;
@@ -565,23 +588,28 @@ namespace sce
 		const std::string& getName(void) const ;
 
 		//获取RadarMode容器对象
-		std::vector<std::shared_ptr<Radar_Mode>>& getRadarModes(void);
+		std::vector<std::shared_ptr<Radar_Mode>>& getAllPtr2RadarModes(void);
 
-		const std::shared_ptr<Radar_Mode> getRadarMode(unsigned int valueOrder) const ;
+		//按索引获取RadarMode
+		const std::shared_ptr<Radar_Mode> getPtr2RadarMode(unsigned int valueOrder) const ;
 
 		//add method
 		void addRadarMode(const std::shared_ptr<Radar_Mode>);
 		
+		//按照索引设置/修改RadarMode
+		bool setPtr2RadarMode(unsigned int& pos, std::shared_ptr<Radar_Mode>);
+
 		//insert
-		bool insertRadarMode(unsigned int pos, std::shared_ptr<Radar_Mode>);
+		bool insertRadarMode(unsigned int& pos, std::shared_ptr<Radar_Mode>);
 
 		//delete
-		bool deleteRadarMode(unsigned int pos);
+		bool deleteRadarMode(unsigned int& pos);
 
 		//set method
 		void setName(const std::string& name);
 
-		void setRadarModes(std::vector<std::shared_ptr<Radar_Mode>>&);
+		//整体设置修改RadarMode
+		void setAllPtr2RadarModes(std::vector<std::shared_ptr<Radar_Mode>>&);
 
 	private:
 		std::string m_name{"Emitter1"};
@@ -694,23 +722,26 @@ namespace sce
 		Point& getStartPoint(void);
 		Point& getEndPoint(void);
 
-		std::vector<Point>& getTargetPoint(void);
+		//获取容纳所有TargetPoints的容器对象
+		std::vector<Point>& getAllTargetPoints(void);
 		
 		bool isTargetPointEmpty(void);
 
 		//返回非常量引用可以连续调用成员变量类的成员函数
-		Point& getTargetPoint(unsigned int pointOrder);
+		Point& getTargetPoint(unsigned int& pointOrder);
 
 		void addTargetPoint(const Point&);
 
-		bool insertTargetPoint(unsigned int pos, const Point&);
+		bool setTargetPoint(unsigned int& pos, const Point&);
 
-		bool deleteTargetPoint(unsigned int pos);
+		bool insertTargetPoint(unsigned int& pos, const Point&);
+
+		bool deleteTargetPoint(unsigned int& pos);
 
 		void setMissionType(const MissionType&);
 		void setStartPoint(const Point&);
 		void setEndPoint(const Point&);
-		void setTargetPoint(const std::vector<Point>&);
+		void setAllTargetPoints(const std::vector<Point>&);
 
 
 	private:
@@ -826,7 +857,7 @@ namespace sce
 		const unsigned long& getRfMax(void);
 
 		//获取装填所有Tech的容器对象
-		std::vector<Tech>& getTechs(void);
+		std::vector<Tech>& getAllTechs(void);
 
 		//判断装填所有Tech的容器中是否为空
 		bool isTechEmpty(void);
@@ -854,7 +885,7 @@ namespace sce
 		void setRfMax(const unsigned long&);
 
 		//以容器为单位，整体赋值修改
-		void setTechs(const std::vector<Tech>&);
+		void setAllTechs(const std::vector<Tech>&);
 
 	private:
 		std::string m_name{ "Ecm1" };
@@ -863,6 +894,373 @@ namespace sce
 		unsigned long m_rfMin{ 9000 };
 		unsigned long m_rfMax{ 9500 };
 		std::vector<Tech> m_techName{Tech::NOISE};
+	};
+
+	class WayPoint
+	{
+	public:
+		WayPoint(void);
+		WayPoint(const unsigned int&, const double&, const double&, const double&, const double&, const double&, const double&);
+		~WayPoint(void);
+
+		//get latitude and longitude
+		const unsigned int& getIndex(void) const;
+		const double& getAltitude(void) const;
+		const double& getLatitude(void) const;
+		const double& getLongitude(void) const;
+		const double& getTime(void) const;
+		const double& getVelocity(void) const;
+		const double& getAcceleration(void) const;
+
+		//set latitude and longitute
+		void setIndex(const unsigned int &);
+		void setAltitude(const double &);
+		void setLatitude(const double &);
+		void setLongitude(const double &);
+		void setTime(const double &);
+		void setVelocity(const double&);
+		void setAcceleration(const double&);
+
+	private:
+		unsigned int m_index{1};
+		double m_altitude{ 0.0 };
+		double m_latitude{ 0.0 };
+		double m_longitude{ 0.0 };
+		double m_time{ 0.0 };
+		double m_velocity{ 200.0 };
+		double m_acceleration{0.0};
+	};
+
+	class Route
+	{
+	public:
+		Route(void);
+		Route(const std::string&, const WayPoint&);
+		Route(const std::string&, const std::vector<WayPoint>&);
+		~Route(void);
+
+		//get name
+		const std::string& getName(void);
+
+		//get waypoint by index
+		WayPoint& getWayPoint(const unsigned int&);
+
+		//get all waypoints
+		std::vector<WayPoint>& getAllWayPoints(void);
+
+		//add waypoint
+		void addWayPoint(const WayPoint&);
+
+		//insert waypoint by position
+		bool insertWayPoint(const unsigned int&, const WayPoint&);
+
+		//set/moditify waypoint by index
+		bool setWayPoint(const unsigned int&, const WayPoint&);
+
+		//detele waypoint by index
+		bool deleteWayPoint(const unsigned int&);
+
+		//set name
+		void setName(const std::string&);
+
+		//set/moditify WayPoints
+		void setAllWayPoints(const std::vector<WayPoint>&);
+
+	private:
+		std::string m_name{"Route1"};
+		std::vector<WayPoint> m_wayPoints{WayPoint()};
+	};
+
+	class Location
+	{
+	public:
+		Location(void);
+		Location(const double&, const double&, const double&);
+		~Location(void);
+
+		//get latitude and longitude
+		const double& getAltitude(void) const;
+		const double& getLatitude(void) const;
+		const double& getLongitude(void) const;
+
+		//set latitude and longitute
+		void setAltitude(const double &);
+		void setLatitude(const double &);
+		void setLongitude(const double &);
+
+	private:
+		double m_altitude{ 0.0 };
+		double m_latitude{ 0.0 };
+		double m_longitude{ 0.0 };
+	};
+
+	class DwellSquence
+	{
+	public:
+		DwellSquence(void);
+		DwellSquence(const unsigned int&, const unsigned long&, const unsigned long&, const double&, const double&);
+		~DwellSquence(void);
+
+		//get method;
+		const unsigned int& getIndex(void);
+		const unsigned long& getMinFreq(void);
+		const unsigned long& getMaxFreq(void);
+		const double& getStartTime(void);
+		const double& getEndTime(void);
+
+		//set method;
+		void setIndex(const unsigned int&);
+		void setMinFreq(const unsigned long&);
+		void setMaxFreq(const unsigned long&);
+		void setStartTime(const double&);
+		void setEndTime(const double&);
+
+	private:
+		unsigned int m_index{ 1 };
+		unsigned long m_minFreq{ 100 };
+		unsigned long m_maxFreq{ 200 };
+		double m_startTime{ 0.0 };
+		double m_endTime{ 30.0 };
+	};
+
+	class EsmStrategySection
+	{
+	public:
+		EsmStrategySection(void);
+		EsmStrategySection(const double&, const double&, const Location&, const Location&, const DwellSquence&);
+		EsmStrategySection(const double&, const double&, const Location&, const Location&, const std::vector<DwellSquence>&);
+		~EsmStrategySection(void);
+
+		//get method
+		const double& getStartTime(void);
+		const double& getEndTime(void);
+		Location& getStartLocation(void);
+		Location& getEndLocation(void);
+
+		//get DwellSquence by index
+		DwellSquence& getDwellSquence(const unsigned int& index);
+
+		//get all DwellSquences
+		std::vector<DwellSquence>& getAllDwellSquences(void);
+
+		//add DwellSquence
+		void addDwellSquence(const DwellSquence&);
+
+		//insert DwellSquence
+		bool insertDwellSquence(const unsigned int& pos, const DwellSquence&);
+
+		//set/moditify DwellSquence
+		bool setDwellSquence(const unsigned int& pos, const DwellSquence&);
+
+		//delete DwellSquence
+		bool deleteDwellSquence(const unsigned int& index);
+
+		//set/moditify all DwellSquence
+		void setDwellSquences(const std::vector<DwellSquence>&);
+
+		void setStartTime(const double&);
+		void setEndTime(const double&);
+		void setStartLocation(const Location&);
+		void setEndLocation(const Location&);
+
+	private:
+		double m_startTime{0};
+		double m_endTime{100};
+		Location m_startLocation{Location()};
+		Location m_endLocation{Location()};
+		std::vector<DwellSquence> m_dwellSquences{DwellSquence()};
+	};
+
+	class EsmStrategy
+	{
+	public:
+		EsmStrategy(void);
+		EsmStrategy(const std::string&, const std::shared_ptr<EsmStrategySection>&);
+		EsmStrategy(const std::string&, const std::vector<std::shared_ptr<EsmStrategySection>>&);
+		~EsmStrategy(void);
+
+		//get method
+		const std::string& getName(void) const;
+
+		//获取EsmStrategySection指针容器对象
+		std::vector<std::shared_ptr<EsmStrategySection>>& getAllPtr2Sections(void);
+
+		//按索引获取EsmStrategySection
+		const std::shared_ptr<EsmStrategySection> getPtr2Section(unsigned int& pos) const;
+
+		//add EsmStrategySection
+		void addSection(const std::shared_ptr<EsmStrategySection>);
+
+		//按照索引设置/修改EsmStrategySection
+		bool setPtr2Section(unsigned int& pos, std::shared_ptr<EsmStrategySection>);
+
+		//insert EsmStrategySection
+		bool insertSection(unsigned int& pos, std::shared_ptr<EsmStrategySection>);
+
+		//delete EsmStrategySection
+		bool deleteSection(unsigned int& pos);
+
+		//set name
+		void setName(const std::string& name);
+
+		//整体设置修改EsmStrategySection指针容器对象
+		void setAllPtr2Sections(std::vector<std::shared_ptr<EsmStrategySection>>&);
+
+	private:
+		std::string m_name{"ESM Strategy 1"};
+		std::vector<std::shared_ptr<EsmStrategySection>> m_ptrSections{ std::make_shared<EsmStrategySection>() };
+
+	};
+
+	
+	class EcmStrategySection
+	{
+	public:
+		EcmStrategySection(void);
+		EcmStrategySection(const double&, const double&, const Location&, const Location&,const Tech&);
+		~EcmStrategySection(void);
+
+		//get prop
+		const double& getStartTime(void);
+		const double& getEndTime(void);
+		const Location& getStartLocation(void);
+		const Location& getEndLocation(void); 
+		const Tech& getTechName(void);
+
+		//set prop
+		void setStartTime(const double&);
+		void setEndTime(const double&);
+		void setStartLocation(const Location&);
+		void setEndLocation(const Location&);
+		void setTechName(const Tech&);
+
+	private:
+		double m_startTime{0.0};
+		double m_endTime{100.0};
+		Location m_startLocation{ Location() };
+		Location m_endLocation{ Location() };
+		Tech m_tech{ Tech::NOISE };
+	};
+
+	class EcmStrategy
+	{
+	public:
+		EcmStrategy(void);
+		EcmStrategy(const std::string&, const std::shared_ptr<EcmStrategySection>&);
+		EcmStrategy(const std::string&, const std::vector<std::shared_ptr<EcmStrategySection>>&);
+		~EcmStrategy(void);
+
+		//get method
+		const std::string& getName(void) const;
+
+		//获取EcmStrategySection指针容器对象
+		std::vector<std::shared_ptr<EcmStrategySection>>& getAllPtr2Sections(void);
+
+		//按索引获取EsmStrategySection
+		const std::shared_ptr<EcmStrategySection> getPtr2Section(unsigned int& pos) const;
+
+		//add EsmStrategySection
+		void addSection(const std::shared_ptr<EcmStrategySection>);
+
+		//按照索引设置/修改EsmStrategySection
+		bool setPtr2Section(unsigned int& pos, std::shared_ptr<EcmStrategySection>);
+
+		//insert EsmStrategySection
+		bool insertSection(unsigned int& pos, std::shared_ptr<EcmStrategySection>);
+
+		//delete EsmStrategySection
+		bool deleteSection(unsigned int& pos);
+
+		//set name
+		void setName(const std::string& name);
+
+		//整体设置修改EsmStrategySection指针容器对象
+		void setAllPtr2Sections(std::vector<std::shared_ptr<EcmStrategySection>>&);
+
+	private:
+		std::string m_name{ "ECM Strategy 1" };
+		std::vector<std::shared_ptr<EcmStrategySection>> m_ptrSections{ std::make_shared<EcmStrategySection>() };
+	};
+
+	class PlatformSiteRelation
+	{
+	public:
+		PlatformSiteRelation();
+		~PlatformSiteRelation();
+
+	private:
+		Platform m_platform;
+		Site m_site;
+	};
+
+	class PlatformEmitterRelation
+	{
+	public:
+		PlatformEmitterRelation();
+		~PlatformEmitterRelation();
+
+	private:
+
+	};
+
+	class PlatformWeaponRelation
+	{
+	public:
+		PlatformWeaponRelation();
+		~PlatformWeaponRelation();
+
+	private:
+
+	};
+
+	class OwnPlatformEsmRelation
+	{
+	public:
+		OwnPlatformEsmRelation();
+		~OwnPlatformEsmRelation();
+
+	private:
+
+	};
+
+	class EsmEsmStrategyRelation
+	{
+	public:
+		EsmEsmStrategyRelation();
+		~EsmEsmStrategyRelation();
+
+	private:
+
+	};
+
+	class OwnPlatformEcmRelation
+	{
+	public:
+		OwnPlatformEcmRelation();
+		~OwnPlatformEcmRelation();
+
+	private:
+
+	};
+
+	class EcmEcmStrategyRelation
+	{
+	public:
+		EcmEcmStrategyRelation();
+		~EcmEcmStrategyRelation();
+
+	private:
+
+	};
+
+	class OwnPlatformRouteRelation
+	{
+	public:
+		OwnPlatformRouteRelation();
+		~OwnPlatformRouteRelation();
+
+	private:
+
 	};
 
 }
