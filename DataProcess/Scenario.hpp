@@ -1185,82 +1185,162 @@ namespace sce
 	class PlatformSiteRelation
 	{
 	public:
-		PlatformSiteRelation();
-		~PlatformSiteRelation();
+		PlatformSiteRelation(void);
+		PlatformSiteRelation(const std::shared_ptr<Platform>,const std::shared_ptr<Site>);
+		~PlatformSiteRelation(void);
+
+		//get name;
+		const std::string& getPlatformName(void);
+		const std::string& getSiteName(void);
+
+		//set/moditify pointer of Object
+		void setPlatform(const std::shared_ptr<Platform>);
+		void setSite(const std::shared_ptr<Site>);
+		
 
 	private:
-		Platform m_platform;
-		Site m_site;
+		std::shared_ptr<Platform> m_ptrPlatform{std::make_shared<Platform>()};
+		std::shared_ptr<Site> m_ptrSite{ std::make_shared<Site>() };
 	};
 
 	class PlatformEmitterRelation
 	{
 	public:
-		PlatformEmitterRelation();
-		~PlatformEmitterRelation();
+		PlatformEmitterRelation(void);
+		PlatformEmitterRelation(const std::shared_ptr<Platform>, const std::shared_ptr<Emitter>);
+		~PlatformEmitterRelation(void);
+
+		//get name;
+		const std::string& getPlatformName(void);
+		const std::string& getEmitterName(void);
+
+		//set/moditify pointer of Object
+		void setPlatform(const std::shared_ptr<Platform>);
+		void setEmitter(const std::shared_ptr<Emitter>);
 
 	private:
-
+		std::shared_ptr<Platform> m_ptrPlatform{ std::make_shared<Platform>() };
+		std::shared_ptr<Emitter> m_ptrEmitter{ std::make_shared<Emitter>() };
 	};
 
 	class PlatformWeaponRelation
 	{
 	public:
-		PlatformWeaponRelation();
-		~PlatformWeaponRelation();
+		PlatformWeaponRelation(void);
+		PlatformWeaponRelation(const std::shared_ptr<Platform>, const std::shared_ptr<Weapon>);
+		~PlatformWeaponRelation(void);
+
+		//get name;
+		const std::string& getPlatformName(void);
+		const std::string& getWeaponName(void);
+
+		//set/moditify pointer of Object
+		void setPlatform(const std::shared_ptr<Platform>);
+		void setWeapon(const std::shared_ptr<Weapon>);
 
 	private:
-
+		std::shared_ptr<Platform> m_ptrPlatform{ std::make_shared<Platform>() };
+		std::shared_ptr<Weapon> m_ptrWeapon{ std::make_shared<Weapon>() };
 	};
 
 	class OwnPlatformEsmRelation
 	{
 	public:
-		OwnPlatformEsmRelation();
-		~OwnPlatformEsmRelation();
+		OwnPlatformEsmRelation(void);
+		OwnPlatformEsmRelation(const std::shared_ptr<OwnPlatform>, const std::shared_ptr<Esm>);
+		~OwnPlatformEsmRelation(void);
+
+		//get name;
+		const std::string& getOwnPlatformName(void);
+		const std::string& getEsmName(void);
+
+		//set/moditify pointer of Object
+		void setOwnPlatform(const std::shared_ptr<OwnPlatform>);
+		void setEsm(const std::shared_ptr<Esm>);
 
 	private:
-
+		std::shared_ptr<OwnPlatform> m_ptrOwnPlatform{ std::make_shared<OwnPlatform>() };
+		std::shared_ptr<Esm> m_ptrEsm{ std::make_shared<Esm>() };
 	};
 
 	class EsmEsmStrategyRelation
 	{
 	public:
-		EsmEsmStrategyRelation();
-		~EsmEsmStrategyRelation();
+		EsmEsmStrategyRelation(void);
+		EsmEsmStrategyRelation(const std::shared_ptr<Esm>, const std::shared_ptr<EsmStrategy>);
+		~EsmEsmStrategyRelation(void);
+
+		//get name;
+		const std::string& getEsmName(void);
+		const std::string& getEsmStrategyName(void);
+
+		//set/moditify pointer of Object
+		void setEsm(const std::shared_ptr<Esm>);
+		void setEsmStrategy(const std::shared_ptr<EsmStrategy>);
 
 	private:
-
+		std::shared_ptr<Esm> m_ptrEsm{ std::make_shared<Esm>() };
+		std::shared_ptr<EsmStrategy> m_ptrEsmStrategy{ std::make_shared<EsmStrategy>() };
 	};
 
 	class OwnPlatformEcmRelation
 	{
 	public:
-		OwnPlatformEcmRelation();
-		~OwnPlatformEcmRelation();
+		OwnPlatformEcmRelation(void);
+		OwnPlatformEcmRelation(const std::shared_ptr<OwnPlatform>, const std::shared_ptr<Ecm>);
+		~OwnPlatformEcmRelation(void);
+
+		//get name;
+		const std::string& getOwnPlatformName(void);
+		const std::string& getEcmName(void);
+
+		//set/moditify pointer of Object
+		void setOwnPlatform(const std::shared_ptr<OwnPlatform>);
+		void setEcm(const std::shared_ptr<Ecm>);
 
 	private:
-
+		std::shared_ptr<OwnPlatform> m_ptrOwnPlatform{ std::make_shared<OwnPlatform>() };
+		std::shared_ptr<Ecm> m_ptrEcm{ std::make_shared<Ecm>() };
 	};
 
 	class EcmEcmStrategyRelation
 	{
 	public:
-		EcmEcmStrategyRelation();
-		~EcmEcmStrategyRelation();
+		EcmEcmStrategyRelation(void);
+		EcmEcmStrategyRelation(const std::shared_ptr<Ecm>, const std::shared_ptr<EcmStrategy>);
+		~EcmEcmStrategyRelation(void);
+
+		//get name;
+		const std::string& getEcmName(void);
+		const std::string& getEcmStrategyName(void);
+
+		//set/moditify pointer of Object
+		void setEcm(const std::shared_ptr<Ecm>);
+		void setEcmStrategy(const std::shared_ptr<EcmStrategy>);
 
 	private:
-
+		std::shared_ptr<Ecm> m_ptrEcm{ std::make_shared<Ecm>() };
+		std::shared_ptr<EcmStrategy> m_ptrEcmStrategy{ std::make_shared<EcmStrategy>() };
 	};
 
 	class OwnPlatformRouteRelation
 	{
 	public:
-		OwnPlatformRouteRelation();
-		~OwnPlatformRouteRelation();
+		OwnPlatformRouteRelation(void);
+		OwnPlatformRouteRelation(const std::shared_ptr<OwnPlatform>, const std::shared_ptr<Route>);
+		~OwnPlatformRouteRelation(void);
+
+		//get name;
+		const std::string& getOwnPlatformName(void);
+		const std::string& getRouteName(void);
+
+		//set/moditify pointer of Object
+		void setOwnPlatform(const std::shared_ptr<OwnPlatform>);
+		void setRoute(const std::shared_ptr<Route>);
 
 	private:
-
+		std::shared_ptr<OwnPlatform> m_ptrOwnPlatform{ std::make_shared<OwnPlatform>() };
+		std::shared_ptr<Route> m_ptrRoute{ std::make_shared<Route>() };
 	};
 
 }

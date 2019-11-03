@@ -2449,4 +2449,214 @@ namespace sce
 	{
 		m_ptrSections = ptrAllSections;
 	}
+
+	/**************************PlatformSiteRelation*****************************/
+	PlatformSiteRelation::PlatformSiteRelation(void)
+	{
+	}
+
+	PlatformSiteRelation::PlatformSiteRelation(const std::shared_ptr<Platform> ptrPlatform,
+		const std::shared_ptr<Site>ptrSite)
+		:m_ptrPlatform(ptrPlatform)
+		,m_ptrSite(ptrSite)
+	{
+	}
+	PlatformSiteRelation::~PlatformSiteRelation(void)
+	{
+	}
+
+	const std::string & PlatformSiteRelation::getPlatformName(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_ptrPlatform->getPlatformName();
+	}
+	const std::string & PlatformSiteRelation::getSiteName(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_ptrSite->getName();
+	}
+	void PlatformSiteRelation::setPlatform(const std::shared_ptr<Platform> ptrPlatform)
+	{
+		m_ptrPlatform = ptrPlatform;
+	}
+	void PlatformSiteRelation::setSite(const std::shared_ptr<Site> ptrSite)
+	{
+		m_ptrSite = ptrSite;
+	}
+
+	/************************PlatformEmitterRelation*************************/
+	PlatformEmitterRelation::PlatformEmitterRelation(void)
+	{
+	}
+	PlatformEmitterRelation::PlatformEmitterRelation(const std::shared_ptr<Platform>ptrPlatform,
+		const std::shared_ptr<Emitter>ptrEmitter)
+		:m_ptrPlatform(ptrPlatform)
+		,m_ptrEmitter(ptrEmitter)
+	{
+	}
+	PlatformEmitterRelation::~PlatformEmitterRelation(void)
+	{
+	}
+	const std::string & PlatformEmitterRelation::getPlatformName(void)
+	{
+		// TODO: 在此处插入 return 语句
+	}
+	const std::string & PlatformEmitterRelation::getEmitterName(void)
+	{
+		// TODO: 在此处插入 return 语句
+	}
+	void PlatformEmitterRelation::setPlatform(const std::shared_ptr<Platform>)
+	{
+	}
+	void PlatformEmitterRelation::setEmitter(const std::shared_ptr<Emitter>)
+	{
+	}
+
+	/*************************PlatformWeaponRelation*********************************/
+	PlatformWeaponRelation::PlatformWeaponRelation(void)
+	{
+	}
+	PlatformWeaponRelation::PlatformWeaponRelation(const std::shared_ptr<Platform>, const std::shared_ptr<Weapon>)
+	{
+	}
+	PlatformWeaponRelation::~PlatformWeaponRelation(void)
+	{
+	}
+	const std::string & PlatformWeaponRelation::getPlatformName(void)
+	{
+		// TODO: 在此处插入 return 语句
+	}
+	const std::string & PlatformWeaponRelation::getWeaponName(void)
+	{
+		// TODO: 在此处插入 return 语句
+	}
+	void PlatformWeaponRelation::setPlatform(const std::shared_ptr<Platform>)
+	{
+	}
+	void PlatformWeaponRelation::setWeapon(const std::shared_ptr<Weapon>)
+	{
+	}
+
+	/************************OwnPlatformEsmRelation********************************/
+	OwnPlatformEsmRelation::OwnPlatformEsmRelation(void)
+	{
+	}
+	OwnPlatformEsmRelation::OwnPlatformEsmRelation(const std::shared_ptr<OwnPlatform>, const std::shared_ptr<Esm>)
+	{
+	}
+	OwnPlatformEsmRelation::~OwnPlatformEsmRelation(void)
+	{
+	}
+	const std::string & OwnPlatformEsmRelation::getOwnPlatformName(void)
+	{
+		// TODO: 在此处插入 return 语句
+	}
+	const std::string & OwnPlatformEsmRelation::getEsmName(void)
+	{
+		// TODO: 在此处插入 return 语句
+	}
+	void OwnPlatformEsmRelation::setOwnPlatform(const std::shared_ptr<OwnPlatform>)
+	{
+	}
+	void OwnPlatformEsmRelation::setEsm(const std::shared_ptr<Esm>)
+	{
+	}
+
+	/**********************EsmEsmStrategyRelation*************************/
+	EsmEsmStrategyRelation::EsmEsmStrategyRelation(void)
+	{
+	}
+	EsmEsmStrategyRelation::EsmEsmStrategyRelation(const std::shared_ptr<Esm>, const std::shared_ptr<EsmStrategy>)
+	{
+	}
+	EsmEsmStrategyRelation::~EsmEsmStrategyRelation(void)
+	{
+	}
+	const std::string & EsmEsmStrategyRelation::getEsmName(void)
+	{
+		// TODO: 在此处插入 return 语句
+	}
+	const std::string & EsmEsmStrategyRelation::getEsmStrategyName(void)
+	{
+		// TODO: 在此处插入 return 语句
+	}
+	void EsmEsmStrategyRelation::setEsm(const std::shared_ptr<Esm>)
+	{
+	}
+	void EsmEsmStrategyRelation::setEsmStrategy(const std::shared_ptr<EsmStrategy>)
+	{
+	}
+
+	/************************OwnPlatformEcmRelation**********************/
+	OwnPlatformEcmRelation::OwnPlatformEcmRelation(void)
+	{
+	}
+	OwnPlatformEcmRelation::OwnPlatformEcmRelation(const std::shared_ptr<OwnPlatform>, const std::shared_ptr<Ecm>)
+	{
+	}
+	OwnPlatformEcmRelation::~OwnPlatformEcmRelation(void)
+	{
+	}
+	const std::string & OwnPlatformEcmRelation::getOwnPlatformName(void)
+	{
+		// TODO: 在此处插入 return 语句
+	}
+	const std::string & OwnPlatformEcmRelation::getEcmName(void)
+	{
+		// TODO: 在此处插入 return 语句
+	}
+	void OwnPlatformEcmRelation::setOwnPlatform(const std::shared_ptr<OwnPlatform>)
+	{
+	}
+	void OwnPlatformEcmRelation::setEcm(const std::shared_ptr<Ecm>)
+	{
+	}
+
+	/************************EcmEcmStrategyRelation**********************/
+	EcmEcmStrategyRelation::EcmEcmStrategyRelation(void)
+	{
+	}
+	EcmEcmStrategyRelation::EcmEcmStrategyRelation(const std::shared_ptr<Ecm>, const std::shared_ptr<EcmStrategy>)
+	{
+	}
+	EcmEcmStrategyRelation::~EcmEcmStrategyRelation(void)
+	{
+	}
+	const std::string & EcmEcmStrategyRelation::getEcmName(void)
+	{
+		// TODO: 在此处插入 return 语句
+	}
+	const std::string & EcmEcmStrategyRelation::getEcmStrategyName(void)
+	{
+		// TODO: 在此处插入 return 语句
+	}
+	void EcmEcmStrategyRelation::setEcm(const std::shared_ptr<Ecm>)
+	{
+	}
+	void EcmEcmStrategyRelation::setEcmStrategy(const std::shared_ptr<EcmStrategy>)
+	{
+	}
+	OwnPlatformRouteRelation::OwnPlatformRouteRelation(void)
+	{
+	}
+	OwnPlatformRouteRelation::OwnPlatformRouteRelation(const std::shared_ptr<OwnPlatform>, const std::shared_ptr<Route>)
+	{
+	}
+	OwnPlatformRouteRelation::~OwnPlatformRouteRelation(void)
+	{
+	}
+	const std::string & OwnPlatformRouteRelation::getOwnPlatformName(void)
+	{
+		// TODO: 在此处插入 return 语句
+	}
+	const std::string & OwnPlatformRouteRelation::getRouteName(void)
+	{
+		// TODO: 在此处插入 return 语句
+	}
+	void OwnPlatformRouteRelation::setOwnPlatform(const std::shared_ptr<OwnPlatform>)
+	{
+	}
+	void OwnPlatformRouteRelation::setRoute(const std::shared_ptr<Route>)
+	{
+	}
 }
