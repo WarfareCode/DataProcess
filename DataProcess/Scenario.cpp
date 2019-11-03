@@ -6,7 +6,7 @@
 *	功能：提供XML解析数据封装类实现程序
 *	当前版本：1.0
 *	作者：韩露
-*	完成日期：
+*	完成日期：2019年11月3日
 ******************************************************************/
 
 #include "Scenario.hpp"
@@ -2706,5 +2706,31 @@ namespace sce
 	void OwnPlatformRouteRelation::setRoute(const std::shared_ptr<Route> ptrRoute)
 	{
 		m_ptrRoute = ptrRoute;
+	}
+
+	/******************************Scenario***********************************/
+	Scenario::Scenario(void)
+	{
+	}
+	Scenario::Scenario(std::vector<Vertex>& vertexs,
+		std::vector<std::shared_ptr<Platform>> ptrPlatforms,
+		std::vector<std::shared_ptr<Emitter>> ptrEmitters,
+		std::vector<std::shared_ptr<Weapon>> ptrWeapons,
+		std::vector<std::shared_ptr<Site>> ptrSites,
+		std::vector<std::shared_ptr<OwnPlatform>> ptrOwnPlatforms,
+		std::vector<std::shared_ptr<Esm>> ptrEsms,
+		std::vector<std::shared_ptr<Ecm>> ptrEcms,
+		std::vector<std::shared_ptr<Route>> ptrRoutes,
+		std::vector<std::shared_ptr<EsmStrategy>> ptrEsmStrategy,
+		std::vector<std::shared_ptr<EcmStrategy>> ptrEcmStrategy,
+		std::vector<PlatformSiteRelation> ptrPlatformSiteRelations,
+		std::vector<PlatformEmitterRelation> ptrPlatformEmitterRelations,
+		std::vector<PlatformWeaponRelation> ptrPlatformWeaponRelations,
+		std::vector<OwnPlatformEsmRelation> ptrOwnPlatformEsmRelations,
+		std::vector<EsmEsmStrategyRelation> ptrEsmEsmStrategyRelations,
+		std::vector<OwnPlatformEcmRelation> ptrOwnPlatformEcmRelations,
+		std::vector<EcmEcmStrategyRelation> ptrEcmEcmStrategyRelations,
+		std::vector<OwnPlatformRouteRelation> ptrOwnPlatformRouteRelations)
+	{
 	}
 }

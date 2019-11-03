@@ -6,7 +6,7 @@
 *	功能：提供XML解析数据封装类声明
 *	当前版本：1.0
 *	作者：韩露
-*	完成日期：
+*	完成日期：2019-11-3
 ******************************************************************/
 
 #ifndef __SCENARIO__
@@ -70,22 +70,58 @@ namespace sce
 	class Scenario
 	{
 	public:
-		Scenario(void);
+		Scenario(void); 
+		Scenario(std::vector<Vertex>& vertexs,
+			std::vector<std::shared_ptr<Platform>> ptrPlatforms,
+			std::vector<std::shared_ptr<Emitter>> ptrEmitters,
+			std::vector<std::shared_ptr<Weapon>> ptrWeapons,
+			std::vector<std::shared_ptr<Site>> ptrSites,
+			std::vector<std::shared_ptr<OwnPlatform>> ptrOwnPlatforms,
+			std::vector<std::shared_ptr<Esm>> ptrEsms,
+			std::vector<std::shared_ptr<Ecm>> ptrEcms,
+			std::vector<std::shared_ptr<Route>> ptrRoutes,
+			std::vector<std::shared_ptr<EsmStrategy>> ptrEsmStrategy,
+			std::vector<std::shared_ptr<EcmStrategy>> ptrEcmStrategy,
+			std::vector<PlatformSiteRelation> ptrPlatformSiteRelations,
+			std::vector<PlatformEmitterRelation> ptrPlatformEmitterRelations,
+			std::vector<PlatformWeaponRelation> ptrPlatformWeaponRelations,
+			std::vector<OwnPlatformEsmRelation> ptrOwnPlatformEsmRelations,
+			std::vector<EsmEsmStrategyRelation> ptrEsmEsmStrategyRelations,
+			std::vector<OwnPlatformEcmRelation> ptrOwnPlatformEcmRelations,
+			std::vector<EcmEcmStrategyRelation> ptrEcmEcmStrategyRelations,
+			std::vector<OwnPlatformRouteRelation> ptrOwnPlatformRouteRelations);
+
 		~Scenario(void);
 
 	private:
-		std::vector<Vertex> m_vertex;
+		std::vector<Vertex> m_vertex{Vertex()};
 		//由于Platform中name数据成员为string这种可变长类型，不应直接在容器中放置类对象，而应该使用指针
-		std::vector<std::shared_ptr<Platform>> m_ptrPlatform;
+		std::vector<std::shared_ptr<Platform>> m_ptrPlatform{std::make_shared<Platform>()};
+
+		std::vector<std::shared_ptr<Emitter>> m_ptrEmitter{ std::make_shared<Emitter>() };
+		std::vector<std::shared_ptr<Weapon>> m_ptrWeapon{ std::make_shared<Weapon>() };
+
+		std::vector<std::shared_ptr<Site>> m_ptrSite{ std::make_shared<Site>() };
+		std::vector<std::shared_ptr<OwnPlatform>> m_ptrOwnPlatform{ std::make_shared<OwnPlatform>() };
+
+		std::vector<std::shared_ptr<Esm>> m_ptrEsm{ std::make_shared<Esm>() };
+		std::vector<std::shared_ptr<Ecm>> m_ptrEcm{ std::make_shared<Ecm>() };
+
+		std::vector<std::shared_ptr<Route>> m_ptrRoute{ std::make_shared<Route>() };
+
+		std::vector<std::shared_ptr<EsmStrategy>> m_ptrEsmStrategy{ std::make_shared<EsmStrategy>() };
+		std::vector<std::shared_ptr<EcmStrategy>> m_ptrEcmStrategy{ std::make_shared<EcmStrategy>() };
+
+		std::vector<PlatformSiteRelation> m_PlatformSiteRelation{PlatformSiteRelation()};
+		std::vector<PlatformEmitterRelation> m_PlatformEmitterRelation{PlatformEmitterRelation()};
+		std::vector<PlatformWeaponRelation> m_PlatformWeaponRelation{PlatformWeaponRelation()};
+		std::vector<OwnPlatformEsmRelation> m_OwnPlatformEsmRelation{OwnPlatformEsmRelation()};
+		std::vector<EsmEsmStrategyRelation> m_EsmEsmStrategyRelation{EsmEsmStrategyRelation()};
+		std::vector<OwnPlatformEcmRelation> m_OwnPlatformEcmRelation{OwnPlatformEcmRelation()};
+		std::vector<EcmEcmStrategyRelation> m_EcmEcmStrategyRelation{EcmEcmStrategyRelation()};
+		std::vector<OwnPlatformRouteRelation> m_OwnPlatformRouteRelation{OwnPlatformRouteRelation()};
+
 	};
-
-	Scenario::Scenario(void)
-	{
-	}
-
-	Scenario::~Scenario(void)
-	{
-	}
 
 	class Vertex
 	{
