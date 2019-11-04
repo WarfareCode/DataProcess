@@ -938,6 +938,11 @@ namespace sce
 		return m_ptrRadarMode;
 	}
 
+	bool Emitter::isRadarModeEmpty(void)
+	{
+		return m_ptrRadarMode.empty()?true:false;
+	}
+
 	const std::shared_ptr<Radar_Mode> Emitter::getPtr2RadarMode(unsigned int valueOrder) const
 	{
 		// TODO: 在此处插入 return 语句
@@ -1855,6 +1860,11 @@ namespace sce
 		return m_name;
 	}
 
+	bool Route::isWayPointEmpty(void)
+	{
+		return m_wayPoints.empty()?true:false;
+	}
+
 	WayPoint & Route::getWayPoint(const unsigned int &index)
 	{
 		// TODO: 在此处插入 return 语句
@@ -2107,6 +2117,11 @@ namespace sce
 		return m_endLocation;
 	}
 
+	bool EsmStrategySection::isDwellSquenceEmpty(void)
+	{
+		return m_dwellSquences.empty()?true:false;
+	}
+
 	DwellSquence & EsmStrategySection::getDwellSquence(const unsigned int & index)
 	{
 		// TODO: 在此处插入 return 语句
@@ -2220,6 +2235,11 @@ namespace sce
 	{
 		// TODO: 在此处插入 return 语句
 		return m_ptrSections;
+	}
+
+	bool EsmStrategy::isSectionEmpty(void)
+	{
+		return m_ptrSections.empty()?true:false;
 	}
 
 	const std::shared_ptr<EsmStrategySection> EsmStrategy::getPtr2Section(unsigned int & pos) const
@@ -2390,6 +2410,11 @@ namespace sce
 	{
 		// TODO: 在此处插入 return 语句
 		return m_ptrSections;
+	}
+
+	bool EcmStrategy::isSectionEmpty(void)
+	{
+		return m_ptrSections.empty()?true:false;
 	}
 
 	const std::shared_ptr<EcmStrategySection> EcmStrategy::getPtr2Section(unsigned int & pos) const
@@ -2723,14 +2748,37 @@ namespace sce
 		std::vector<std::shared_ptr<Route>> ptrRoutes,
 		std::vector<std::shared_ptr<EsmStrategy>> ptrEsmStrategy,
 		std::vector<std::shared_ptr<EcmStrategy>> ptrEcmStrategy,
-		std::vector<PlatformSiteRelation> ptrPlatformSiteRelations,
-		std::vector<PlatformEmitterRelation> ptrPlatformEmitterRelations,
-		std::vector<PlatformWeaponRelation> ptrPlatformWeaponRelations,
-		std::vector<OwnPlatformEsmRelation> ptrOwnPlatformEsmRelations,
-		std::vector<EsmEsmStrategyRelation> ptrEsmEsmStrategyRelations,
-		std::vector<OwnPlatformEcmRelation> ptrOwnPlatformEcmRelations,
-		std::vector<EcmEcmStrategyRelation> ptrEcmEcmStrategyRelations,
-		std::vector<OwnPlatformRouteRelation> ptrOwnPlatformRouteRelations)
+		std::vector<PlatformSiteRelation> platformSiteRelations,
+		std::vector<PlatformEmitterRelation> platformEmitterRelations,
+		std::vector<PlatformWeaponRelation> platformWeaponRelations,
+		std::vector<OwnPlatformEsmRelation> ownPlatformEsmRelations,
+		std::vector<EsmEsmStrategyRelation> esmEsmStrategyRelations,
+		std::vector<OwnPlatformEcmRelation> ownPlatformEcmRelations,
+		std::vector<EcmEcmStrategyRelation> ecmEcmStrategyRelations,
+		std::vector<OwnPlatformRouteRelation> ownPlatformRouteRelations)
+		:m_vertex(vertexs)
+		, m_ptrPlatform(ptrPlatforms)
+		, m_ptrEmitter(ptrEmitters)
+		, m_ptrWeapon(ptrWeapons)
+		, m_ptrSite(ptrSites)
+		, m_ptrOwnPlatform(ptrOwnPlatforms)
+		, m_ptrEsm(ptrEsms)
+		, m_ptrEcm(ptrEcms)
+		, m_ptrRoute(ptrRoutes)
+		, m_ptrEsmStrategy(ptrEsmStrategy)
+		, m_ptrEcmStrategy(ptrEcmStrategy)
+		,m_PlatformSiteRelation(platformSiteRelations)
+		,m_PlatformEmitterRelation(platformEmitterRelations)
+		,m_PlatformWeaponRelation(platformWeaponRelations)
+		,m_OwnPlatformEsmRelation(ownPlatformEsmRelations)
+		,m_EsmEsmStrategyRelation(esmEsmStrategyRelations)
+		,m_OwnPlatformEcmRelation(ownPlatformEcmRelations)
+		,m_EcmEcmStrategyRelation(ecmEcmStrategyRelations)
+		,m_OwnPlatformRouteRelation(ownPlatformRouteRelations)
+	{
+	}
+
+	Scenario::~Scenario(void)
 	{
 	}
 }
