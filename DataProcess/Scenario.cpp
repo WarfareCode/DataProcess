@@ -16,9 +16,9 @@
 namespace sce 
 {
 	/***************************Vertex***********************************/
-	Vertex::Vertex(void)
-	{
-	}
+	//Vertex::Vertex(void)
+	//{
+	//}
 	
 	Vertex::Vertex(const double &la, const double &lo)
 		:m_latitude(la), m_longitude(lo)
@@ -52,9 +52,9 @@ namespace sce
 	}
 		
 	/***************************Platform***********************************/
-	Platform::Platform(void)
-	{
-	}
+	//Platform::Platform(void)
+	//{
+	//}
 
 	Platform::Platform(const std::string &pname, const PlatformType &type)
 		:m_name(pname), m_type(type)
@@ -84,15 +84,15 @@ namespace sce
 	}
 
 	/***************************Rf_values***********************************/
-	Rf_values::Rf_values(void)
-	{
-	}
+	//Rf_values::Rf_values(void)
+	//{
+	//}
 
 	Rf_values::Rf_values(const unsigned int &pOrder,
 		const unsigned int &numOfPulses,
-		const unsigned long &min,
-		const unsigned long &max,
-		const unsigned long &sweepTime)
+		const unsigned int &min,
+		const unsigned int &max,
+		const unsigned int &sweepTime)
 		: m_phaseOrder(pOrder)
 		, m_numberOfPulses(numOfPulses)
 		, m_min(min)
@@ -113,15 +113,15 @@ namespace sce
 	{
 		return m_numberOfPulses;
 	}
-	const unsigned long & Rf_values::getMin(void) const
+	const unsigned int & Rf_values::getMin(void) const
 	{
 		return m_min;
 	}
-	const unsigned long & Rf_values::getMax(void) const
+	const unsigned int & Rf_values::getMax(void) const
 	{
 		return m_max;
 	}
-	const unsigned long & Rf_values::getSweepTime(void) const
+	const unsigned int & Rf_values::getSweepTime(void) const
 	{
 		return m_sweepTime;
 	}
@@ -134,27 +134,27 @@ namespace sce
 	{
 		m_numberOfPulses = numOfPulses;
 	}
-	void Rf_values::setMin(const unsigned long & min)
+	void Rf_values::setMin(const unsigned int & min)
 	{
 		m_min = min;
 	}
-	void Rf_values::setMax(const unsigned long & max)
+	void Rf_values::setMax(const unsigned int & max)
 	{
 		m_max = max;
 	}
-	void Rf_values::setSweepTime(const unsigned long & sweepTime)
+	void Rf_values::setSweepTime(const unsigned int & sweepTime)
 	{
 		m_sweepTime = sweepTime;
 	}
 
 	/************************Rf**********************************/
 	//由于默认构造函数尚未进行Values值初始化，所以调用默认构造后应尽快添加Values值
-	Rf::Rf(void)
-	{
-	}
+	//Rf::Rf(void)
+	//{
+	//}
 	//由于默认构造函数尚未进行Values值初始化，所以调用默认构造后应尽快添加Values值
-	Rf::Rf(const unsigned long &rfmin,
-		const unsigned long &rfmax,
+	Rf::Rf(const unsigned int &rfmin,
+		const unsigned int &rfmax,
 		const RfType &rftype)
 		: m_min(rfmin)
 		, m_max(rfmax)
@@ -162,8 +162,8 @@ namespace sce
 	{
 	}
 
-	Rf::Rf(const unsigned long &rfmin,
-		const unsigned long &rfmax,
+	Rf::Rf(const unsigned int &rfmin,
+		const unsigned int &rfmax,
 		const Rf_values & rfvalues,
 		const RfType &rftype)
 		:m_min(rfmin)
@@ -173,8 +173,8 @@ namespace sce
 	{
 	}
 
-	Rf::Rf(const unsigned long &rfmin,
-		const unsigned long &rfmax,
+	Rf::Rf(const unsigned int &rfmin,
+		const unsigned int &rfmax,
 		const std::vector<Rf_values>& rfvalues,
 		const RfType &rftype)
 		:m_min(rfmin)
@@ -194,12 +194,12 @@ namespace sce
 		}*/
 	}
 
-	const unsigned long & Rf::getRfMin(void) const
+	const unsigned int & Rf::getRfMin(void) const
 	{
 		return m_min;
 	}
 
-	const unsigned long & Rf::getRfMax(void) const
+	const unsigned int & Rf::getRfMax(void) const
 	{
 		return m_max;
 	}
@@ -222,7 +222,7 @@ namespace sce
 
 	Rf_values & Rf::getRfValue(const unsigned int& valueOrder)
 	{
-		assert(valueOrder >= m_values.size());
+		assert(valueOrder < m_values.size());
 		if (valueOrder<m_values.size())
 		{
 			return m_values[valueOrder];
@@ -237,7 +237,7 @@ namespace sce
 
 	bool Rf::setRfValues(const unsigned int & pos, const Rf_values &rfValues)
 	{
-		assert(pos >= m_values.size());
+		assert(pos < m_values.size());
 		if (pos < m_values.size())
 		{
 			m_values[pos]=rfValues;
@@ -248,7 +248,7 @@ namespace sce
 
 	bool Rf::insertRfValues(const unsigned int& pos, const Rf_values & rfvalues)
 	{
-		assert(pos > m_values.size());
+		assert(pos <= m_values.size());
 		if (pos <= m_values.size())
 		{
 			m_values.insert(m_values.begin() + pos, rfvalues);
@@ -259,7 +259,7 @@ namespace sce
 
 	bool Rf::deleteRfValues(const unsigned int& pos)
 	{
-		assert(pos >= m_values.size());
+		assert(pos < m_values.size());
 		if (pos<m_values.size())
 		{
 			//delete *(_rfValues.begin() + pos);
@@ -269,12 +269,12 @@ namespace sce
 		return false;
 	}
 
-	void Rf::setRfMin(const unsigned long & rfmin)
+	void Rf::setRfMin(const unsigned int & rfmin)
 	{
 		m_min = rfmin;
 	}
 
-	void Rf::setRfMax(const unsigned long & rfmax)
+	void Rf::setRfMax(const unsigned int & rfmax)
 	{
 		m_max = rfmax;
 	}
@@ -296,15 +296,15 @@ namespace sce
 	//}
 
 	/**************************Pw_Values*************************************/
-	Pw_values::Pw_values(void)
-	{
-	}
+	//Pw_values::Pw_values(void)
+	//{
+	//}
 
 	Pw_values::Pw_values(const unsigned int &pOrder,
 		const unsigned int &numOfPulses,
-		const unsigned long &min,
-		const unsigned long &max,
-		const unsigned long &sweepTime)
+		const unsigned int &min,
+		const unsigned int &max,
+		const unsigned int &sweepTime)
 		: m_phaseOrder(pOrder)
 		, m_numberOfPulses(numOfPulses)
 		, m_min(min)
@@ -325,15 +325,15 @@ namespace sce
 	{
 		return m_numberOfPulses;
 	}
-	const unsigned long & Pw_values::getMin(void) const
+	const unsigned int & Pw_values::getMin(void) const
 	{
 		return m_min;
 	}
-	const unsigned long & Pw_values::getMax(void) const
+	const unsigned int & Pw_values::getMax(void) const
 	{
 		return m_max;
 	}
-	const unsigned long & Pw_values::getSweepTime(void) const
+	const unsigned int & Pw_values::getSweepTime(void) const
 	{
 		return m_sweepTime;
 	}
@@ -345,27 +345,27 @@ namespace sce
 	{
 		m_numberOfPulses = numOfPulses;
 	}
-	void Pw_values::setMin(const unsigned long & min)
+	void Pw_values::setMin(const unsigned int & min)
 	{
 		m_min = min;
 	}
-	void Pw_values::setMax(const unsigned long & max)
+	void Pw_values::setMax(const unsigned int & max)
 	{
 		m_max = max;
 	}
-	void Pw_values::setSweepTime(const unsigned long & sweepTime)
+	void Pw_values::setSweepTime(const unsigned int & sweepTime)
 	{
 		m_sweepTime = sweepTime;
 	}
 	
 	/***************************PW************************************/
 	//由于默认构造函数尚未进行Values值初始化，所以调用默认构造后应尽快添加Values值
-	Pw::Pw(void)
-	{
-	}
+	//Pw::Pw(void)
+	//{
+	//}
 	//由于默认构造函数尚未进行Values值初始化，所以调用默认构造后应尽快添加Values值
-	Pw::Pw(const unsigned long &pwmin,
-		const unsigned long &pwmax,
+	Pw::Pw(const unsigned int &pwmin,
+		const unsigned int &pwmax,
 		const PwType &pwtype)
 		:m_min(pwmin)
 		, m_max(pwmax)
@@ -373,8 +373,8 @@ namespace sce
 	{
 	}
 
-	Pw::Pw(const unsigned long &pwmin,
-		const unsigned long &pwmax,
+	Pw::Pw(const unsigned int &pwmin,
+		const unsigned int &pwmax,
 		const Pw_values &pwvalues, 
 		const PwType &pwtype)
 		:m_min(pwmin)
@@ -384,8 +384,8 @@ namespace sce
 	{
 	}
 
-	Pw::Pw(const unsigned long &pwmin,
-		const unsigned long &pwmax,
+	Pw::Pw(const unsigned int &pwmin,
+		const unsigned int &pwmax,
 		const std::vector<Pw_values>&pwvalues, 
 		const PwType &pwtype)
 		:m_min(pwmin)
@@ -410,12 +410,12 @@ namespace sce
 		}*/
 	}
 
-	const unsigned long & Pw::getPwMin(void) const
+	const unsigned int & Pw::getPwMin(void) const
 	{
 		return m_min;
 	}
 
-	const unsigned long & Pw::getPwMax(void) const
+	const unsigned int & Pw::getPwMax(void) const
 	{
 		return m_max;
 	}
@@ -438,7 +438,7 @@ namespace sce
 
 	Pw_values & Pw::getPwValue(unsigned int valueOrder)
 	{
-		assert(valueOrder >= m_values.size());
+		assert(valueOrder < m_values.size());
 		if (valueOrder<m_values.size())
 		{
 			//return *(_pwValues[valueOrder]);
@@ -454,7 +454,7 @@ namespace sce
 
 	bool Pw::setPwValues(const unsigned int & pos, const Pw_values &pwValues)
 	{
-		assert(pos >= m_values.size());
+		assert(pos < m_values.size());
 		if (pos < m_values.size())
 		{
 			m_values[pos] = pwValues;
@@ -465,7 +465,7 @@ namespace sce
 
 	bool Pw::insertPwValues(unsigned int pos, Pw_values & pwvalues)
 	{
-		assert(pos > m_values.size());
+		assert(pos <= m_values.size());
 		if (pos <= m_values.size())
 		{
 			//_pwValues.insert(_pwValues.begin() + pos, &pwvalues);
@@ -477,7 +477,7 @@ namespace sce
 
 	bool Pw::deletePwValues(unsigned int pos)
 	{
-		assert(pos >= m_values.size());
+		assert(pos < m_values.size());
 		if (pos<m_values.size())
 		{
 			//delete *(_pwValues.begin() + pos);
@@ -487,12 +487,12 @@ namespace sce
 		return false;
 	}
 
-	void Pw::setPwMin(const unsigned long & pwmin)
+	void Pw::setPwMin(const unsigned int & pwmin)
 	{
 		m_min = pwmin;
 	}
 
-	void Pw::setPwMax(const unsigned long & pwmax)
+	void Pw::setPwMax(const unsigned int & pwmax)
 	{
 		m_max = pwmax;
 	}
@@ -515,15 +515,15 @@ namespace sce
 	//}
 
 	/***************************Pri_Values************************************/
-	Pri_values::Pri_values(void)
-	{
-	}
+	//Pri_values::Pri_values(void)
+	//{
+	//}
 
 	Pri_values::Pri_values(const unsigned int &pOrder,
 		const unsigned int &numOfPulses,
-		const unsigned long &min,
-		const unsigned long &max,
-		const unsigned long &sweepTime)
+		const unsigned int &min,
+		const unsigned int &max,
+		const unsigned int &sweepTime)
 		: m_phaseOrder(pOrder)
 		, m_numberOfPulses(numOfPulses)
 		, m_min(min)
@@ -543,15 +543,15 @@ namespace sce
 	{
 		return m_numberOfPulses;
 	}
-	const unsigned long & Pri_values::getMin(void) const
+	const unsigned int & Pri_values::getMin(void) const
 	{
 		return m_min;
 	}
-	const unsigned long & Pri_values::getMax(void) const
+	const unsigned int & Pri_values::getMax(void) const
 	{
 		return m_max;
 	}
-	const unsigned long & Pri_values::getSweepTime(void) const
+	const unsigned int & Pri_values::getSweepTime(void) const
 	{
 		return m_sweepTime;
 	}
@@ -563,27 +563,27 @@ namespace sce
 	{
 		m_numberOfPulses = numOfPulses;
 	}
-	void Pri_values::setMin(const unsigned long & min)
+	void Pri_values::setMin(const unsigned int & min)
 	{
 		m_min = min;
 	}
-	void Pri_values::setMax(const unsigned long & max)
+	void Pri_values::setMax(const unsigned int & max)
 	{
 		m_max = max;
 	}
-	void Pri_values::setSweepTime(const unsigned long & sweepTime)
+	void Pri_values::setSweepTime(const unsigned int & sweepTime)
 	{
 		m_sweepTime = sweepTime;
 	}
 
 	/***************************Pri************************************/
 	//由于默认构造函数尚未进行Values值初始化，所以调用默认构造后应尽快添加Values值
-	Pri::Pri(void)
-	{
-	}
+	//Pri::Pri(void)
+	//{
+	//}
 	//由于构造函数尚未进行Values值初始化，所以调用默认构造后应尽快添加Values值
-	Pri::Pri(const unsigned long &primin,
-		const unsigned long &primax,
+	Pri::Pri(const unsigned int &primin,
+		const unsigned int &primax,
 		const PriType &pritype)
 		:m_min(primin)
 		, m_max(primax)
@@ -591,8 +591,8 @@ namespace sce
 	{
 	}
 
-	Pri::Pri(const unsigned long &primin,
-		const unsigned long &primax,
+	Pri::Pri(const unsigned int &primin,
+		const unsigned int &primax,
 		const Pri_values &privalues,
 		const PriType & pritype)
 		:m_min(primin)
@@ -602,8 +602,8 @@ namespace sce
 	{
 	}
 
-	Pri::Pri(const unsigned long &primin, 
-		const unsigned long &primax,
+	Pri::Pri(const unsigned int &primin, 
+		const unsigned int &primax,
 		const std::vector<Pri_values> &privalues,
 		const PriType & pritype)
 		:m_min(primin)
@@ -622,12 +622,12 @@ namespace sce
 			*it = nullptr;
 		}*/
 	}
-	inline const unsigned long & Pri::getPriMin(void) const
+	inline const unsigned int & Pri::getPriMin(void) const
 	{
 		return m_min;
 	}
 
-	const unsigned long & Pri::getPriMax(void) const
+	const unsigned int & Pri::getPriMax(void) const
 	{
 		return m_max;
 	}
@@ -650,7 +650,7 @@ namespace sce
 
 	Pri_values & Pri::getPriValue(unsigned int valueOrder)
 	{
-		assert(valueOrder>=m_values.size());
+		assert(valueOrder<m_values.size());
 		if (valueOrder<m_values.size())
 		{
 			//return *(_priValues[valueOrder]);
@@ -659,12 +659,12 @@ namespace sce
 		throw Error("can't return this value (doesn't exist)");
 	}
 
-	void Pri::setPriMin(const unsigned long & primin)
+	void Pri::setPriMin(const unsigned int & primin)
 	{
 		m_min = primin;
 	}
 
-	void Pri::setPriMax(const unsigned long & primax)
+	void Pri::setPriMax(const unsigned int & primax)
 	{
 		m_max = primax;
 	}
@@ -681,7 +681,7 @@ namespace sce
 
 	bool Pri::setPriValues(const unsigned int & pos, const Pri_values &priValues)
 	{
-		assert(pos >= m_values.size());
+		assert(pos < m_values.size());
 		if (pos < m_values.size())
 		{
 			m_values[pos] = priValues;
@@ -703,7 +703,7 @@ namespace sce
 
 	bool Pri::deletePriValues(unsigned int pos)
 	{
-		assert(pos >= m_values.size());
+		assert(pos < m_values.size());
 		if (pos<m_values.size())
 		{
 			//delete *(_priValues.begin() + pos);
@@ -725,9 +725,9 @@ namespace sce
 	//}
 
 	/**************************Scan*************************************/
-	Scan::Scan(void)
-	{
-	}
+	//Scan::Scan(void)
+	//{
+	//}
 
 	Scan::Scan(const unsigned int &max,
 		const unsigned int &min,
@@ -757,7 +757,7 @@ namespace sce
 		return m_type;
 	}
 
-	void Scan::setScanMin(const unsigned long & min)
+	void Scan::setScanMin(const unsigned int & min)
 	{
 		m_min = min;
 	}
@@ -767,18 +767,18 @@ namespace sce
 		m_type = type;
 	}
 
-	void Scan::setScanMax(const unsigned long & max)
+	void Scan::setScanMax(const unsigned int & max)
 	{
 		m_max = max;
 	}
 
 	/**************************Erp*************************************/
-	Erp::Erp(void)
-	{
-	}
+	//Erp::Erp(void)
+	//{
+	//}
 
-	Erp::Erp(const unsigned long &min,
-		const unsigned long &max)
+	Erp::Erp(const unsigned int &min,
+		const unsigned int &max)
 		:m_min(min),
 		m_max(max)
 	{
@@ -787,28 +787,28 @@ namespace sce
 	Erp::~Erp(void)
 	{
 	}
-	const unsigned long & Erp::getErpMin(void) const
+	const unsigned int & Erp::getErpMin(void) const
 	{
 		return m_min;
 	}
-	const unsigned long & Erp::getErpMax(void) const
+	const unsigned int & Erp::getErpMax(void) const
 	{
 		return m_max;
 	}
-	void Erp::setErpMin(const unsigned long & min)
+	void Erp::setErpMin(const unsigned int & min)
 	{
 		m_min = min;
 	}
-	void Erp::setErpMax(const unsigned long & max)
+	void Erp::setErpMax(const unsigned int & max)
 	{
 		m_max = max;
 	}
 	
 	/**************************Radar_Mode**********************************/
 	//由于默认构造函数尚未进行Values值初始化，所以调用默认构造后应尽快添加Values值
-	Radar_Mode::Radar_Mode(void)
-	{
-	}
+	//Radar_Mode::Radar_Mode(void)
+	//{
+	//}
 
 	Radar_Mode::Radar_Mode(const std::string &modeCode,
 		const ModeType &modeType,
@@ -904,9 +904,9 @@ namespace sce
 
 	/***************************Emitter*********************************/
 	//由于默认构造函数尚未进行RadarMode值初始化，所以调用默认构造后应尽快完成RadarMode值初始化操作
-	Emitter::Emitter(void)
-	{
-	}
+	//Emitter::Emitter(void)
+	//{
+	//}
 
 	Emitter::Emitter(const std::string &name,
 		std::shared_ptr<Radar_Mode>& ptrRadarMode)
@@ -946,7 +946,7 @@ namespace sce
 	const std::shared_ptr<Radar_Mode> Emitter::getPtr2RadarMode(unsigned int valueOrder) const
 	{
 		// TODO: 在此处插入 return 语句
-		assert(valueOrder>= m_ptrRadarMode.size());
+		assert(valueOrder < m_ptrRadarMode.size());
 		if (valueOrder<m_ptrRadarMode.size())
 		{
 			return m_ptrRadarMode[valueOrder];
@@ -961,7 +961,7 @@ namespace sce
 
 	bool Emitter::setPtr2RadarMode(unsigned int & pos, std::shared_ptr<Radar_Mode> ptr_radarmode)
 	{
-		assert(pos>=m_ptrRadarMode.size());
+		assert(pos<m_ptrRadarMode.size());
 		if (pos < m_ptrRadarMode.size())
 		{
 			m_ptrRadarMode[pos]=ptr_radarmode;
@@ -972,7 +972,7 @@ namespace sce
 
 	bool Emitter::insertRadarMode(unsigned int& pos, std::shared_ptr<Radar_Mode> ptr_radarmode)
 	{
-		assert(pos>m_ptrRadarMode.size());
+		assert(pos<=m_ptrRadarMode.size());
 		if (pos<=m_ptrRadarMode.size())
 		{
 			m_ptrRadarMode.insert(m_ptrRadarMode.begin() + pos, ptr_radarmode);
@@ -983,7 +983,7 @@ namespace sce
 
 	bool Emitter::deleteRadarMode(unsigned int& pos)
 	{
-		assert(pos>=m_ptrRadarMode.size());
+		assert(pos<m_ptrRadarMode.size());
 		if (pos < m_ptrRadarMode.size())
 		{
 			m_ptrRadarMode.erase(m_ptrRadarMode.begin() + pos);
@@ -1003,13 +1003,13 @@ namespace sce
 	}
 	
 	/*********************Weapon*********************************/
-	Weapon::Weapon(void)
-	{
-	}
+	//Weapon::Weapon(void)
+	//{
+	//}
 
 	Weapon::Weapon(const std::string& name,
-		const unsigned long& cepr,
-		const unsigned long& weaponAreaCoverage)
+		const unsigned int& cepr,
+		const unsigned int& weaponAreaCoverage)
 		:m_name(name)
 		,m_cepr(cepr)
 		,m_weaponAreaCoverage(weaponAreaCoverage)
@@ -1026,13 +1026,13 @@ namespace sce
 		return m_name;
 	}
 
-	const unsigned long & Weapon::getCEPR(void) const
+	const unsigned int & Weapon::getCEPR(void) const
 	{
 		// TODO: 在此处插入 return 语句
 		return m_cepr;
 	}
 
-	const unsigned long & Weapon::getWeaponAreaCoverage(void) const
+	const unsigned int & Weapon::getWeaponAreaCoverage(void) const
 	{
 		// TODO: 在此处插入 return 语句
 		return m_weaponAreaCoverage;
@@ -1043,20 +1043,20 @@ namespace sce
 		m_name = name;
 	}
 
-	void Weapon::setCEPR(const unsigned long &cepr)
+	void Weapon::setCEPR(const unsigned int &cepr)
 	{
 		m_cepr = cepr;
 	}
 
-	void Weapon::setWeaponAreaCoverage(const unsigned long &weaponAreaCoverage)
+	void Weapon::setWeaponAreaCoverage(const unsigned int &weaponAreaCoverage)
 	{
 		m_weaponAreaCoverage = weaponAreaCoverage;
 	}
 
 	/***********************Site*********************************/
-	Site::Site(void)
-	{
-	}
+	//Site::Site(void)
+	//{
+	//}
 
 	Site::Site(const std::string &name,
 		const double &altitude,
@@ -1118,9 +1118,9 @@ namespace sce
 	}
 
 	/*******************Point*******************************/
-	Point::Point(void)
-	{
-	}
+	//Point::Point(void)
+	//{
+	//}
 
 	Point::Point(const double &altitude,
 		const double &latitude,
@@ -1195,9 +1195,9 @@ namespace sce
 	}
 
 	/*******************Mission********************************/
-	Mission::Mission(void)
-	{
-	}
+	//Mission::Mission(void)
+	//{
+	//}
 
 	Mission::Mission(const MissionType &missionType,
 		const Point &startPoint,
@@ -1267,7 +1267,7 @@ namespace sce
 	Point & Mission::getTargetPoint(unsigned int& pointOrder)
 	{
 		// TODO: 在此处插入 return 语句
-		assert(pointOrder >= m_targetPoints.size());
+		assert(pointOrder < m_targetPoints.size());
 		if (pointOrder<m_targetPoints.size())
 		{
 			return m_targetPoints[pointOrder];
@@ -1284,7 +1284,7 @@ namespace sce
 
 	bool Mission::setTargetPoint(unsigned int& pos, const Point &targetPoint)
 	{
-		assert(pos >= m_targetPoints.size());
+		assert(pos < m_targetPoints.size());
 		if (pos < m_targetPoints.size())
 		{
 			m_targetPoints[pos]= targetPoint;
@@ -1295,7 +1295,7 @@ namespace sce
 
 	bool Mission::insertTargetPoint(unsigned int& pos, const Point &targetPoint)
 	{
-		assert(pos > m_targetPoints.size());
+		assert(pos <= m_targetPoints.size());
 		if (pos <= m_targetPoints.size())
 		{
 			m_targetPoints.insert(m_targetPoints.begin()+pos,targetPoint);
@@ -1306,7 +1306,7 @@ namespace sce
 
 	bool Mission::deleteTargetPoint(unsigned int& pos)
 	{
-		assert(pos>=m_targetPoints.size());
+		assert(pos<m_targetPoints.size());
 		if (pos<m_targetPoints.size())
 		{
 			m_targetPoints.erase(m_targetPoints.begin() + pos);
@@ -1336,9 +1336,9 @@ namespace sce
 	}
 
 	/***********************OwnPlatform************************************/
-	OwnPlatform::OwnPlatform(void)
-	{
-	}
+	//OwnPlatform::OwnPlatform(void)
+	//{
+	//}
 
 	OwnPlatform::OwnPlatform(const std::string &name,
 		const OwnPlatformType &ownPlatformType,
@@ -1466,15 +1466,15 @@ namespace sce
 	}
 
 	/****************************Esm***************************/
-	Esm::Esm(void)
-	{
-	}
+	//Esm::Esm(void)
+	//{
+	//}
 
 	Esm::Esm(const std::string &name,
 		const double &dwellFreqResolution,
 		const unsigned int &tuningStep,
-		const unsigned long &rfCovMin,
-		const unsigned long &rfCovMax,
+		const unsigned int &rfCovMin,
+		const unsigned int &rfCovMax,
 		const unsigned int &numPulsesAcquisition,
 		const unsigned int &numPulsesAlarm)
 		:m_name(name)
@@ -1509,13 +1509,13 @@ namespace sce
 		return m_tuningStep;
 	}
 
-	const unsigned long & Esm::getRfCovMin(void)
+	const unsigned int & Esm::getRfCovMin(void)
 	{
 		// TODO: 在此处插入 return 语句
 		return m_rfCovMin;
 	}
 
-	const unsigned long & Esm::getRfCovMax(void)
+	const unsigned int & Esm::getRfCovMax(void)
 	{
 		// TODO: 在此处插入 return 语句
 		return m_rfCovMax;
@@ -1548,12 +1548,12 @@ namespace sce
 		m_tuningStep = tuningStep;
 	}
 
-	void Esm::setRfCovMin(const long &rfCovMin)
+	void Esm::setRfCovMin(const int &rfCovMin)
 	{
 		m_rfCovMin = rfCovMin;
 	}
 
-	void Esm::setRfCovMax(const long &rfCovMax)
+	void Esm::setRfCovMax(const int &rfCovMax)
 	{
 		m_rfCovMax = rfCovMax;
 	}
@@ -1569,15 +1569,15 @@ namespace sce
 	}
 
 	/********************Ecm********************************/
-	Ecm::Ecm(void)
-	{
-	}
+	//Ecm::Ecm(void)
+	//{
+	//}
 
 	Ecm::Ecm(const std::string &name,
-		const unsigned long &pt,
+		const unsigned int &pt,
 		const unsigned int &gain,
-		const unsigned long &rfmin,
-		const unsigned long &rfmax,
+		const unsigned int &rfmin,
+		const unsigned int &rfmax,
 		const Tech& techName)
 		:m_name(name)
 		, m_pt(pt)
@@ -1589,10 +1589,10 @@ namespace sce
 	}
 
 	Ecm::Ecm(const std::string &name,
-		const unsigned long &pt,
+		const unsigned int &pt,
 		const unsigned int &gain,
-		const unsigned long &rfmin,
-		const unsigned long &rfmax,
+		const unsigned int &rfmin,
+		const unsigned int &rfmax,
 		const std::vector<Tech>&techName) 
 		:m_name(name)
 		,m_pt(pt)
@@ -1613,7 +1613,7 @@ namespace sce
 		return m_name;
 	}
 
-	const unsigned long & Ecm::getPt(void)
+	const unsigned int & Ecm::getPt(void)
 	{
 		// TODO: 在此处插入 return 语句
 		return m_pt;
@@ -1625,13 +1625,13 @@ namespace sce
 		return m_gain;
 	}
 
-	const unsigned long & Ecm::getRfMin(void)
+	const unsigned int & Ecm::getRfMin(void)
 	{
 		// TODO: 在此处插入 return 语句
 		return m_rfMin;
 	}
 
-	const unsigned long & Ecm::getRfMax(void)
+	const unsigned int & Ecm::getRfMax(void)
 	{
 		// TODO: 在此处插入 return 语句
 		return m_rfMax;
@@ -1651,7 +1651,7 @@ namespace sce
 	const Tech & Ecm::getTech(const unsigned int & order)
 	{
 		// TODO: 在此处插入 return 语句
-		assert(order>=m_techName.size());
+		assert(order<m_techName.size());
 		if (order<m_techName.size())
 		{
 			return m_techName[order];
@@ -1666,7 +1666,7 @@ namespace sce
 
 	bool Ecm::setTech(const unsigned int & pos, const Tech &tech)
 	{
-		assert(pos>=m_techName.size());
+		assert(pos<m_techName.size());
 		if (pos<m_techName.size())
 		{
 			m_techName[pos] = tech;
@@ -1677,7 +1677,7 @@ namespace sce
 
 	bool Ecm::insertTech(const unsigned int & pos, const Tech &tech)
 	{
-		assert(pos > m_techName.size());
+		assert(pos <= m_techName.size());
 		if (pos<=m_techName.size())
 		{
 			m_techName.insert(m_techName.begin()+pos,tech);
@@ -1688,7 +1688,7 @@ namespace sce
 
 	bool Ecm::deleteTech(const unsigned int & pos)
 	{
-		assert(pos >= m_techName.size());
+		assert(pos < m_techName.size());
 		if (pos<m_techName.size())
 		{
 			m_techName.erase(m_techName.begin()+pos);
@@ -1702,7 +1702,7 @@ namespace sce
 		m_name = name;
 	}
 
-	void Ecm::setPt(const unsigned long &pt)
+	void Ecm::setPt(const unsigned int &pt)
 	{
 		m_pt = pt;
 	}
@@ -1712,12 +1712,12 @@ namespace sce
 		m_gain = gain;
 	}
 
-	void Ecm::setRfMin(const unsigned long &rfMin)
+	void Ecm::setRfMin(const unsigned int &rfMin)
 	{
 		m_rfMin = rfMin;
 	}
 
-	void Ecm::setRfMax(const unsigned long &rfMax)
+	void Ecm::setRfMax(const unsigned int &rfMax)
 	{
 		m_rfMax = rfMax;
 	}
@@ -1728,9 +1728,9 @@ namespace sce
 	}
 
 	/*************************WarPoint********************************/
-	WayPoint::WayPoint(void)
-	{
-	}
+	//WayPoint::WayPoint(void)
+	//{
+	//}
 
 	WayPoint::WayPoint(const unsigned int &index,
 		const double &altitude,
@@ -1831,10 +1831,10 @@ namespace sce
 	}
 
 	/************************Route*****************************/
-	Route::Route(void)
-	{
+	//Route::Route(void)
+	//{
 
-	}
+	//}
 
 	Route::Route(const std::string &name,
 		const WayPoint &wayPoint)
@@ -1868,7 +1868,7 @@ namespace sce
 	WayPoint & Route::getWayPoint(const unsigned int &index)
 	{
 		// TODO: 在此处插入 return 语句
-		assert(index >= m_wayPoints.size());
+		assert(index < m_wayPoints.size());
 		if (index<m_wayPoints.size())
 		{
 			return m_wayPoints[index];
@@ -1889,7 +1889,7 @@ namespace sce
 
 	bool Route::insertWayPoint(const unsigned int &pos, const WayPoint &wayPoint)
 	{
-		assert(pos > m_wayPoints.size());
+		assert(pos <= m_wayPoints.size());
 		if (pos<=m_wayPoints.size())
 		{
 			m_wayPoints.insert(m_wayPoints.begin()+pos,wayPoint);
@@ -1900,7 +1900,7 @@ namespace sce
 
 	bool Route::setWayPoint(const unsigned int &index, const WayPoint &wayPoint)
 	{
-		assert(index >= m_wayPoints.size());
+		assert(index < m_wayPoints.size());
 		if (index < m_wayPoints.size())
 		{
 			m_wayPoints[index]= wayPoint;
@@ -1911,7 +1911,7 @@ namespace sce
 
 	bool Route::deleteWayPoint(const unsigned int &index)
 	{
-		assert(index >= m_wayPoints.size());
+		assert(index < m_wayPoints.size());
 		if (index < m_wayPoints.size())
 		{
 			m_wayPoints.erase(m_wayPoints.begin()+index);
@@ -1931,9 +1931,9 @@ namespace sce
 	}
 
 	/***************************Location********************************/
-	Location::Location(void)
-	{
-	}
+	//Location::Location(void)
+	//{
+	//}
 
 	Location::Location(const double &altitude,
 		const double &latitude,
@@ -1982,13 +1982,13 @@ namespace sce
 	}
 
 	/*********************DwellSquence***********************************/
-	DwellSquence::DwellSquence(void)
-	{
-	}
+	//DwellSquence::DwellSquence(void)
+	//{
+	//}
 
 	DwellSquence::DwellSquence(const unsigned int &index,
-		const unsigned long &minFreq,
-		const unsigned long &maxFreq,
+		const unsigned int &minFreq,
+		const unsigned int &maxFreq,
 		const double &startTime,
 		const double &endTime)
 		:m_index(index)
@@ -2009,13 +2009,13 @@ namespace sce
 		return m_index;
 	}
 
-	const unsigned long & DwellSquence::getMinFreq(void)
+	const unsigned int & DwellSquence::getMinFreq(void)
 	{
 		// TODO: 在此处插入 return 语句
 		return m_minFreq;
 	}
 
-	const unsigned long & DwellSquence::getMaxFreq(void)
+	const unsigned int & DwellSquence::getMaxFreq(void)
 	{
 		// TODO: 在此处插入 return 语句
 		return m_maxFreq;
@@ -2038,12 +2038,12 @@ namespace sce
 		m_index = index;
 	}
 
-	void DwellSquence::setMinFreq(const unsigned long &minFreq)
+	void DwellSquence::setMinFreq(const unsigned int &minFreq)
 	{
 		m_minFreq = minFreq;
 	}
 
-	void DwellSquence::setMaxFreq(const unsigned long &maxFreq)
+	void DwellSquence::setMaxFreq(const unsigned int &maxFreq)
 	{
 		m_maxFreq=maxFreq;
 	}
@@ -2059,9 +2059,9 @@ namespace sce
 	}
 
 	/***********************EsmStrategySection*********************************/
-	EsmStrategySection::EsmStrategySection(void)
-	{
-	}
+	//EsmStrategySection::EsmStrategySection(void)
+	//{
+	//}
 
 	EsmStrategySection::EsmStrategySection(const double &startTime,
 		const double &endTime,
@@ -2125,7 +2125,7 @@ namespace sce
 	DwellSquence & EsmStrategySection::getDwellSquence(const unsigned int & index)
 	{
 		// TODO: 在此处插入 return 语句
-		assert(index >= m_dwellSquences.size());
+		assert(index < m_dwellSquences.size());
 		if (index<m_dwellSquences.size())
 		{
 			return m_dwellSquences[index];
@@ -2146,7 +2146,7 @@ namespace sce
 
 	bool EsmStrategySection::insertDwellSquence(const unsigned int & pos, const DwellSquence &dwellsquence)
 	{
-		assert(pos > m_dwellSquences.size());
+		assert(pos <= m_dwellSquences.size());
 		if (pos <= m_dwellSquences.size())
 		{
 			m_dwellSquences.insert(m_dwellSquences.begin() + pos, dwellsquence);
@@ -2157,7 +2157,7 @@ namespace sce
 
 	bool EsmStrategySection::setDwellSquence(const unsigned int & pos, const DwellSquence &dwellsquence)
 	{
-		assert(pos >= m_dwellSquences.size());
+		assert(pos < m_dwellSquences.size());
 		if (pos < m_dwellSquences.size())
 		{
 			m_dwellSquences[pos]= dwellsquence;
@@ -2168,7 +2168,7 @@ namespace sce
 
 	bool EsmStrategySection::deleteDwellSquence(const unsigned int & index)
 	{
-		assert(index >= m_dwellSquences.size());
+		assert(index < m_dwellSquences.size());
 		if (index < m_dwellSquences.size())
 		{
 			m_dwellSquences.erase(m_dwellSquences.begin()+index);
@@ -2203,9 +2203,9 @@ namespace sce
 	}
 	
 	/********************EsmStrategy*********************************/
-	EsmStrategy::EsmStrategy(void)
-	{
-	}
+	//EsmStrategy::EsmStrategy(void)
+	//{
+	//}
 
 	EsmStrategy::EsmStrategy(const std::string &name,
 		const std::shared_ptr<EsmStrategySection>&ptrEsmStrategySection)
@@ -2244,7 +2244,7 @@ namespace sce
 
 	const std::shared_ptr<EsmStrategySection> EsmStrategy::getPtr2Section(unsigned int & pos) const
 	{
-		assert(pos >= m_ptrSections.size());
+		assert(pos < m_ptrSections.size());
 		if (pos<m_ptrSections.size())
 		{
 			return m_ptrSections[pos];
@@ -2259,7 +2259,7 @@ namespace sce
 
 	bool EsmStrategy::setPtr2Section(unsigned int & pos, std::shared_ptr<EsmStrategySection> ptrSection)
 	{
-		assert(pos >= m_ptrSections.size());
+		assert(pos < m_ptrSections.size());
 		if (pos<m_ptrSections.size())
 		{
 			m_ptrSections[pos] = ptrSection;
@@ -2270,7 +2270,7 @@ namespace sce
 
 	bool EsmStrategy::insertSection(unsigned int & pos, std::shared_ptr<EsmStrategySection> ptrSection)
 	{
-		assert(pos > m_ptrSections.size());
+		assert(pos <= m_ptrSections.size());
 		if (pos<=m_ptrSections.size())
 		{
 			m_ptrSections.insert(m_ptrSections.begin() +pos, ptrSection);
@@ -2281,7 +2281,7 @@ namespace sce
 
 	bool EsmStrategy::deleteSection(unsigned int & pos)
 	{
-		assert(pos >= m_ptrSections.size());
+		assert(pos < m_ptrSections.size());
 		if (pos < m_ptrSections.size())
 		{
 			m_ptrSections.erase(m_ptrSections.begin() + pos);
@@ -2301,9 +2301,9 @@ namespace sce
 	}
 
 	/*************************EcmStrategySection**********************************/
-	EcmStrategySection::EcmStrategySection(void)
-	{
-	}
+	//EcmStrategySection::EcmStrategySection(void)
+	//{
+	//}
 
 	EcmStrategySection::EcmStrategySection(const double &startTime,
 		const double &endTime,
@@ -2378,9 +2378,9 @@ namespace sce
 	}
 
 	/***************************EcmStrategy******************************/
-	EcmStrategy::EcmStrategy(void)
-	{
-	}
+	//EcmStrategy::EcmStrategy(void)
+	//{
+	//}
 
 	EcmStrategy::EcmStrategy(const std::string &name,
 		const std::shared_ptr<EcmStrategySection>&ptrEcmStrategySection)
@@ -2419,7 +2419,7 @@ namespace sce
 
 	const std::shared_ptr<EcmStrategySection> EcmStrategy::getPtr2Section(unsigned int & pos) const
 	{
-		assert(pos >= m_ptrSections.size());
+		assert(pos < m_ptrSections.size());
 		if (pos<m_ptrSections.size())
 		{
 			return m_ptrSections[pos];
@@ -2434,7 +2434,7 @@ namespace sce
 
 	bool EcmStrategy::setPtr2Section(unsigned int & pos, std::shared_ptr<EcmStrategySection> ptrSection)
 	{
-		assert(pos >= m_ptrSections.size());
+		assert(pos < m_ptrSections.size());
 		if (pos<m_ptrSections.size())
 		{
 			m_ptrSections[pos] = ptrSection;
@@ -2445,7 +2445,7 @@ namespace sce
 
 	bool EcmStrategy::insertSection(unsigned int & pos, std::shared_ptr<EcmStrategySection> ptrSection)
 	{
-		assert(pos > m_ptrSections.size());
+		assert(pos <= m_ptrSections.size());
 		if (pos <= m_ptrSections.size())
 		{
 			m_ptrSections.insert(m_ptrSections.begin() + pos, ptrSection);
@@ -2456,7 +2456,7 @@ namespace sce
 
 	bool EcmStrategy::deleteSection(unsigned int & pos)
 	{
-		assert(pos >= m_ptrSections.size());
+		assert(pos < m_ptrSections.size());
 		if (pos < m_ptrSections.size())
 		{
 			m_ptrSections.erase(m_ptrSections.begin() + pos);
@@ -2476,9 +2476,9 @@ namespace sce
 	}
 
 	/**************************PlatformSiteRelation*****************************/
-	PlatformSiteRelation::PlatformSiteRelation(void)
-	{
-	}
+	//PlatformSiteRelation::PlatformSiteRelation(void)
+	//{
+	//}
 
 	PlatformSiteRelation::PlatformSiteRelation(const std::shared_ptr<Platform> ptrPlatform,
 		const std::shared_ptr<Site> ptrSite)
@@ -2510,9 +2510,9 @@ namespace sce
 	}
 
 	/************************PlatformEmitterRelation*************************/
-	PlatformEmitterRelation::PlatformEmitterRelation(void)
-	{
-	}
+	//PlatformEmitterRelation::PlatformEmitterRelation(void)
+	//{
+	//}
 	PlatformEmitterRelation::PlatformEmitterRelation(const std::shared_ptr<Platform> ptrPlatform,
 		const std::shared_ptr<Emitter> ptrEmitter)
 		:m_ptrPlatform(ptrPlatform)
@@ -2542,9 +2542,9 @@ namespace sce
 	}
 
 	/*************************PlatformWeaponRelation*********************************/
-	PlatformWeaponRelation::PlatformWeaponRelation(void)
-	{
-	}
+	//PlatformWeaponRelation::PlatformWeaponRelation(void)
+	//{
+	//}
 	PlatformWeaponRelation::PlatformWeaponRelation(const std::shared_ptr<Platform> ptrPlatform,
 		const std::shared_ptr<Weapon> ptrWeapon)
 		:m_ptrPlatform(ptrPlatform)
@@ -2574,9 +2574,9 @@ namespace sce
 	}
 
 	/************************OwnPlatformEsmRelation********************************/
-	OwnPlatformEsmRelation::OwnPlatformEsmRelation(void)
-	{
-	}
+	//OwnPlatformEsmRelation::OwnPlatformEsmRelation(void)
+	//{
+	//}
 	OwnPlatformEsmRelation::OwnPlatformEsmRelation(const std::shared_ptr<OwnPlatform> ptrOwnPlatform,
 		const std::shared_ptr<Esm> ptrEsm)
 		:m_ptrOwnPlatform(ptrOwnPlatform)
@@ -2606,9 +2606,9 @@ namespace sce
 	}
 
 	/**********************EsmEsmStrategyRelation*************************/
-	EsmEsmStrategyRelation::EsmEsmStrategyRelation(void)
-	{
-	}
+	//EsmEsmStrategyRelation::EsmEsmStrategyRelation(void)
+	//{
+	//}
 	EsmEsmStrategyRelation::EsmEsmStrategyRelation(const std::shared_ptr<Esm>ptrEsm,
 		const std::shared_ptr<EsmStrategy> ptrEsmStrategy)
 		:m_ptrEsm(ptrEsm)
@@ -2638,9 +2638,9 @@ namespace sce
 	}
 
 	/************************OwnPlatformEcmRelation**********************/
-	OwnPlatformEcmRelation::OwnPlatformEcmRelation(void)
-	{
-	}
+	//OwnPlatformEcmRelation::OwnPlatformEcmRelation(void)
+	//{
+	//}
 	OwnPlatformEcmRelation::OwnPlatformEcmRelation(const std::shared_ptr<OwnPlatform> ptrOwnPlatform,
 		const std::shared_ptr<Ecm> ptrEcm)
 		:m_ptrOwnPlatform(ptrOwnPlatform)
@@ -2670,9 +2670,9 @@ namespace sce
 	}
 
 	/************************EcmEcmStrategyRelation**********************/
-	EcmEcmStrategyRelation::EcmEcmStrategyRelation(void)
-	{
-	}
+	//EcmEcmStrategyRelation::EcmEcmStrategyRelation(void)
+	//{
+	//}
 	EcmEcmStrategyRelation::EcmEcmStrategyRelation(const std::shared_ptr<Ecm> ptrEcm,
 		const std::shared_ptr<EcmStrategy> ptrEcmStrategy)
 		:m_ptrEcm(ptrEcm)
@@ -2702,9 +2702,9 @@ namespace sce
 	}
 
 	/************************OwnPlatformRouteRelation**********************/
-	OwnPlatformRouteRelation::OwnPlatformRouteRelation(void)
-	{
-	}
+	//OwnPlatformRouteRelation::OwnPlatformRouteRelation(void)
+	//{
+	//}
 	OwnPlatformRouteRelation::OwnPlatformRouteRelation(const std::shared_ptr<OwnPlatform> ptrOwnPlatform,
 		const std::shared_ptr<Route> ptrRoute)
 		:m_ptrOwnPlatform(ptrOwnPlatform)
@@ -2734,10 +2734,10 @@ namespace sce
 	}
 
 	/******************************Scenario***********************************/
-	Scenario::Scenario(void)
-	{
-	}
-	Scenario::Scenario(std::vector<Vertex>& vertexs,
+	//Scenario::Scenario(void)
+	//{
+	//}
+	Scenario::Scenario(std::vector<std::shared_ptr<Vertex>>& vertexs,
 		std::vector<std::shared_ptr<Platform>> ptrPlatforms,
 		std::vector<std::shared_ptr<Emitter>> ptrEmitters,
 		std::vector<std::shared_ptr<Weapon>> ptrWeapons,
@@ -2756,7 +2756,7 @@ namespace sce
 		std::vector<OwnPlatformEcmRelation> ownPlatformEcmRelations,
 		std::vector<EcmEcmStrategyRelation> ecmEcmStrategyRelations,
 		std::vector<OwnPlatformRouteRelation> ownPlatformRouteRelations)
-		:m_vertex(vertexs)
+		: m_vertex(vertexs)
 		, m_ptrPlatform(ptrPlatforms)
 		, m_ptrEmitter(ptrEmitters)
 		, m_ptrWeapon(ptrWeapons)

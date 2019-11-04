@@ -70,7 +70,7 @@ namespace sce
 	class Scenario
 	{
 	public:
-		Scenario(void); 
+		//Scenario(void); 
 		Scenario(std::vector<std::shared_ptr<Vertex>>& vertexs,
 			std::vector<std::shared_ptr<Platform>> ptrPlatforms,
 			std::vector<std::shared_ptr<Emitter>> ptrEmitters,
@@ -147,89 +147,89 @@ namespace sce
 		template<typename T>
 		std::shared_ptr<T> getPtr(const unsigned int& pos) 
 		{
-			if (T=Vertex)
+			if (T==Vertex)
 			{
-				assert(pos>=m_vertex.size());
+				assert(pos<m_vertex.size());
 				if (pos<m_vertex.size())
 				{
 					return m_vertex[pos];
 				}
 			}
-			if (T=Platform)
+			if (T==Platform)
 			{
-				assert(pos >= m_ptrPlatform.size());
+				assert(pos < m_ptrPlatform.size());
 				if (pos < m_ptrPlatform.size())
 				{
 					return m_ptrPlatform[pos];
 				}
 			}
-			if (T = Emitter)
+			if (T == Emitter)
 			{
-				assert(pos >= m_ptrEmitter.size());
+				assert(pos < m_ptrEmitter.size());
 				if (pos < m_ptrEmitter.size())
 				{
 					return m_ptrEmitter[pos];
 				}
 			}
-			if (T = Weapon)
+			if (T == Weapon)
 			{
-				assert(pos >= m_ptrWeapon.size());
+				assert(pos < m_ptrWeapon.size());
 				if (pos < m_ptrWeapon.size())
 				{
 					return m_ptrWeapon[pos];
 				}
 			}
-			if (T = Site)
+			if (T == Site)
 			{
-				assert(pos >= m_ptrSite.size());
+				assert(pos < m_ptrSite.size());
 				if (pos < m_ptrSite.size())
 				{
 					return m_ptrSite[pos];
 				}
 			}
-			if (T = OwnPlatform)
+			if (T == OwnPlatform)
 			{
-				assert(pos >= m_ptrOwnPlatform.size());
+				assert(pos < m_ptrOwnPlatform.size());
 				if (pos < m_ptrOwnPlatform.size())
 				{
 					return m_ptrOwnPlatform[pos];
 				}
 			}
-			if (T = Esm)
+			if (T == Esm)
 			{
-				assert(pos >= m_ptrEsm.size());
+				assert(pos < m_ptrEsm.size());
 				if (pos < m_ptrEsm.size())
 				{
 					return m_ptrEsm[pos];
 				}
 			}
-			if (T = Ecm)
+			if (T == Ecm)
 			{
-				assert(pos >= m_ptrEcm.size());
+				assert(pos < m_ptrEcm.size());
 				if (pos < m_ptrEcm.size())
 				{
 					return m_ptrEcm[pos];
 				}
 			}
-			if (T = Route)
+			if (T == Route)
 			{
-				assert(pos >= m_ptrRoute.size());
+				assert(pos < m_ptrRoute.size());
 				if (pos < m_ptrRoute.size())
 				{
 					return m_ptrRoute[pos];
 				}
 			}
-			if (T = EsmStrategy)
+			if (T == EsmStrategy)
 			{
-				assert(pos >= m_ptrEsmStrategy.size());
+				assert(pos < m_ptrEsmStrategy.size());
 				if (pos < m_ptrEsmStrategy.size())
 				{
 					return m_ptrEsmStrategy[pos];
 				}
 			}
-			if (T = EcmStrategy)
+			if (T == EcmStrategy)
 			{
-				assert(pos >= m_ptrEcmStrategy.size());
+				assert(pos < m_ptrEcmStrategy.size());
 				if (pos < m_ptrEcmStrategy.size())
 				{
 					return m_ptrEcmStrategy[pos];
@@ -242,126 +242,126 @@ namespace sce
 		template<typename T>
 		void setAllPtrs(std::vector<std::shared_ptr<T>>& ptr2AllEntities)
 		{
-			if (T = Vertex) m_vertex=ptr2AllEntities;
+			if (T == Vertex) m_vertex=ptr2AllEntities;
 
-			if (T = Platform) m_ptrPlatform=ptr2AllEntities;
+			if (T == Platform) m_ptrPlatform=ptr2AllEntities;
 
-			if (T = Emitter) m_ptrEmitter=ptr2AllEntities;
+			if (T == Emitter) m_ptrEmitter=ptr2AllEntities;
 
-			if (T = Weapon) m_ptrWeapon=ptr2AllEntities;
+			if (T == Weapon) m_ptrWeapon=ptr2AllEntities;
 
-			if (T = Site) m_ptrSite=ptr2AllEntities;
+			if (T == Site) m_ptrSite=ptr2AllEntities;
 
-			if (T = OwnPlatform) m_ptrOwnPlatform=ptr2AllEntities;
+			if (T == OwnPlatform) m_ptrOwnPlatform=ptr2AllEntities;
 
-			if (T = Esm) m_ptrEsm=ptr2AllEntities;
+			if (T == Esm) m_ptrEsm=ptr2AllEntities;
 
-			if (T = Ecm) m_ptrEcm=ptr2AllEntities;
+			if (T == Ecm) m_ptrEcm=ptr2AllEntities;
 
-			if (T = Route) m_ptrRoute=ptr2AllEntities;
+			if (T == Route) m_ptrRoute=ptr2AllEntities;
 
-			if (T = EsmStrategy) m_ptrEsmStrategy=ptr2AllEntities;
+			if (T == EsmStrategy) m_ptrEsmStrategy=ptr2AllEntities;
 
-			if (T = EcmStrategy) m_ptrEcmStrategy=ptr2AllEntities;
+			if (T == EcmStrategy) m_ptrEcmStrategy=ptr2AllEntities;
 		}
 
 		//set/modify pointer of entity
 		template<typename T>
 		bool setPtr(const unsigned int& pos, std::shared_ptr<T> ptr2Entity)
 		{
-			if (T = Vertex)
+			if (T == Vertex)
 			{
-				assert(pos >= m_vertex.size());
+				assert(pos < m_vertex.size());
 				if (pos < m_vertex.size())
 				{
 					m_vertex[pos] = ptr2Entity;
 					return true;
 				}
 			}
-			if (T = Platform)
+			if (T == Platform)
 			{
-				assert(pos >= m_ptrPlatform.size());
+				assert(pos < m_ptrPlatform.size());
 				if (pos < m_ptrPlatform.size())
 				{
 					m_ptrPlatform[pos] = ptr2Entity;
 					return true;
 				}
 			}
-			if (T = Emitter)
+			if (T == Emitter)
 			{
-				assert(pos >= m_ptrEmitter.size());
+				assert(pos < m_ptrEmitter.size());
 				if (pos < m_ptrEmitter.size())
 				{
 					m_ptrEmitter[pos] = ptr2Entity;
 					return true;
 				}
 			}
-			if (T = Weapon)
+			if (T == Weapon)
 			{
-				assert(pos >= m_ptrWeapon.size());
+				assert(pos < m_ptrWeapon.size());
 				if (pos < m_ptrWeapon.size())
 				{
 					m_ptrWeapon[pos] = ptr2Entity;
 					return true;
 				}
 			}
-			if (T = Site)
+			if (T == Site)
 			{
-				assert(pos >= m_ptrSite.size());
+				assert(pos < m_ptrSite.size());
 				if (pos < m_ptrSite.size())
 				{
 					m_ptrSite[pos] = ptr2Entity;
 					return true;
 				}
 			}
-			if (T = OwnPlatform)
+			if (T == OwnPlatform)
 			{
-				assert(pos >= m_ptrOwnPlatform.size());
+				assert(pos < m_ptrOwnPlatform.size());
 				if (pos < m_ptrOwnPlatform.size())
 				{
 					m_ptrOwnPlatform[pos] = ptr2Entity;
 					return true;
 				}
 			}
-			if (T = Esm)
+			if (T == Esm)
 			{
-				assert(pos >= m_ptrEsm.size());
+				assert(pos < m_ptrEsm.size());
 				if (pos < m_ptrEsm.size())
 				{
 					m_ptrEsm[pos] = ptr2Entity;
 					return true;
 				}
 			}
-			if (T = Ecm)
+			if (T == Ecm)
 			{
-				assert(pos >= m_ptrEcm.size());
+				assert(pos < m_ptrEcm.size());
 				if (pos < m_ptrEcm.size())
 				{
 					m_ptrEcm[pos] = ptr2Entity;
 					return true;
 				}
 			}
-			if (T = Route)
+			if (T == Route)
 			{
-				assert(pos >= m_ptrRoute.size());
+				assert(pos < m_ptrRoute.size());
 				if (pos < m_ptrRoute.size())
 				{
 					m_ptrRoute[pos] = ptr2Entity;
 					return true;
 				}
 			}
-			if (T = EsmStrategy)
+			if (T == EsmStrategy)
 			{
-				assert(pos >= m_ptrEsmStrategy.size());
+				assert(pos < m_ptrEsmStrategy.size());
 				if (pos < m_ptrEsmStrategy.size())
 				{
 					m_ptrEsmStrategy[pos] = ptr2Entity;
 					return true;
 				}
 			}
-			if (T = EcmStrategy)
+			if (T == EcmStrategy)
 			{
-				assert(pos >= m_ptrEcmStrategy.size());
+				assert(pos < m_ptrEcmStrategy.size());
 				if (pos < m_ptrEcmStrategy.size())
 				{
 					m_ptrEcmStrategy[pos] = ptr2Entity;
@@ -375,99 +375,99 @@ namespace sce
 		template<typename T>
 		bool insertPtr(const unsigned int& pos, std::shared_ptr<T> ptr2Entity)
 		{
-			if (T = Vertex)
+			if (T == Vertex)
 			{
-				assert(pos > m_vertex.size());
+				assert(pos <= m_vertex.size());
 				if (pos <= m_vertex.size())
 				{
 					m_vertex.insert(m_vertex.begin() + pos, ptr2Entity);;
 					return true;
 				}
 			}
-			if (T = Platform)
+			if (T == Platform)
 			{
-				assert(pos > m_ptrPlatform.size());
+				assert(pos <= m_ptrPlatform.size());
 				if (pos <= m_ptrPlatform.size())
 				{
 					m_ptrPlatform.insert(m_ptrPlatform.begin() + pos, ptr2Entity);
 					return true;
 				}
 			}
-			if (T = Emitter)
+			if (T == Emitter)
 			{
-				assert(pos > m_ptrEmitter.size());
+				assert(pos <= m_ptrEmitter.size());
 				if (pos <= m_ptrEmitter.size())
 				{
 					m_ptrEmitter.insert(m_ptrEmitter.begin() + pos, ptr2Entity);
 					return true;
 				}
 			}
-			if (T = Weapon)
+			if (T == Weapon)
 			{
-				assert(pos > m_ptrWeapon.size());
+				assert(pos <= m_ptrWeapon.size());
 				if (pos <= m_ptrWeapon.size())
 				{
 					m_ptrWeapon.insert(m_ptrWeapon.begin() + pos, ptr2Entity);
 					return true;
 				}
 			}
-			if (T = Site)
+			if (T == Site)
 			{
-				assert(pos > m_ptrSite.size());
+				assert(pos <= m_ptrSite.size());
 				if (pos <= m_ptrSite.size())
 				{
 					m_ptrSite.insert(m_ptrSite.begin() + pos, ptr2Entity);
 					return true;
 				}
 			}
-			if (T = OwnPlatform)
+			if (T == OwnPlatform)
 			{
-				assert(pos > m_ptrOwnPlatform.size());
+				assert(pos <= m_ptrOwnPlatform.size());
 				if (pos <= m_ptrOwnPlatform.size())
 				{
 					m_ptrOwnPlatform.insert(m_ptrOwnPlatform.begin() + pos, ptr2Entity);
 					return true;
 				}
 			}
-			if (T = Esm)
+			if (T == Esm)
 			{
-				assert(pos > m_ptrEsm.size());
+				assert(pos <= m_ptrEsm.size());
 				if (pos <= m_ptrEsm.size())
 				{
 					m_ptrEsm.insert(m_ptrEsm.begin() + pos, ptr2Entity);
 					return true;
 				}
 			}
-			if (T = Ecm)
+			if (T == Ecm)
 			{
-				assert(pos > m_ptrEcm.size());
+				assert(pos <= m_ptrEcm.size());
 				if (pos <= m_ptrEcm.size())
 				{
 					m_ptrEcm.insert(m_ptrEcm.begin() + pos, ptr2Entity);
 					return true;
 				}
 			}
-			if (T = Route)
+			if (T == Route)
 			{
-				assert(pos > m_ptrRoute.size());
+				assert(pos <= m_ptrRoute.size());
 				if (pos <= m_ptrRoute.size())
 				{
 					m_ptrRoute.insert(m_ptrRoute.begin() + pos, ptr2Entity);
 					return true;
 				}
 			}
-			if (T = EsmStrategy)
+			if (T == EsmStrategy)
 			{
-				assert(pos > m_ptrEsmStrategy.size());
+				assert(pos <= m_ptrEsmStrategy.size());
 				if (pos <= m_ptrEsmStrategy.size())
 				{
 					m_ptrEsmStrategy.insert(m_ptrEsmStrategy.begin() + pos, ptr2Entity);
 					return true;
 				}
 			}
-			if (T = EcmStrategy)
+			if (T == EcmStrategy)
 			{
-				assert(pos > m_ptrEcmStrategy.size());
+				assert(pos <= m_ptrEcmStrategy.size());
 				if (pos <= m_ptrEcmStrategy.size())
 				{
 					m_ptrEcmStrategy.insert(m_ptrEcmStrategy.begin() + pos, ptr2Entity);
@@ -481,126 +481,126 @@ namespace sce
 		template<typename T>
 		void addPtr(std::shared_ptr<T>& ptr2Entitiy)
 		{
-			if (T = Vertex) m_vertex.push_back(ptr2Entitiy);
+			if (T == Vertex) m_vertex.push_back(ptr2Entitiy);
 
-			if (T = Platform) m_ptrPlatform.push_back(ptr2Entitiy);
+			if (T == Platform) m_ptrPlatform.push_back(ptr2Entitiy);
 
-			if (T = Emitter) m_ptrEmitter.push_back(ptr2Entitiy);
+			if (T == Emitter) m_ptrEmitter.push_back(ptr2Entitiy);
 
-			if (T = Weapon) m_ptrWeapon.push_back(ptr2Entitiy);
+			if (T == Weapon) m_ptrWeapon.push_back(ptr2Entitiy);
 
-			if (T = Site) m_ptrSite.push_back(ptr2Entitiy);
+			if (T == Site) m_ptrSite.push_back(ptr2Entitiy);
 
-			if (T = OwnPlatform) m_ptrOwnPlatform.push_back(ptr2Entitiy);
+			if (T == OwnPlatform) m_ptrOwnPlatform.push_back(ptr2Entitiy);
 
-			if (T = Esm) m_ptrEsm.push_back(ptr2Entitiy);
+			if (T == Esm) m_ptrEsm.push_back(ptr2Entitiy);
 
-			if (T = Ecm) m_ptrEcm.push_back(ptr2Entitiy);
+			if (T == Ecm) m_ptrEcm.push_back(ptr2Entitiy);
 
-			if (T = Route) m_ptrRoute.push_back(ptr2Entitiy);
+			if (T == Route) m_ptrRoute.push_back(ptr2Entitiy);
 
-			if (T = EsmStrategy) m_ptrEsmStrategy.push_back(ptr2Entitiy);
+			if (T == EsmStrategy) m_ptrEsmStrategy.push_back(ptr2Entitiy);
 
-			if (T = EcmStrategy) m_ptrEcmStrategy.push_back(ptr2Entitiy);
+			if (T == EcmStrategy) m_ptrEcmStrategy.push_back(ptr2Entitiy);
 		}
 
 		//delete pointer of entity
 		template<typename T>
 		bool deletePtr(const unsigned int& pos)
 		{
-			if (T = Vertex)
+			if (T == Vertex)
 			{
-				assert(pos >= m_vertex.size());
+				assert(pos < m_vertex.size());
 				if (pos < m_vertex.size())
 				{
 					m_vertex.erase(m_vertex.begin()+pos);
 					return true;
 				}
 			}
-			if (T = Platform)
+			if (T == Platform)
 			{
-				assert(pos >= m_ptrPlatform.size());
+				assert(pos < m_ptrPlatform.size());
 				if (pos < m_ptrPlatform.size())
 				{
 					m_ptrPlatform.erase(m_ptrPlatform.begin() + pos);
 					return true;
 				}
 			}
-			if (T = Emitter)
+			if (T == Emitter)
 			{
-				assert(pos >= m_ptrEmitter.size());
+				assert(pos < m_ptrEmitter.size());
 				if (pos < m_ptrEmitter.size())
 				{
 					m_ptrEmitter.erase(m_ptrEmitter.begin() + pos);
 					return true;
 				}
 			}
-			if (T = Weapon)
+			if (T == Weapon)
 			{
-				assert(pos >= m_ptrWeapon.size());
+				assert(pos < m_ptrWeapon.size());
 				if (pos < m_ptrWeapon.size())
 				{
 					m_ptrWeapon.erase(m_ptrWeapon.begin() + pos);
 					return true;
 				}
 			}
-			if (T = Site)
+			if (T == Site)
 			{
-				assert(pos >= m_ptrSite.size());
+				assert(pos < m_ptrSite.size());
 				if (pos < m_ptrSite.size())
 				{
 					m_ptrSite.erase(m_ptrSite.begin() + pos);
 					return true;
 				}
 			}
-			if (T = OwnPlatform)
+			if (T == OwnPlatform)
 			{
-				assert(pos >= m_ptrOwnPlatform.size());
+				assert(pos < m_ptrOwnPlatform.size());
 				if (pos < m_ptrOwnPlatform.size())
 				{
 					m_ptrOwnPlatform.erase(m_ptrOwnPlatform.begin() + pos);
 					return true;
 				}
 			}
-			if (T = Esm)
+			if (T == Esm)
 			{
-				assert(pos >= m_ptrEsm.size());
+				assert(pos < m_ptrEsm.size());
 				if (pos < m_ptrEsm.size())
 				{
 					m_ptrEsm.erase(m_ptrEsm.begin() + pos);
 					return true;
 				}
 			}
-			if (T = Ecm)
+			if (T == Ecm)
 			{
-				assert(pos >= m_ptrEcm.size());
+				assert(pos < m_ptrEcm.size());
 				if (pos < m_ptrEcm.size())
 				{
 					m_ptrEcm.erase(m_ptrEcm.begin() + pos);
 					return true;
 				}
 			}
-			if (T = Route)
+			if (T == Route)
 			{
-				assert(pos >= m_ptrRoute.size());
+				assert(pos < m_ptrRoute.size());
 				if (pos < m_ptrRoute.size())
 				{
 					m_ptrRoute.erase(m_ptrRoute.begin() + pos);
 					return true;
 				}
 			}
-			if (T = EsmStrategy)
+			if (T == EsmStrategy)
 			{
-				assert(pos >= m_ptrEsmStrategy.size());
+				assert(pos < m_ptrEsmStrategy.size());
 				if (pos < m_ptrEsmStrategy.size())
 				{
 					m_ptrEsmStrategy.erase(m_ptrEsmStrategy.begin() + pos);
 					return true;
 				}
 			}
-			if (T = EcmStrategy)
+			if (T == EcmStrategy)
 			{
-				assert(pos >= m_ptrEcmStrategy.size());
+				assert(pos < m_ptrEcmStrategy.size());
 				if (pos < m_ptrEcmStrategy.size())
 				{
 					m_ptrEcmStrategy.erase(m_ptrEcmStrategy.begin() + pos);
@@ -625,85 +625,85 @@ namespace sce
 		template<typename T>
 		std::vector<T>& getAllRelation(void)
 		{
-			if (T = PlatformSiteRelation) return m_PlatformSiteRelation;
+			if (T == PlatformSiteRelation) return m_PlatformSiteRelation;
 
-			if (T = PlatformEmitterRelation) return m_PlatformEmitterRelation;
+			if (T == PlatformEmitterRelation) return m_PlatformEmitterRelation;
 
-			if (T = PlatformWeaponRelation) return m_PlatformWeaponRelation;
+			if (T == PlatformWeaponRelation) return m_PlatformWeaponRelation;
 
-			if (T = OwnPlatformEsmRelation) return m_OwnPlatformEsmRelation;
+			if (T == OwnPlatformEsmRelation) return m_OwnPlatformEsmRelation;
 
-			if (T = EsmEsmStrategyRelation) return m_EsmEsmStrategyRelation;
+			if (T == EsmEsmStrategyRelation) return m_EsmEsmStrategyRelation;
 
-			if (T = OwnPlatformEcmRelation) return m_OwnPlatformEcmRelation;
+			if (T == OwnPlatformEcmRelation) return m_OwnPlatformEcmRelation;
 
-			if (T = EcmEcmStrategyRelation) return m_EcmEcmStrategyRelation;
+			if (T == EcmEcmStrategyRelation) return m_EcmEcmStrategyRelation;
 
-			if (T = OwnPlatformRouteRelation) return m_OwnPlatformRouteRelation;
+			if (T == OwnPlatformRouteRelation) return m_OwnPlatformRouteRelation;
 		}
 
 		template <typename T>
 		T& getRelation(const unsigned int& pos)
 		{
-			if (T = PlatformSiteRelation)
+			if (T == PlatformSiteRelation)
 			{
-				assert(pos >= m_PlatformSiteRelation.size());
+				assert(pos < m_PlatformSiteRelation.size());
 				if (pos < m_PlatformSiteRelation.size())
 				{
 					return m_PlatformSiteRelation[pos];
 				}
 			}
-			if (T = PlatformEmitterRelation)
+			if (T == PlatformEmitterRelation)
 			{
-				assert(pos >= m_PlatformEmitterRelation.size());
+				assert(pos < m_PlatformEmitterRelation.size());
 				if (pos < m_PlatformEmitterRelation.size())
 				{
 					return m_PlatformEmitterRelation[pos];
 				}
 			}
-			if (T = PlatformWeaponRelation)
+			if (T == PlatformWeaponRelation)
 			{
-				assert(pos >= m_PlatformWeaponRelation.size());
+				assert(pos < m_PlatformWeaponRelation.size());
 				if (pos < m_PlatformWeaponRelation.size())
 				{
 					return m_PlatformWeaponRelation[pos];
 				}
 			}
-			if (T = OwnPlatformEsmRelation)
+			if (T == OwnPlatformEsmRelation)
 			{
-				assert(pos >= m_OwnPlatformEsmRelation.size());
+				assert(pos < m_OwnPlatformEsmRelation.size());
 				if (pos < m_OwnPlatformEsmRelation.size())
 				{
 					return m_OwnPlatformEsmRelation[pos];
 				}
 			}
-			if (T = EsmEsmStrategyRelation)
+			if (T == EsmEsmStrategyRelation)
 			{
-				assert(pos >= m_EsmEsmStrategyRelation.size());
+				assert(pos < m_EsmEsmStrategyRelation.size());
 				if (pos < m_EsmEsmStrategyRelation.size())
 				{
 					return m_EsmEsmStrategyRelation[pos];
 				}
 			}
-			if (T = OwnPlatformEcmRelation)
+			if (T == OwnPlatformEcmRelation)
 			{
-				assert(pos >= m_OwnPlatformEcmRelation.size());
+				assert(pos < m_OwnPlatformEcmRelation.size());
 				if (pos < m_OwnPlatformEcmRelation.size())
 				{
 					return m_OwnPlatformEcmRelation[pos];
 				}
 			}
-			if (T = EcmEcmStrategyRelation)
+			if (T == EcmEcmStrategyRelation)
 			{
-				assert(pos >= m_EcmEcmStrategyRelation.size());
+				assert(pos < m_EcmEcmStrategyRelation.size());
 				if (pos < m_EcmEcmStrategyRelation.size())
 				{
 					return m_EcmEcmStrategyRelation[pos];
 				}
 			}
-			if (T = OwnPlatformRouteRelation)
+			if (T == OwnPlatformRouteRelation)
 			{
-				assert(pos >= m_OwnPlatformRouteRelation.size());
+				assert(pos < m_OwnPlatformRouteRelation.size());
 				if (pos < m_OwnPlatformRouteRelation.size())
 				{
 					return m_OwnPlatformRouteRelation[pos];
@@ -715,92 +715,92 @@ namespace sce
 		template<typename T>
 		void setAllRelation(std::vector<T>& relations)
 		{
-			if (T = PlatformSiteRelation) m_PlatformSiteRelation= relations;
+			if (T == PlatformSiteRelation) m_PlatformSiteRelation= relations;
 
-			if (T = PlatformEmitterRelation) m_PlatformEmitterRelation= relations;
+			if (T == PlatformEmitterRelation) m_PlatformEmitterRelation= relations;
 
-			if (T = PlatformWeaponRelation) m_PlatformWeaponRelation= relations;
+			if (T == PlatformWeaponRelation) m_PlatformWeaponRelation= relations;
 
-			if (T = OwnPlatformEsmRelation) m_OwnPlatformEsmRelation= relations;
+			if (T == OwnPlatformEsmRelation) m_OwnPlatformEsmRelation= relations;
 
-			if (T = EsmEsmStrategyRelation) m_EsmEsmStrategyRelation= relations;
+			if (T == EsmEsmStrategyRelation) m_EsmEsmStrategyRelation= relations;
 
-			if (T = OwnPlatformEcmRelation) m_OwnPlatformEcmRelation= relations;
+			if (T == OwnPlatformEcmRelation) m_OwnPlatformEcmRelation= relations;
 
-			if (T = EcmEcmStrategyRelation) m_EcmEcmStrategyRelation= relations;
+			if (T == EcmEcmStrategyRelation) m_EcmEcmStrategyRelation= relations;
 
-			if (T = OwnPlatformRouteRelation) m_OwnPlatformRouteRelation= relations;
+			if (T == OwnPlatformRouteRelation) m_OwnPlatformRouteRelation= relations;
 		}
 
 		template <typename T>
 		bool setRelation(const unsigned int& pos, T& relation)
 		{
-			if (T = PlatformSiteRelation)
+			if (T == PlatformSiteRelation)
 			{
-				assert(pos >= m_PlatformSiteRelation.size());
+				assert(pos < m_PlatformSiteRelation.size());
 				if (pos < m_PlatformSiteRelation.size())
 				{
 					m_PlatformSiteRelation[pos] = relation;
 					return true;
 				}
 			}
-			if (T = PlatformEmitterRelation)
+			if (T == PlatformEmitterRelation)
 			{
-				assert(pos >= m_PlatformEmitterRelation.size());
+				assert(pos < m_PlatformEmitterRelation.size());
 				if (pos < m_PlatformEmitterRelation.size())
 				{
 					m_PlatformEmitterRelation[pos] = relation;
 					return true;
 				}
 			}
-			if (T = PlatformWeaponRelation)
+			if (T == PlatformWeaponRelation)
 			{
-				assert(pos >= m_PlatformWeaponRelation.size());
+				assert(pos < m_PlatformWeaponRelation.size());
 				if (pos < m_PlatformWeaponRelation.size())
 				{
 					m_PlatformWeaponRelation[pos] = relation;
 					return true;
 				}
 			}
-			if (T = OwnPlatformEsmRelation)
+			if (T == OwnPlatformEsmRelation)
 			{
-				assert(pos >= m_OwnPlatformEsmRelation.size());
+				assert(pos < m_OwnPlatformEsmRelation.size());
 				if (pos < m_OwnPlatformEsmRelation.size())
 				{
 					m_OwnPlatformEsmRelation[pos] = relation;
 					return true;
 				}
 			}
-			if (T = EsmEsmStrategyRelation)
+			if (T == EsmEsmStrategyRelation)
 			{
-				assert(pos >= m_EsmEsmStrategyRelation.size());
+				assert(pos < m_EsmEsmStrategyRelation.size());
 				if (pos < m_EsmEsmStrategyRelation.size())
 				{
 					m_EsmEsmStrategyRelation[pos] = relation;
 					return true;
 				}
 			}
-			if (T = OwnPlatformEcmRelation)
+			if (T == OwnPlatformEcmRelation)
 			{
-				assert(pos >= m_OwnPlatformEcmRelation.size());
+				assert(pos < m_OwnPlatformEcmRelation.size());
 				if (pos < m_OwnPlatformEcmRelation.size())
 				{
 					m_OwnPlatformEcmRelation[pos] = relation;
 					return true;
 				}
 			}
-			if (T = EcmEcmStrategyRelation)
+			if (T == EcmEcmStrategyRelation)
 			{
-				assert(pos >= m_EcmEcmStrategyRelation.size());
+				assert(pos < m_EcmEcmStrategyRelation.size());
 				if (pos < m_EcmEcmStrategyRelation.size())
 				{
 					m_EcmEcmStrategyRelation[pos] = relation;
 					return true;
 				}
 			}
-			if (T = OwnPlatformRouteRelation)
+			if (T == OwnPlatformRouteRelation)
 			{
-				assert(pos >= m_OwnPlatformRouteRelation.size());
+				assert(pos < m_OwnPlatformRouteRelation.size());
 				if (pos < m_OwnPlatformRouteRelation.size())
 				{
 					m_OwnPlatformRouteRelation[pos] = relation;
@@ -813,73 +813,73 @@ namespace sce
 		template <typename T>
 		bool insertRelation(const unsigned int& pos, T& relation)
 		{
-			if (T = PlatformSiteRelation)
+			if (T == PlatformSiteRelation)
 			{
-				assert(pos > m_PlatformSiteRelation.size());
+				assert(pos <= m_PlatformSiteRelation.size());
 				if (pos <= m_PlatformSiteRelation.size())
 				{
 					m_PlatformSiteRelation.insert(m_PlatformSiteRelation.begin() +pos, relation);
 					return true;
 				}
 			}
-			if (T = PlatformEmitterRelation)
+			if (T == PlatformEmitterRelation)
 			{
-				assert(pos >= m_PlatformEmitterRelation.size());
-				if (pos < m_PlatformEmitterRelation.size())
+				assert(pos <= m_PlatformEmitterRelation.size());
+				if (pos <= m_PlatformEmitterRelation.size())
 				{
 					m_PlatformEmitterRelation.insert(m_PlatformEmitterRelation.begin() + pos, relation);
 					return true;
 				}
 			}
-			if (T = PlatformWeaponRelation)
+			if (T == PlatformWeaponRelation)
 			{
-				assert(pos >= m_PlatformWeaponRelation.size());
-				if (pos < m_PlatformWeaponRelation.size())
+				assert(pos <= m_PlatformWeaponRelation.size());
+				if (pos <= m_PlatformWeaponRelation.size())
 				{
 					m_PlatformWeaponRelation.insert(m_PlatformWeaponRelation.begin() + pos, relation);
 					return true;
 				}
 			}
-			if (T = OwnPlatformEsmRelation)
+			if (T == OwnPlatformEsmRelation)
 			{
-				assert(pos >= m_OwnPlatformEsmRelation.size());
-				if (pos < m_OwnPlatformEsmRelation.size())
+				assert(pos <= m_OwnPlatformEsmRelation.size());
+				if (pos <= m_OwnPlatformEsmRelation.size())
 				{
 					m_OwnPlatformEsmRelation.insert(m_OwnPlatformEsmRelation.begin() + pos, relation);
 					return true;
 				}
 			}
-			if (T = EsmEsmStrategyRelation)
+			if (T == EsmEsmStrategyRelation)
 			{
-				assert(pos >= m_EsmEsmStrategyRelation.size());
-				if (pos < m_EsmEsmStrategyRelation.size())
+				assert(pos <= m_EsmEsmStrategyRelation.size());
+				if (pos <= m_EsmEsmStrategyRelation.size())
 				{
 					m_EsmEsmStrategyRelation.insert(m_EsmEsmStrategyRelation.begin() + pos, relation);
 					return true;
 				}
 			}
-			if (T = OwnPlatformEcmRelation)
+			if (T == OwnPlatformEcmRelation)
 			{
-				assert(pos >= m_OwnPlatformEcmRelation.size());
-				if (pos < m_OwnPlatformEcmRelation.size())
+				assert(pos <= m_OwnPlatformEcmRelation.size());
+				if (pos <= m_OwnPlatformEcmRelation.size())
 				{
 					m_OwnPlatformEcmRelation.insert(m_OwnPlatformEcmRelation.begin() + pos, relation);
 					return true;
 				}
 			}
-			if (T = EcmEcmStrategyRelation)
+			if (T == EcmEcmStrategyRelation)
 			{
-				assert(pos >= m_EcmEcmStrategyRelation.size());
-				if (pos < m_EcmEcmStrategyRelation.size())
+				assert(pos <= m_EcmEcmStrategyRelation.size());
+				if (pos <= m_EcmEcmStrategyRelation.size())
 				{
 					m_EcmEcmStrategyRelation.insert(m_EcmEcmStrategyRelation.begin() + pos, relation);
 					return true;
 				}
 			}
-			if (T = OwnPlatformRouteRelation)
+			if (T == OwnPlatformRouteRelation)
 			{
-				assert(pos >= m_OwnPlatformRouteRelation.size());
-				if (pos < m_OwnPlatformRouteRelation.size())
+				assert(pos <= m_OwnPlatformRouteRelation.size());
+				if (pos <= m_OwnPlatformRouteRelation.size())
 				{
 					m_OwnPlatformRouteRelation.insert(m_OwnPlatformRouteRelation.begin() + pos, relation);
 					return true;
@@ -891,92 +891,92 @@ namespace sce
 		template<typename T>
 		void addRelation(T& relation)
 		{
-			if (T = PlatformSiteRelation) m_PlatformSiteRelation.push_back(relations);
+			if (T == PlatformSiteRelation) m_PlatformSiteRelation.push_back(relations);
 
-			if (T = PlatformEmitterRelation) m_PlatformEmitterRelation.push_back(relations);
+			if (T == PlatformEmitterRelation) m_PlatformEmitterRelation.push_back(relations);
 
-			if (T = PlatformWeaponRelation) m_PlatformWeaponRelation.push_back(relations);
+			if (T == PlatformWeaponRelation) m_PlatformWeaponRelation.push_back(relations);
 
-			if (T = OwnPlatformEsmRelation) m_OwnPlatformEsmRelation.push_back(relations);
+			if (T == OwnPlatformEsmRelation) m_OwnPlatformEsmRelation.push_back(relations);
 
-			if (T = EsmEsmStrategyRelation) m_EsmEsmStrategyRelation.push_back(relations);
+			if (T == EsmEsmStrategyRelation) m_EsmEsmStrategyRelation.push_back(relations);
 
-			if (T = OwnPlatformEcmRelation) m_OwnPlatformEcmRelation.push_back(relations);
+			if (T == OwnPlatformEcmRelation) m_OwnPlatformEcmRelation.push_back(relations);
 
-			if (T = EcmEcmStrategyRelation) m_EcmEcmStrategyRelation.push_back(relations);
+			if (T == EcmEcmStrategyRelation) m_EcmEcmStrategyRelation.push_back(relations);
 
-			if (T = OwnPlatformRouteRelation) m_OwnPlatformRouteRelation.push_back(relations);
+			if (T == OwnPlatformRouteRelation) m_OwnPlatformRouteRelation.push_back(relations);
 		}
 
 		template <typename T>
 		bool deleteRelation(const unsigned int& pos)
 		{
-			if (T = PlatformSiteRelation)
+			if (T == PlatformSiteRelation)
 			{
-				assert(pos >= m_PlatformSiteRelation.size());
+				assert(pos < m_PlatformSiteRelation.size());
 				if (pos < m_PlatformSiteRelation.size())
 				{
 					m_PlatformSiteRelation.erase(m_PlatformSiteRelation.begin() + pos);
 					return true;
 				}
 			}
-			if (T = PlatformEmitterRelation)
+			if (T == PlatformEmitterRelation)
 			{
-				assert(pos > m_PlatformEmitterRelation.size());
-				if (pos <= m_PlatformEmitterRelation.size())
+				assert(pos < m_PlatformEmitterRelation.size());
+				if (pos < m_PlatformEmitterRelation.size())
 				{
 					m_PlatformEmitterRelation.erase(m_PlatformEmitterRelation.begin() + pos);
 					return true;
 				}
 			}
-			if (T = PlatformWeaponRelation)
+			if (T == PlatformWeaponRelation)
 			{
-				assert(pos > m_PlatformWeaponRelation.size());
-				if (pos <= m_PlatformWeaponRelation.size())
+				assert(pos < m_PlatformWeaponRelation.size());
+				if (pos < m_PlatformWeaponRelation.size())
 				{
 					m_PlatformWeaponRelation.erase(m_PlatformWeaponRelation.begin() + pos);
 					return true;
 				}
 			}
-			if (T = OwnPlatformEsmRelation)
+			if (T == OwnPlatformEsmRelation)
 			{
-				assert(pos > m_OwnPlatformEsmRelation.size());
-				if (pos <= m_OwnPlatformEsmRelation.size())
+				assert(pos < m_OwnPlatformEsmRelation.size());
+				if (pos < m_OwnPlatformEsmRelation.size())
 				{
 					m_OwnPlatformEsmRelation.erase(m_OwnPlatformEsmRelation.begin() + pos);
 					return true;
 				}
 			}
-			if (T = EsmEsmStrategyRelation)
+			if (T == EsmEsmStrategyRelation)
 			{
-				assert(pos > m_EsmEsmStrategyRelation.size());
-				if (pos <= m_EsmEsmStrategyRelation.size())
+				assert(pos < m_EsmEsmStrategyRelation.size());
+				if (pos < m_EsmEsmStrategyRelation.size())
 				{
 					m_EsmEsmStrategyRelation.erase(m_EsmEsmStrategyRelation.begin() + pos);
 					return true;
 				}
 			}
-			if (T = OwnPlatformEcmRelation)
+			if (T == OwnPlatformEcmRelation)
 			{
-				assert(pos > m_OwnPlatformEcmRelation.size());
-				if (pos <= m_OwnPlatformEcmRelation.size())
+				assert(pos < m_OwnPlatformEcmRelation.size());
+				if (pos < m_OwnPlatformEcmRelation.size())
 				{
 					m_OwnPlatformEcmRelation.erase(m_OwnPlatformEcmRelation.begin() + pos);
 					return true;
 				}
 			}
-			if (T = EcmEcmStrategyRelation)
+			if (T == EcmEcmStrategyRelation)
 			{
-				assert(pos >= m_EcmEcmStrategyRelation.size());
+				assert(pos < m_EcmEcmStrategyRelation.size());
 				if (pos < m_EcmEcmStrategyRelation.size())
 				{
 					m_EcmEcmStrategyRelation.erase(m_EcmEcmStrategyRelation.begin() + pos);
 					return true;
 				}
 			}
-			if (T = OwnPlatformRouteRelation)
+			if (T == OwnPlatformRouteRelation)
 			{
-				assert(pos >= m_OwnPlatformRouteRelation.size());
+				assert(pos < m_OwnPlatformRouteRelation.size());
 				if (pos < m_OwnPlatformRouteRelation.size())
 				{
 					m_OwnPlatformRouteRelation.erase(m_OwnPlatformRouteRelation.begin() + pos);
@@ -996,32 +996,32 @@ namespace sce
 		//OwnPlatformRouteRelation& getOwnPlatformRouteRelation(const unsigned int& pos);
 
 	private:
-		std::vector<std::shared_ptr<Vertex>> m_vertex{std::make_shared < Vertex>()};
+		std::vector<std::shared_ptr<Vertex>> m_vertex;
 		//由于Platform中name数据成员为string这种可变长类型，不应直接在容器中放置类对象，而应该使用指针
-		std::vector<std::shared_ptr<Platform>> m_ptrPlatform{std::make_shared<Platform>()};
+		std::vector<std::shared_ptr<Platform>> m_ptrPlatform;
 
-		std::vector<std::shared_ptr<Emitter>> m_ptrEmitter{ std::make_shared<Emitter>() };
-		std::vector<std::shared_ptr<Weapon>> m_ptrWeapon{ std::make_shared<Weapon>() };
+		std::vector<std::shared_ptr<Emitter>> m_ptrEmitter;
+		std::vector<std::shared_ptr<Weapon>> m_ptrWeapon;
 
-		std::vector<std::shared_ptr<Site>> m_ptrSite{ std::make_shared<Site>() };
-		std::vector<std::shared_ptr<OwnPlatform>> m_ptrOwnPlatform{ std::make_shared<OwnPlatform>() };
+		std::vector<std::shared_ptr<Site>> m_ptrSite;
+		std::vector<std::shared_ptr<OwnPlatform>> m_ptrOwnPlatform;
 
-		std::vector<std::shared_ptr<Esm>> m_ptrEsm{ std::make_shared<Esm>() };
-		std::vector<std::shared_ptr<Ecm>> m_ptrEcm{ std::make_shared<Ecm>() };
+		std::vector<std::shared_ptr<Esm>> m_ptrEsm;
+		std::vector<std::shared_ptr<Ecm>> m_ptrEcm;
 
-		std::vector<std::shared_ptr<Route>> m_ptrRoute{ std::make_shared<Route>() };
+		std::vector<std::shared_ptr<Route>> m_ptrRoute;
 
-		std::vector<std::shared_ptr<EsmStrategy>> m_ptrEsmStrategy{ std::make_shared<EsmStrategy>() };
-		std::vector<std::shared_ptr<EcmStrategy>> m_ptrEcmStrategy{ std::make_shared<EcmStrategy>() };
+		std::vector<std::shared_ptr<EsmStrategy>> m_ptrEsmStrategy;
+		std::vector<std::shared_ptr<EcmStrategy>> m_ptrEcmStrategy;
 
-		std::vector<PlatformSiteRelation> m_PlatformSiteRelation{PlatformSiteRelation()};
-		std::vector<PlatformEmitterRelation> m_PlatformEmitterRelation{PlatformEmitterRelation()};
-		std::vector<PlatformWeaponRelation> m_PlatformWeaponRelation{PlatformWeaponRelation()};
-		std::vector<OwnPlatformEsmRelation> m_OwnPlatformEsmRelation{OwnPlatformEsmRelation()};
-		std::vector<EsmEsmStrategyRelation> m_EsmEsmStrategyRelation{EsmEsmStrategyRelation()};
-		std::vector<OwnPlatformEcmRelation> m_OwnPlatformEcmRelation{OwnPlatformEcmRelation()};
-		std::vector<EcmEcmStrategyRelation> m_EcmEcmStrategyRelation{EcmEcmStrategyRelation()};
-		std::vector<OwnPlatformRouteRelation> m_OwnPlatformRouteRelation{OwnPlatformRouteRelation()};
+		std::vector<PlatformSiteRelation> m_PlatformSiteRelation;
+		std::vector<PlatformEmitterRelation> m_PlatformEmitterRelation;
+		std::vector<PlatformWeaponRelation> m_PlatformWeaponRelation;
+		std::vector<OwnPlatformEsmRelation> m_OwnPlatformEsmRelation;
+		std::vector<EsmEsmStrategyRelation> m_EsmEsmStrategyRelation;
+		std::vector<OwnPlatformEcmRelation> m_OwnPlatformEcmRelation;
+		std::vector<EcmEcmStrategyRelation> m_EcmEcmStrategyRelation;
+		std::vector<OwnPlatformRouteRelation> m_OwnPlatformRouteRelation;
 
 	};
 
@@ -1029,7 +1029,7 @@ namespace sce
 	{
 	public:
 		
-		Vertex(void)=default;
+		//Vertex(void)=default;
 
 		Vertex(const double &, const double &);
 
@@ -1061,7 +1061,7 @@ namespace sce
 		//请注意，数据成员中自定义类虽然都有默认构造函数，但本质上没有完全实例化类对象，
 		//由于充满不确定性，调用默认构造可能会引起一些未知错误；
 		//此构造函数用于编译器隐含调用，使用者请不要使用默认构造函数
-		Platform(void)=default;
+		//Platform(void)=default;
 
 		Platform(const std::string &, const PlatformType &);
 
@@ -1082,36 +1082,36 @@ namespace sce
 	class Rf_values
 	{
 	public:
-		Rf_values(void)=default;
+		//Rf_values(void)=default;
 
 		Rf_values(const unsigned int &,
 			const unsigned int &,
-			const unsigned long &,
-			const unsigned long &,
-			const unsigned long &);
+			const unsigned int &,
+			const unsigned int &,
+			const unsigned int &);
 
 		~Rf_values(void);
 
 		//get method
 		const unsigned int& getPhaseOrder(void) const;
 		const unsigned int& getNumberOfPulses(void) const;
-		const unsigned long& getMin(void) const;
-		const unsigned long& getMax(void) const;
-		const unsigned long& getSweepTime(void) const;
+		const unsigned int& getMin(void) const;
+		const unsigned int& getMax(void) const;
+		const unsigned int& getSweepTime(void) const;
 
 		//set method
 		void setPhaseOrder(const unsigned int &);
 		void setNumberOfPulses(const unsigned int &);
-		void setMin(const unsigned long &);
-		void setMax(const unsigned long &);
-		void setSweepTime(const unsigned long &);
+		void setMin(const unsigned int &);
+		void setMax(const unsigned int &);
+		void setSweepTime(const unsigned int &);
 
 	private:
 		unsigned int m_phaseOrder = 1;
 		unsigned int m_numberOfPulses = 0;
-		unsigned long m_min = 90;
-		unsigned long m_max = 90;
-		unsigned long m_sweepTime = 0;
+		unsigned int m_min = 90;
+		unsigned int m_max = 90;
+		unsigned int m_sweepTime = 0;
 	};
 
 	enum class RfType
@@ -1126,17 +1126,17 @@ namespace sce
 		//请注意，数据成员中自定义类虽然都有默认构造函数，但本质上没有完全实例化类对象，
 		//由于充满不确定性，调用默认构造可能会引起一些未知错误；
 		//此构造函数用于编译器隐含调用，使用者请不要使用默认构造函数
-		Rf(void) = default;
-		Rf(const unsigned long &,
-			const unsigned long &,
+		//Rf(void) = default;
+		Rf(const unsigned int &,
+			const unsigned int &,
 			const RfType &);
 
-		Rf(const unsigned long &,
-			const unsigned long &,
+		Rf(const unsigned int &,
+			const unsigned int &,
 			const Rf_values &, 
 			const RfType &);
-		Rf(const unsigned long &,
-			const unsigned long &,
+		Rf(const unsigned int &,
+			const unsigned int &,
 			const std::vector<Rf_values> &, 
 			const RfType &);
 
@@ -1145,8 +1145,8 @@ namespace sce
 		~Rf(void);
 
 		//get mehtod
-		const unsigned long& getRfMin(void) const;
-		const unsigned long& getRfMax(void) const;
+		const unsigned int& getRfMin(void) const;
+		const unsigned int& getRfMax(void) const;
 		const RfType& getRfType(void) const;
 
 		//获取容纳Pri_values的容器对象
@@ -1172,18 +1172,18 @@ namespace sce
 		bool deleteRfValues(const unsigned int& pos);
 
 		//set method
-		void setRfMin(const unsigned long &);
-		void setRfMax(const unsigned long &);
+		void setRfMin(const unsigned int &);
+		void setRfMax(const unsigned int &);
 		void setRfType(const RfType &);
 
 		//赋值覆盖，可用此成员函数覆盖住默认构造函数初始化的对象
 		void setAllRfValues(const std::vector<Rf_values>&);
 		
 	private:
-		unsigned long m_min=9000;
-		unsigned long m_max=10000;
+		unsigned int m_min=9000;
+		unsigned int m_max=10000;
 		RfType m_type=RfType::BURST;
-		std::vector<Rf_values> m_values{ Rf_values() };
+		std::vector<Rf_values> m_values;
 
 	public:
 		//const Rf_values &operator[](unsigned int valuesOrder) const;
@@ -1193,36 +1193,31 @@ namespace sce
 	{
 	public:
 		
-		Pw_values(void)=default;
+		//Pw_values(void)=default;
 
-		Pw_values(const unsigned int &,
-			const unsigned int &,
-			const unsigned long &,
-			const unsigned long &,
-			const unsigned long &)
-		{}
+		Pw_values(const unsigned int & pOrder, const unsigned int & numOfPulses, const unsigned int & min, const unsigned int & max, const unsigned int & sweepTime);
 		~Pw_values(void);
 
 		//get method
 		const unsigned int& getPhaseOrder(void) const;
 		const unsigned int& getNumberOfPulses(void) const;
-		const unsigned long& getMin(void) const;
-		const unsigned long& getMax(void) const;
-		const unsigned long& getSweepTime(void) const;
+		const unsigned int& getMin(void) const;
+		const unsigned int& getMax(void) const;
+		const unsigned int& getSweepTime(void) const;
 
 		//set method
 		void setPhaseOrder(const unsigned int &);
 		void setNumberOfPulses(const unsigned int &);
-		void setMin(const unsigned long &);
-		void setMax(const unsigned long &);
-		void setSweepTime(const unsigned long &);
+		void setMin(const unsigned int &);
+		void setMax(const unsigned int &);
+		void setSweepTime(const unsigned int &);
 
 	private:
 		unsigned int m_phaseOrder=0;
 		unsigned int m_numberOfPulses=0;
-		unsigned long m_min=20;
-		unsigned long m_max=20;
-		unsigned long m_sweepTime=0;
+		unsigned int m_min=20;
+		unsigned int m_max=20;
+		unsigned int m_sweepTime=0;
 	};
 
 	enum class PwType
@@ -1236,24 +1231,24 @@ namespace sce
 		//请注意，数据成员中自定义类虽然都有默认构造函数，但本质上没有完全实例化类对象，
 		//由于充满不确定性，调用默认构造可能会引起一些未知错误；
 		//此构造函数用于编译器隐含调用，使用者请不要使用默认构造函数
-		Pw(void)=default;
-		Pw(const unsigned long &, 
-			const unsigned long &, 
+		//Pw(void)=default;
+		Pw(const unsigned int &, 
+			const unsigned int &, 
 			const PwType &);
 
-		Pw(const unsigned long &,
-			const unsigned long &,
+		Pw(const unsigned int &,
+			const unsigned int &,
 			const Pw_values &,
 			const PwType &);
-		Pw(const unsigned long &,
-			const unsigned long &,
+		Pw(const unsigned int &,
+			const unsigned int &,
 			const std::vector<Pw_values > &,
 			const PwType &);
 		~Pw(void);
 
 		//get mehtod
-		const unsigned long& getPwMin(void) const;
-		const unsigned long& getPwMax(void) const;
+		const unsigned int& getPwMin(void) const;
+		const unsigned int& getPwMax(void) const;
 		const PwType& getPwType(void) const;
 
 		//获取容纳Pri_values的容器对象
@@ -1279,18 +1274,18 @@ namespace sce
 		bool deletePwValues(unsigned int pos);
 		
 		//set method
-		void setPwMin(const unsigned long &);
-		void setPwMax(const unsigned long &);
+		void setPwMin(const unsigned int &);
+		void setPwMax(const unsigned int &);
 		void setPwType(const PwType &);
 
 		//赋值覆盖，可用此成员函数覆盖住默认构造函数初始化的对象
 		void setAllPwValues(const std::vector<Pw_values>&);
 
 	private:
-		unsigned long m_min=20;
-		unsigned long m_max=20;
+		unsigned int m_min=20;
+		unsigned int m_max=20;
 		PwType m_type=PwType::FIX;
-		std::vector<Pw_values> m_values{ Pw_values() };
+		std::vector<Pw_values> m_values;
 
 	public:
 		//const Pw_values &operator[](unsigned int valuesOrder) const;
@@ -1299,36 +1294,36 @@ namespace sce
 	class Pri_values
 	{
 	public:
-		Pri_values(void) = default;
+		//Pri_values(void) = default;
 		
 		Pri_values(const unsigned int &,
 			const unsigned int &,
-			const unsigned long &,
-			const unsigned long &,
-			const unsigned long &);
+			const unsigned int &,
+			const unsigned int &,
+			const unsigned int &);
 
 		~Pri_values(void);
 
 		//get method
 		const unsigned int& getPhaseOrder(void) const;
 		const unsigned int& getNumberOfPulses(void) const;
-		const unsigned long& getMin(void) const;
-		const unsigned long& getMax(void) const;
-		const unsigned long& getSweepTime(void) const;
+		const unsigned int& getMin(void) const;
+		const unsigned int& getMax(void) const;
+		const unsigned int& getSweepTime(void) const;
 
 		//set method
 		void setPhaseOrder(const unsigned int &);
 		void setNumberOfPulses(const unsigned int &);
-		void setMin(const unsigned long &);
-		void setMax(const unsigned long &);
-		void setSweepTime(const unsigned long &);
+		void setMin(const unsigned int &);
+		void setMax(const unsigned int &);
+		void setSweepTime(const unsigned int &);
 
 	private:
 		unsigned int m_phaseOrder=1;
 		unsigned int m_numberOfPulses=0;
-		unsigned long m_min=90;
-		unsigned long m_max=90;
-		unsigned long m_sweepTime=0;
+		unsigned int m_min=90;
+		unsigned int m_max=90;
+		unsigned int m_sweepTime=0;
 	};
 
 	enum class PriType
@@ -1344,18 +1339,18 @@ namespace sce
 		//请注意，数据成员中自定义类虽然都有默认构造函数，但本质上没有完全实例化类对象，
 		//由于充满不确定性，调用默认构造可能会引起一些未知错误；
 		//此构造函数用于编译器隐含调用，使用者请不要使用默认构造函数
-		Pri(void) = default;
-		Pri(const unsigned long &,
-			const unsigned long &,
+		//Pri(void) = default;
+		Pri(const unsigned int &,
+			const unsigned int &,
 			const PriType &);
 
-		Pri(const unsigned long &,
-			const unsigned long &,
+		Pri(const unsigned int &,
+			const unsigned int &,
 			const Pri_values &,
 			const PriType &);
 
-		Pri(const unsigned long &,
-			const unsigned long &,
+		Pri(const unsigned int &,
+			const unsigned int &,
 			const std::vector<Pri_values> &,
 			const PriType &);
 
@@ -1363,8 +1358,8 @@ namespace sce
 
 
 		//get mehtod
-		const unsigned long& getPriMin(void) const;
-		const unsigned long& getPriMax(void) const;
+		const unsigned int& getPriMin(void) const;
+		const unsigned int& getPriMax(void) const;
 		const PriType& getPriType(void) const;
 
 		//获取容纳Pri_values的容器对象
@@ -1378,8 +1373,8 @@ namespace sce
 		Pri_values& getPriValue(unsigned int valueOrder);
 		
 		//set method
-		void setPriMin(const unsigned long &);
-		void setPriMax(const unsigned long &);
+		void setPriMin(const unsigned int &);
+		void setPriMax(const unsigned int &);
 		void setPriType(const PriType &);
 		
 		//add Pri_values
@@ -1398,10 +1393,10 @@ namespace sce
 		void setAllPriValues(const std::vector<Pri_values>&);
 		
 	private:
-		unsigned long m_min=90;
-		unsigned long m_max=100;
+		unsigned int m_min=90;
+		unsigned int m_max=100;
 		PriType m_type = PriType::FIX;
-		std::vector<Pri_values> m_values{ Pri_values() };
+		std::vector<Pri_values> m_values;
 
 	public: 
 		//const Pri_values &operator[](unsigned int valuesOrder) const;
@@ -1416,7 +1411,7 @@ namespace sce
 	{
 	public:
 		
-		Scan(void) = default;
+		//Scan(void) = default;
 		Scan(const unsigned int &,
 			const unsigned int &,
 			const ScanType &);
@@ -1428,8 +1423,8 @@ namespace sce
 		const ScanType& getScanType(void) const;
 		
 		//set method
-		void setScanMin(const unsigned long &);
-		void setScanMax(const unsigned long &);
+		void setScanMin(const unsigned int &);
+		void setScanMax(const unsigned int &);
 		void setScanType(const ScanType &);
 		
 	private:
@@ -1442,23 +1437,23 @@ namespace sce
 	{
 	public:
 		
-		Erp(void) = default;
-		Erp(const unsigned long &,
-			const unsigned long &);
+		//Erp(void) = default;
+		Erp(const unsigned int &,
+			const unsigned int &);
 		~Erp(void);
 
 		//get mehtod
-		const unsigned long& getErpMin(void) const;
-		const unsigned long& getErpMax(void) const;
+		const unsigned int& getErpMin(void) const;
+		const unsigned int& getErpMax(void) const;
 		
 		//set method
-		void setErpMin(const unsigned long &);
-		void setErpMax(const unsigned long &);
+		void setErpMin(const unsigned int &);
+		void setErpMax(const unsigned int &);
 		
 
 	private:
-		unsigned long m_min=50000;
-		unsigned long m_max=50000;
+		unsigned int m_min=50000;
+		unsigned int m_max=50000;
 	};
 
 	enum class ModeType
@@ -1472,7 +1467,7 @@ namespace sce
 		//请注意，数据成员中自定义类虽然都有默认构造函数，但本质上没有完全实例化类对象，
 		//由于充满不确定性，调用默认构造可能会引起一些未知错误；
 		//此构造函数用于编译器隐含调用，使用者请不要使用默认构造函数
-		Radar_Mode(void);
+		//Radar_Mode(void);
 
 		Radar_Mode(const std::string &,
 			const ModeType &,
@@ -1504,11 +1499,11 @@ namespace sce
 	private:
 		std::string m_modeCode{ "001" };//直接初始化
 		ModeType m_modeType=ModeType::PULSE;
-		Rf m_rf{Rf()};
-		Pw m_pw{Pw()};
-		Pri m_pri{Pri()};
-		Scan m_scan{Scan()};
-		Erp m_erp{Erp()};
+		Rf m_rf;
+		Pw m_pw;
+		Pri m_pri;
+		Scan m_scan;
+		Erp m_erp;
 	};
 
 	class Emitter
@@ -1517,7 +1512,7 @@ namespace sce
 		//请注意，数据成员中自定义类虽然都有默认构造函数，但本质上没有完全实例化类对象，
 		//由于充满不确定性，调用默认构造可能会引起一些未知错误；
 		//此构造函数用于编译器隐含调用，使用者请不要使用默认构造函数
-		Emitter(void);
+		//Emitter(void);
 		Emitter(const std::string &, std::shared_ptr<Radar_Mode> &);
 		Emitter(const std::string &, std::vector<std::shared_ptr<Radar_Mode>> &);
 		~Emitter(void);
@@ -1553,37 +1548,37 @@ namespace sce
 
 	private:
 		std::string m_name{"Emitter1"};
-		std::vector<std::shared_ptr<Radar_Mode>> m_ptrRadarMode{ std::make_shared<Radar_Mode>() };
+		std::vector<std::shared_ptr<Radar_Mode>> m_ptrRadarMode;
 	};
 
 	class Weapon
 	{
 	public:
 		//不用使用标准容器类直接装带有string类型成员数据的类对象，而应该是该对象的指针
-		Weapon(void);
-		Weapon(const std::string&,const unsigned long&, const unsigned long&);
+		//Weapon(void);
+		Weapon(const std::string&,const unsigned int&, const unsigned int&);
 		~Weapon(void);
 
 		const std::string& getName(void) const;
-		const unsigned long& getCEPR(void) const;
-		const unsigned long& getWeaponAreaCoverage(void) const;
+		const unsigned int& getCEPR(void) const;
+		const unsigned int& getWeaponAreaCoverage(void) const;
 
 		void setName(const std::string&);
-		void setCEPR(const unsigned long&);
-		void setWeaponAreaCoverage(const unsigned long&);
+		void setCEPR(const unsigned int&);
+		void setWeaponAreaCoverage(const unsigned int&);
 
 
 	private:
 		std::string m_name{"Weapon 1"};
-		unsigned long m_cepr{50000};
-		unsigned long m_weaponAreaCoverage{100000};
+		unsigned int m_cepr{50000};
+		unsigned int m_weaponAreaCoverage{100000};
 	};
 
 	class Site
 	{
 	public:
 		//不用使用标准容器类直接装带有string类型成员数据的类对象，而应该是该对象的指针
-		Site(void);
+		//Site(void);
 		Site(const std::string&, const double&, const double&, const double&);
 		~Site(void);
 
@@ -1609,7 +1604,7 @@ namespace sce
 	class Point
 	{
 	public:
-		Point(void);
+		//Point(void);
 		Point(const double&, const double&, const double&, const double&, const double&);
 		~Point(void);
 
@@ -1647,7 +1642,7 @@ namespace sce
 		//请注意，数据成员中自定义类虽然都有默认构造函数，但本质上没有完全实例化类对象，
 		//由于充满不确定性，调用默认构造可能会引起一些未知错误；
 		//此构造函数用于编译器隐含调用，使用者请不要使用默认构造函数
-		Mission(void);
+		//Mission(void);
 
 		//Mission Type:Strike
 		Mission(const MissionType&, const Point&, const Point&, const std::vector<Point>&);
@@ -1686,9 +1681,9 @@ namespace sce
 
 	private:
 		MissionType m_type = MissionType::STRIKE;
-		Point m_startPoint{Point()};
-		Point m_endPoint{Point()};
-		std::vector<Point> m_targetPoints{Point()};
+		Point m_startPoint;
+		Point m_endPoint;
+		std::vector<Point> m_targetPoints;
 	};
 		
 	enum class OwnPlatformType
@@ -1700,7 +1695,7 @@ namespace sce
 	class OwnPlatform
 	{
 	public:
-		OwnPlatform(void);
+		//OwnPlatform(void);
 		OwnPlatform(const std::string&, const OwnPlatformType&,const double&, const double&, const double&, const double&, const double&, const double&, const Mission&);
 		~OwnPlatform(void);
 
@@ -1736,29 +1731,29 @@ namespace sce
 		double m_maxDiveRate{30.0};
 		double m_maxSpeed{340.0};
 		double m_maxTurnRadius{10000};
-		Mission m_mission{Mission()};
+		Mission m_mission;
 	};
 
 	class Esm
 	{
 	public:
-		Esm(void);
-		Esm(const std::string&, const double&, const unsigned int&, const unsigned long&, const unsigned long&, const unsigned int&, const unsigned int&);
+		//Esm(void);
+		Esm(const std::string&, const double&, const unsigned int&, const unsigned int&, const unsigned int&, const unsigned int&, const unsigned int&);
 		~Esm(void);
 
 		const std::string& getName(void);
 		const double& getDwellFreqResolution(void);
 		const unsigned int& getTuningStep(void);
-		const unsigned long& getRfCovMin(void);
-		const unsigned long& getRfCovMax(void);
+		const unsigned int& getRfCovMin(void);
+		const unsigned int& getRfCovMax(void);
 		const unsigned int& getNumPulsesAcquisition(void);
 		const unsigned int& getNumPulsesAlarm(void);
 
 		void setName(const std::string&);
 		void setDwellFreqResolution(const double&);
 		void setTuningStep(const int&);
-		void setRfCovMin(const long&);
-		void setRfCovMax(const long&);
+		void setRfCovMin(const int&);
+		void setRfCovMax(const int&);
 		void setNumPulsesAcquisition(const int&);
 		void setNumPulsesAlarm(const int&);
 		
@@ -1766,8 +1761,8 @@ namespace sce
 		std::string m_name{ "Esm1" };
 		double m_dwellFreqResolution{100.0};
 		unsigned int m_tuningStep{ 20 };
-		unsigned long m_rfCovMin{ 500 };
-		unsigned long m_rfCovMax{ 12000 };
+		unsigned int m_rfCovMin{ 500 };
+		unsigned int m_rfCovMax{ 12000 };
 		unsigned int m_numPulsesAcquisition{200};
 		unsigned int m_numPulsesAlarm{100};
 	};
@@ -1783,18 +1778,18 @@ namespace sce
 	class Ecm
 	{
 	public:
-		Ecm(void);
+		//Ecm(void);
 
-		Ecm(const std::string&, const unsigned long&, const unsigned int&, const unsigned long&, const unsigned long&, const Tech&);
+		Ecm(const std::string&, const unsigned int&, const unsigned int&, const unsigned int&, const unsigned int&, const Tech&);
 
-		Ecm(const std::string&, const unsigned long&, const unsigned int&, const unsigned long&, const unsigned long&, const std::vector<Tech>&);
+		Ecm(const std::string&, const unsigned int&, const unsigned int&, const unsigned int&, const unsigned int&, const std::vector<Tech>&);
 		~Ecm(void);
 
 		const std::string& getName(void);
-		const unsigned long& getPt(void);
+		const unsigned int& getPt(void);
 		const unsigned int& getGain(void);
-		const unsigned long& getRfMin(void);
-		const unsigned long& getRfMax(void);
+		const unsigned int& getRfMin(void);
+		const unsigned int& getRfMax(void);
 
 		//获取装填所有Tech的容器对象
 		std::vector<Tech>& getAllTechs(void);
@@ -1819,27 +1814,27 @@ namespace sce
 
 		//set method
 		void setName(const std::string&);
-		void setPt(const unsigned long&);
+		void setPt(const unsigned int&);
 		void setGain(const unsigned int&);
-		void setRfMin(const unsigned long&);
-		void setRfMax(const unsigned long&);
+		void setRfMin(const unsigned int&);
+		void setRfMax(const unsigned int&);
 
 		//以容器为单位，整体赋值修改
 		void setAllTechs(const std::vector<Tech>&);
 
 	private:
 		std::string m_name{ "Ecm1" };
-		unsigned long m_pt{ 20000 };
+		unsigned int m_pt{ 20000 };
 		unsigned int m_gain{ 10 };
-		unsigned long m_rfMin{ 9000 };
-		unsigned long m_rfMax{ 9500 };
+		unsigned int m_rfMin{ 9000 };
+		unsigned int m_rfMax{ 9500 };
 		std::vector<Tech> m_techName{Tech::NOISE};
 	};
 
 	class WayPoint
 	{
 	public:
-		WayPoint(void);
+		//WayPoint(void);
 		WayPoint(const unsigned int&, const double&, const double&, const double&, const double&, const double&, const double&);
 		~WayPoint(void);
 
@@ -1874,7 +1869,7 @@ namespace sce
 	class Route
 	{
 	public:
-		Route(void);
+		//Route(void);
 		Route(const std::string&, const WayPoint&);
 		Route(const std::string&, const std::vector<WayPoint>&);
 		~Route(void);
@@ -1910,13 +1905,13 @@ namespace sce
 
 	private:
 		std::string m_name{"Route1"};
-		std::vector<WayPoint> m_wayPoints{WayPoint()};
+		std::vector<WayPoint> m_wayPoints;
 	};
 
 	class Location
 	{
 	public:
-		Location(void);
+		//Location(void);
 		Location(const double&, const double&, const double&);
 		~Location(void);
 
@@ -1939,28 +1934,28 @@ namespace sce
 	class DwellSquence
 	{
 	public:
-		DwellSquence(void);
-		DwellSquence(const unsigned int&, const unsigned long&, const unsigned long&, const double&, const double&);
+		//DwellSquence(void);
+		DwellSquence(const unsigned int&, const unsigned int&, const unsigned int&, const double&, const double&);
 		~DwellSquence(void);
 
 		//get method;
 		const unsigned int& getIndex(void);
-		const unsigned long& getMinFreq(void);
-		const unsigned long& getMaxFreq(void);
+		const unsigned int& getMinFreq(void);
+		const unsigned int& getMaxFreq(void);
 		const double& getStartTime(void);
 		const double& getEndTime(void);
 
 		//set method;
 		void setIndex(const unsigned int&);
-		void setMinFreq(const unsigned long&);
-		void setMaxFreq(const unsigned long&);
+		void setMinFreq(const unsigned int&);
+		void setMaxFreq(const unsigned int&);
 		void setStartTime(const double&);
 		void setEndTime(const double&);
 
 	private:
 		unsigned int m_index{ 1 };
-		unsigned long m_minFreq{ 100 };
-		unsigned long m_maxFreq{ 200 };
+		unsigned int m_minFreq{ 100 };
+		unsigned int m_maxFreq{ 200 };
 		double m_startTime{ 0.0 };
 		double m_endTime{ 30.0 };
 	};
@@ -1968,7 +1963,7 @@ namespace sce
 	class EsmStrategySection
 	{
 	public:
-		EsmStrategySection(void);
+		//EsmStrategySection(void);
 		EsmStrategySection(const double&, const double&, const Location&, const Location&, const DwellSquence&);
 		EsmStrategySection(const double&, const double&, const Location&, const Location&, const std::vector<DwellSquence>&);
 		~EsmStrategySection(void);
@@ -2010,15 +2005,15 @@ namespace sce
 	private:
 		double m_startTime{0};
 		double m_endTime{100};
-		Location m_startLocation{Location()};
-		Location m_endLocation{Location()};
-		std::vector<DwellSquence> m_dwellSquences{DwellSquence()};
+		Location m_startLocation;
+		Location m_endLocation;
+		std::vector<DwellSquence> m_dwellSquences;
 	};
 
 	class EsmStrategy
 	{
 	public:
-		EsmStrategy(void);
+		//EsmStrategy(void);
 		EsmStrategy(const std::string&, const std::shared_ptr<EsmStrategySection>&);
 		EsmStrategy(const std::string&, const std::vector<std::shared_ptr<EsmStrategySection>>&);
 		~EsmStrategy(void);
@@ -2054,7 +2049,7 @@ namespace sce
 
 	private:
 		std::string m_name{"ESM Strategy 1"};
-		std::vector<std::shared_ptr<EsmStrategySection>> m_ptrSections{ std::make_shared<EsmStrategySection>() };
+		std::vector<std::shared_ptr<EsmStrategySection>> m_ptrSections;
 
 	};
 
@@ -2062,7 +2057,7 @@ namespace sce
 	class EcmStrategySection
 	{
 	public:
-		EcmStrategySection(void);
+		//EcmStrategySection(void);
 		EcmStrategySection(const double&, const double&, const Location&, const Location&,const Tech&);
 		~EcmStrategySection(void);
 
@@ -2083,15 +2078,15 @@ namespace sce
 	private:
 		double m_startTime{0.0};
 		double m_endTime{100.0};
-		Location m_startLocation{ Location() };
-		Location m_endLocation{ Location() };
+		Location m_startLocation;
+		Location m_endLocation;
 		Tech m_tech{ Tech::NOISE };
 	};
 
 	class EcmStrategy
 	{
 	public:
-		EcmStrategy(void);
+		//EcmStrategy(void);
 		EcmStrategy(const std::string&, const std::shared_ptr<EcmStrategySection>&);
 		EcmStrategy(const std::string&, const std::vector<std::shared_ptr<EcmStrategySection>>&);
 		~EcmStrategy(void);
@@ -2128,13 +2123,13 @@ namespace sce
 
 	private:
 		std::string m_name{ "ECM Strategy 1" };
-		std::vector<std::shared_ptr<EcmStrategySection>> m_ptrSections{ std::make_shared<EcmStrategySection>() };
+		std::vector<std::shared_ptr<EcmStrategySection>> m_ptrSections;
 	};
 
 	class PlatformSiteRelation
 	{
 	public:
-		PlatformSiteRelation(void);
+		//PlatformSiteRelation(void);
 		PlatformSiteRelation(const std::shared_ptr<Platform>,const std::shared_ptr<Site>);
 		~PlatformSiteRelation(void);
 
@@ -2148,14 +2143,14 @@ namespace sce
 		
 
 	private:
-		std::shared_ptr<Platform> m_ptrPlatform{std::make_shared<Platform>()};
-		std::shared_ptr<Site> m_ptrSite{ std::make_shared<Site>() };
+		std::shared_ptr<Platform> m_ptrPlatform;
+		std::shared_ptr<Site> m_ptrSite;
 	};
 
 	class PlatformEmitterRelation
 	{
 	public:
-		PlatformEmitterRelation(void);
+		//PlatformEmitterRelation(void);
 		PlatformEmitterRelation(const std::shared_ptr<Platform>, const std::shared_ptr<Emitter>);
 		~PlatformEmitterRelation(void);
 
@@ -2168,14 +2163,14 @@ namespace sce
 		void setEmitter(const std::shared_ptr<Emitter>);
 
 	private:
-		std::shared_ptr<Platform> m_ptrPlatform{ std::make_shared<Platform>() };
-		std::shared_ptr<Emitter> m_ptrEmitter{ std::make_shared<Emitter>() };
+		std::shared_ptr<Platform> m_ptrPlatform;
+		std::shared_ptr<Emitter> m_ptrEmitter;
 	};
 
 	class PlatformWeaponRelation
 	{
 	public:
-		PlatformWeaponRelation(void);
+		//PlatformWeaponRelation(void);
 		PlatformWeaponRelation(const std::shared_ptr<Platform>, const std::shared_ptr<Weapon>);
 		~PlatformWeaponRelation(void);
 
@@ -2188,14 +2183,14 @@ namespace sce
 		void setWeapon(const std::shared_ptr<Weapon>);
 
 	private:
-		std::shared_ptr<Platform> m_ptrPlatform{ std::make_shared<Platform>() };
-		std::shared_ptr<Weapon> m_ptrWeapon{ std::make_shared<Weapon>() };
+		std::shared_ptr<Platform> m_ptrPlatform;
+		std::shared_ptr<Weapon> m_ptrWeapon;
 	};
 
 	class OwnPlatformEsmRelation
 	{
 	public:
-		OwnPlatformEsmRelation(void);
+		//OwnPlatformEsmRelation(void);
 		OwnPlatformEsmRelation(const std::shared_ptr<OwnPlatform>, const std::shared_ptr<Esm>);
 		~OwnPlatformEsmRelation(void);
 
@@ -2208,14 +2203,14 @@ namespace sce
 		void setEsm(const std::shared_ptr<Esm>);
 
 	private:
-		std::shared_ptr<OwnPlatform> m_ptrOwnPlatform{ std::make_shared<OwnPlatform>() };
-		std::shared_ptr<Esm> m_ptrEsm{ std::make_shared<Esm>() };
+		std::shared_ptr<OwnPlatform> m_ptrOwnPlatform;
+		std::shared_ptr<Esm> m_ptrEsm;
 	};
 
 	class EsmEsmStrategyRelation
 	{
 	public:
-		EsmEsmStrategyRelation(void);
+		//EsmEsmStrategyRelation(void);
 		EsmEsmStrategyRelation(const std::shared_ptr<Esm>, const std::shared_ptr<EsmStrategy>);
 		~EsmEsmStrategyRelation(void);
 
@@ -2228,14 +2223,14 @@ namespace sce
 		void setEsmStrategy(const std::shared_ptr<EsmStrategy>);
 
 	private:
-		std::shared_ptr<Esm> m_ptrEsm{ std::make_shared<Esm>() };
-		std::shared_ptr<EsmStrategy> m_ptrEsmStrategy{ std::make_shared<EsmStrategy>() };
+		std::shared_ptr<Esm> m_ptrEsm;
+		std::shared_ptr<EsmStrategy> m_ptrEsmStrategy;
 	};
 
 	class OwnPlatformEcmRelation
 	{
 	public:
-		OwnPlatformEcmRelation(void);
+		//OwnPlatformEcmRelation(void);
 		OwnPlatformEcmRelation(const std::shared_ptr<OwnPlatform>, const std::shared_ptr<Ecm>);
 		~OwnPlatformEcmRelation(void);
 
@@ -2248,14 +2243,14 @@ namespace sce
 		void setEcm(const std::shared_ptr<Ecm>);
 
 	private:
-		std::shared_ptr<OwnPlatform> m_ptrOwnPlatform{ std::make_shared<OwnPlatform>() };
-		std::shared_ptr<Ecm> m_ptrEcm{ std::make_shared<Ecm>() };
+		std::shared_ptr<OwnPlatform> m_ptrOwnPlatform;
+		std::shared_ptr<Ecm> m_ptrEcm;
 	};
 
 	class EcmEcmStrategyRelation
 	{
 	public:
-		EcmEcmStrategyRelation(void);
+		//EcmEcmStrategyRelation(void);
 		EcmEcmStrategyRelation(const std::shared_ptr<Ecm>, const std::shared_ptr<EcmStrategy>);
 		~EcmEcmStrategyRelation(void);
 
@@ -2268,14 +2263,14 @@ namespace sce
 		void setEcmStrategy(const std::shared_ptr<EcmStrategy>);
 
 	private:
-		std::shared_ptr<Ecm> m_ptrEcm{ std::make_shared<Ecm>() };
-		std::shared_ptr<EcmStrategy> m_ptrEcmStrategy{ std::make_shared<EcmStrategy>() };
+		std::shared_ptr<Ecm> m_ptrEcm;
+		std::shared_ptr<EcmStrategy> m_ptrEcmStrategy;
 	};
 
 	class OwnPlatformRouteRelation
 	{
 	public:
-		OwnPlatformRouteRelation(void);
+		//OwnPlatformRouteRelation(void);
 		OwnPlatformRouteRelation(const std::shared_ptr<OwnPlatform>, const std::shared_ptr<Route>);
 		~OwnPlatformRouteRelation(void);
 
@@ -2288,8 +2283,8 @@ namespace sce
 		void setRoute(const std::shared_ptr<Route>);
 
 	private:
-		std::shared_ptr<OwnPlatform> m_ptrOwnPlatform{ std::make_shared<OwnPlatform>() };
-		std::shared_ptr<Route> m_ptrRoute{ std::make_shared<Route>() };
+		std::shared_ptr<OwnPlatform> m_ptrOwnPlatform;
+		std::shared_ptr<Route> m_ptrRoute;
 	};
 
 }
