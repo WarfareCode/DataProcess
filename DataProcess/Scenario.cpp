@@ -166,10 +166,10 @@ namespace sce
 		const unsigned int &rfmax,
 		const Rf_values & rfvalues,
 		const RfType &rftype)
-		:m_min(rfmin)
+		: m_min(rfmin)
 		, m_max(rfmax)
 		, m_type(rftype)
-		, m_values{ rfvalues }
+		, m_values({ rfvalues })/*function({ arg1, arg2,...})复制列表初始化，以花括号初始化器列表为实参，以列表初始化对函数形参初始化*/
 	{
 	}
 
@@ -177,7 +177,7 @@ namespace sce
 		const unsigned int &rfmax,
 		const std::vector<Rf_values>& rfvalues,
 		const RfType &rftype)
-		:m_min(rfmin)
+		: m_min(rfmin)
 		, m_max(rfmax)
 		, m_type(rftype)
 		, m_values(rfvalues)
@@ -380,7 +380,7 @@ namespace sce
 		:m_min(pwmin)
 		,m_max(pwmax)
 		,m_type(pwtype)
-		,m_values{pwvalues}
+		,m_values({pwvalues})
 	{
 	}
 
@@ -598,7 +598,7 @@ namespace sce
 		:m_min(primin)
 		, m_max(primax)
 		, m_type(pritype)
-		, m_values{ privalues }
+		, m_values({ privalues })
 	{
 	}
 
@@ -911,7 +911,7 @@ namespace sce
 	Emitter::Emitter(const std::string &name,
 		std::shared_ptr<Radar_Mode>& ptrRadarMode)
 		: m_name(name)
-		, m_ptrRadarMode{ ptrRadarMode }
+		, m_ptrRadarMode({ ptrRadarMode })
 	{
 	}
 
@@ -997,7 +997,7 @@ namespace sce
 		m_name = name;
 	}
 
-	void Emitter::setAllPtr2RadarModes(std::vector<std::shared_ptr<Radar_Mode>>&ptrRadarModes)
+	void Emitter::setAllPtr2RadarModes(std::vector<std::shared_ptr<Radar_Mode>>& ptrRadarModes)
 	{
 		m_ptrRadarMode = ptrRadarModes;
 	}
@@ -1118,9 +1118,18 @@ namespace sce
 	}
 
 	/*******************Point*******************************/
-	//Point::Point(void)
-	//{
-	//}
+	Point::Point(void)
+	{
+	}
+
+	Point::Point(const double &altitude,
+		const double &latitude,
+		const double &longitude)
+		:m_altitude(altitude)
+		, m_latitude(latitude)
+		, m_longitude(longitude)
+	{
+	}
 
 	Point::Point(const double &altitude,
 		const double &latitude,
@@ -1217,7 +1226,7 @@ namespace sce
 		:m_type(missionType)
 		, m_startPoint(startPoint)
 		, m_endPoint(endPoint)
-		, m_targetPoints{ targetPoint }
+		, m_targetPoints({ targetPoint })
 	{
 	}
 
@@ -1584,7 +1593,7 @@ namespace sce
 		, m_gain(gain)
 		, m_rfMin(rfmin)
 		, m_rfMax(rfmax)
-		, m_techName{ techName }
+		, m_techName({ techName })
 	{
 	}
 
@@ -1839,7 +1848,7 @@ namespace sce
 	Route::Route(const std::string &name,
 		const WayPoint &wayPoint)
 		:m_name(name)
-		, m_wayPoints{ wayPoint }
+		, m_wayPoints({ wayPoint })
 	{
 	}
 
@@ -2072,7 +2081,7 @@ namespace sce
 		,m_endTime(endTime)
 		,m_startLocation(startLocation)
 		,m_endLocation(endLocation)
-		,m_dwellSquences{ dwellsquence }
+		,m_dwellSquences({ dwellsquence })
 	{
 	}
 
@@ -2210,12 +2219,12 @@ namespace sce
 	EsmStrategy::EsmStrategy(const std::string &name,
 		const std::shared_ptr<EsmStrategySection>&ptrEsmStrategySection)
 		:m_name(name)
-		, m_ptrSections{ ptrEsmStrategySection }
+		, m_ptrSections({ ptrEsmStrategySection })
 	{
 	}
 
 	EsmStrategy::EsmStrategy(const std::string &name,
-		const std::vector<std::shared_ptr<EsmStrategySection>>&ptrEsmStrategySections)
+		const std::vector<std::shared_ptr<EsmStrategySection>>& ptrEsmStrategySections)
 		:m_name(name)
 		,m_ptrSections(ptrEsmStrategySections)
 	{
@@ -2295,7 +2304,7 @@ namespace sce
 		m_name = name;
 	}
 
-	void EsmStrategy::setAllPtr2Sections(std::vector<std::shared_ptr<EsmStrategySection>>&ptrAllSections)
+	void EsmStrategy::setAllPtr2Sections(std::vector<std::shared_ptr<EsmStrategySection>>& ptrAllSections)
 	{
 		m_ptrSections = ptrAllSections;
 	}
@@ -2385,12 +2394,12 @@ namespace sce
 	EcmStrategy::EcmStrategy(const std::string &name,
 		const std::shared_ptr<EcmStrategySection>&ptrEcmStrategySection)
 		:m_name(name)
-		,m_ptrSections{ ptrEcmStrategySection }
+		,m_ptrSections({ ptrEcmStrategySection })
 	{
 	}
 
 	EcmStrategy::EcmStrategy(const std::string &name,
-		const std::vector<std::shared_ptr<EcmStrategySection>>&ptrEcmStrategySections)
+		const std::vector<std::shared_ptr<EcmStrategySection>>& ptrEcmStrategySections)
 		: m_name(name)
 		, m_ptrSections(ptrEcmStrategySections)
 	{
@@ -2470,7 +2479,7 @@ namespace sce
 		m_name = name;
 	}
 
-	void EcmStrategy::setAllPtr2Sections(std::vector<std::shared_ptr<EcmStrategySection>>&ptrAllSections)
+	void EcmStrategy::setAllPtr2Sections(std::vector<std::shared_ptr<EcmStrategySection>>& ptrAllSections)
 	{
 		m_ptrSections = ptrAllSections;
 	}
@@ -2734,28 +2743,65 @@ namespace sce
 	}
 
 	/******************************Scenario***********************************/
-	//Scenario::Scenario(void)
-	//{
-	//}
+	Scenario::Scenario(std::shared_ptr<Vertex> vertexs,
+		std::shared_ptr<Platform> ptrPlatforms,
+		std::shared_ptr<Emitter> ptrEmitters,
+		std::shared_ptr<Weapon> ptrWeapons,
+		std::shared_ptr<Site> ptrSites,
+		std::shared_ptr<OwnPlatform> ptrOwnPlatforms,
+		std::shared_ptr<Esm> ptrEsms,
+		std::shared_ptr<Ecm> ptrEcms,
+		std::shared_ptr<Route> ptrRoutes,
+		std::shared_ptr<EsmStrategy> ptrEsmStrategy,
+		std::shared_ptr<EcmStrategy> ptrEcmStrategy,
+		PlatformSiteRelation& platformSiteRelations,
+		PlatformEmitterRelation& platformEmitterRelations,
+		PlatformWeaponRelation& platformWeaponRelations,
+		OwnPlatformEsmRelation& ownPlatformEsmRelations,
+		EsmEsmStrategyRelation& esmEsmStrategyRelations,
+		OwnPlatformEcmRelation& ownPlatformEcmRelations,
+		EcmEcmStrategyRelation& ecmEcmStrategyRelations,
+		OwnPlatformRouteRelation& ownPlatformRouteRelations)
+		: m_vertex({vertexs})
+		, m_ptrPlatform({ptrPlatforms})
+		, m_ptrEmitter({ptrEmitters})
+		, m_ptrWeapon({ptrWeapons})
+		, m_ptrSite({ptrSites})
+		, m_ptrOwnPlatform({ptrOwnPlatforms})
+		, m_ptrEsm({ptrEsms})
+		, m_ptrEcm({ptrEcms})
+		, m_ptrRoute({ptrRoutes})
+		, m_ptrEsmStrategy({ptrEsmStrategy})
+		, m_ptrEcmStrategy({ptrEcmStrategy})
+		, m_PlatformSiteRelation({platformSiteRelations})
+		, m_PlatformEmitterRelation({platformEmitterRelations})
+		, m_PlatformWeaponRelation({platformWeaponRelations})
+		, m_OwnPlatformEsmRelation({ownPlatformEsmRelations})
+		, m_EsmEsmStrategyRelation({esmEsmStrategyRelations})
+		, m_OwnPlatformEcmRelation({ownPlatformEcmRelations})
+		, m_EcmEcmStrategyRelation({ecmEcmStrategyRelations})
+		, m_OwnPlatformRouteRelation({ownPlatformRouteRelations})
+	{
+	}
 	Scenario::Scenario(std::vector<std::shared_ptr<Vertex>>& vertexs,
-		std::vector<std::shared_ptr<Platform>> ptrPlatforms,
-		std::vector<std::shared_ptr<Emitter>> ptrEmitters,
-		std::vector<std::shared_ptr<Weapon>> ptrWeapons,
-		std::vector<std::shared_ptr<Site>> ptrSites,
-		std::vector<std::shared_ptr<OwnPlatform>> ptrOwnPlatforms,
-		std::vector<std::shared_ptr<Esm>> ptrEsms,
-		std::vector<std::shared_ptr<Ecm>> ptrEcms,
-		std::vector<std::shared_ptr<Route>> ptrRoutes,
-		std::vector<std::shared_ptr<EsmStrategy>> ptrEsmStrategy,
-		std::vector<std::shared_ptr<EcmStrategy>> ptrEcmStrategy,
-		std::vector<PlatformSiteRelation> platformSiteRelations,
-		std::vector<PlatformEmitterRelation> platformEmitterRelations,
-		std::vector<PlatformWeaponRelation> platformWeaponRelations,
-		std::vector<OwnPlatformEsmRelation> ownPlatformEsmRelations,
-		std::vector<EsmEsmStrategyRelation> esmEsmStrategyRelations,
-		std::vector<OwnPlatformEcmRelation> ownPlatformEcmRelations,
-		std::vector<EcmEcmStrategyRelation> ecmEcmStrategyRelations,
-		std::vector<OwnPlatformRouteRelation> ownPlatformRouteRelations)
+		std::vector<std::shared_ptr<Platform>>& ptrPlatforms,
+		std::vector<std::shared_ptr<Emitter>>& ptrEmitters,
+		std::vector<std::shared_ptr<Weapon>>& ptrWeapons,
+		std::vector<std::shared_ptr<Site>>& ptrSites,
+		std::vector<std::shared_ptr<OwnPlatform>>& ptrOwnPlatforms,
+		std::vector<std::shared_ptr<Esm>>& ptrEsms,
+		std::vector<std::shared_ptr<Ecm>>& ptrEcms,
+		std::vector<std::shared_ptr<Route>>& ptrRoutes,
+		std::vector<std::shared_ptr<EsmStrategy>>& ptrEsmStrategy,
+		std::vector<std::shared_ptr<EcmStrategy>>& ptrEcmStrategy,
+		std::vector<PlatformSiteRelation>& platformSiteRelations,
+		std::vector<PlatformEmitterRelation>& platformEmitterRelations,
+		std::vector<PlatformWeaponRelation>& platformWeaponRelations,
+		std::vector<OwnPlatformEsmRelation>& ownPlatformEsmRelations,
+		std::vector<EsmEsmStrategyRelation>& esmEsmStrategyRelations,
+		std::vector<OwnPlatformEcmRelation>& ownPlatformEcmRelations,
+		std::vector<EcmEcmStrategyRelation>& ecmEcmStrategyRelations,
+		std::vector<OwnPlatformRouteRelation>& ownPlatformRouteRelations)
 		: m_vertex(vertexs)
 		, m_ptrPlatform(ptrPlatforms)
 		, m_ptrEmitter(ptrEmitters)

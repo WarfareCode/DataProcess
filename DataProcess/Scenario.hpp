@@ -15,7 +15,9 @@
 #include<stdexcept>
 #include<string>
 #include<vector>
-#include <memory>
+#include<memory>
+#include<type_traits>
+#include<cassert>
 
 namespace sce 
 {
@@ -70,84 +72,104 @@ namespace sce
 	class Scenario
 	{
 	public:
-		//Scenario(void); 
-		Scenario(std::vector<std::shared_ptr<Vertex>>& vertexs,
-			std::vector<std::shared_ptr<Platform>> ptrPlatforms,
-			std::vector<std::shared_ptr<Emitter>> ptrEmitters,
-			std::vector<std::shared_ptr<Weapon>> ptrWeapons,
-			std::vector<std::shared_ptr<Site>> ptrSites,
-			std::vector<std::shared_ptr<OwnPlatform>> ptrOwnPlatforms,
-			std::vector<std::shared_ptr<Esm>> ptrEsms,
-			std::vector<std::shared_ptr<Ecm>> ptrEcms,
-			std::vector<std::shared_ptr<Route>> ptrRoutes,
-			std::vector<std::shared_ptr<EsmStrategy>> ptrEsmStrategy,
-			std::vector<std::shared_ptr<EcmStrategy>> ptrEcmStrategy,
-			std::vector<PlatformSiteRelation> ptrPlatformSiteRelations,
-			std::vector<PlatformEmitterRelation> ptrPlatformEmitterRelations,
-			std::vector<PlatformWeaponRelation> ptrPlatformWeaponRelations,
-			std::vector<OwnPlatformEsmRelation> ptrOwnPlatformEsmRelations,
-			std::vector<EsmEsmStrategyRelation> ptrEsmEsmStrategyRelations,
-			std::vector<OwnPlatformEcmRelation> ptrOwnPlatformEcmRelations,
-			std::vector<EcmEcmStrategyRelation> ptrEcmEcmStrategyRelations,
-			std::vector<OwnPlatformRouteRelation> ptrOwnPlatformRouteRelations);
+		Scenario(std::shared_ptr<Vertex> ,
+			std::shared_ptr<Platform> ,
+			std::shared_ptr<Emitter> ,
+			std::shared_ptr<Weapon> ,
+			std::shared_ptr<Site> ,
+			std::shared_ptr<OwnPlatform> ,
+			std::shared_ptr<Esm> ,
+			std::shared_ptr<Ecm> ,
+			std::shared_ptr<Route> ,
+			std::shared_ptr<EsmStrategy> ,
+			std::shared_ptr<EcmStrategy> ,
+			PlatformSiteRelation& ,
+			PlatformEmitterRelation& ,
+			PlatformWeaponRelation& ,
+			OwnPlatformEsmRelation& ,
+			EsmEsmStrategyRelation& ,
+			OwnPlatformEcmRelation& ,
+			EcmEcmStrategyRelation& ,
+			OwnPlatformRouteRelation& );
+
+		Scenario(std::vector<std::shared_ptr<Vertex>>& ,
+			std::vector<std::shared_ptr<Platform>>& ,
+			std::vector<std::shared_ptr<Emitter>>& ,
+			std::vector<std::shared_ptr<Weapon>>& ,
+			std::vector<std::shared_ptr<Site>>& ,
+			std::vector<std::shared_ptr<OwnPlatform>>& ,
+			std::vector<std::shared_ptr<Esm>>& ,
+			std::vector<std::shared_ptr<Ecm>>& ,
+			std::vector<std::shared_ptr<Route>>& ,
+			std::vector<std::shared_ptr<EsmStrategy>>& ,
+			std::vector<std::shared_ptr<EcmStrategy>>& ,
+			std::vector<PlatformSiteRelation>& ,
+			std::vector<PlatformEmitterRelation>& ,
+			std::vector<PlatformWeaponRelation>& ,
+			std::vector<OwnPlatformEsmRelation>& ,
+			std::vector<EsmEsmStrategyRelation>& ,
+			std::vector<OwnPlatformEcmRelation>& ,
+			std::vector<EcmEcmStrategyRelation>& ,
+			std::vector<OwnPlatformRouteRelation>& );
 		~Scenario(void);
 
 		template <typename T>
 		bool isEmpty(void)
 		{
-			if (T = Vertex) return m_vertex.empty() ? true : false;
-			if (T = Platform) return m_ptrPlatform.empty() ? true : false;
-			if (T = Emitter) return m_ptrEmitter.empty() ? true : false;
-			if (T = Weapon) return m_ptrWeapon.empty() ? true : false;
-			if (T = Site) return m_ptrSite.empty() ? true : false;
-			if (T = OwnPlatform) return m_ptrOwnPlatform.empty() ? true : false;
-			if (T = Esm) return m_ptrEsm.empty() ? true : false;
-			if (T = Ecm) return m_ptrEcm.empty() ? true : false;
-			if (T = Route) return m_ptrRoute.empty() ? true : false;
-			if (T = EsmStrategy) return m_ptrEsmStrategy.empty() ? true : false;
-			if (T = EcmStrategy) return m_ptrEcmStrategy.empty() ? true : false;
+			if (std::is_same<T , Vertex>::value) return m_vertex.empty() ? true : false;
+			if (std::is_same<T , Platform>::value) return m_ptrPlatform.empty() ? true : false;
+			if (std::is_same<T , Emitter>::value) return m_ptrEmitter.empty() ? true : false;
+			if (std::is_same<T , Weapon>::value) return m_ptrWeapon.empty() ? true : false;
+			if (std::is_same<T , Site>::value) return m_ptrSite.empty() ? true : false;
+			if (std::is_same<T , OwnPlatform>::value) return m_ptrOwnPlatform.empty() ? true : false;
+			if (std::is_same<T , Esm>::value) return m_ptrEsm.empty() ? true : false;
+			if (std::is_same<T , Ecm>::value) return m_ptrEcm.empty() ? true : false;
+			if (std::is_same<T , Route>::value) return m_ptrRoute.empty() ? true : false;
+			if (std::is_same<T , EsmStrategy>::value) return m_ptrEsmStrategy.empty() ? true : false;
+			if (std::is_same<T , EcmStrategy>::value) return m_ptrEcmStrategy.empty() ? true : false;
 
-			if (T = PlatformSiteRelation) return m_PlatformSiteRelation.empty() ? true : false;
-			if (T = PlatformEmitterRelation) return m_PlatformEmitterRelation.empty() ? true : false;
-			if (T = PlatformWeaponRelation) return m_PlatformWeaponRelation.empty() ? true : false;
-			if (T = OwnPlatformEsmRelation) return m_OwnPlatformEsmRelation.empty() ? true : false;
-			if (T = EsmEsmStrategyRelation) return m_EsmEsmStrategyRelation.empty() ? true : false;
-			if (T = OwnPlatformEcmRelation) return m_OwnPlatformEcmRelation.empty() ? true : false;
-			if (T = EcmEcmStrategyRelation) return m_EcmEcmStrategyRelation.empty() ? true : false;
-			if (T = OwnPlatformRouteRelation) return m_OwnPlatformRouteRelation.empty() ? true : false;
+			if (std::is_same<T , PlatformSiteRelation>::value) return m_PlatformSiteRelation.empty() ? true : false;
+			if (std::is_same<T , PlatformEmitterRelation>::value) return m_PlatformEmitterRelation.empty() ? true : false;
+			if (std::is_same<T , PlatformWeaponRelation>::value) return m_PlatformWeaponRelation.empty() ? true : false;
+			if (std::is_same<T , OwnPlatformEsmRelation>::value) return m_OwnPlatformEsmRelation.empty() ? true : false;
+			if (std::is_same<T , EsmEsmStrategyRelation>::value) return m_EsmEsmStrategyRelation.empty() ? true : false;
+			if (std::is_same<T , OwnPlatformEcmRelation>::value) return m_OwnPlatformEcmRelation.empty() ? true : false;
+			if (std::is_same<T , EcmEcmStrategyRelation>::value) return m_EcmEcmStrategyRelation.empty() ? true : false;
+			if (std::is_same<T , OwnPlatformRouteRelation>::value) return m_OwnPlatformRouteRelation.empty() ? true : false;
 		}
 		
 		//get pointer of typename
 		template<typename T>
 		std::vector<std::shared_ptr<T>>& getAllPtr(void)
 		{
-			if (T = Vertex) return m_vertex;
+			if (std::is_same<T , Vertex>::value) return m_vertex;
 
-			if (T = Platform) return m_ptrPlatform;
+			if (std::is_same<T , Platform>::value) return m_ptrPlatform;
 			
-			if (T = Emitter) return m_ptrEmitter;
+			if (std::is_same<T , Emitter>::value) return m_ptrEmitter;
 			
-			if (T = Weapon) return m_ptrWeapon;
+			if (std::is_same<T , Weapon>::value) return m_ptrWeapon;
 			
-			if (T = Site) return m_ptrSite;
+			if (std::is_same<T , Site>::value) return m_ptrSite;
 			
-			if (T = OwnPlatform) return m_ptrOwnPlatform;
+			if (std::is_same<T , OwnPlatform>::value) return m_ptrOwnPlatform;
 			
-			if (T = Esm) return m_ptrEsm;
+			if (std::is_same<T , Esm>::value) return m_ptrEsm;
 			
-			if (T = Ecm) return m_ptrEcm;
+			if (std::is_same<T , Ecm>::value) return m_ptrEcm;
 			
-			if (T = Route) return m_ptrRoute;
+			if (std::is_same<T , Route>::value) return m_ptrRoute;
 			
-			if (T = EsmStrategy) return m_ptrEsmStrategy;
+			if (std::is_same<T , EsmStrategy>::value) return m_ptrEsmStrategy;
 			
-			if (T = EcmStrategy) return m_ptrEcmStrategy;
+			if (std::is_same<T , EcmStrategy>::value) return m_ptrEcmStrategy;
 		}
 
-		template<typename T>
+		template<class T>
 		std::shared_ptr<T> getPtr(const unsigned int& pos) 
 		{
-			if (T==Vertex)
+			using type = typename std::decay<typename T>::type;
+			if (std::is_same<type,Vertex>::value)
 			{
 				assert(pos<m_vertex.size());
 				if (pos<m_vertex.size())
@@ -155,7 +177,7 @@ namespace sce
 					return m_vertex[pos];
 				}
 			}
-			if (T==Platform)
+			if (std::is_same<type,Platform>::value)
 			{
 				assert(pos < m_ptrPlatform.size());
 				if (pos < m_ptrPlatform.size())
@@ -163,7 +185,7 @@ namespace sce
 					return m_ptrPlatform[pos];
 				}
 			}
-			if (T == Emitter)
+			if (std::is_same<T , Emitter>::value)
 			{
 				assert(pos < m_ptrEmitter.size());
 				if (pos < m_ptrEmitter.size())
@@ -171,7 +193,7 @@ namespace sce
 					return m_ptrEmitter[pos];
 				}
 			}
-			if (T == Weapon)
+			if (std::is_same<T , Weapon>::value)
 			{
 				assert(pos < m_ptrWeapon.size());
 				if (pos < m_ptrWeapon.size())
@@ -179,7 +201,7 @@ namespace sce
 					return m_ptrWeapon[pos];
 				}
 			}
-			if (T == Site)
+			if (std::is_same<T , Site>::value)
 			{
 				assert(pos < m_ptrSite.size());
 				if (pos < m_ptrSite.size())
@@ -187,7 +209,7 @@ namespace sce
 					return m_ptrSite[pos];
 				}
 			}
-			if (T == OwnPlatform)
+			if (std::is_same<T , OwnPlatform>::value)
 			{
 				assert(pos < m_ptrOwnPlatform.size());
 				if (pos < m_ptrOwnPlatform.size())
@@ -195,7 +217,7 @@ namespace sce
 					return m_ptrOwnPlatform[pos];
 				}
 			}
-			if (T == Esm)
+			if (std::is_same<T , Esm>::value)
 			{
 				assert(pos < m_ptrEsm.size());
 				if (pos < m_ptrEsm.size())
@@ -203,7 +225,7 @@ namespace sce
 					return m_ptrEsm[pos];
 				}
 			}
-			if (T == Ecm)
+			if (std::is_same<T , Ecm>::value)
 			{
 				assert(pos < m_ptrEcm.size());
 				if (pos < m_ptrEcm.size())
@@ -211,7 +233,7 @@ namespace sce
 					return m_ptrEcm[pos];
 				}
 			}
-			if (T == Route)
+			if (std::is_same<T , Route>::value)
 			{
 				assert(pos < m_ptrRoute.size());
 				if (pos < m_ptrRoute.size())
@@ -219,7 +241,7 @@ namespace sce
 					return m_ptrRoute[pos];
 				}
 			}
-			if (T == EsmStrategy)
+			if (std::is_same<T , EsmStrategy>::value)
 			{
 				assert(pos < m_ptrEsmStrategy.size());
 				if (pos < m_ptrEsmStrategy.size())
@@ -227,7 +249,7 @@ namespace sce
 					return m_ptrEsmStrategy[pos];
 				}
 			}
-			if (T == EcmStrategy)
+			if (std::is_same<T , EcmStrategy>::value)
 			{
 				assert(pos < m_ptrEcmStrategy.size());
 				if (pos < m_ptrEcmStrategy.size())
@@ -242,34 +264,34 @@ namespace sce
 		template<typename T>
 		void setAllPtrs(std::vector<std::shared_ptr<T>>& ptr2AllEntities)
 		{
-			if (T == Vertex) m_vertex=ptr2AllEntities;
+			if (std::is_same<T , Vertex>::value) m_vertex=ptr2AllEntities;
 
-			if (T == Platform) m_ptrPlatform=ptr2AllEntities;
+			if (std::is_same<T , Platform>::value) m_ptrPlatform=ptr2AllEntities;
 
-			if (T == Emitter) m_ptrEmitter=ptr2AllEntities;
+			if (std::is_same<T , Emitter>::value) m_ptrEmitter=ptr2AllEntities;
 
-			if (T == Weapon) m_ptrWeapon=ptr2AllEntities;
+			if (std::is_same<T , Weapon>::value) m_ptrWeapon=ptr2AllEntities;
 
-			if (T == Site) m_ptrSite=ptr2AllEntities;
+			if (std::is_same<T , Site>::value) m_ptrSite=ptr2AllEntities;
 
-			if (T == OwnPlatform) m_ptrOwnPlatform=ptr2AllEntities;
+			if (std::is_same<T , OwnPlatform>::value) m_ptrOwnPlatform=ptr2AllEntities;
 
-			if (T == Esm) m_ptrEsm=ptr2AllEntities;
+			if (std::is_same<T , Esm>::value) m_ptrEsm=ptr2AllEntities;
 
-			if (T == Ecm) m_ptrEcm=ptr2AllEntities;
+			if (std::is_same<T , Ecm>::value) m_ptrEcm=ptr2AllEntities;
 
-			if (T == Route) m_ptrRoute=ptr2AllEntities;
+			if (std::is_same<T , Route>::value) m_ptrRoute=ptr2AllEntities;
 
-			if (T == EsmStrategy) m_ptrEsmStrategy=ptr2AllEntities;
+			if (std::is_same<T , EsmStrategy>::value) m_ptrEsmStrategy=ptr2AllEntities;
 
-			if (T == EcmStrategy) m_ptrEcmStrategy=ptr2AllEntities;
+			if (std::is_same<T , EcmStrategy>::value) m_ptrEcmStrategy=ptr2AllEntities;
 		}
 
 		//set/modify pointer of entity
 		template<typename T>
 		bool setPtr(const unsigned int& pos, std::shared_ptr<T> ptr2Entity)
 		{
-			if (T == Vertex)
+			if (std::is_same<T , Vertex>::value)
 			{
 				assert(pos < m_vertex.size());
 				if (pos < m_vertex.size())
@@ -278,7 +300,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Platform)
+			if (std::is_same<T , Platform>::value)
 			{
 				assert(pos < m_ptrPlatform.size());
 				if (pos < m_ptrPlatform.size())
@@ -287,7 +309,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Emitter)
+			if (std::is_same<T , Emitter>::value)
 			{
 				assert(pos < m_ptrEmitter.size());
 				if (pos < m_ptrEmitter.size())
@@ -296,7 +318,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Weapon)
+			if (std::is_same<T , Weapon>::value)
 			{
 				assert(pos < m_ptrWeapon.size());
 				if (pos < m_ptrWeapon.size())
@@ -305,7 +327,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Site)
+			if (std::is_same<T , Site>::value)
 			{
 				assert(pos < m_ptrSite.size());
 				if (pos < m_ptrSite.size())
@@ -314,7 +336,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == OwnPlatform)
+			if (std::is_same<T , OwnPlatform>::value)
 			{
 				assert(pos < m_ptrOwnPlatform.size());
 				if (pos < m_ptrOwnPlatform.size())
@@ -323,7 +345,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Esm)
+			if (std::is_same<T , Esm>::value)
 			{
 				assert(pos < m_ptrEsm.size());
 				if (pos < m_ptrEsm.size())
@@ -332,7 +354,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Ecm)
+			if (std::is_same<T , Ecm>::value)
 			{
 				assert(pos < m_ptrEcm.size());
 				if (pos < m_ptrEcm.size())
@@ -341,7 +363,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Route)
+			if (std::is_same<T , Route>::value)
 			{
 				assert(pos < m_ptrRoute.size());
 				if (pos < m_ptrRoute.size())
@@ -350,7 +372,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == EsmStrategy)
+			if (std::is_same<T , EsmStrategy>::value)
 			{
 				assert(pos < m_ptrEsmStrategy.size());
 				if (pos < m_ptrEsmStrategy.size())
@@ -359,7 +381,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == EcmStrategy)
+			if (std::is_same<T , EcmStrategy>::value)
 			{
 				assert(pos < m_ptrEcmStrategy.size());
 				if (pos < m_ptrEcmStrategy.size())
@@ -375,7 +397,7 @@ namespace sce
 		template<typename T>
 		bool insertPtr(const unsigned int& pos, std::shared_ptr<T> ptr2Entity)
 		{
-			if (T == Vertex)
+			if (std::is_same<T , Vertex>::value)
 			{
 				assert(pos <= m_vertex.size());
 				if (pos <= m_vertex.size())
@@ -384,7 +406,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Platform)
+			if (std::is_same<T , Platform>::value)
 			{
 				assert(pos <= m_ptrPlatform.size());
 				if (pos <= m_ptrPlatform.size())
@@ -393,7 +415,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Emitter)
+			if (std::is_same<T , Emitter>::value)
 			{
 				assert(pos <= m_ptrEmitter.size());
 				if (pos <= m_ptrEmitter.size())
@@ -402,7 +424,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Weapon)
+			if (std::is_same<T , Weapon>::value)
 			{
 				assert(pos <= m_ptrWeapon.size());
 				if (pos <= m_ptrWeapon.size())
@@ -411,7 +433,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Site)
+			if (std::is_same<T , Site>::value)
 			{
 				assert(pos <= m_ptrSite.size());
 				if (pos <= m_ptrSite.size())
@@ -420,7 +442,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == OwnPlatform)
+			if (std::is_same<T , OwnPlatform>::value)
 			{
 				assert(pos <= m_ptrOwnPlatform.size());
 				if (pos <= m_ptrOwnPlatform.size())
@@ -429,7 +451,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Esm)
+			if (std::is_same<T , Esm>::value)
 			{
 				assert(pos <= m_ptrEsm.size());
 				if (pos <= m_ptrEsm.size())
@@ -438,7 +460,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Ecm)
+			if (std::is_same<T , Ecm>::value)
 			{
 				assert(pos <= m_ptrEcm.size());
 				if (pos <= m_ptrEcm.size())
@@ -447,7 +469,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Route)
+			if (std::is_same<T , Route>::value)
 			{
 				assert(pos <= m_ptrRoute.size());
 				if (pos <= m_ptrRoute.size())
@@ -456,7 +478,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == EsmStrategy)
+			if (std::is_same<T , EsmStrategy>::value)
 			{
 				assert(pos <= m_ptrEsmStrategy.size());
 				if (pos <= m_ptrEsmStrategy.size())
@@ -465,7 +487,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == EcmStrategy)
+			if (std::is_same<T , EcmStrategy>::value)
 			{
 				assert(pos <= m_ptrEcmStrategy.size());
 				if (pos <= m_ptrEcmStrategy.size())
@@ -479,36 +501,26 @@ namespace sce
 
 		//add pointer of all entities
 		template<typename T>
-		void addPtr(std::shared_ptr<T>& ptr2Entitiy)
+		void addPtr(std::shared_ptr<T> ptr2Entitiy)
 		{
-			if (T == Vertex) m_vertex.push_back(ptr2Entitiy);
-
-			if (T == Platform) m_ptrPlatform.push_back(ptr2Entitiy);
-
-			if (T == Emitter) m_ptrEmitter.push_back(ptr2Entitiy);
-
-			if (T == Weapon) m_ptrWeapon.push_back(ptr2Entitiy);
-
-			if (T == Site) m_ptrSite.push_back(ptr2Entitiy);
-
-			if (T == OwnPlatform) m_ptrOwnPlatform.push_back(ptr2Entitiy);
-
-			if (T == Esm) m_ptrEsm.push_back(ptr2Entitiy);
-
-			if (T == Ecm) m_ptrEcm.push_back(ptr2Entitiy);
-
-			if (T == Route) m_ptrRoute.push_back(ptr2Entitiy);
-
-			if (T == EsmStrategy) m_ptrEsmStrategy.push_back(ptr2Entitiy);
-
-			if (T == EcmStrategy) m_ptrEcmStrategy.push_back(ptr2Entitiy);
+			if (std::is_same<T , Vertex>::value) m_vertex.push_back(ptr2Entitiy);
+			if (std::is_same<T , Platform>::value) m_ptrPlatform.push_back(ptr2Entitiy);
+			if (std::is_same<T , Emitter>::value) m_ptrEmitter.push_back(ptr2Entitiy);
+			if (std::is_same<T , Weapon>::value) m_ptrWeapon.push_back(ptr2Entitiy);
+			if (std::is_same<T , Site>::value) m_ptrSite.push_back(ptr2Entitiy);
+			if (std::is_same<T , OwnPlatform>::value) m_ptrOwnPlatform.push_back(ptr2Entitiy);
+			if (std::is_same<T , Esm>::value) m_ptrEsm.push_back(ptr2Entitiy);
+			if (std::is_same<T , Ecm>::value) m_ptrEcm.push_back(ptr2Entitiy);
+			if (std::is_same<T , Route>::value) m_ptrRoute.push_back(ptr2Entitiy);
+			if (std::is_same<T , EsmStrategy>::value) m_ptrEsmStrategy.push_back(ptr2Entitiy);
+			if (std::is_same<T , EcmStrategy>::value) m_ptrEcmStrategy.push_back(ptr2Entitiy);
 		}
 
 		//delete pointer of entity
 		template<typename T>
 		bool deletePtr(const unsigned int& pos)
 		{
-			if (T == Vertex)
+			if (std::is_same<T , Vertex>::value)
 			{
 				assert(pos < m_vertex.size());
 				if (pos < m_vertex.size())
@@ -517,7 +529,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Platform)
+			if (std::is_same<T , Platform>::value)
 			{
 				assert(pos < m_ptrPlatform.size());
 				if (pos < m_ptrPlatform.size())
@@ -526,7 +538,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Emitter)
+			if (std::is_same<T , Emitter>::value)
 			{
 				assert(pos < m_ptrEmitter.size());
 				if (pos < m_ptrEmitter.size())
@@ -535,7 +547,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Weapon)
+			if (std::is_same<T , Weapon>::value)
 			{
 				assert(pos < m_ptrWeapon.size());
 				if (pos < m_ptrWeapon.size())
@@ -544,7 +556,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Site)
+			if (std::is_same<T , Site>::value)
 			{
 				assert(pos < m_ptrSite.size());
 				if (pos < m_ptrSite.size())
@@ -553,7 +565,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == OwnPlatform)
+			if (std::is_same<T , OwnPlatform>::value)
 			{
 				assert(pos < m_ptrOwnPlatform.size());
 				if (pos < m_ptrOwnPlatform.size())
@@ -562,7 +574,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Esm)
+			if (std::is_same<T , Esm>::value)
 			{
 				assert(pos < m_ptrEsm.size());
 				if (pos < m_ptrEsm.size())
@@ -571,7 +583,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Ecm)
+			if (std::is_same<T , Ecm>::value)
 			{
 				assert(pos < m_ptrEcm.size());
 				if (pos < m_ptrEcm.size())
@@ -580,7 +592,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == Route)
+			if (std::is_same<T , Route>::value)
 			{
 				assert(pos < m_ptrRoute.size());
 				if (pos < m_ptrRoute.size())
@@ -589,7 +601,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == EsmStrategy)
+			if (std::is_same<T , EsmStrategy>::value)
 			{
 				assert(pos < m_ptrEsmStrategy.size());
 				if (pos < m_ptrEsmStrategy.size())
@@ -598,7 +610,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == EcmStrategy)
+			if (std::is_same<T , EcmStrategy>::value)
 			{
 				assert(pos < m_ptrEcmStrategy.size());
 				if (pos < m_ptrEcmStrategy.size())
@@ -625,27 +637,27 @@ namespace sce
 		template<typename T>
 		std::vector<T>& getAllRelation(void)
 		{
-			if (T == PlatformSiteRelation) return m_PlatformSiteRelation;
+			if (std::is_same<T , PlatformSiteRelation>::value) return m_PlatformSiteRelation;
 
-			if (T == PlatformEmitterRelation) return m_PlatformEmitterRelation;
+			if (std::is_same<T , PlatformEmitterRelation>::value) return m_PlatformEmitterRelation;
 
-			if (T == PlatformWeaponRelation) return m_PlatformWeaponRelation;
+			if (std::is_same<T , PlatformWeaponRelation>::value) return m_PlatformWeaponRelation;
 
-			if (T == OwnPlatformEsmRelation) return m_OwnPlatformEsmRelation;
+			if (std::is_same<T , OwnPlatformEsmRelation>::value) return m_OwnPlatformEsmRelation;
 
-			if (T == EsmEsmStrategyRelation) return m_EsmEsmStrategyRelation;
+			if (std::is_same<T , EsmEsmStrategyRelation>::value) return m_EsmEsmStrategyRelation;
 
-			if (T == OwnPlatformEcmRelation) return m_OwnPlatformEcmRelation;
+			if (std::is_same<T , OwnPlatformEcmRelation>::value) return m_OwnPlatformEcmRelation;
 
-			if (T == EcmEcmStrategyRelation) return m_EcmEcmStrategyRelation;
+			if (std::is_same<T , EcmEcmStrategyRelation>::value) return m_EcmEcmStrategyRelation;
 
-			if (T == OwnPlatformRouteRelation) return m_OwnPlatformRouteRelation;
+			if (std::is_same<T , OwnPlatformRouteRelation>::value) return m_OwnPlatformRouteRelation;
 		}
 
 		template <typename T>
 		T& getRelation(const unsigned int& pos)
 		{
-			if (T == PlatformSiteRelation)
+			if (std::is_same<T , PlatformSiteRelation>::value)
 			{
 				assert(pos < m_PlatformSiteRelation.size());
 				if (pos < m_PlatformSiteRelation.size())
@@ -653,7 +665,7 @@ namespace sce
 					return m_PlatformSiteRelation[pos];
 				}
 			}
-			if (T == PlatformEmitterRelation)
+			if (std::is_same<T , PlatformEmitterRelation>::value)
 			{
 				assert(pos < m_PlatformEmitterRelation.size());
 				if (pos < m_PlatformEmitterRelation.size())
@@ -661,7 +673,7 @@ namespace sce
 					return m_PlatformEmitterRelation[pos];
 				}
 			}
-			if (T == PlatformWeaponRelation)
+			if (std::is_same<T , PlatformWeaponRelation>::value)
 			{
 				assert(pos < m_PlatformWeaponRelation.size());
 				if (pos < m_PlatformWeaponRelation.size())
@@ -669,7 +681,7 @@ namespace sce
 					return m_PlatformWeaponRelation[pos];
 				}
 			}
-			if (T == OwnPlatformEsmRelation)
+			if (std::is_same<T , OwnPlatformEsmRelation>::value)
 			{
 				assert(pos < m_OwnPlatformEsmRelation.size());
 				if (pos < m_OwnPlatformEsmRelation.size())
@@ -677,7 +689,7 @@ namespace sce
 					return m_OwnPlatformEsmRelation[pos];
 				}
 			}
-			if (T == EsmEsmStrategyRelation)
+			if (std::is_same<T , EsmEsmStrategyRelation>::value)
 			{
 				assert(pos < m_EsmEsmStrategyRelation.size());
 				if (pos < m_EsmEsmStrategyRelation.size())
@@ -685,7 +697,7 @@ namespace sce
 					return m_EsmEsmStrategyRelation[pos];
 				}
 			}
-			if (T == OwnPlatformEcmRelation)
+			if (std::is_same<T , OwnPlatformEcmRelation>::value)
 			{
 				assert(pos < m_OwnPlatformEcmRelation.size());
 				if (pos < m_OwnPlatformEcmRelation.size())
@@ -693,7 +705,7 @@ namespace sce
 					return m_OwnPlatformEcmRelation[pos];
 				}
 			}
-			if (T == EcmEcmStrategyRelation)
+			if (std::is_same<T , EcmEcmStrategyRelation>::value)
 			{
 				assert(pos < m_EcmEcmStrategyRelation.size());
 				if (pos < m_EcmEcmStrategyRelation.size())
@@ -701,7 +713,7 @@ namespace sce
 					return m_EcmEcmStrategyRelation[pos];
 				}
 			}
-			if (T == OwnPlatformRouteRelation)
+			if (std::is_same<T , OwnPlatformRouteRelation>::value)
 			{
 				assert(pos < m_OwnPlatformRouteRelation.size());
 				if (pos < m_OwnPlatformRouteRelation.size())
@@ -715,27 +727,27 @@ namespace sce
 		template<typename T>
 		void setAllRelation(std::vector<T>& relations)
 		{
-			if (T == PlatformSiteRelation) m_PlatformSiteRelation= relations;
+			if (std::is_same<T , PlatformSiteRelation>::value) m_PlatformSiteRelation= relations;
 
-			if (T == PlatformEmitterRelation) m_PlatformEmitterRelation= relations;
+			if (std::is_same<T , PlatformEmitterRelation>::value) m_PlatformEmitterRelation= relations;
 
-			if (T == PlatformWeaponRelation) m_PlatformWeaponRelation= relations;
+			if (std::is_same<T , PlatformWeaponRelation>::value) m_PlatformWeaponRelation= relations;
 
-			if (T == OwnPlatformEsmRelation) m_OwnPlatformEsmRelation= relations;
+			if (std::is_same<T , OwnPlatformEsmRelation>::value) m_OwnPlatformEsmRelation= relations;
 
-			if (T == EsmEsmStrategyRelation) m_EsmEsmStrategyRelation= relations;
+			if (std::is_same<T , EsmEsmStrategyRelation>::value) m_EsmEsmStrategyRelation= relations;
 
-			if (T == OwnPlatformEcmRelation) m_OwnPlatformEcmRelation= relations;
+			if (std::is_same<T , OwnPlatformEcmRelation>::value) m_OwnPlatformEcmRelation= relations;
 
-			if (T == EcmEcmStrategyRelation) m_EcmEcmStrategyRelation= relations;
+			if (std::is_same<T , EcmEcmStrategyRelation>::value) m_EcmEcmStrategyRelation= relations;
 
-			if (T == OwnPlatformRouteRelation) m_OwnPlatformRouteRelation= relations;
+			if (std::is_same<T , OwnPlatformRouteRelation>::value) m_OwnPlatformRouteRelation= relations;
 		}
 
 		template <typename T>
 		bool setRelation(const unsigned int& pos, T& relation)
 		{
-			if (T == PlatformSiteRelation)
+			if (std::is_same<T , PlatformSiteRelation>::value)
 			{
 				assert(pos < m_PlatformSiteRelation.size());
 				if (pos < m_PlatformSiteRelation.size())
@@ -744,7 +756,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == PlatformEmitterRelation)
+			if (std::is_same<T , PlatformEmitterRelation>::value)
 			{
 				assert(pos < m_PlatformEmitterRelation.size());
 				if (pos < m_PlatformEmitterRelation.size())
@@ -753,7 +765,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == PlatformWeaponRelation)
+			if (std::is_same<T , PlatformWeaponRelation>::value)
 			{
 				assert(pos < m_PlatformWeaponRelation.size());
 				if (pos < m_PlatformWeaponRelation.size())
@@ -762,7 +774,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == OwnPlatformEsmRelation)
+			if (std::is_same<T , OwnPlatformEsmRelation>::value)
 			{
 				assert(pos < m_OwnPlatformEsmRelation.size());
 				if (pos < m_OwnPlatformEsmRelation.size())
@@ -771,7 +783,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == EsmEsmStrategyRelation)
+			if (std::is_same<T , EsmEsmStrategyRelation>::value)
 			{
 				assert(pos < m_EsmEsmStrategyRelation.size());
 				if (pos < m_EsmEsmStrategyRelation.size())
@@ -780,7 +792,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == OwnPlatformEcmRelation)
+			if (std::is_same<T , OwnPlatformEcmRelation>::value)
 			{
 				assert(pos < m_OwnPlatformEcmRelation.size());
 				if (pos < m_OwnPlatformEcmRelation.size())
@@ -789,7 +801,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == EcmEcmStrategyRelation)
+			if (std::is_same<T , EcmEcmStrategyRelation>::value)
 			{
 				assert(pos < m_EcmEcmStrategyRelation.size());
 				if (pos < m_EcmEcmStrategyRelation.size())
@@ -798,7 +810,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == OwnPlatformRouteRelation)
+			if (std::is_same<T , OwnPlatformRouteRelation>::value)
 			{
 				assert(pos < m_OwnPlatformRouteRelation.size());
 				if (pos < m_OwnPlatformRouteRelation.size())
@@ -813,7 +825,7 @@ namespace sce
 		template <typename T>
 		bool insertRelation(const unsigned int& pos, T& relation)
 		{
-			if (T == PlatformSiteRelation)
+			if (std::is_same<T , PlatformSiteRelation>::value)
 			{
 				assert(pos <= m_PlatformSiteRelation.size());
 				if (pos <= m_PlatformSiteRelation.size())
@@ -822,7 +834,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == PlatformEmitterRelation)
+			if (std::is_same<T , PlatformEmitterRelation>::value)
 			{
 				assert(pos <= m_PlatformEmitterRelation.size());
 				if (pos <= m_PlatformEmitterRelation.size())
@@ -831,7 +843,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == PlatformWeaponRelation)
+			if (std::is_same<T , PlatformWeaponRelation>::value)
 			{
 				assert(pos <= m_PlatformWeaponRelation.size());
 				if (pos <= m_PlatformWeaponRelation.size())
@@ -840,7 +852,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == OwnPlatformEsmRelation)
+			if (std::is_same<T , OwnPlatformEsmRelation>::value)
 			{
 				assert(pos <= m_OwnPlatformEsmRelation.size());
 				if (pos <= m_OwnPlatformEsmRelation.size())
@@ -849,7 +861,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == EsmEsmStrategyRelation)
+			if (std::is_same<T , EsmEsmStrategyRelation>::value)
 			{
 				assert(pos <= m_EsmEsmStrategyRelation.size());
 				if (pos <= m_EsmEsmStrategyRelation.size())
@@ -858,7 +870,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == OwnPlatformEcmRelation)
+			if (std::is_same<T , OwnPlatformEcmRelation>::value)
 			{
 				assert(pos <= m_OwnPlatformEcmRelation.size());
 				if (pos <= m_OwnPlatformEcmRelation.size())
@@ -867,7 +879,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == EcmEcmStrategyRelation)
+			if (std::is_same<T , EcmEcmStrategyRelation>::value)
 			{
 				assert(pos <= m_EcmEcmStrategyRelation.size());
 				if (pos <= m_EcmEcmStrategyRelation.size())
@@ -876,7 +888,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == OwnPlatformRouteRelation)
+			if (std::is_same<T , OwnPlatformRouteRelation>::value)
 			{
 				assert(pos <= m_OwnPlatformRouteRelation.size());
 				if (pos <= m_OwnPlatformRouteRelation.size())
@@ -891,27 +903,27 @@ namespace sce
 		template<typename T>
 		void addRelation(T& relation)
 		{
-			if (T == PlatformSiteRelation) m_PlatformSiteRelation.push_back(relations);
+			if (std::is_same<T , PlatformSiteRelation>::value) m_PlatformSiteRelation.push_back(relation);
 
-			if (T == PlatformEmitterRelation) m_PlatformEmitterRelation.push_back(relations);
+			if (std::is_same<T , PlatformEmitterRelation>::value) m_PlatformEmitterRelation.push_back(relation);
 
-			if (T == PlatformWeaponRelation) m_PlatformWeaponRelation.push_back(relations);
+			if (std::is_same<T , PlatformWeaponRelation>::value) m_PlatformWeaponRelation.push_back(relation);
 
-			if (T == OwnPlatformEsmRelation) m_OwnPlatformEsmRelation.push_back(relations);
+			if (std::is_same<T , OwnPlatformEsmRelation>::value) m_OwnPlatformEsmRelation.push_back(relation);
 
-			if (T == EsmEsmStrategyRelation) m_EsmEsmStrategyRelation.push_back(relations);
+			if (std::is_same<T , EsmEsmStrategyRelation>::value) m_EsmEsmStrategyRelation.push_back(relation);
 
-			if (T == OwnPlatformEcmRelation) m_OwnPlatformEcmRelation.push_back(relations);
+			if (std::is_same<T , OwnPlatformEcmRelation>::value) m_OwnPlatformEcmRelation.push_back(relation);
 
-			if (T == EcmEcmStrategyRelation) m_EcmEcmStrategyRelation.push_back(relations);
+			if (std::is_same<T , EcmEcmStrategyRelation>::value) m_EcmEcmStrategyRelation.push_back(relation);
 
-			if (T == OwnPlatformRouteRelation) m_OwnPlatformRouteRelation.push_back(relations);
+			if (std::is_same<T , OwnPlatformRouteRelation>::value) m_OwnPlatformRouteRelation.push_back(relation);
 		}
 
 		template <typename T>
 		bool deleteRelation(const unsigned int& pos)
 		{
-			if (T == PlatformSiteRelation)
+			if (std::is_same<T , PlatformSiteRelation>::value)
 			{
 				assert(pos < m_PlatformSiteRelation.size());
 				if (pos < m_PlatformSiteRelation.size())
@@ -920,7 +932,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == PlatformEmitterRelation)
+			if (std::is_same<T , PlatformEmitterRelation>::value)
 			{
 				assert(pos < m_PlatformEmitterRelation.size());
 				if (pos < m_PlatformEmitterRelation.size())
@@ -929,7 +941,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == PlatformWeaponRelation)
+			if (std::is_same<T , PlatformWeaponRelation>::value)
 			{
 				assert(pos < m_PlatformWeaponRelation.size());
 				if (pos < m_PlatformWeaponRelation.size())
@@ -938,7 +950,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == OwnPlatformEsmRelation)
+			if (std::is_same<T , OwnPlatformEsmRelation>::value)
 			{
 				assert(pos < m_OwnPlatformEsmRelation.size());
 				if (pos < m_OwnPlatformEsmRelation.size())
@@ -947,7 +959,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == EsmEsmStrategyRelation)
+			if (std::is_same<T , EsmEsmStrategyRelation>::value)
 			{
 				assert(pos < m_EsmEsmStrategyRelation.size());
 				if (pos < m_EsmEsmStrategyRelation.size())
@@ -956,7 +968,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == OwnPlatformEcmRelation)
+			if (std::is_same<T , OwnPlatformEcmRelation>::value)
 			{
 				assert(pos < m_OwnPlatformEcmRelation.size());
 				if (pos < m_OwnPlatformEcmRelation.size())
@@ -965,7 +977,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == EcmEcmStrategyRelation)
+			if (std::is_same<T , EcmEcmStrategyRelation>::value)
 			{
 				assert(pos < m_EcmEcmStrategyRelation.size());
 				if (pos < m_EcmEcmStrategyRelation.size())
@@ -974,7 +986,7 @@ namespace sce
 					return true;
 				}
 			}
-			if (T == OwnPlatformRouteRelation)
+			if (std::is_same<T , OwnPlatformRouteRelation>::value)
 			{
 				assert(pos < m_OwnPlatformRouteRelation.size());
 				if (pos < m_OwnPlatformRouteRelation.size())
@@ -1604,7 +1616,8 @@ namespace sce
 	class Point
 	{
 	public:
-		//Point(void);
+		Point(void);
+		Point(const double&, const double&, const double&);
 		Point(const double&, const double&, const double&, const double&, const double&);
 		~Point(void);
 
