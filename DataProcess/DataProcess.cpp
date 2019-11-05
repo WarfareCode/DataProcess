@@ -137,9 +137,9 @@ int main()
 	Scenario scenario(vertexs,platforms,emitiers,weapons, sites, oplatforms,esms,ecms, routes, esmStrategies, ecmStrategies,
 		psRelations, peRelations, pwRelations,oesmRelations,eesRelations,oecmRelations,ecmecmsRelations,orRelations);
 	
-	std::cout << scenario.getPtr<Platform>(0)->getPlatformName() << std::endl;
+	std::cout << scenario.getPtr2Platform(0)->getPlatformName() << std::endl;
 
-	std::cout << (scenario.isEmpty<Vertex>() ? "true" : "false");
+	std::cout << (scenario.isVertexEmpty() ? "true" : "false");
 	std::cout << std::endl;
 	return 0;
 }

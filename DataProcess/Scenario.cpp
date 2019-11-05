@@ -2762,7 +2762,7 @@ namespace sce
 		OwnPlatformEcmRelation& ownPlatformEcmRelations,
 		EcmEcmStrategyRelation& ecmEcmStrategyRelations,
 		OwnPlatformRouteRelation& ownPlatformRouteRelations)
-		: m_vertex({vertexs})
+		: m_ptrVertex({vertexs})
 		, m_ptrPlatform({ptrPlatforms})
 		, m_ptrEmitter({ptrEmitters})
 		, m_ptrWeapon({ptrWeapons})
@@ -2802,7 +2802,7 @@ namespace sce
 		std::vector<OwnPlatformEcmRelation>& ownPlatformEcmRelations,
 		std::vector<EcmEcmStrategyRelation>& ecmEcmStrategyRelations,
 		std::vector<OwnPlatformRouteRelation>& ownPlatformRouteRelations)
-		: m_vertex(vertexs)
+		: m_ptrVertex(vertexs)
 		, m_ptrPlatform(ptrPlatforms)
 		, m_ptrEmitter(ptrEmitters)
 		, m_ptrWeapon(ptrWeapons)
@@ -2827,4 +2827,1122 @@ namespace sce
 	Scenario::~Scenario(void)
 	{
 	}
+
+	std::shared_ptr<Vertex> Scenario::getPtr2Vertex(const unsigned int & pos)
+	{
+		assert(pos<m_ptrVertex.size());
+		if (pos<m_ptrVertex.size())
+		{
+			return m_ptrVertex[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+	std::shared_ptr<Platform> Scenario::getPtr2Platform(const unsigned int & pos)
+	{
+		assert(pos < m_ptrPlatform.size());
+		if (pos < m_ptrPlatform.size())
+		{
+			return m_ptrPlatform[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+	std::shared_ptr<Emitter> Scenario::getPtr2Emitter(const unsigned int & pos)
+	{
+		assert(pos < m_ptrEmitter.size());
+		if (pos < m_ptrEmitter.size())
+		{
+			return m_ptrEmitter[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+	std::shared_ptr<Weapon> Scenario::getPtr2Weapon(const unsigned int & pos)
+	{
+		assert(pos < m_ptrWeapon.size());
+		if (pos < m_ptrWeapon.size())
+		{
+			return m_ptrWeapon[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	std::shared_ptr<Site> Scenario::getPtr2Site(const unsigned int & pos)
+	{
+		assert(pos < m_ptrSite.size());
+		if (pos < m_ptrSite.size())
+		{
+			return m_ptrSite[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	std::shared_ptr<OwnPlatform> Scenario::getPtr2OwnPlatform(const unsigned int & pos)
+	{
+		assert(pos < m_ptrOwnPlatform.size());
+		if (pos < m_ptrOwnPlatform.size())
+		{
+			return m_ptrOwnPlatform[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	std::shared_ptr<Esm> Scenario::getPtr2Esm(const unsigned int & pos)
+	{
+		assert(pos < m_ptrEsm.size());
+		if (pos < m_ptrEsm.size())
+		{
+			return m_ptrEsm[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	std::shared_ptr<Ecm> Scenario::getPtr2Ecm(const unsigned int & pos)
+	{
+		assert(pos < m_ptrEcm.size());
+		if (pos < m_ptrEcm.size())
+		{
+			return m_ptrEcm[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	std::shared_ptr<Route> Scenario::getPtr2Route(const unsigned int & pos)
+	{
+		assert(pos < m_ptrRoute.size());
+		if (pos < m_ptrRoute.size())
+		{
+			return m_ptrRoute[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	std::shared_ptr<EsmStrategy> Scenario::getPtr2EsmStrategy(const unsigned int & pos)
+	{
+		assert(pos < m_ptrEsmStrategy.size());
+		if (pos < m_ptrEsmStrategy.size())
+		{
+			return m_ptrEsmStrategy[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	std::shared_ptr<EcmStrategy> Scenario::getPtr2EcmStrategy(const unsigned int & pos)
+	{
+		assert(pos < m_ptrEcmStrategy.size());
+		if (pos < m_ptrEcmStrategy.size())
+		{
+			return m_ptrEcmStrategy[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	PlatformSiteRelation & Scenario::getPlatformSiteRelation(const unsigned int & pos)
+	{
+		assert(pos < m_PlatformSiteRelation.size());
+		if (pos < m_PlatformSiteRelation.size())
+		{
+			return m_PlatformSiteRelation[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	PlatformEmitterRelation & Scenario::getPlatformEmitterRelation(const unsigned int & pos)
+	{
+		assert(pos < m_PlatformEmitterRelation.size());
+		if (pos < m_PlatformEmitterRelation.size())
+		{
+			return m_PlatformEmitterRelation[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	PlatformWeaponRelation & Scenario::getPlatformWeaponRelation(const unsigned int & pos)
+	{
+		assert(pos < m_PlatformWeaponRelation.size());
+		if (pos < m_PlatformWeaponRelation.size())
+		{
+			return m_PlatformWeaponRelation[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	OwnPlatformEsmRelation & Scenario::getOwnPlatformEsmRelation(const unsigned int & pos)
+	{
+		assert(pos < m_OwnPlatformEsmRelation.size());
+		if (pos < m_OwnPlatformEsmRelation.size())
+		{
+			return m_OwnPlatformEsmRelation[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	EsmEsmStrategyRelation & Scenario::getEsmEsmStrategyRelation(const unsigned int & pos)
+	{
+		assert(pos < m_EsmEsmStrategyRelation.size());
+		if (pos < m_EsmEsmStrategyRelation.size())
+		{
+			return m_EsmEsmStrategyRelation[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	OwnPlatformEcmRelation & Scenario::getOwnPlatformEcmRelation(const unsigned int & pos)
+	{
+		assert(pos < m_OwnPlatformEcmRelation.size());
+		if (pos < m_OwnPlatformEcmRelation.size())
+		{
+			return m_OwnPlatformEcmRelation[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	EcmEcmStrategyRelation & Scenario::getEcmEcmStrategyRelation(const unsigned int & pos)
+	{
+		assert(pos < m_EcmEcmStrategyRelation.size());
+		if (pos < m_EcmEcmStrategyRelation.size())
+		{
+			return m_EcmEcmStrategyRelation[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	OwnPlatformRouteRelation & Scenario::getOwnPlatformRouteRelation(const unsigned int & pos)
+	{
+		assert(pos < m_OwnPlatformRouteRelation.size());
+		if (pos < m_OwnPlatformRouteRelation.size())
+		{
+			return m_OwnPlatformRouteRelation[pos];
+		}
+		throw Error("can't return this value (doesn't exist)");
+	}
+
+	std::vector<std::shared_ptr<Vertex>>& Scenario::getAllVertex(void)
+	{
+		return m_ptrVertex;
+	}
+
+	std::vector<std::shared_ptr<Platform>>& Scenario::getAllPlatform(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_ptrPlatform;
+	}
+
+	std::vector<std::shared_ptr<Emitter>>& Scenario::getAllEmitter(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_ptrEmitter;
+	}
+
+	std::vector<std::shared_ptr<Weapon>>& Scenario::getAllWeapon(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_ptrWeapon;
+	}
+
+	std::vector<std::shared_ptr<Site>>& Scenario::getAllSite(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_ptrSite;
+	}
+
+	std::vector<std::shared_ptr<OwnPlatform>>& Scenario::getAllOwnPlatform(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_ptrOwnPlatform;
+	}
+
+	std::vector<std::shared_ptr<Esm>>& Scenario::getAllEsm(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_ptrEsm;
+	}
+
+	std::vector<std::shared_ptr<Ecm>>& Scenario::getAllEcm(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_ptrEcm;
+	}
+
+	std::vector<std::shared_ptr<Route>>& Scenario::getAllRoute(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_ptrRoute;
+	}
+
+	std::vector<std::shared_ptr<EsmStrategy>>& Scenario::getAllEsmStrategy(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_ptrEsmStrategy;
+	}
+
+	std::vector<std::shared_ptr<EcmStrategy>>& Scenario::getAllEcmStrategy(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_ptrEcmStrategy;
+	}
+
+	std::vector<PlatformSiteRelation>& Scenario::getAllPlatformSiteRelation(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_PlatformSiteRelation;
+	}
+
+	std::vector<PlatformEmitterRelation>& Scenario::getAllPlatformEmitterRelation(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_PlatformEmitterRelation;
+	}
+
+	std::vector<PlatformWeaponRelation>& Scenario::getAllPlatformWeaponRelation(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_PlatformWeaponRelation;
+	}
+
+	std::vector<OwnPlatformEsmRelation>& Scenario::getAllOwnPlatformEsmRelation(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_OwnPlatformEsmRelation;
+	}
+
+	std::vector<EsmEsmStrategyRelation>& Scenario::getAllEsmEsmStrategyRelation(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_EsmEsmStrategyRelation;
+	}
+
+	std::vector<OwnPlatformEcmRelation>& Scenario::getAllOwnPlatformEcmRelation(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_OwnPlatformEcmRelation;
+	}
+
+	std::vector<EcmEcmStrategyRelation>& Scenario::getAllEcmEcmStrategyRelation(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_EcmEcmStrategyRelation;
+	}
+
+	std::vector<OwnPlatformRouteRelation>& Scenario::getAllOwnPlatformRouteRelation(void)
+	{
+		// TODO: 在此处插入 return 语句
+		return m_OwnPlatformRouteRelation; 
+	}
+
+	bool Scenario::setPtr2Vertex(const unsigned int & pos, std::shared_ptr<Vertex> ptr2Entity)
+	{
+		assert(pos < m_ptrVertex.size());
+		if (pos < m_ptrVertex.size())
+		{
+			m_ptrVertex[pos] = ptr2Entity;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setPtr2Platform(const unsigned int & pos, std::shared_ptr<Platform> ptr2Entity)
+	{
+		assert(pos < m_ptrPlatform.size());
+		if (pos < m_ptrPlatform.size())
+		{
+			m_ptrPlatform[pos] = ptr2Entity;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setPtr2Emitter(const unsigned int & pos, std::shared_ptr<Emitter> ptr2Entity)
+	{
+		assert(pos < m_ptrEmitter.size());
+		if (pos < m_ptrEmitter.size())
+		{
+			m_ptrEmitter[pos] = ptr2Entity;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setPtr2Weapon(const unsigned int & pos, std::shared_ptr<Weapon> ptr2Entity)
+	{
+		assert(pos < m_ptrWeapon.size());
+		if (pos < m_ptrWeapon.size())
+		{
+			m_ptrWeapon[pos] = ptr2Entity;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setPtr2Site(const unsigned int & pos, std::shared_ptr<Site> ptr2Entity)
+	{
+		assert(pos < m_ptrSite.size());
+		if (pos < m_ptrSite.size())
+		{
+			m_ptrSite[pos] = ptr2Entity;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setPtr2OwnPlatform(const unsigned int & pos, std::shared_ptr<OwnPlatform> ptr2Entity)
+	{
+		assert(pos < m_ptrOwnPlatform.size());
+		if (pos < m_ptrOwnPlatform.size())
+		{
+			m_ptrOwnPlatform[pos] = ptr2Entity;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setPtr2Esm(const unsigned int & pos, std::shared_ptr<Esm> ptr2Entity)
+	{
+		assert(pos < m_ptrEsm.size());
+		if (pos < m_ptrEsm.size())
+		{
+			m_ptrEsm[pos] = ptr2Entity;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setPtr2Ecm(const unsigned int & pos, std::shared_ptr<Ecm> ptr2Entity)
+	{
+		assert(pos < m_ptrEcm.size());
+		if (pos < m_ptrEcm.size())
+		{
+			m_ptrEcm[pos] = ptr2Entity;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setPtr2Route(const unsigned int & pos, std::shared_ptr<Route> ptr2Entity)
+	{
+		assert(pos < m_ptrRoute.size());
+		if (pos < m_ptrRoute.size())
+		{
+			m_ptrRoute[pos] = ptr2Entity;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setPtr2EsmStrategy(const unsigned int & pos, std::shared_ptr<EsmStrategy> ptr2Entity)
+	{
+		assert(pos < m_ptrEsmStrategy.size());
+		if (pos < m_ptrEsmStrategy.size())
+		{
+			m_ptrEsmStrategy[pos] = ptr2Entity;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setPtr2EcmStrategy(const unsigned int & pos, std::shared_ptr<EcmStrategy> ptr2Entity)
+	{
+		assert(pos < m_ptrEcmStrategy.size());
+		if (pos < m_ptrEcmStrategy.size())
+		{
+			m_ptrEcmStrategy[pos] = ptr2Entity;
+			return true;
+		}
+		return false;
+	}
+
+	void Scenario::addVertex(std::shared_ptr<Vertex> ptr2Entity)
+	{
+		m_ptrVertex.push_back(ptr2Entity);
+	}
+
+	void Scenario::addPlatform(std::shared_ptr<Platform> ptr2Entity)
+	{
+		m_ptrPlatform.push_back(ptr2Entity);
+	}
+
+	void Scenario::addEmitter(std::shared_ptr<Emitter> ptr2Entity)
+	{
+		m_ptrEmitter.push_back(ptr2Entity);
+	}
+
+	void Scenario::addWeapon(std::shared_ptr<Weapon> ptr2Entity)
+	{
+		m_ptrWeapon.push_back(ptr2Entity);
+	}
+
+	void Scenario::addSite(std::shared_ptr<Site> ptr2Entity)
+	{
+		m_ptrSite.push_back(ptr2Entity);
+	}
+
+	void Scenario::addOwnPlatform(std::shared_ptr<OwnPlatform> ptr2Entity)
+	{
+		m_ptrOwnPlatform.push_back(ptr2Entity);
+	}
+
+	void Scenario::addEsm(std::shared_ptr<Esm> ptr2Entity)
+	{
+		m_ptrEsm.push_back(ptr2Entity);
+	}
+
+	void Scenario::addEcm(std::shared_ptr<Ecm> ptr2Entity)
+	{
+		m_ptrEcm.push_back(ptr2Entity);
+	}
+
+	void Scenario::addRoute(std::shared_ptr<Route> ptr2Entity)
+	{
+		m_ptrRoute.push_back(ptr2Entity);
+	}
+
+	void Scenario::addEsmStrategy(std::shared_ptr<EsmStrategy> ptr2Entity)
+	{
+		m_ptrEsmStrategy.push_back(ptr2Entity);
+	}
+
+	void Scenario::addEcmStrategy(std::shared_ptr<EcmStrategy> ptr2Entity)
+	{
+		m_ptrEcmStrategy.push_back(ptr2Entity);
+	}
+
+	bool Scenario::insertPtr2Vertex(const unsigned int & pos, std::shared_ptr<Vertex> ptr2Entity)
+	{
+		assert(pos <= m_ptrVertex.size());
+		if (pos <= m_ptrVertex.size())
+		{
+			m_ptrVertex.insert(m_ptrVertex.begin() + pos, ptr2Entity);;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::insertPtr2Platform(const unsigned int & pos, std::shared_ptr<Platform> ptr2Entity)
+	{
+		assert(pos <= m_ptrPlatform.size());
+		if (pos <= m_ptrPlatform.size())
+		{
+			m_ptrPlatform.insert(m_ptrPlatform.begin() + pos, ptr2Entity);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::insertPtr2Emitter(const unsigned int & pos, std::shared_ptr<Emitter> ptr2Entity)
+	{
+		assert(pos <= m_ptrEmitter.size());
+		if (pos <= m_ptrEmitter.size())
+		{
+			m_ptrEmitter.insert(m_ptrEmitter.begin() + pos, ptr2Entity);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::insertPtr2Weapon(const unsigned int & pos, std::shared_ptr<Weapon> ptr2Entity)
+	{
+		assert(pos <= m_ptrWeapon.size());
+		if (pos <= m_ptrWeapon.size())
+		{
+			m_ptrWeapon.insert(m_ptrWeapon.begin() + pos, ptr2Entity);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::insertPtr2Site(const unsigned int & pos, std::shared_ptr<Site> ptr2Entity)
+	{
+		assert(pos <= m_ptrSite.size());
+		if (pos <= m_ptrSite.size())
+		{
+			m_ptrSite.insert(m_ptrSite.begin() + pos, ptr2Entity);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::insertPtr2OwnPlatform(const unsigned int & pos, std::shared_ptr<OwnPlatform> ptr2Entity)
+	{
+		assert(pos <= m_ptrOwnPlatform.size());
+		if (pos <= m_ptrOwnPlatform.size())
+		{
+			m_ptrOwnPlatform.insert(m_ptrOwnPlatform.begin() + pos, ptr2Entity);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::insertPtr2Esm(const unsigned int & pos, std::shared_ptr<Esm> ptr2Entity)
+	{
+		assert(pos <= m_ptrEsm.size());
+		if (pos <= m_ptrEsm.size())
+		{
+			m_ptrEsm.insert(m_ptrEsm.begin() + pos, ptr2Entity);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::insertPtr2Ecm(const unsigned int & pos, std::shared_ptr<Ecm> ptr2Entity)
+	{
+		assert(pos <= m_ptrEcm.size());
+		if (pos <= m_ptrEcm.size())
+		{
+			m_ptrEcm.insert(m_ptrEcm.begin() + pos, ptr2Entity);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::insertPtr2Route(const unsigned int & pos, std::shared_ptr<Route> ptr2Entity)
+	{
+		assert(pos <= m_ptrRoute.size());
+		if (pos <= m_ptrRoute.size())
+		{
+			m_ptrRoute.insert(m_ptrRoute.begin() + pos, ptr2Entity);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::insertPtr2EsmStrategy(const unsigned int & pos, std::shared_ptr<EsmStrategy> ptr2Entity)
+	{
+		assert(pos <= m_ptrEsmStrategy.size());
+		if (pos <= m_ptrEsmStrategy.size())
+		{
+			m_ptrEsmStrategy.insert(m_ptrEsmStrategy.begin() + pos, ptr2Entity);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::insertPtr2EcmStrategy(const unsigned int & pos, std::shared_ptr<EcmStrategy> ptr2Entity)
+	{
+		assert(pos <= m_ptrEcmStrategy.size());
+		if (pos <= m_ptrEcmStrategy.size())
+		{
+			m_ptrEcmStrategy.insert(m_ptrEcmStrategy.begin() + pos, ptr2Entity);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deleteVertex(const unsigned int & pos)
+	{
+		assert(pos < m_ptrVertex.size());
+		if (pos < m_ptrVertex.size())
+		{
+			m_ptrVertex.erase(m_ptrVertex.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deletePlatform(const unsigned int & pos)
+	{
+		assert(pos < m_ptrPlatform.size());
+		if (pos < m_ptrPlatform.size())
+		{
+			m_ptrPlatform.erase(m_ptrPlatform.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deleteEmitter(const unsigned int & pos)
+	{
+		assert(pos < m_ptrEmitter.size());
+		if (pos < m_ptrEmitter.size())
+		{
+			m_ptrEmitter.erase(m_ptrEmitter.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deleteWeapon(const unsigned int & pos)
+	{
+		assert(pos < m_ptrWeapon.size());
+		if (pos < m_ptrWeapon.size())
+		{
+			m_ptrWeapon.erase(m_ptrWeapon.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deleteSite(const unsigned int & pos)
+	{
+		assert(pos < m_ptrSite.size());
+		if (pos < m_ptrSite.size())
+		{
+			m_ptrSite.erase(m_ptrSite.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deleteOwnPlatform(const unsigned int & pos)
+	{
+		assert(pos < m_ptrOwnPlatform.size());
+		if (pos < m_ptrOwnPlatform.size())
+		{
+			m_ptrOwnPlatform.erase(m_ptrOwnPlatform.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deleteEsm(const unsigned int & pos)
+	{
+		assert(pos < m_ptrEsm.size());
+		if (pos < m_ptrEsm.size())
+		{
+			m_ptrEsm.erase(m_ptrEsm.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deleteEcm(const unsigned int & pos)
+	{
+		assert(pos < m_ptrEcm.size());
+		if (pos < m_ptrEcm.size())
+		{
+			m_ptrEcm.erase(m_ptrEcm.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deleteRoute(const unsigned int & pos)
+	{
+		assert(pos < m_ptrRoute.size());
+		if (pos < m_ptrRoute.size())
+		{
+			m_ptrRoute.erase(m_ptrRoute.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deleteEsmStrategy(const unsigned int & pos)
+	{
+		assert(pos < m_ptrEsmStrategy.size());
+		if (pos < m_ptrEsmStrategy.size())
+		{
+			m_ptrEsmStrategy.erase(m_ptrEsmStrategy.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deleteEcmStrategy(const unsigned int & pos)
+	{
+		assert(pos < m_ptrEcmStrategy.size());
+		if (pos < m_ptrEcmStrategy.size())
+		{
+			m_ptrEcmStrategy.erase(m_ptrEcmStrategy.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setPlatformSiteRelation(const unsigned int & pos, PlatformSiteRelation & relation)
+	{
+		assert(pos < m_PlatformSiteRelation.size());
+		if (pos < m_PlatformSiteRelation.size())
+		{
+			m_PlatformSiteRelation[pos] = relation;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setPlatformEmitterRelation(const unsigned int & pos, PlatformEmitterRelation & relation)
+	{
+		assert(pos < m_PlatformEmitterRelation.size());
+		if (pos < m_PlatformEmitterRelation.size())
+		{
+			m_PlatformEmitterRelation[pos] = relation;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setPlatformWeaponRelation(const unsigned int & pos, PlatformWeaponRelation & relation)
+	{
+		assert(pos < m_PlatformWeaponRelation.size());
+		if (pos < m_PlatformWeaponRelation.size())
+		{
+			m_PlatformWeaponRelation[pos] = relation;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setOwnPlatformEsmRelation(const unsigned int & pos, OwnPlatformEsmRelation & relation)
+	{
+		assert(pos < m_OwnPlatformEsmRelation.size());
+		if (pos < m_OwnPlatformEsmRelation.size())
+		{
+			m_OwnPlatformEsmRelation[pos] = relation;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setEsmEsmStrategyRelation(const unsigned int & pos, EsmEsmStrategyRelation & relation)
+	{
+		assert(pos < m_EsmEsmStrategyRelation.size());
+		if (pos < m_EsmEsmStrategyRelation.size())
+		{
+			m_EsmEsmStrategyRelation[pos] = relation;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setOwnPlatformEcmRelation(const unsigned int & pos, OwnPlatformEcmRelation & relation)
+	{
+		assert(pos < m_OwnPlatformEcmRelation.size());
+		if (pos < m_OwnPlatformEcmRelation.size())
+		{
+			m_OwnPlatformEcmRelation[pos] = relation;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setEcmEcmStrategyRelation(const unsigned int & pos, EcmEcmStrategyRelation & relation)
+	{
+		assert(pos < m_EcmEcmStrategyRelation.size());
+		if (pos < m_EcmEcmStrategyRelation.size())
+		{
+			m_EcmEcmStrategyRelation[pos] = relation;
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::setOwnPlatformRouteRelation(const unsigned int & pos, OwnPlatformRouteRelation & relation)
+	{
+		assert(pos < m_OwnPlatformRouteRelation.size());
+		if (pos < m_OwnPlatformRouteRelation.size())
+		{
+			m_OwnPlatformRouteRelation[pos] = relation;
+			return true;
+		}
+		return false;
+	}
+
+	void Scenario::addPlatformSiteRelation(PlatformSiteRelation & relation)
+	{
+		m_PlatformSiteRelation.push_back(relation);
+	}
+
+	void Scenario::addPlatformEmitterRelation(PlatformEmitterRelation & relation)
+	{
+		m_PlatformEmitterRelation.push_back(relation);
+	}
+
+	void Scenario::addPlatformWeaponRelation(PlatformWeaponRelation & relation)
+	{
+		m_PlatformWeaponRelation.push_back(relation);
+	}
+
+	void Scenario::addOwnPlatformEsmRelation(OwnPlatformEsmRelation & relation)
+	{
+		m_OwnPlatformEsmRelation.push_back(relation);
+	}
+
+	void Scenario::addEsmEsmStrategyRelation(EsmEsmStrategyRelation & relation)
+	{
+		m_EsmEsmStrategyRelation.push_back(relation);
+	}
+
+	void Scenario::addOwnPlatformEcmRelation(OwnPlatformEcmRelation & relation)
+	{
+		m_OwnPlatformEcmRelation.push_back(relation);
+	}
+
+	void Scenario::addEcmEcmStrategyRelation(EcmEcmStrategyRelation & relation)
+	{
+		m_EcmEcmStrategyRelation.push_back(relation);
+	}
+
+	void Scenario::addOwnPlatformRouteRelation(OwnPlatformRouteRelation & relation)
+	{
+		m_OwnPlatformRouteRelation.push_back(relation);
+	}
+
+	bool Scenario::insertPlatformSiteRelation(const unsigned int & pos, PlatformSiteRelation & relation)
+	{
+		assert(pos <= m_PlatformSiteRelation.size());
+		if (pos <= m_PlatformSiteRelation.size())
+		{
+			m_PlatformSiteRelation.insert(m_PlatformSiteRelation.begin() + pos, relation);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::insertPlatformEmitterRelation(const unsigned int & pos, PlatformEmitterRelation & relation)
+	{
+		assert(pos <= m_PlatformEmitterRelation.size());
+		if (pos <= m_PlatformEmitterRelation.size())
+		{
+			m_PlatformEmitterRelation.insert(m_PlatformEmitterRelation.begin() + pos, relation);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::insertPlatformWeaponRelation(const unsigned int & pos, PlatformWeaponRelation & relation)
+	{
+		assert(pos <= m_PlatformWeaponRelation.size());
+		if (pos <= m_PlatformWeaponRelation.size())
+		{
+			m_PlatformWeaponRelation.insert(m_PlatformWeaponRelation.begin() + pos, relation);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::insertOwnPlatformEsmRelation(const unsigned int & pos, OwnPlatformEsmRelation & relation)
+	{
+		assert(pos <= m_OwnPlatformEsmRelation.size());
+		if (pos <= m_OwnPlatformEsmRelation.size())
+		{
+			m_OwnPlatformEsmRelation.insert(m_OwnPlatformEsmRelation.begin() + pos, relation);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::insertEsmEsmStrategyRelation(const unsigned int & pos, EsmEsmStrategyRelation & relation)
+	{
+		assert(pos <= m_EsmEsmStrategyRelation.size());
+		if (pos <= m_EsmEsmStrategyRelation.size())
+		{
+			m_EsmEsmStrategyRelation.insert(m_EsmEsmStrategyRelation.begin() + pos, relation);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::insertOwnPlatformEcmRelation(const unsigned int & pos, OwnPlatformEcmRelation & relation)
+	{
+		assert(pos <= m_OwnPlatformEcmRelation.size());
+		if (pos <= m_OwnPlatformEcmRelation.size())
+		{
+			m_OwnPlatformEcmRelation.insert(m_OwnPlatformEcmRelation.begin() + pos, relation);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::insertEcmEcmStrategyRelation(const unsigned int & pos, EcmEcmStrategyRelation & relation)
+	{
+		assert(pos <= m_EcmEcmStrategyRelation.size());
+		if (pos <= m_EcmEcmStrategyRelation.size())
+		{
+			m_EcmEcmStrategyRelation.insert(m_EcmEcmStrategyRelation.begin() + pos, relation);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::insertOwnPlatformRouteRelation(const unsigned int & pos, OwnPlatformRouteRelation & relation)
+	{
+		assert(pos <= m_OwnPlatformRouteRelation.size());
+		if (pos <= m_OwnPlatformRouteRelation.size())
+		{
+			m_OwnPlatformRouteRelation.insert(m_OwnPlatformRouteRelation.begin() + pos, relation);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deletePlatformSiteRelation(const unsigned int & pos, PlatformSiteRelation & relation)
+	{
+		assert(pos < m_PlatformSiteRelation.size());
+		if (pos < m_PlatformSiteRelation.size())
+		{
+			m_PlatformSiteRelation.erase(m_PlatformSiteRelation.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deletePlatformEmitterRelation(const unsigned int & pos, PlatformEmitterRelation & relation)
+	{
+		assert(pos < m_PlatformEmitterRelation.size());
+		if (pos < m_PlatformEmitterRelation.size())
+		{
+			m_PlatformEmitterRelation.erase(m_PlatformEmitterRelation.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deletePlatformWeaponRelation(const unsigned int & pos, PlatformWeaponRelation & relation)
+	{
+		assert(pos < m_PlatformWeaponRelation.size());
+		if (pos < m_PlatformWeaponRelation.size())
+		{
+			m_PlatformWeaponRelation.erase(m_PlatformWeaponRelation.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deleteOwnPlatformEsmRelation(const unsigned int & pos, OwnPlatformEsmRelation & relation)
+	{
+		assert(pos < m_OwnPlatformEsmRelation.size());
+		if (pos < m_OwnPlatformEsmRelation.size())
+		{
+			m_OwnPlatformEsmRelation.erase(m_OwnPlatformEsmRelation.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deleteEsmEsmStrategyRelation(const unsigned int & pos, EsmEsmStrategyRelation & relation)
+	{
+		assert(pos < m_EsmEsmStrategyRelation.size());
+		if (pos < m_EsmEsmStrategyRelation.size())
+		{
+			m_EsmEsmStrategyRelation.erase(m_EsmEsmStrategyRelation.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deleteOwnPlatformEcmRelation(const unsigned int & pos, OwnPlatformEcmRelation & relation)
+	{
+		assert(pos < m_OwnPlatformEcmRelation.size());
+		if (pos < m_OwnPlatformEcmRelation.size())
+		{
+			m_OwnPlatformEcmRelation.erase(m_OwnPlatformEcmRelation.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deleteEcmEcmStrategyRelation(const unsigned int & pos, EcmEcmStrategyRelation & relation)
+	{
+		assert(pos < m_EcmEcmStrategyRelation.size());
+		if (pos < m_EcmEcmStrategyRelation.size())
+		{
+			m_EcmEcmStrategyRelation.erase(m_EcmEcmStrategyRelation.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool Scenario::deleteOwnPlatformRouteRelation(const unsigned int & pos, OwnPlatformRouteRelation & relation)
+	{
+		assert(pos < m_OwnPlatformRouteRelation.size());
+		if (pos < m_OwnPlatformRouteRelation.size())
+		{
+			m_OwnPlatformRouteRelation.erase(m_OwnPlatformRouteRelation.begin() + pos);
+			return true;
+		}
+		return false;
+	}
+
+	void Scenario::setAllVertex(std::vector<std::shared_ptr<Vertex>>& ptr2AllEntities)
+	{
+		m_ptrVertex = ptr2AllEntities;
+	}
+
+	void Scenario::setAllPlatform(std::vector<std::shared_ptr<Platform>>& ptr2AllEntities)
+	{
+		m_ptrPlatform = ptr2AllEntities;
+	}
+
+	void Scenario::setAllEmitter(std::vector<std::shared_ptr<Emitter>>& ptr2AllEntities)
+	{
+		m_ptrEmitter = ptr2AllEntities;
+	}
+
+	void Scenario::setAllWeapon(std::vector<std::shared_ptr<Weapon>>& ptr2AllEntities)
+	{
+		m_ptrWeapon = ptr2AllEntities;
+	}
+
+	void Scenario::setAllSite(std::vector<std::shared_ptr<Site>>& ptr2AllEntities)
+	{
+		m_ptrSite = ptr2AllEntities;
+	}
+
+	void Scenario::setAllOwnPlatform(std::vector<std::shared_ptr<OwnPlatform>>& ptr2AllEntities)
+	{
+		m_ptrOwnPlatform = ptr2AllEntities;
+	}
+
+	void Scenario::setAllEsm(std::vector<std::shared_ptr<Esm>>& ptr2AllEntities)
+	{
+		m_ptrEsm = ptr2AllEntities;
+	}
+
+	void Scenario::setAllEcm(std::vector<std::shared_ptr<Ecm>>& ptr2AllEntities)
+	{
+		m_ptrEcm = ptr2AllEntities;
+	}
+
+	void Scenario::setAllRoute(std::vector<std::shared_ptr<Route>>& ptr2AllEntities)
+	{
+		m_ptrRoute = ptr2AllEntities;
+	}
+
+	void Scenario::setAllEsmStrategy(std::vector<std::shared_ptr<EsmStrategy>>& ptr2AllEntities)
+	{
+		m_ptrEsmStrategy = ptr2AllEntities;
+	}
+
+	void Scenario::setAllEcmStrategy(std::vector<std::shared_ptr<EcmStrategy>>& ptr2AllEntities)
+	{
+		m_ptrEcmStrategy = ptr2AllEntities;
+	}
+
+	void Scenario::setAllPlatformSiteRelation(std::vector<PlatformSiteRelation>& ptr2AllEntities)
+	{
+		m_PlatformSiteRelation = ptr2AllEntities;
+	}
+
+	void Scenario::setAllPlatformEmitterRelation(std::vector<PlatformEmitterRelation>& ptr2AllEntities)
+	{
+		m_PlatformEmitterRelation = ptr2AllEntities;
+	}
+
+	void Scenario::setAllPlatformWeaponRelation(std::vector<PlatformWeaponRelation>& ptr2AllEntities)
+	{
+		m_PlatformWeaponRelation = ptr2AllEntities;
+	}
+
+	void Scenario::setAllOwnPlatformEsmRelation(std::vector<OwnPlatformEsmRelation>& ptr2AllEntities)
+	{
+		m_OwnPlatformEsmRelation = ptr2AllEntities;
+	}
+
+	void Scenario::setAllEsmEsmStrategyRelation(std::vector<EsmEsmStrategyRelation>& ptr2AllEntities)
+	{
+		m_EsmEsmStrategyRelation = ptr2AllEntities;
+	}
+
+	void Scenario::setAllOwnPlatformEcmRelation(std::vector<OwnPlatformEcmRelation>& ptr2AllEntities)
+	{
+		m_OwnPlatformEcmRelation = ptr2AllEntities;
+	}
+
+	void Scenario::setAllEcmEcmStrategyRelation(std::vector<EcmEcmStrategyRelation>& ptr2AllEntities)
+	{
+		m_EcmEcmStrategyRelation = ptr2AllEntities;
+	}
+
+	void Scenario::setAllOwnPlatformRouteRelation(std::vector<OwnPlatformRouteRelation>& ptr2AllEntities)
+	{
+		m_OwnPlatformRouteRelation = ptr2AllEntities;
+	}
+
 }
