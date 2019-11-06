@@ -909,7 +909,7 @@ namespace sce
 	//}
 
 	Emitter::Emitter(const std::string &name,
-		std::shared_ptr<Radar_Mode>& ptrRadarMode)
+		std::shared_ptr<Radar_Mode> ptrRadarMode)
 		: m_name(name)
 		, m_ptrRadarMode({ ptrRadarMode })
 	{

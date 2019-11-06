@@ -1525,7 +1525,7 @@ namespace sce
 		//由于充满不确定性，调用默认构造可能会引起一些未知错误；
 		//此构造函数用于编译器隐含调用，使用者请不要使用默认构造函数
 		//Emitter(void);
-		Emitter(const std::string &, std::shared_ptr<Radar_Mode> &);
+		Emitter(const std::string &, std::shared_ptr<Radar_Mode>);
 		Emitter(const std::string &, std::vector<std::shared_ptr<Radar_Mode>> &);
 		~Emitter(void);
 
