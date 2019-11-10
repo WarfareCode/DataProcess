@@ -15,7 +15,9 @@
 #include<stdexcept>
 #include<string>
 #include<vector>
-#include <memory>
+#include<memory>
+#include<type_traits>
+#include<cassert>
 
 namespace sce 
 {
@@ -70,933 +72,221 @@ namespace sce
 	class Scenario
 	{
 	public:
-		//Scenario(void); 
-		Scenario(std::vector<std::shared_ptr<Vertex>>& vertexs,
-			std::vector<std::shared_ptr<Platform>> ptrPlatforms,
-			std::vector<std::shared_ptr<Emitter>> ptrEmitters,
-			std::vector<std::shared_ptr<Weapon>> ptrWeapons,
-			std::vector<std::shared_ptr<Site>> ptrSites,
-			std::vector<std::shared_ptr<OwnPlatform>> ptrOwnPlatforms,
-			std::vector<std::shared_ptr<Esm>> ptrEsms,
-			std::vector<std::shared_ptr<Ecm>> ptrEcms,
-			std::vector<std::shared_ptr<Route>> ptrRoutes,
-			std::vector<std::shared_ptr<EsmStrategy>> ptrEsmStrategy,
-			std::vector<std::shared_ptr<EcmStrategy>> ptrEcmStrategy,
-			std::vector<PlatformSiteRelation> ptrPlatformSiteRelations,
-			std::vector<PlatformEmitterRelation> ptrPlatformEmitterRelations,
-			std::vector<PlatformWeaponRelation> ptrPlatformWeaponRelations,
-			std::vector<OwnPlatformEsmRelation> ptrOwnPlatformEsmRelations,
-			std::vector<EsmEsmStrategyRelation> ptrEsmEsmStrategyRelations,
-			std::vector<OwnPlatformEcmRelation> ptrOwnPlatformEcmRelations,
-			std::vector<EcmEcmStrategyRelation> ptrEcmEcmStrategyRelations,
-			std::vector<OwnPlatformRouteRelation> ptrOwnPlatformRouteRelations);
+		Scenario(std::shared_ptr<Vertex> ,
+			std::shared_ptr<Platform> ,
+			std::shared_ptr<Emitter> ,
+			std::shared_ptr<Weapon> ,
+			std::shared_ptr<Site> ,
+			std::shared_ptr<OwnPlatform> ,
+			std::shared_ptr<Esm> ,
+			std::shared_ptr<Ecm> ,
+			std::shared_ptr<Route> ,
+			std::shared_ptr<EsmStrategy> ,
+			std::shared_ptr<EcmStrategy> ,
+			PlatformSiteRelation& ,
+			PlatformEmitterRelation& ,
+			PlatformWeaponRelation& ,
+			OwnPlatformEsmRelation& ,
+			EsmEsmStrategyRelation& ,
+			OwnPlatformEcmRelation& ,
+			EcmEcmStrategyRelation& ,
+			OwnPlatformRouteRelation& );
+
+		Scenario(std::vector<std::shared_ptr<Vertex>>& ,
+			std::vector<std::shared_ptr<Platform>>& ,
+			std::vector<std::shared_ptr<Emitter>>& ,
+			std::vector<std::shared_ptr<Weapon>>& ,
+			std::vector<std::shared_ptr<Site>>& ,
+			std::vector<std::shared_ptr<OwnPlatform>>& ,
+			std::vector<std::shared_ptr<Esm>>& ,
+			std::vector<std::shared_ptr<Ecm>>& ,
+			std::vector<std::shared_ptr<Route>>& ,
+			std::vector<std::shared_ptr<EsmStrategy>>& ,
+			std::vector<std::shared_ptr<EcmStrategy>>& ,
+			std::vector<PlatformSiteRelation>& ,
+			std::vector<PlatformEmitterRelation>& ,
+			std::vector<PlatformWeaponRelation>& ,
+			std::vector<OwnPlatformEsmRelation>& ,
+			std::vector<EsmEsmStrategyRelation>& ,
+			std::vector<OwnPlatformEcmRelation>& ,
+			std::vector<EcmEcmStrategyRelation>& ,
+			std::vector<OwnPlatformRouteRelation>& );
 		~Scenario(void);
 
-		template <typename T>
-		bool isEmpty(void)
-		{
-			if (T == Vertex) return m_vertex.empty() ? true : false;
-			if (T == Platform) return m_ptrPlatform.empty() ? true : false;
-			if (T == Emitter) return m_ptrEmitter.empty() ? true : false;
-			if (T == Weapon) return m_ptrWeapon.empty() ? true : false;
-			if (T == Site) return m_ptrSite.empty() ? true : false;
-			if (T == OwnPlatform) return m_ptrOwnPlatform.empty() ? true : false;
-			if (T == Esm) return m_ptrEsm.empty() ? true : false;
-			if (T == Ecm) return m_ptrEcm.empty() ? true : false;
-			if (T == Route) return m_ptrRoute.empty() ? true : false;
-			if (T == EsmStrategy) return m_ptrEsmStrategy.empty() ? true : false;
-			if (T == EcmStrategy) return m_ptrEcmStrategy.empty() ? true : false;
+		bool isVertexEmpty(void) { return m_ptrVertex.empty() ? true : false; };
+		bool isPlatformEmpty(void) { return m_ptrPlatform.empty() ? true : false; };
+		bool isEmitterEmpty(void) { return m_ptrEmitter.empty() ? true : false; };
+		bool isWeaponEmpty(void) { return m_ptrWeapon.empty() ? true : false; };
+		bool isSiteEmpty(void) { return m_ptrSite.empty() ? true : false; };
+		bool isOwnPlatformEmpty(void) { return m_ptrOwnPlatform.empty() ? true : false; };
+		bool isEsmEmpty(void) { return m_ptrEsm.empty() ? true : false; };
+		bool isEcmEmpty(void) { return m_ptrEcm.empty() ? true : false; };
+		bool isRouteEmpty(void) { return m_ptrRoute.empty() ? true : false; };
+		bool isEsmStrategyEmpty(void) { return m_ptrEsmStrategy.empty() ? true : false; };
+		bool isEcmStrategyEmpty(void) {	return m_ptrEcmStrategy.empty() ? true : false;	};
 
-			if (T == PlatformSiteRelation) return m_PlatformSiteRelation.empty() ? true : false;
-			if (T == PlatformEmitterRelation) return m_PlatformEmitterRelation.empty() ? true : false;
-			if (T == PlatformWeaponRelation) return m_PlatformWeaponRelation.empty() ? true : false;
-			if (T == OwnPlatformEsmRelation) return m_OwnPlatformEsmRelation.empty() ? true : false;
-			if (T == EsmEsmStrategyRelation) return m_EsmEsmStrategyRelation.empty() ? true : false;
-			if (T == OwnPlatformEcmRelation) return m_OwnPlatformEcmRelation.empty() ? true : false;
-			if (T == EcmEcmStrategyRelation) return m_EcmEcmStrategyRelation.empty() ? true : false;
-			if (T == OwnPlatformRouteRelation) return m_OwnPlatformRouteRelation.empty() ? true : false;
-		}
+		bool isPlatformSiteRelationEmpty(void) { return m_PlatformSiteRelation.empty() ? true : false; };
+		bool isPlatformEmitterRelationEmpty(void) { return m_PlatformEmitterRelation.empty() ? true : false; };
+		bool isPlatformWeaponRelationEmpty(void) { return m_PlatformWeaponRelation.empty() ? true : false; };
+		bool isOwnPlatformEsmRelationEmpty(void) { return m_OwnPlatformEsmRelation.empty() ? true : false; };
+		bool isEsmEsmStrategyRelationEmpty(void) { return m_EsmEsmStrategyRelation.empty() ? true : false; };
+		bool isOwnPlatformEcmRelationEmpty(void) { return m_OwnPlatformEcmRelation.empty() ? true : false; };
+		bool isEcmEcmStrategyRelationEmpty(void) { return m_EcmEcmStrategyRelation.empty() ? true : false; };
+		bool isOwnPlatformRouteRelationEmpty(void) { return m_OwnPlatformRouteRelation.empty() ? true : false; };
+
 		
-		//get pointer of typename
-		template<typename T>
-		std::vector<std::shared_ptr<T>>& getAllPtr(void)
-		{
-			if (T == Vertex) return m_vertex;
+		std::shared_ptr<Vertex> getPtr2Vertex(const unsigned int& pos);
+		std::shared_ptr<Platform> getPtr2Platform(const unsigned int& pos);
+		std::shared_ptr<Emitter> getPtr2Emitter(const unsigned int& pos);
+		std::shared_ptr<Weapon> getPtr2Weapon(const unsigned int& pos);
+		std::shared_ptr<Site> getPtr2Site(const unsigned int& pos);
+		std::shared_ptr<OwnPlatform> getPtr2OwnPlatform(const unsigned int& pos);
+		std::shared_ptr<Esm> getPtr2Esm(const unsigned int& pos);
+		std::shared_ptr<Ecm> getPtr2Ecm(const unsigned int& pos);
+		std::shared_ptr<Route> getPtr2Route(const unsigned int& pos);
+		std::shared_ptr<EsmStrategy> getPtr2EsmStrategy(const unsigned int& pos);
+		std::shared_ptr<EcmStrategy> getPtr2EcmStrategy(const unsigned int& pos);
 
-			if (T == Platform) return m_ptrPlatform;
-			
-			if (T == Emitter) return m_ptrEmitter;
-			
-			if (T == Weapon) return m_ptrWeapon;
-			
-			if (T == Site) return m_ptrSite;
-			
-			if (T == OwnPlatform) return m_ptrOwnPlatform;
-			
-			if (T == Esm) return m_ptrEsm;
-			
-			if (T == Ecm) return m_ptrEcm;
-			
-			if (T == Route) return m_ptrRoute;
-			
-			if (T == EsmStrategy) return m_ptrEsmStrategy;
-			
-			if (T == EcmStrategy) return m_ptrEcmStrategy;
-		}
+		PlatformSiteRelation& getPlatformSiteRelation(const unsigned int& pos);
+		PlatformEmitterRelation& getPlatformEmitterRelation(const unsigned int& pos);
+		PlatformWeaponRelation& getPlatformWeaponRelation(const unsigned int& pos);
+		OwnPlatformEsmRelation& getOwnPlatformEsmRelation(const unsigned int& pos);
+		EsmEsmStrategyRelation& getEsmEsmStrategyRelation(const unsigned int& pos);
+		OwnPlatformEcmRelation& getOwnPlatformEcmRelation(const unsigned int& pos);
+		EcmEcmStrategyRelation& getEcmEcmStrategyRelation(const unsigned int& pos);
+		OwnPlatformRouteRelation& getOwnPlatformRouteRelation(const unsigned int& pos);
 
-		template<typename T>
-		std::shared_ptr<T> getPtr(const unsigned int& pos) 
-		{
-			if (T==Vertex)
-			{
-				assert(pos<m_vertex.size());
-				if (pos<m_vertex.size())
-				{
-					return m_vertex[pos];
-				}
-			}
-			if (T==Platform)
-			{
-				assert(pos < m_ptrPlatform.size());
-				if (pos < m_ptrPlatform.size())
-				{
-					return m_ptrPlatform[pos];
-				}
-			}
-			if (T == Emitter)
-			{
-				assert(pos < m_ptrEmitter.size());
-				if (pos < m_ptrEmitter.size())
-				{
-					return m_ptrEmitter[pos];
-				}
-			}
-			if (T == Weapon)
-			{
-				assert(pos < m_ptrWeapon.size());
-				if (pos < m_ptrWeapon.size())
-				{
-					return m_ptrWeapon[pos];
-				}
-			}
-			if (T == Site)
-			{
-				assert(pos < m_ptrSite.size());
-				if (pos < m_ptrSite.size())
-				{
-					return m_ptrSite[pos];
-				}
-			}
-			if (T == OwnPlatform)
-			{
-				assert(pos < m_ptrOwnPlatform.size());
-				if (pos < m_ptrOwnPlatform.size())
-				{
-					return m_ptrOwnPlatform[pos];
-				}
-			}
-			if (T == Esm)
-			{
-				assert(pos < m_ptrEsm.size());
-				if (pos < m_ptrEsm.size())
-				{
-					return m_ptrEsm[pos];
-				}
-			}
-			if (T == Ecm)
-			{
-				assert(pos < m_ptrEcm.size());
-				if (pos < m_ptrEcm.size())
-				{
-					return m_ptrEcm[pos];
-				}
-			}
-			if (T == Route)
-			{
-				assert(pos < m_ptrRoute.size());
-				if (pos < m_ptrRoute.size())
-				{
-					return m_ptrRoute[pos];
-				}
-			}
-			if (T == EsmStrategy)
-			{
-				assert(pos < m_ptrEsmStrategy.size());
-				if (pos < m_ptrEsmStrategy.size())
-				{
-					return m_ptrEsmStrategy[pos];
-				}
-			}
-			if (T == EcmStrategy)
-			{
-				assert(pos < m_ptrEcmStrategy.size());
-				if (pos < m_ptrEcmStrategy.size())
-				{
-					return m_ptrEcmStrategy[pos];
-				}
-			}
-			throw Error("can't return this value (doesn't exist)");
-		}
 
-		//set pointer of all entities
-		template<typename T>
-		void setAllPtrs(std::vector<std::shared_ptr<T>>& ptr2AllEntities)
-		{
-			if (T == Vertex) m_vertex=ptr2AllEntities;
+		std::vector<std::shared_ptr<Vertex>>& getAllVertex(void);
+		std::vector<std::shared_ptr<Platform>>& getAllPlatform(void);
+		std::vector<std::shared_ptr<Emitter>>& getAllEmitter(void);
+		std::vector<std::shared_ptr<Weapon>>& getAllWeapon(void);
+		std::vector<std::shared_ptr<Site>>& getAllSite(void);
+		std::vector<std::shared_ptr<OwnPlatform>>& getAllOwnPlatform(void);
+		std::vector<std::shared_ptr<Esm>>& getAllEsm(void);
+		std::vector<std::shared_ptr<Ecm>>& getAllEcm(void);
+		std::vector<std::shared_ptr<Route>>& getAllRoute(void);
+		std::vector<std::shared_ptr<EsmStrategy>>& getAllEsmStrategy(void);
+		std::vector<std::shared_ptr<EcmStrategy>>& getAllEcmStrategy(void);
 
-			if (T == Platform) m_ptrPlatform=ptr2AllEntities;
+		std::vector<PlatformSiteRelation>& getAllPlatformSiteRelation(void);
+		std::vector<PlatformEmitterRelation>& getAllPlatformEmitterRelation(void);
+		std::vector<PlatformWeaponRelation>& getAllPlatformWeaponRelation(void);
+		std::vector<OwnPlatformEsmRelation>& getAllOwnPlatformEsmRelation(void);
+		std::vector<EsmEsmStrategyRelation>& getAllEsmEsmStrategyRelation(void);
+		std::vector<OwnPlatformEcmRelation>& getAllOwnPlatformEcmRelation(void);
+		std::vector<EcmEcmStrategyRelation>& getAllEcmEcmStrategyRelation(void);
+		std::vector<OwnPlatformRouteRelation>& getAllOwnPlatformRouteRelation(void);
 
-			if (T == Emitter) m_ptrEmitter=ptr2AllEntities;
 
-			if (T == Weapon) m_ptrWeapon=ptr2AllEntities;
+		bool setPtr2Vertex(const unsigned int& pos, std::shared_ptr<Vertex> ptr2Entity);
+		bool setPtr2Platform(const unsigned int& pos, std::shared_ptr<Platform> ptr2Entity);
+		bool setPtr2Emitter(const unsigned int& pos, std::shared_ptr<Emitter> ptr2Entity);
+		bool setPtr2Weapon(const unsigned int& pos, std::shared_ptr<Weapon> ptr2Entity);
+		bool setPtr2Site(const unsigned int& pos, std::shared_ptr<Site> ptr2Entity);
+		bool setPtr2OwnPlatform(const unsigned int& pos, std::shared_ptr<OwnPlatform> ptr2Entity);
+		bool setPtr2Esm(const unsigned int& pos, std::shared_ptr<Esm> ptr2Entity);
+		bool setPtr2Ecm(const unsigned int& pos, std::shared_ptr<Ecm> ptr2Entity);
+		bool setPtr2Route(const unsigned int& pos, std::shared_ptr<Route> ptr2Entity);
+		bool setPtr2EsmStrategy(const unsigned int& pos, std::shared_ptr<EsmStrategy> ptr2Entity);
+		bool setPtr2EcmStrategy(const unsigned int& pos, std::shared_ptr<EcmStrategy> ptr2Entity);
 
-			if (T == Site) m_ptrSite=ptr2AllEntities;
+		void addVertex(std::shared_ptr<Vertex> ptr2Entity);
+		void addPlatform(std::shared_ptr<Platform> ptr2Entity);
+		void addEmitter(std::shared_ptr<Emitter> ptr2Entity);
+		void addWeapon(std::shared_ptr<Weapon> ptr2Entity);
+		void addSite(std::shared_ptr<Site> ptr2Entity);
+		void addOwnPlatform(std::shared_ptr<OwnPlatform> ptr2Entity);
+		void addEsm(std::shared_ptr<Esm> ptr2Entity);
+		void addEcm(std::shared_ptr<Ecm> ptr2Entity);
+		void addRoute(std::shared_ptr<Route> ptr2Entity);
+		void addEsmStrategy(std::shared_ptr<EsmStrategy> ptr2Entity);
+		void addEcmStrategy(std::shared_ptr<EcmStrategy> ptr2Entity);
 
-			if (T == OwnPlatform) m_ptrOwnPlatform=ptr2AllEntities;
+		bool insertPtr2Vertex(const unsigned int& pos, std::shared_ptr<Vertex> ptr2Entity);
+		bool insertPtr2Platform(const unsigned int& pos, std::shared_ptr<Platform> ptr2Entity);
+		bool insertPtr2Emitter(const unsigned int& pos, std::shared_ptr<Emitter>ptr2Entity);
+		bool insertPtr2Weapon(const unsigned int& pos, std::shared_ptr<Weapon> ptr2Entity);
+		bool insertPtr2Site(const unsigned int& pos, std::shared_ptr<Site> ptr2Entity);
+		bool insertPtr2OwnPlatform(const unsigned int& pos, std::shared_ptr<OwnPlatform> ptr2Entity);
+		bool insertPtr2Esm(const unsigned int& pos, std::shared_ptr<Esm> ptr2Entity);
+		bool insertPtr2Ecm(const unsigned int& pos, std::shared_ptr<Ecm> ptr2Entity);
+		bool insertPtr2Route(const unsigned int& pos, std::shared_ptr<Route> ptr2Entity);
+		bool insertPtr2EsmStrategy(const unsigned int& pos, std::shared_ptr<EsmStrategy> ptr2Entity);
+		bool insertPtr2EcmStrategy(const unsigned int& pos, std::shared_ptr<EcmStrategy> ptr2Entity);
 
-			if (T == Esm) m_ptrEsm=ptr2AllEntities;
+		bool deleteVertex(const unsigned int& pos);
+		bool deletePlatform(const unsigned int& pos);
+		bool deleteEmitter(const unsigned int& pos);
+		bool deleteWeapon(const unsigned int& pos);
+		bool deleteSite(const unsigned int& pos);
+		bool deleteOwnPlatform(const unsigned int& pos);
+		bool deleteEsm(const unsigned int& pos);
+		bool deleteEcm(const unsigned int& pos);
+		bool deleteRoute(const unsigned int& pos);
+		bool deleteEsmStrategy(const unsigned int& pos);
+		bool deleteEcmStrategy(const unsigned int& pos);
 
-			if (T == Ecm) m_ptrEcm=ptr2AllEntities;
 
-			if (T == Route) m_ptrRoute=ptr2AllEntities;
-
-			if (T == EsmStrategy) m_ptrEsmStrategy=ptr2AllEntities;
-
-			if (T == EcmStrategy) m_ptrEcmStrategy=ptr2AllEntities;
-		}
-
-		//set/modify pointer of entity
-		template<typename T>
-		bool setPtr(const unsigned int& pos, std::shared_ptr<T> ptr2Entity)
-		{
-			if (T == Vertex)
-			{
-				assert(pos < m_vertex.size());
-				if (pos < m_vertex.size())
-				{
-					m_vertex[pos] = ptr2Entity;
-					return true;
-				}
-			}
-			if (T == Platform)
-			{
-				assert(pos < m_ptrPlatform.size());
-				if (pos < m_ptrPlatform.size())
-				{
-					m_ptrPlatform[pos] = ptr2Entity;
-					return true;
-				}
-			}
-			if (T == Emitter)
-			{
-				assert(pos < m_ptrEmitter.size());
-				if (pos < m_ptrEmitter.size())
-				{
-					m_ptrEmitter[pos] = ptr2Entity;
-					return true;
-				}
-			}
-			if (T == Weapon)
-			{
-				assert(pos < m_ptrWeapon.size());
-				if (pos < m_ptrWeapon.size())
-				{
-					m_ptrWeapon[pos] = ptr2Entity;
-					return true;
-				}
-			}
-			if (T == Site)
-			{
-				assert(pos < m_ptrSite.size());
-				if (pos < m_ptrSite.size())
-				{
-					m_ptrSite[pos] = ptr2Entity;
-					return true;
-				}
-			}
-			if (T == OwnPlatform)
-			{
-				assert(pos < m_ptrOwnPlatform.size());
-				if (pos < m_ptrOwnPlatform.size())
-				{
-					m_ptrOwnPlatform[pos] = ptr2Entity;
-					return true;
-				}
-			}
-			if (T == Esm)
-			{
-				assert(pos < m_ptrEsm.size());
-				if (pos < m_ptrEsm.size())
-				{
-					m_ptrEsm[pos] = ptr2Entity;
-					return true;
-				}
-			}
-			if (T == Ecm)
-			{
-				assert(pos < m_ptrEcm.size());
-				if (pos < m_ptrEcm.size())
-				{
-					m_ptrEcm[pos] = ptr2Entity;
-					return true;
-				}
-			}
-			if (T == Route)
-			{
-				assert(pos < m_ptrRoute.size());
-				if (pos < m_ptrRoute.size())
-				{
-					m_ptrRoute[pos] = ptr2Entity;
-					return true;
-				}
-			}
-			if (T == EsmStrategy)
-			{
-				assert(pos < m_ptrEsmStrategy.size());
-				if (pos < m_ptrEsmStrategy.size())
-				{
-					m_ptrEsmStrategy[pos] = ptr2Entity;
-					return true;
-				}
-			}
-			if (T == EcmStrategy)
-			{
-				assert(pos < m_ptrEcmStrategy.size());
-				if (pos < m_ptrEcmStrategy.size())
-				{
-					m_ptrEcmStrategy[pos] = ptr2Entity;
-					return true;
-				}
-			}
-			return false;
-		}
-
-		//insert pointer of entity
-		template<typename T>
-		bool insertPtr(const unsigned int& pos, std::shared_ptr<T> ptr2Entity)
-		{
-			if (T == Vertex)
-			{
-				assert(pos <= m_vertex.size());
-				if (pos <= m_vertex.size())
-				{
-					m_vertex.insert(m_vertex.begin() + pos, ptr2Entity);;
-					return true;
-				}
-			}
-			if (T == Platform)
-			{
-				assert(pos <= m_ptrPlatform.size());
-				if (pos <= m_ptrPlatform.size())
-				{
-					m_ptrPlatform.insert(m_ptrPlatform.begin() + pos, ptr2Entity);
-					return true;
-				}
-			}
-			if (T == Emitter)
-			{
-				assert(pos <= m_ptrEmitter.size());
-				if (pos <= m_ptrEmitter.size())
-				{
-					m_ptrEmitter.insert(m_ptrEmitter.begin() + pos, ptr2Entity);
-					return true;
-				}
-			}
-			if (T == Weapon)
-			{
-				assert(pos <= m_ptrWeapon.size());
-				if (pos <= m_ptrWeapon.size())
-				{
-					m_ptrWeapon.insert(m_ptrWeapon.begin() + pos, ptr2Entity);
-					return true;
-				}
-			}
-			if (T == Site)
-			{
-				assert(pos <= m_ptrSite.size());
-				if (pos <= m_ptrSite.size())
-				{
-					m_ptrSite.insert(m_ptrSite.begin() + pos, ptr2Entity);
-					return true;
-				}
-			}
-			if (T == OwnPlatform)
-			{
-				assert(pos <= m_ptrOwnPlatform.size());
-				if (pos <= m_ptrOwnPlatform.size())
-				{
-					m_ptrOwnPlatform.insert(m_ptrOwnPlatform.begin() + pos, ptr2Entity);
-					return true;
-				}
-			}
-			if (T == Esm)
-			{
-				assert(pos <= m_ptrEsm.size());
-				if (pos <= m_ptrEsm.size())
-				{
-					m_ptrEsm.insert(m_ptrEsm.begin() + pos, ptr2Entity);
-					return true;
-				}
-			}
-			if (T == Ecm)
-			{
-				assert(pos <= m_ptrEcm.size());
-				if (pos <= m_ptrEcm.size())
-				{
-					m_ptrEcm.insert(m_ptrEcm.begin() + pos, ptr2Entity);
-					return true;
-				}
-			}
-			if (T == Route)
-			{
-				assert(pos <= m_ptrRoute.size());
-				if (pos <= m_ptrRoute.size())
-				{
-					m_ptrRoute.insert(m_ptrRoute.begin() + pos, ptr2Entity);
-					return true;
-				}
-			}
-			if (T == EsmStrategy)
-			{
-				assert(pos <= m_ptrEsmStrategy.size());
-				if (pos <= m_ptrEsmStrategy.size())
-				{
-					m_ptrEsmStrategy.insert(m_ptrEsmStrategy.begin() + pos, ptr2Entity);
-					return true;
-				}
-			}
-			if (T == EcmStrategy)
-			{
-				assert(pos <= m_ptrEcmStrategy.size());
-				if (pos <= m_ptrEcmStrategy.size())
-				{
-					m_ptrEcmStrategy.insert(m_ptrEcmStrategy.begin() + pos, ptr2Entity);
-					return true;
-				}
-			}
-			return false;
-		}
-
-		//add pointer of all entities
-		template<typename T>
-		void addPtr(std::shared_ptr<T>& ptr2Entitiy)
-		{
-			if (T == Vertex) m_vertex.push_back(ptr2Entitiy);
-
-			if (T == Platform) m_ptrPlatform.push_back(ptr2Entitiy);
-
-			if (T == Emitter) m_ptrEmitter.push_back(ptr2Entitiy);
-
-			if (T == Weapon) m_ptrWeapon.push_back(ptr2Entitiy);
-
-			if (T == Site) m_ptrSite.push_back(ptr2Entitiy);
-
-			if (T == OwnPlatform) m_ptrOwnPlatform.push_back(ptr2Entitiy);
-
-			if (T == Esm) m_ptrEsm.push_back(ptr2Entitiy);
-
-			if (T == Ecm) m_ptrEcm.push_back(ptr2Entitiy);
-
-			if (T == Route) m_ptrRoute.push_back(ptr2Entitiy);
-
-			if (T == EsmStrategy) m_ptrEsmStrategy.push_back(ptr2Entitiy);
-
-			if (T == EcmStrategy) m_ptrEcmStrategy.push_back(ptr2Entitiy);
-		}
-
-		//delete pointer of entity
-		template<typename T>
-		bool deletePtr(const unsigned int& pos)
-		{
-			if (T == Vertex)
-			{
-				assert(pos < m_vertex.size());
-				if (pos < m_vertex.size())
-				{
-					m_vertex.erase(m_vertex.begin()+pos);
-					return true;
-				}
-			}
-			if (T == Platform)
-			{
-				assert(pos < m_ptrPlatform.size());
-				if (pos < m_ptrPlatform.size())
-				{
-					m_ptrPlatform.erase(m_ptrPlatform.begin() + pos);
-					return true;
-				}
-			}
-			if (T == Emitter)
-			{
-				assert(pos < m_ptrEmitter.size());
-				if (pos < m_ptrEmitter.size())
-				{
-					m_ptrEmitter.erase(m_ptrEmitter.begin() + pos);
-					return true;
-				}
-			}
-			if (T == Weapon)
-			{
-				assert(pos < m_ptrWeapon.size());
-				if (pos < m_ptrWeapon.size())
-				{
-					m_ptrWeapon.erase(m_ptrWeapon.begin() + pos);
-					return true;
-				}
-			}
-			if (T == Site)
-			{
-				assert(pos < m_ptrSite.size());
-				if (pos < m_ptrSite.size())
-				{
-					m_ptrSite.erase(m_ptrSite.begin() + pos);
-					return true;
-				}
-			}
-			if (T == OwnPlatform)
-			{
-				assert(pos < m_ptrOwnPlatform.size());
-				if (pos < m_ptrOwnPlatform.size())
-				{
-					m_ptrOwnPlatform.erase(m_ptrOwnPlatform.begin() + pos);
-					return true;
-				}
-			}
-			if (T == Esm)
-			{
-				assert(pos < m_ptrEsm.size());
-				if (pos < m_ptrEsm.size())
-				{
-					m_ptrEsm.erase(m_ptrEsm.begin() + pos);
-					return true;
-				}
-			}
-			if (T == Ecm)
-			{
-				assert(pos < m_ptrEcm.size());
-				if (pos < m_ptrEcm.size())
-				{
-					m_ptrEcm.erase(m_ptrEcm.begin() + pos);
-					return true;
-				}
-			}
-			if (T == Route)
-			{
-				assert(pos < m_ptrRoute.size());
-				if (pos < m_ptrRoute.size())
-				{
-					m_ptrRoute.erase(m_ptrRoute.begin() + pos);
-					return true;
-				}
-			}
-			if (T == EsmStrategy)
-			{
-				assert(pos < m_ptrEsmStrategy.size());
-				if (pos < m_ptrEsmStrategy.size())
-				{
-					m_ptrEsmStrategy.erase(m_ptrEsmStrategy.begin() + pos);
-					return true;
-				}
-			}
-			if (T == EcmStrategy)
-			{
-				assert(pos < m_ptrEcmStrategy.size());
-				if (pos < m_ptrEcmStrategy.size())
-				{
-					m_ptrEcmStrategy.erase(m_ptrEcmStrategy.begin() + pos);
-					return true;
-				}
-			}
-			return false;
-		}
-
-		//std::shared_ptr<Vertex> getPtr2Vertex(const unsigned int& pos);
-		//std::shared_ptr<Platform> getPtr2Platform(const unsigned int& pos);
-		//std::shared_ptr<Emitter> getPtr2Emitter(const unsigned int& pos);
-		//std::shared_ptr<Weapon> getPtr2Weapon(const unsigned int& pos);
-		//std::shared_ptr<Site> getPtr2Site(const unsigned int& pos);
-		//std::shared_ptr<OwnPlatform> getPtr2OwnPlatform(const unsigned int& pos);
-		//std::shared_ptr<Esm> getPtr2Esm(const unsigned int& pos);
-		//std::shared_ptr<Ecm> getPtr2Ecm(const unsigned int& pos);
-		//std::shared_ptr<Route> getPtr2Route(const unsigned int& pos);
-		//std::shared_ptr<EsmStrategy> getPtr2EsmStrategy(const unsigned int& pos);
-		//std::shared_ptr<EcmStrategy> getPtr2EcmStrategy(const unsigned int& pos);
+		bool setPlatformSiteRelation(const unsigned int& pos, PlatformSiteRelation& relation);
+		bool setPlatformEmitterRelation(const unsigned int& pos, PlatformEmitterRelation& relation);
+		bool setPlatformWeaponRelation(const unsigned int& pos, PlatformWeaponRelation& relation);
+		bool setOwnPlatformEsmRelation(const unsigned int& pos, OwnPlatformEsmRelation& relation);
+		bool setEsmEsmStrategyRelation(const unsigned int& pos, EsmEsmStrategyRelation& relation);
+		bool setOwnPlatformEcmRelation(const unsigned int& pos, OwnPlatformEcmRelation& relation);
+		bool setEcmEcmStrategyRelation(const unsigned int& pos, EcmEcmStrategyRelation& relation);
+		bool setOwnPlatformRouteRelation(const unsigned int& pos, OwnPlatformRouteRelation& relation);
 		
-		template<typename T>
-		std::vector<T>& getAllRelation(void)
-		{
-			if (T == PlatformSiteRelation) return m_PlatformSiteRelation;
+		void addPlatformSiteRelation(PlatformSiteRelation& relation);
+		void addPlatformEmitterRelation(PlatformEmitterRelation& relation);
+		void addPlatformWeaponRelation(PlatformWeaponRelation& relation);
+		void addOwnPlatformEsmRelation(OwnPlatformEsmRelation& relation);
+		void addEsmEsmStrategyRelation(EsmEsmStrategyRelation& relation);
+		void addOwnPlatformEcmRelation(OwnPlatformEcmRelation& relation);
+		void addEcmEcmStrategyRelation(EcmEcmStrategyRelation& relation);
+		void addOwnPlatformRouteRelation(OwnPlatformRouteRelation& relation);
 
-			if (T == PlatformEmitterRelation) return m_PlatformEmitterRelation;
+		bool insertPlatformSiteRelation(const unsigned int& pos, PlatformSiteRelation& relation);
+		bool insertPlatformEmitterRelation(const unsigned int& pos, PlatformEmitterRelation& relation);
+		bool insertPlatformWeaponRelation(const unsigned int& pos, PlatformWeaponRelation& relation);
+		bool insertOwnPlatformEsmRelation(const unsigned int& pos, OwnPlatformEsmRelation& relation);
+		bool insertEsmEsmStrategyRelation(const unsigned int& pos, EsmEsmStrategyRelation& relation);
+		bool insertOwnPlatformEcmRelation(const unsigned int& pos, OwnPlatformEcmRelation& relation);
+		bool insertEcmEcmStrategyRelation(const unsigned int& pos, EcmEcmStrategyRelation& relation);
+		bool insertOwnPlatformRouteRelation(const unsigned int& pos, OwnPlatformRouteRelation& relation);
 
-			if (T == PlatformWeaponRelation) return m_PlatformWeaponRelation;
+		bool deletePlatformSiteRelation(const unsigned int& pos, PlatformSiteRelation& relation);
+		bool deletePlatformEmitterRelation(const unsigned int& pos, PlatformEmitterRelation& relation);
+		bool deletePlatformWeaponRelation(const unsigned int& pos, PlatformWeaponRelation& relation);
+		bool deleteOwnPlatformEsmRelation(const unsigned int& pos, OwnPlatformEsmRelation& relation);
+		bool deleteEsmEsmStrategyRelation(const unsigned int& pos, EsmEsmStrategyRelation& relation);
+		bool deleteOwnPlatformEcmRelation(const unsigned int& pos, OwnPlatformEcmRelation& relation);
+		bool deleteEcmEcmStrategyRelation(const unsigned int& pos, EcmEcmStrategyRelation& relation);
+		bool deleteOwnPlatformRouteRelation(const unsigned int& pos, OwnPlatformRouteRelation& relation);
 
-			if (T == OwnPlatformEsmRelation) return m_OwnPlatformEsmRelation;
+		void setAllVertex(std::vector<std::shared_ptr<Vertex>>& ptr2AllEntities);
+		void setAllPlatform(std::vector<std::shared_ptr<Platform>>& ptr2AllEntities);
+		void setAllEmitter(std::vector<std::shared_ptr<Emitter>>& ptr2AllEntities);
+		void setAllWeapon(std::vector<std::shared_ptr<Weapon>>& ptr2AllEntities);
+		void setAllSite(std::vector<std::shared_ptr<Site>>& ptr2AllEntities);
+		void setAllOwnPlatform(std::vector<std::shared_ptr<OwnPlatform>>& ptr2AllEntities);
+		void setAllEsm(std::vector<std::shared_ptr<Esm>>& ptr2AllEntities);
+		void setAllEcm(std::vector<std::shared_ptr<Ecm>>& ptr2AllEntities);
+		void setAllRoute(std::vector<std::shared_ptr<Route>>& ptr2AllEntities);
+		void setAllEsmStrategy(std::vector<std::shared_ptr<EsmStrategy>>& ptr2AllEntities);
+		void setAllEcmStrategy(std::vector<std::shared_ptr<EcmStrategy>>& ptr2AllEntities);
 
-			if (T == EsmEsmStrategyRelation) return m_EsmEsmStrategyRelation;
-
-			if (T == OwnPlatformEcmRelation) return m_OwnPlatformEcmRelation;
-
-			if (T == EcmEcmStrategyRelation) return m_EcmEcmStrategyRelation;
-
-			if (T == OwnPlatformRouteRelation) return m_OwnPlatformRouteRelation;
-		}
-
-		template <typename T>
-		T& getRelation(const unsigned int& pos)
-		{
-			if (T == PlatformSiteRelation)
-			{
-				assert(pos < m_PlatformSiteRelation.size());
-				if (pos < m_PlatformSiteRelation.size())
-				{
-					return m_PlatformSiteRelation[pos];
-				}
-			}
-			if (T == PlatformEmitterRelation)
-			{
-				assert(pos < m_PlatformEmitterRelation.size());
-				if (pos < m_PlatformEmitterRelation.size())
-				{
-					return m_PlatformEmitterRelation[pos];
-				}
-			}
-			if (T == PlatformWeaponRelation)
-			{
-				assert(pos < m_PlatformWeaponRelation.size());
-				if (pos < m_PlatformWeaponRelation.size())
-				{
-					return m_PlatformWeaponRelation[pos];
-				}
-			}
-			if (T == OwnPlatformEsmRelation)
-			{
-				assert(pos < m_OwnPlatformEsmRelation.size());
-				if (pos < m_OwnPlatformEsmRelation.size())
-				{
-					return m_OwnPlatformEsmRelation[pos];
-				}
-			}
-			if (T == EsmEsmStrategyRelation)
-			{
-				assert(pos < m_EsmEsmStrategyRelation.size());
-				if (pos < m_EsmEsmStrategyRelation.size())
-				{
-					return m_EsmEsmStrategyRelation[pos];
-				}
-			}
-			if (T == OwnPlatformEcmRelation)
-			{
-				assert(pos < m_OwnPlatformEcmRelation.size());
-				if (pos < m_OwnPlatformEcmRelation.size())
-				{
-					return m_OwnPlatformEcmRelation[pos];
-				}
-			}
-			if (T == EcmEcmStrategyRelation)
-			{
-				assert(pos < m_EcmEcmStrategyRelation.size());
-				if (pos < m_EcmEcmStrategyRelation.size())
-				{
-					return m_EcmEcmStrategyRelation[pos];
-				}
-			}
-			if (T == OwnPlatformRouteRelation)
-			{
-				assert(pos < m_OwnPlatformRouteRelation.size());
-				if (pos < m_OwnPlatformRouteRelation.size())
-				{
-					return m_OwnPlatformRouteRelation[pos];
-				}
-			}
-			throw Error("can't return this value (doesn't exist)");
-		}
-
-		template<typename T>
-		void setAllRelation(std::vector<T>& relations)
-		{
-			if (T == PlatformSiteRelation) m_PlatformSiteRelation= relations;
-
-			if (T == PlatformEmitterRelation) m_PlatformEmitterRelation= relations;
-
-			if (T == PlatformWeaponRelation) m_PlatformWeaponRelation= relations;
-
-			if (T == OwnPlatformEsmRelation) m_OwnPlatformEsmRelation= relations;
-
-			if (T == EsmEsmStrategyRelation) m_EsmEsmStrategyRelation= relations;
-
-			if (T == OwnPlatformEcmRelation) m_OwnPlatformEcmRelation= relations;
-
-			if (T == EcmEcmStrategyRelation) m_EcmEcmStrategyRelation= relations;
-
-			if (T == OwnPlatformRouteRelation) m_OwnPlatformRouteRelation= relations;
-		}
-
-		template <typename T>
-		bool setRelation(const unsigned int& pos, T& relation)
-		{
-			if (T == PlatformSiteRelation)
-			{
-				assert(pos < m_PlatformSiteRelation.size());
-				if (pos < m_PlatformSiteRelation.size())
-				{
-					m_PlatformSiteRelation[pos] = relation;
-					return true;
-				}
-			}
-			if (T == PlatformEmitterRelation)
-			{
-				assert(pos < m_PlatformEmitterRelation.size());
-				if (pos < m_PlatformEmitterRelation.size())
-				{
-					m_PlatformEmitterRelation[pos] = relation;
-					return true;
-				}
-			}
-			if (T == PlatformWeaponRelation)
-			{
-				assert(pos < m_PlatformWeaponRelation.size());
-				if (pos < m_PlatformWeaponRelation.size())
-				{
-					m_PlatformWeaponRelation[pos] = relation;
-					return true;
-				}
-			}
-			if (T == OwnPlatformEsmRelation)
-			{
-				assert(pos < m_OwnPlatformEsmRelation.size());
-				if (pos < m_OwnPlatformEsmRelation.size())
-				{
-					m_OwnPlatformEsmRelation[pos] = relation;
-					return true;
-				}
-			}
-			if (T == EsmEsmStrategyRelation)
-			{
-				assert(pos < m_EsmEsmStrategyRelation.size());
-				if (pos < m_EsmEsmStrategyRelation.size())
-				{
-					m_EsmEsmStrategyRelation[pos] = relation;
-					return true;
-				}
-			}
-			if (T == OwnPlatformEcmRelation)
-			{
-				assert(pos < m_OwnPlatformEcmRelation.size());
-				if (pos < m_OwnPlatformEcmRelation.size())
-				{
-					m_OwnPlatformEcmRelation[pos] = relation;
-					return true;
-				}
-			}
-			if (T == EcmEcmStrategyRelation)
-			{
-				assert(pos < m_EcmEcmStrategyRelation.size());
-				if (pos < m_EcmEcmStrategyRelation.size())
-				{
-					m_EcmEcmStrategyRelation[pos] = relation;
-					return true;
-				}
-			}
-			if (T == OwnPlatformRouteRelation)
-			{
-				assert(pos < m_OwnPlatformRouteRelation.size());
-				if (pos < m_OwnPlatformRouteRelation.size())
-				{
-					m_OwnPlatformRouteRelation[pos] = relation;
-					return true;
-				}
-			}
-			return false;
-		}
-
-		template <typename T>
-		bool insertRelation(const unsigned int& pos, T& relation)
-		{
-			if (T == PlatformSiteRelation)
-			{
-				assert(pos <= m_PlatformSiteRelation.size());
-				if (pos <= m_PlatformSiteRelation.size())
-				{
-					m_PlatformSiteRelation.insert(m_PlatformSiteRelation.begin() +pos, relation);
-					return true;
-				}
-			}
-			if (T == PlatformEmitterRelation)
-			{
-				assert(pos <= m_PlatformEmitterRelation.size());
-				if (pos <= m_PlatformEmitterRelation.size())
-				{
-					m_PlatformEmitterRelation.insert(m_PlatformEmitterRelation.begin() + pos, relation);
-					return true;
-				}
-			}
-			if (T == PlatformWeaponRelation)
-			{
-				assert(pos <= m_PlatformWeaponRelation.size());
-				if (pos <= m_PlatformWeaponRelation.size())
-				{
-					m_PlatformWeaponRelation.insert(m_PlatformWeaponRelation.begin() + pos, relation);
-					return true;
-				}
-			}
-			if (T == OwnPlatformEsmRelation)
-			{
-				assert(pos <= m_OwnPlatformEsmRelation.size());
-				if (pos <= m_OwnPlatformEsmRelation.size())
-				{
-					m_OwnPlatformEsmRelation.insert(m_OwnPlatformEsmRelation.begin() + pos, relation);
-					return true;
-				}
-			}
-			if (T == EsmEsmStrategyRelation)
-			{
-				assert(pos <= m_EsmEsmStrategyRelation.size());
-				if (pos <= m_EsmEsmStrategyRelation.size())
-				{
-					m_EsmEsmStrategyRelation.insert(m_EsmEsmStrategyRelation.begin() + pos, relation);
-					return true;
-				}
-			}
-			if (T == OwnPlatformEcmRelation)
-			{
-				assert(pos <= m_OwnPlatformEcmRelation.size());
-				if (pos <= m_OwnPlatformEcmRelation.size())
-				{
-					m_OwnPlatformEcmRelation.insert(m_OwnPlatformEcmRelation.begin() + pos, relation);
-					return true;
-				}
-			}
-			if (T == EcmEcmStrategyRelation)
-			{
-				assert(pos <= m_EcmEcmStrategyRelation.size());
-				if (pos <= m_EcmEcmStrategyRelation.size())
-				{
-					m_EcmEcmStrategyRelation.insert(m_EcmEcmStrategyRelation.begin() + pos, relation);
-					return true;
-				}
-			}
-			if (T == OwnPlatformRouteRelation)
-			{
-				assert(pos <= m_OwnPlatformRouteRelation.size());
-				if (pos <= m_OwnPlatformRouteRelation.size())
-				{
-					m_OwnPlatformRouteRelation.insert(m_OwnPlatformRouteRelation.begin() + pos, relation);
-					return true;
-				}
-			}
-			return false;
-		}
-
-		template<typename T>
-		void addRelation(T& relation)
-		{
-			if (T == PlatformSiteRelation) m_PlatformSiteRelation.push_back(relations);
-
-			if (T == PlatformEmitterRelation) m_PlatformEmitterRelation.push_back(relations);
-
-			if (T == PlatformWeaponRelation) m_PlatformWeaponRelation.push_back(relations);
-
-			if (T == OwnPlatformEsmRelation) m_OwnPlatformEsmRelation.push_back(relations);
-
-			if (T == EsmEsmStrategyRelation) m_EsmEsmStrategyRelation.push_back(relations);
-
-			if (T == OwnPlatformEcmRelation) m_OwnPlatformEcmRelation.push_back(relations);
-
-			if (T == EcmEcmStrategyRelation) m_EcmEcmStrategyRelation.push_back(relations);
-
-			if (T == OwnPlatformRouteRelation) m_OwnPlatformRouteRelation.push_back(relations);
-		}
-
-		template <typename T>
-		bool deleteRelation(const unsigned int& pos)
-		{
-			if (T == PlatformSiteRelation)
-			{
-				assert(pos < m_PlatformSiteRelation.size());
-				if (pos < m_PlatformSiteRelation.size())
-				{
-					m_PlatformSiteRelation.erase(m_PlatformSiteRelation.begin() + pos);
-					return true;
-				}
-			}
-			if (T == PlatformEmitterRelation)
-			{
-				assert(pos < m_PlatformEmitterRelation.size());
-				if (pos < m_PlatformEmitterRelation.size())
-				{
-					m_PlatformEmitterRelation.erase(m_PlatformEmitterRelation.begin() + pos);
-					return true;
-				}
-			}
-			if (T == PlatformWeaponRelation)
-			{
-				assert(pos < m_PlatformWeaponRelation.size());
-				if (pos < m_PlatformWeaponRelation.size())
-				{
-					m_PlatformWeaponRelation.erase(m_PlatformWeaponRelation.begin() + pos);
-					return true;
-				}
-			}
-			if (T == OwnPlatformEsmRelation)
-			{
-				assert(pos < m_OwnPlatformEsmRelation.size());
-				if (pos < m_OwnPlatformEsmRelation.size())
-				{
-					m_OwnPlatformEsmRelation.erase(m_OwnPlatformEsmRelation.begin() + pos);
-					return true;
-				}
-			}
-			if (T == EsmEsmStrategyRelation)
-			{
-				assert(pos < m_EsmEsmStrategyRelation.size());
-				if (pos < m_EsmEsmStrategyRelation.size())
-				{
-					m_EsmEsmStrategyRelation.erase(m_EsmEsmStrategyRelation.begin() + pos);
-					return true;
-				}
-			}
-			if (T == OwnPlatformEcmRelation)
-			{
-				assert(pos < m_OwnPlatformEcmRelation.size());
-				if (pos < m_OwnPlatformEcmRelation.size())
-				{
-					m_OwnPlatformEcmRelation.erase(m_OwnPlatformEcmRelation.begin() + pos);
-					return true;
-				}
-			}
-			if (T == EcmEcmStrategyRelation)
-			{
-				assert(pos < m_EcmEcmStrategyRelation.size());
-				if (pos < m_EcmEcmStrategyRelation.size())
-				{
-					m_EcmEcmStrategyRelation.erase(m_EcmEcmStrategyRelation.begin() + pos);
-					return true;
-				}
-			}
-			if (T == OwnPlatformRouteRelation)
-			{
-				assert(pos < m_OwnPlatformRouteRelation.size());
-				if (pos < m_OwnPlatformRouteRelation.size())
-				{
-					m_OwnPlatformRouteRelation.erase(m_OwnPlatformRouteRelation.begin() + pos);
-					return true;
-				}
-			}
-			return false;
-		}
-
-		//PlatformSiteRelation& getPlatformSiteRelation(const unsigned int& pos);
-		//PlatformEmitterRelation& getPlatformEmitterRelation(const unsigned int& pos);
-		//PlatformWeaponRelation& getPlatformWeaponRelation(const unsigned int& pos);
-		//OwnPlatformEsmRelation& getOwnPlatformEsmRelation(const unsigned int& pos);
-		//EsmEsmStrategyRelation& getEsmEsmStrategyRelation(const unsigned int& pos);
-		//OwnPlatformEcmRelation& getOwnPlatformEcmRelation(const unsigned int& pos);
-		//EcmEcmStrategyRelation& getEcmEcmStrategyRelation(const unsigned int& pos);
-		//OwnPlatformRouteRelation& getOwnPlatformRouteRelation(const unsigned int& pos);
+		void setAllPlatformSiteRelation(std::vector<PlatformSiteRelation>& ptr2AllEntities);
+		void setAllPlatformEmitterRelation(std::vector<PlatformEmitterRelation>& ptr2AllEntities);
+		void setAllPlatformWeaponRelation(std::vector<PlatformWeaponRelation>& ptr2AllEntities);
+		void setAllOwnPlatformEsmRelation(std::vector<OwnPlatformEsmRelation>& ptr2AllEntities);
+		void setAllEsmEsmStrategyRelation(std::vector<EsmEsmStrategyRelation>& ptr2AllEntities);
+		void setAllOwnPlatformEcmRelation(std::vector<OwnPlatformEcmRelation>& ptr2AllEntities);
+		void setAllEcmEcmStrategyRelation(std::vector<EcmEcmStrategyRelation>& ptr2AllEntities);
+		void setAllOwnPlatformRouteRelation(std::vector<OwnPlatformRouteRelation>& ptr2AllEntities);
 
 	private:
-		std::vector<std::shared_ptr<Vertex>> m_vertex;
+		std::vector<std::shared_ptr<Vertex>> m_ptrVertex;
 		//由于Platform中name数据成员为string这种可变长类型，不应直接在容器中放置类对象，而应该使用指针
 		std::vector<std::shared_ptr<Platform>> m_ptrPlatform;
 
@@ -1513,7 +803,7 @@ namespace sce
 		//由于充满不确定性，调用默认构造可能会引起一些未知错误；
 		//此构造函数用于编译器隐含调用，使用者请不要使用默认构造函数
 		//Emitter(void);
-		Emitter(const std::string &, std::shared_ptr<Radar_Mode> &);
+		Emitter(const std::string &, std::shared_ptr<Radar_Mode>);
 		Emitter(const std::string &, std::vector<std::shared_ptr<Radar_Mode>> &);
 		~Emitter(void);
 
@@ -1604,7 +894,8 @@ namespace sce
 	class Point
 	{
 	public:
-		//Point(void);
+		Point(void);
+		Point(const double&, const double&, const double&);
 		Point(const double&, const double&, const double&, const double&, const double&);
 		~Point(void);
 
