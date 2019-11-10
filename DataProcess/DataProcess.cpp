@@ -6,6 +6,27 @@
 
 using namespace sce;
 
+std::shared_ptr<Vertex> test1()
+{
+	return std::make_shared<Vertex>(Vertex(10, 12));
+}
+std::shared_ptr<Vertex> test2()
+{
+	Vertex vert(10, 12);
+	return std::make_shared<Vertex>(vert);
+}
+std::shared_ptr<Vertex> test3()
+{
+	Vertex vert(10, 12);
+	auto p = std::make_shared<Vertex>(vert);
+	return p;
+}
+std::shared_ptr<Vertex> test4()
+{
+	auto p = std::make_shared<Vertex>(Vertex(10, 12));
+	return p;
+}
+
 int main()
 {
     std::cout << "Scenario Class Test!"<<std::endl;
