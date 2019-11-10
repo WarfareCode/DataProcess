@@ -255,14 +255,14 @@ namespace sce
 		bool insertEcmEcmStrategyRelation(const unsigned int& pos, EcmEcmStrategyRelation& relation);
 		bool insertOwnPlatformRouteRelation(const unsigned int& pos, OwnPlatformRouteRelation& relation);
 
-		bool deletePlatformSiteRelation(const unsigned int& pos, PlatformSiteRelation& relation);
-		bool deletePlatformEmitterRelation(const unsigned int& pos, PlatformEmitterRelation& relation);
-		bool deletePlatformWeaponRelation(const unsigned int& pos, PlatformWeaponRelation& relation);
-		bool deleteOwnPlatformEsmRelation(const unsigned int& pos, OwnPlatformEsmRelation& relation);
-		bool deleteEsmEsmStrategyRelation(const unsigned int& pos, EsmEsmStrategyRelation& relation);
-		bool deleteOwnPlatformEcmRelation(const unsigned int& pos, OwnPlatformEcmRelation& relation);
-		bool deleteEcmEcmStrategyRelation(const unsigned int& pos, EcmEcmStrategyRelation& relation);
-		bool deleteOwnPlatformRouteRelation(const unsigned int& pos, OwnPlatformRouteRelation& relation);
+		bool deletePlatformSiteRelation(const unsigned int& pos);
+		bool deletePlatformEmitterRelation(const unsigned int& pos);
+		bool deletePlatformWeaponRelation(const unsigned int& pos);
+		bool deleteOwnPlatformEsmRelation(const unsigned int& pos);
+		bool deleteEsmEsmStrategyRelation(const unsigned int& pos);
+		bool deleteOwnPlatformEcmRelation(const unsigned int& pos);
+		bool deleteEcmEcmStrategyRelation(const unsigned int& pos);
+		bool deleteOwnPlatformRouteRelation(const unsigned int& pos);
 
 		void setAllVertex(std::vector<std::shared_ptr<Vertex>>& ptr2AllEntities);
 		void setAllPlatform(std::vector<std::shared_ptr<Platform>>& ptr2AllEntities);

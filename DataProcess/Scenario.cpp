@@ -3762,7 +3762,7 @@ namespace sce
 		return false;
 	}
 
-	bool Scenario::deletePlatformSiteRelation(const unsigned int & pos, PlatformSiteRelation & relation)
+	bool Scenario::deletePlatformSiteRelation(const unsigned int & pos)
 	{
 		assert(pos < m_PlatformSiteRelation.size());
 		if (pos < m_PlatformSiteRelation.size())
@@ -3773,7 +3773,7 @@ namespace sce
 		return false;
 	}
 
-	bool Scenario::deletePlatformEmitterRelation(const unsigned int & pos, PlatformEmitterRelation & relation)
+	bool Scenario::deletePlatformEmitterRelation(const unsigned int & pos)
 	{
 		assert(pos < m_PlatformEmitterRelation.size());
 		if (pos < m_PlatformEmitterRelation.size())
@@ -3784,7 +3784,7 @@ namespace sce
 		return false;
 	}
 
-	bool Scenario::deletePlatformWeaponRelation(const unsigned int & pos, PlatformWeaponRelation & relation)
+	bool Scenario::deletePlatformWeaponRelation(const unsigned int & pos)
 	{
 		assert(pos < m_PlatformWeaponRelation.size());
 		if (pos < m_PlatformWeaponRelation.size())
@@ -3795,7 +3795,7 @@ namespace sce
 		return false;
 	}
 
-	bool Scenario::deleteOwnPlatformEsmRelation(const unsigned int & pos, OwnPlatformEsmRelation & relation)
+	bool Scenario::deleteOwnPlatformEsmRelation(const unsigned int & pos)
 	{
 		assert(pos < m_OwnPlatformEsmRelation.size());
 		if (pos < m_OwnPlatformEsmRelation.size())
@@ -3806,7 +3806,7 @@ namespace sce
 		return false;
 	}
 
-	bool Scenario::deleteEsmEsmStrategyRelation(const unsigned int & pos, EsmEsmStrategyRelation & relation)
+	bool Scenario::deleteEsmEsmStrategyRelation(const unsigned int & pos)
 	{
 		assert(pos < m_EsmEsmStrategyRelation.size());
 		if (pos < m_EsmEsmStrategyRelation.size())
@@ -3817,7 +3817,7 @@ namespace sce
 		return false;
 	}
 
-	bool Scenario::deleteOwnPlatformEcmRelation(const unsigned int & pos, OwnPlatformEcmRelation & relation)
+	bool Scenario::deleteOwnPlatformEcmRelation(const unsigned int & pos)
 	{
 		assert(pos < m_OwnPlatformEcmRelation.size());
 		if (pos < m_OwnPlatformEcmRelation.size())
@@ -3828,7 +3828,7 @@ namespace sce
 		return false;
 	}
 
-	bool Scenario::deleteEcmEcmStrategyRelation(const unsigned int & pos, EcmEcmStrategyRelation & relation)
+	bool Scenario::deleteEcmEcmStrategyRelation(const unsigned int & pos)
 	{
 		assert(pos < m_EcmEcmStrategyRelation.size());
 		if (pos < m_EcmEcmStrategyRelation.size())
@@ -3839,7 +3839,7 @@ namespace sce
 		return false;
 	}
 
-	bool Scenario::deleteOwnPlatformRouteRelation(const unsigned int & pos, OwnPlatformRouteRelation & relation)
+	bool Scenario::deleteOwnPlatformRouteRelation(const unsigned int & pos)
 	{
 		assert(pos < m_OwnPlatformRouteRelation.size());
 		if (pos < m_OwnPlatformRouteRelation.size())
