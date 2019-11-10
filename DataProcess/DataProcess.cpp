@@ -23,13 +23,17 @@ std::shared_ptr<Vertex> test3()
 }
 std::shared_ptr<Vertex> test4()
 {
-	auto p = std::make_shared<Vertex>(Vertex(10, 12));
+	auto p= std::make_shared<Vertex>(Vertex(10, 12));
 	return p;
 }
 
 int main()
 {
     std::cout << "Scenario Class Test!"<<std::endl;
+	std::cout << "Test1:" << test1()->getLatitude() << std::endl;
+	std::cout << "Test2:" << test2()->getLatitude() << std::endl;
+	std::cout << "Test3:" << test3()->getLatitude() << std::endl;
+	std::cout << "Test4:" << test4()->getLatitude() << std::endl;
 
 	Vertex ver1(30,25), ver2(35, 25),ver3(35, 30), ver4(30, 35);
 	std::vector<std::shared_ptr<Vertex>> vertexs{ std::make_shared<Vertex>(ver1),
