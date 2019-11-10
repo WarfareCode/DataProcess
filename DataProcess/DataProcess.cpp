@@ -3,9 +3,11 @@
 #include"Scenario.hpp"
 
 #include <iostream>
+#include <memory>
 
 using namespace sce;
 
+//测试智能指针对局部变量内存释放的影响
 std::shared_ptr<Vertex> test1()
 {
 	return std::make_shared<Vertex>(Vertex(10, 12));

@@ -31,12 +31,12 @@ namespace sce
 	}
 
 	
-	inline const double& Vertex::getLatitude(void) const
+	const double& Vertex::getLatitude(void) const
 	{
 		return m_latitude;
 	}
 
-	inline const double& Vertex::getLongitude(void) const
+	const double& Vertex::getLongitude(void) const
 	{
 		return m_longitude;
 	}
@@ -317,7 +317,7 @@ namespace sce
 	{
 	}
 
-	inline const unsigned int & Pw_values::getPhaseOrder(void) const
+	const unsigned int & Pw_values::getPhaseOrder(void) const
 	{
 		return m_phaseOrder;
 	}
@@ -622,7 +622,7 @@ namespace sce
 			*it = nullptr;
 		}*/
 	}
-	inline const unsigned int & Pri::getPriMin(void) const
+	const unsigned int & Pri::getPriMin(void) const
 	{
 		return m_min;
 	}
