@@ -30,7 +30,6 @@ namespace sce
 
 	}
 
-	
 	const double& Vertex::getLatitude(void) const
 	{
 		return m_latitude;
@@ -66,7 +65,7 @@ namespace sce
 	{
 	}
 
-	const std::string& Platform::getPlatformName(void) const
+	inline const std::string& Platform::getPlatformName(void) const
 	{
 		return m_name;
 	}

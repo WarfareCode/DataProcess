@@ -32,10 +32,10 @@ std::shared_ptr<Vertex> test4()
 int main()
 {
     std::cout << "Scenario Class Test!"<<std::endl;
-	std::cout << "Test1:" << test1()->getLatitude() << std::endl;
+	/*std::cout << "Test1:" << test1()->getLatitude() << std::endl;
 	std::cout << "Test2:" << test2()->getLatitude() << std::endl;
 	std::cout << "Test3:" << test3()->getLatitude() << std::endl;
-	std::cout << "Test4:" << test4()->getLatitude() << std::endl;
+	std::cout << "Test4:" << test4()->getLatitude() << std::endl;*/
 
 	Vertex ver1(30,25), ver2(35, 25),ver3(35, 30), ver4(30, 35);
 	std::vector<std::shared_ptr<Vertex>> vertexs{ std::make_shared<Vertex>(ver1),
@@ -164,6 +164,7 @@ int main()
 	Scenario scenario(vertexs,platforms,emitiers,weapons, sites, oplatforms,esms,ecms, routes, esmStrategies, ecmStrategies,
 		psRelations, peRelations, pwRelations,oesmRelations,eesRelations,oecmRelations,ecmecmsRelations,orRelations);
 	
+	std::cout << scenario.getPtr2Vertex(0)->getLatitude()<< std::endl;
 	std::cout << scenario.getPtr2Platform(0)->getPlatformName() << std::endl;
 
 	std::cout << (scenario.isVertexEmpty() ? "true" : "false");
