@@ -99,9 +99,9 @@ namespace sce
 		, m_sweepTime(sweepTime)
 	{
 	}
-	Rf_values::~Rf_values(void)
-	{
-	}
+//	Rf_values::~Rf_values(void)
+//	{
+//	}
 
 	const unsigned int & Rf_values::getPhaseOrder(void) const
 	{
@@ -183,15 +183,15 @@ namespace sce
 	{
 	}
 
-	Rf::~Rf()
-	{
-		/*std::vector<Rf_values *>::iterator it;
-		for (it = _rfValues.begin(); it != _rfValues.end(); it++)
-		{
-			delete *it;
-			*it = nullptr;
-		}*/
-	}
+//	Rf::~Rf()
+//	{
+//		/*std::vector<Rf_values *>::iterator it;
+//		for (it = _rfValues.begin(); it != _rfValues.end(); it++)
+//		{
+//			delete *it;
+//			*it = nullptr;
+//		}*/
+//	}
 
 	const unsigned int & Rf::getRfMin(void) const
 	{
@@ -312,9 +312,9 @@ namespace sce
 	{
 	}
 
-	Pw_values::~Pw_values(void)
-	{
-	}
+//	Pw_values::~Pw_values(void)
+//	{
+//	}
 
 	const unsigned int & Pw_values::getPhaseOrder(void) const
 	{
@@ -398,16 +398,16 @@ namespace sce
 		}*/
 	}
 
-	Pw::~Pw(void)
-	{
-		//_pwValues.clear();
-		/*std::vector<std::shared_ptr<Pw_values>>::iterator it;
-		for (it = _pwValues.begin(); it != _pwValues.end(); it++)
-		{
-			delete *it;
-			*it = nullptr;
-		}*/
-	}
+//	Pw::~Pw(void)
+//	{
+//		//_pwValues.clear();
+//		/*std::vector<std::shared_ptr<Pw_values>>::iterator it;
+//		for (it = _pwValues.begin(); it != _pwValues.end(); it++)
+//		{
+//			delete *it;
+//			*it = nullptr;
+//		}*/
+//	}
 
 	const unsigned int & Pw::getPwMin(void) const
 	{
@@ -531,9 +531,9 @@ namespace sce
 	{
 	}
 
-	Pri_values::~Pri_values(void)
-	{
-	}
+//	Pri_values::~Pri_values(void)
+//	{
+//	}
 	const unsigned int & Pri_values::getPhaseOrder(void) const
 	{
 		return m_phaseOrder;
@@ -607,20 +607,20 @@ namespace sce
 		const PriType & pritype)
 		:m_min(primin)
 		,m_max(primax)
-		,m_values( privalues )
-		,m_type(pritype)
+        ,m_type(pritype)
+        ,m_values( privalues )
 	{
 	}
 
-	Pri::~Pri(void)
-	{
-		/*std::vector<Pri_values *>::iterator it;
-		for (it = _priValues.begin(); it != _priValues.end(); it++)
-		{
-			delete *it;
-			*it = nullptr;
-		}*/
-	}
+//	Pri::~Pri(void)
+//	{
+//		/*std::vector<Pri_values *>::iterator it;
+//		for (it = _priValues.begin(); it != _priValues.end(); it++)
+//		{
+//			delete *it;
+//			*it = nullptr;
+//		}*/
+//	}
 	const unsigned int & Pri::getPriMin(void) const
 	{
 		return m_min;
@@ -737,9 +737,9 @@ namespace sce
 	{
 	}
 
-	Scan::~Scan(void)
-	{
-	}
+//	Scan::~Scan(void)
+//	{
+//	}
 
 	const unsigned int & Scan::getScanMin(void) const
 	{
@@ -783,9 +783,9 @@ namespace sce
 	{
 	}
 
-	Erp::~Erp(void)
-	{
-	}
+//	Erp::~Erp(void)
+//	{
+//	}
 	const unsigned int & Erp::getErpMin(void) const
 	{
 		return m_min;
@@ -817,18 +817,19 @@ namespace sce
 		const Scan &scan,
 		const Erp &erp)
 		: m_modeCode(modeCode)
+        , m_modeType(modeType)
 		, m_rf(rf)
 		, m_pw(pw)
 		, m_pri(pri)
 		, m_scan(scan)
 		, m_erp(erp)
-		, m_modeType(modeType)
+
 	{
 	}
 
-	Radar_Mode::~Radar_Mode(void)
-	{
-	}
+//	Radar_Mode::~Radar_Mode(void)
+//	{
+//	}
 	const std::string & Radar_Mode::getModeCode(void) const
 	{
 		return m_modeCode;
@@ -1143,9 +1144,9 @@ namespace sce
 	{
 	}
 
-	Point::~Point(void)
-	{
-	}
+//	Point::~Point(void)
+//	{
+//	}
 
 	const double & Point::getAltitude(void) const
 	{
@@ -1239,9 +1240,9 @@ namespace sce
 	{
 	}
 
-	Mission::~Mission(void)
-	{
-	}
+//	Mission::~Mission(void)
+//	{
+//	}
 
 	const MissionType & Mission::getMissionType(void) const
 	{
@@ -1551,27 +1552,27 @@ namespace sce
 		m_dwellFreqResolution = dwellFreqResolution;
 	}
 
-	void Esm::setTuningStep(const int &tuningStep)
+    void Esm::setTuningStep(const unsigned int &tuningStep)
 	{
 		m_tuningStep = tuningStep;
 	}
 
-	void Esm::setRfCovMin(const int &rfCovMin)
+    void Esm::setRfCovMin(const unsigned int &rfCovMin)
 	{
 		m_rfCovMin = rfCovMin;
 	}
 
-	void Esm::setRfCovMax(const int &rfCovMax)
+    void Esm::setRfCovMax(const unsigned int &rfCovMax)
 	{
 		m_rfCovMax = rfCovMax;
 	}
 
-	void Esm::setNumPulsesAcquisition(const int &numPulsesAcquisition)
+    void Esm::setNumPulsesAcquisition(const unsigned int &numPulsesAcquisition)
 	{
 		m_numPulsesAcquisition = numPulsesAcquisition;
 	}
 
-	void Esm::setNumPulsesAlarm(const int &numPulsesAlarm)
+    void Esm::setNumPulsesAlarm(const unsigned int &numPulsesAlarm)
 	{
 		m_numPulsesAlarm = numPulsesAlarm;
 	}
@@ -1757,9 +1758,9 @@ namespace sce
 	{
 	}
 
-	WayPoint::~WayPoint(void)
-	{
-	}
+//	WayPoint::~WayPoint(void)
+//	{
+//	}
 
 	const unsigned int & WayPoint::getIndex(void) const
 	{
@@ -1952,9 +1953,9 @@ namespace sce
 	{
 	}
 
-	Location::~Location(void)
-	{
-	}
+//	Location::~Location(void)
+//	{
+//	}
 
 	const double & Location::getAltitude(void) const
 	{
@@ -2007,9 +2008,9 @@ namespace sce
 	{
 	}
 
-	DwellSquence::~DwellSquence(void)
-	{
-	}
+//	DwellSquence::~DwellSquence(void)
+//	{
+//	}
 
 	const unsigned int & DwellSquence::getIndex(void)
 	{
@@ -2494,9 +2495,9 @@ namespace sce
 		,m_ptrSite(ptrSite)
 	{
 	}
-	PlatformSiteRelation::~PlatformSiteRelation(void)
-	{
-	}
+//	PlatformSiteRelation::~PlatformSiteRelation(void)
+//	{
+//	}
 
 	const std::string & PlatformSiteRelation::getPlatformName(void)
 	{
@@ -2527,9 +2528,9 @@ namespace sce
 		,m_ptrEmitter(ptrEmitter)
 	{
 	}
-	PlatformEmitterRelation::~PlatformEmitterRelation(void)
-	{
-	}
+//	PlatformEmitterRelation::~PlatformEmitterRelation(void)
+//	{
+//	}
 	const std::string & PlatformEmitterRelation::getPlatformName(void)
 	{
 		// TODO: 在此处插入 return 语句
@@ -2559,9 +2560,9 @@ namespace sce
 		,m_ptrWeapon(ptrWeapon)
 	{
 	}
-	PlatformWeaponRelation::~PlatformWeaponRelation(void)
-	{
-	}
+//	PlatformWeaponRelation::~PlatformWeaponRelation(void)
+//	{
+//	}
 	const std::string & PlatformWeaponRelation::getPlatformName(void)
 	{
 		// TODO: 在此处插入 return 语句
@@ -2591,9 +2592,9 @@ namespace sce
 		,m_ptrEsm(ptrEsm)
 	{
 	}
-	OwnPlatformEsmRelation::~OwnPlatformEsmRelation(void)
-	{
-	}
+//	OwnPlatformEsmRelation::~OwnPlatformEsmRelation(void)
+//	{
+//	}
 	const std::string & OwnPlatformEsmRelation::getOwnPlatformName(void)
 	{
 		// TODO: 在此处插入 return 语句
@@ -2623,9 +2624,9 @@ namespace sce
 		,m_ptrEsmStrategy(ptrEsmStrategy)
 	{
 	}
-	EsmEsmStrategyRelation::~EsmEsmStrategyRelation(void)
-	{
-	}
+//	EsmEsmStrategyRelation::~EsmEsmStrategyRelation(void)
+//	{
+//	}
 	const std::string & EsmEsmStrategyRelation::getEsmName(void)
 	{
 		// TODO: 在此处插入 return 语句
@@ -2655,9 +2656,9 @@ namespace sce
 		,m_ptrEcm(ptrEcm)
 	{
 	}
-	OwnPlatformEcmRelation::~OwnPlatformEcmRelation(void)
-	{
-	}
+//	OwnPlatformEcmRelation::~OwnPlatformEcmRelation(void)
+//	{
+//	}
 	const std::string & OwnPlatformEcmRelation::getOwnPlatformName(void)
 	{
 		// TODO: 在此处插入 return 语句
@@ -2687,9 +2688,9 @@ namespace sce
 		, m_ptrEcmStrategy(ptrEcmStrategy)
 	{
 	}
-	EcmEcmStrategyRelation::~EcmEcmStrategyRelation(void)
-	{
-	}
+//	EcmEcmStrategyRelation::~EcmEcmStrategyRelation(void)
+//	{
+//	}
 	const std::string & EcmEcmStrategyRelation::getEcmName(void)
 	{
 		// TODO: 在此处插入 return 语句
@@ -2719,9 +2720,9 @@ namespace sce
 		,m_ptrRoute(ptrRoute)
 	{
 	}
-	OwnPlatformRouteRelation::~OwnPlatformRouteRelation(void)
-	{
-	}
+//	OwnPlatformRouteRelation::~OwnPlatformRouteRelation(void)
+//	{
+//	}
 	const std::string & OwnPlatformRouteRelation::getOwnPlatformName(void)
 	{
 		// TODO: 在此处插入 return 语句

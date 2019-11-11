@@ -113,26 +113,26 @@ namespace sce
 			std::vector<OwnPlatformRouteRelation>& );
 		~Scenario(void);
 
-		bool isVertexEmpty(void) { return m_ptrVertex.empty() ? true : false; };
-		bool isPlatformEmpty(void) { return m_ptrPlatform.empty() ? true : false; };
-		bool isEmitterEmpty(void) { return m_ptrEmitter.empty() ? true : false; };
-		bool isWeaponEmpty(void) { return m_ptrWeapon.empty() ? true : false; };
-		bool isSiteEmpty(void) { return m_ptrSite.empty() ? true : false; };
-		bool isOwnPlatformEmpty(void) { return m_ptrOwnPlatform.empty() ? true : false; };
-		bool isEsmEmpty(void) { return m_ptrEsm.empty() ? true : false; };
-		bool isEcmEmpty(void) { return m_ptrEcm.empty() ? true : false; };
-		bool isRouteEmpty(void) { return m_ptrRoute.empty() ? true : false; };
-		bool isEsmStrategyEmpty(void) { return m_ptrEsmStrategy.empty() ? true : false; };
-		bool isEcmStrategyEmpty(void) {	return m_ptrEcmStrategy.empty() ? true : false;	};
+        bool isVertexEmpty(void) { return m_ptrVertex.empty() ? true : false; }
+        bool isPlatformEmpty(void) { return m_ptrPlatform.empty() ? true : false; }
+        bool isEmitterEmpty(void) { return m_ptrEmitter.empty() ? true : false; }
+        bool isWeaponEmpty(void) { return m_ptrWeapon.empty() ? true : false; }
+        bool isSiteEmpty(void) { return m_ptrSite.empty() ? true : false; }
+        bool isOwnPlatformEmpty(void) { return m_ptrOwnPlatform.empty() ? true : false; }
+        bool isEsmEmpty(void) { return m_ptrEsm.empty() ? true : false; }
+        bool isEcmEmpty(void) { return m_ptrEcm.empty() ? true : false; }
+        bool isRouteEmpty(void) { return m_ptrRoute.empty() ? true : false; }
+        bool isEsmStrategyEmpty(void) { return m_ptrEsmStrategy.empty() ? true : false; }
+        bool isEcmStrategyEmpty(void) {	return m_ptrEcmStrategy.empty() ? true : false;	}
 
-		bool isPlatformSiteRelationEmpty(void) { return m_PlatformSiteRelation.empty() ? true : false; };
-		bool isPlatformEmitterRelationEmpty(void) { return m_PlatformEmitterRelation.empty() ? true : false; };
-		bool isPlatformWeaponRelationEmpty(void) { return m_PlatformWeaponRelation.empty() ? true : false; };
-		bool isOwnPlatformEsmRelationEmpty(void) { return m_OwnPlatformEsmRelation.empty() ? true : false; };
-		bool isEsmEsmStrategyRelationEmpty(void) { return m_EsmEsmStrategyRelation.empty() ? true : false; };
-		bool isOwnPlatformEcmRelationEmpty(void) { return m_OwnPlatformEcmRelation.empty() ? true : false; };
-		bool isEcmEcmStrategyRelationEmpty(void) { return m_EcmEcmStrategyRelation.empty() ? true : false; };
-		bool isOwnPlatformRouteRelationEmpty(void) { return m_OwnPlatformRouteRelation.empty() ? true : false; };
+        bool isPlatformSiteRelationEmpty(void) { return m_PlatformSiteRelation.empty() ? true : false; }
+        bool isPlatformEmitterRelationEmpty(void) { return m_PlatformEmitterRelation.empty() ? true : false; }
+        bool isPlatformWeaponRelationEmpty(void) { return m_PlatformWeaponRelation.empty() ? true : false; }
+        bool isOwnPlatformEsmRelationEmpty(void) { return m_OwnPlatformEsmRelation.empty() ? true : false; }
+        bool isEsmEsmStrategyRelationEmpty(void) { return m_EsmEsmStrategyRelation.empty() ? true : false; }
+        bool isOwnPlatformEcmRelationEmpty(void) { return m_OwnPlatformEcmRelation.empty() ? true : false; }
+        bool isEcmEcmStrategyRelationEmpty(void) { return m_EcmEcmStrategyRelation.empty() ? true : false; }
+        bool isOwnPlatformRouteRelationEmpty(void) { return m_OwnPlatformRouteRelation.empty() ? true : false; }
 
 		
 		std::shared_ptr<Vertex> getPtr2Vertex(const unsigned int& pos);
@@ -1042,11 +1042,11 @@ namespace sce
 
 		void setName(const std::string&);
 		void setDwellFreqResolution(const double&);
-		void setTuningStep(const int&);
-		void setRfCovMin(const int&);
-		void setRfCovMax(const int&);
-		void setNumPulsesAcquisition(const int&);
-		void setNumPulsesAlarm(const int&);
+        void setTuningStep(const unsigned int&);
+        void setRfCovMin(const unsigned int&);
+        void setRfCovMax(const unsigned int&);
+        void setNumPulsesAcquisition(const unsigned int&);
+        void setNumPulsesAlarm(const unsigned int&);
 		
 	private:
 		std::string m_name{ "Esm1" };
