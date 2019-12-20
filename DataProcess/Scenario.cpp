@@ -13,19 +13,22 @@
 #include<iostream>
 #include<cassert>
 
-namespace sce 
+namespace sce
 {
 	/***************************Vertex***********************************/
-	//Vertex::Vertex(void)
-	//{
-	//}
-	
+	Vertex::Vertex(void)
+		:m_latitude(0.0), m_longitude(0.0), m_altitude(0.0)
+	{
+	}
+
 	Vertex::Vertex(const double &la, const double &lo)
-		:m_latitude(la), m_longitude(lo)
+		: m_latitude(la), m_longitude(lo), m_altitude(0.0)
 	{
 
 	}
-	Vertex::~Vertex(void)
+
+	Vertex::Vertex(const double &latitude , const double &longitude, const double &altitude)
+		: m_latitude(latitude), m_longitude(longitude), m_altitude(altitude)
 	{
 
 	}
@@ -40,6 +43,11 @@ namespace sce
 		return m_longitude;
 	}
 
+	const double & Vertex::getAltitude(void) const
+	{
+		return m_altitude;
+	}
+
 	void Vertex::setLatitude(const double & la)
 	{
 		m_latitude = la;
@@ -49,20 +57,22 @@ namespace sce
 	{
 		m_longitude = lo;
 	}
-		
-	/***************************Platform***********************************/
-	//Platform::Platform(void)
-	//{
-	//}
 
-	Platform::Platform(const std::string &pname, const PlatformType &type)
-		:m_name(pname), m_type(type)
+	void Vertex::setAltitude(const double &altitude)
 	{
-
+		m_altitude = altitude;
 	}
 
-	Platform::~Platform(void)
+	/***************************Platform***********************************/
+	Platform::Platform(void)
+		:m_name("Platform1"), m_type(PlatformType::LAND)
 	{
+	}
+
+	Platform::Platform(const std::string &pname, const PlatformType &type)
+		: m_name(pname), m_type(type)
+	{
+
 	}
 
 	inline const std::string& Platform::getPlatformName(void) const
@@ -71,11 +81,11 @@ namespace sce
 	}
 	const PlatformType & Platform::getPlatformType(void) const
 	{
-		return m_type; 
+		return m_type;
 	}
 	void Platform::setPlatformName(const std::string & name)
 	{
-		m_name = name; 
+		m_name = name;
 	}
 	void Platform::setPlatformType(const PlatformType & type)
 	{
@@ -83,9 +93,14 @@ namespace sce
 	}
 
 	/***************************Rf_values***********************************/
-	//Rf_values::Rf_values(void)
-	//{
-	//}
+	Rf_values::Rf_values(void)
+		: m_phaseOrder(1)
+		, m_numberOfPulses(0)
+		, m_min(90)
+		, m_max(90)
+		, m_sweepTime(0)
+	{
+	}
 
 	Rf_values::Rf_values(const unsigned int &pOrder,
 		const unsigned int &numOfPulses,
@@ -99,14 +114,11 @@ namespace sce
 		, m_sweepTime(sweepTime)
 	{
 	}
-//	Rf_values::~Rf_values(void)
-//	{
-//	}
 
 	const unsigned int & Rf_values::getPhaseOrder(void) const
 	{
 		// TODO: 在此处插入 return 语句
-		return m_phaseOrder; 
+		return m_phaseOrder;
 	}
 	const unsigned int & Rf_values::getNumberOfPulses(void) const
 	{
@@ -148,9 +160,13 @@ namespace sce
 
 	/************************Rf**********************************/
 	//由于默认构造函数尚未进行Values值初始化，所以调用默认构造后应尽快添加Values值
-	//Rf::Rf(void)
-	//{
-	//}
+	Rf::Rf(void)
+		: m_min(9000)
+		, m_max(10000)
+		, m_type(RfType::BURST)
+		, m_values({ Rf_values() })
+	{
+	}
 	//由于默认构造函数尚未进行Values值初始化，所以调用默认构造后应尽快添加Values值
 	Rf::Rf(const unsigned int &rfmin,
 		const unsigned int &rfmax,
@@ -158,6 +174,7 @@ namespace sce
 		: m_min(rfmin)
 		, m_max(rfmax)
 		, m_type(rftype)
+		, m_values({ Rf_values() })
 	{
 	}
 
@@ -183,15 +200,15 @@ namespace sce
 	{
 	}
 
-//	Rf::~Rf()
-//	{
-//		/*std::vector<Rf_values *>::iterator it;
-//		for (it = _rfValues.begin(); it != _rfValues.end(); it++)
-//		{
-//			delete *it;
-//			*it = nullptr;
-//		}*/
-//	}
+	//	Rf::~Rf()
+	//	{
+	//		/*std::vector<Rf_values *>::iterator it;
+	//		for (it = _rfValues.begin(); it != _rfValues.end(); it++)
+	//		{
+	//			delete *it;
+	//			*it = nullptr;
+	//		}*/
+	//	}
 
 	const unsigned int & Rf::getRfMin(void) const
 	{
@@ -239,7 +256,7 @@ namespace sce
 		assert(pos < m_values.size());
 		if (pos < m_values.size())
 		{
-			m_values[pos]=rfValues;
+			m_values[pos] = rfValues;
 			return true;
 		}
 		return false;
@@ -295,9 +312,14 @@ namespace sce
 	//}
 
 	/**************************Pw_Values*************************************/
-	//Pw_values::Pw_values(void)
-	//{
-	//}
+	Pw_values::Pw_values(void)
+		: m_phaseOrder(0)
+		, m_numberOfPulses(0)
+		, m_min(20)
+		, m_max(20)
+		, m_sweepTime(0)
+	{
+	}
 
 	Pw_values::Pw_values(const unsigned int &pOrder,
 		const unsigned int &numOfPulses,
@@ -312,9 +334,9 @@ namespace sce
 	{
 	}
 
-//	Pw_values::~Pw_values(void)
-//	{
-//	}
+	//	Pw_values::~Pw_values(void)
+	//	{
+	//	}
 
 	const unsigned int & Pw_values::getPhaseOrder(void) const
 	{
@@ -356,12 +378,16 @@ namespace sce
 	{
 		m_sweepTime = sweepTime;
 	}
-	
+
 	/***************************PW************************************/
 	//由于默认构造函数尚未进行Values值初始化，所以调用默认构造后应尽快添加Values值
-	//Pw::Pw(void)
-	//{
-	//}
+	Pw::Pw(void)
+		:m_min(20)
+		, m_max(20)
+		, m_type(PwType::FIX)
+		, m_values({ Pw_values() })
+	{
+	}
 	//由于默认构造函数尚未进行Values值初始化，所以调用默认构造后应尽快添加Values值
 	Pw::Pw(const unsigned int &pwmin,
 		const unsigned int &pwmax,
@@ -369,45 +395,46 @@ namespace sce
 		:m_min(pwmin)
 		, m_max(pwmax)
 		, m_type(pwtype)
+		, m_values({ Pw_values() })
 	{
 	}
 
 	Pw::Pw(const unsigned int &pwmin,
 		const unsigned int &pwmax,
-		const Pw_values &pwvalues, 
+		const Pw_values &pwvalues,
 		const PwType &pwtype)
 		:m_min(pwmin)
-		,m_max(pwmax)
-		,m_type(pwtype)
-		,m_values({pwvalues})
+		, m_max(pwmax)
+		, m_type(pwtype)
+		, m_values({ pwvalues })
 	{
 	}
 
 	Pw::Pw(const unsigned int &pwmin,
 		const unsigned int &pwmax,
-		const std::vector<Pw_values>&pwvalues, 
+		const std::vector<Pw_values>&pwvalues,
 		const PwType &pwtype)
 		:m_min(pwmin)
-		,m_max(pwmax)
-		,m_type(pwtype)
-		,m_values(pwvalues)
+		, m_max(pwmax)
+		, m_type(pwtype)
+		, m_values(pwvalues)
 	{
 		/*for (auto &it : pwvalues)
 		{
-			_pwValues.push_back(it);
+		_pwValues.push_back(it);
 		}*/
 	}
 
-//	Pw::~Pw(void)
-//	{
-//		//_pwValues.clear();
-//		/*std::vector<std::shared_ptr<Pw_values>>::iterator it;
-//		for (it = _pwValues.begin(); it != _pwValues.end(); it++)
-//		{
-//			delete *it;
-//			*it = nullptr;
-//		}*/
-//	}
+	//	Pw::~Pw(void)
+	//	{
+	//		//_pwValues.clear();
+	//		/*std::vector<std::shared_ptr<Pw_values>>::iterator it;
+	//		for (it = _pwValues.begin(); it != _pwValues.end(); it++)
+	//		{
+	//			delete *it;
+	//			*it = nullptr;
+	//		}*/
+	//	}
 
 	const unsigned int & Pw::getPwMin(void) const
 	{
@@ -514,9 +541,14 @@ namespace sce
 	//}
 
 	/***************************Pri_Values************************************/
-	//Pri_values::Pri_values(void)
-	//{
-	//}
+	Pri_values::Pri_values(void)
+		: m_phaseOrder(1)
+		, m_numberOfPulses(0)
+		, m_min(90)
+		, m_max(90)
+		, m_sweepTime(0)
+	{
+	}
 
 	Pri_values::Pri_values(const unsigned int &pOrder,
 		const unsigned int &numOfPulses,
@@ -531,9 +563,9 @@ namespace sce
 	{
 	}
 
-//	Pri_values::~Pri_values(void)
-//	{
-//	}
+	//	Pri_values::~Pri_values(void)
+	//	{
+	//	}
 	const unsigned int & Pri_values::getPhaseOrder(void) const
 	{
 		return m_phaseOrder;
@@ -577,16 +609,21 @@ namespace sce
 
 	/***************************Pri************************************/
 	//由于默认构造函数尚未进行Values值初始化，所以调用默认构造后应尽快添加Values值
-	//Pri::Pri(void)
-	//{
-	//}
+	Pri::Pri(void)
+		: m_min(90)
+		, m_max(100)
+		, m_type(PriType::FIX)
+		, m_values({ Pri_values() })
+	{
+	}
 	//由于构造函数尚未进行Values值初始化，所以调用默认构造后应尽快添加Values值
 	Pri::Pri(const unsigned int &primin,
 		const unsigned int &primax,
 		const PriType &pritype)
-		:m_min(primin)
+		: m_min(primin)
 		, m_max(primax)
 		, m_type(pritype)
+		, m_values({ Pri_values() })
 	{
 	}
 
@@ -601,26 +638,26 @@ namespace sce
 	{
 	}
 
-	Pri::Pri(const unsigned int &primin, 
+	Pri::Pri(const unsigned int &primin,
 		const unsigned int &primax,
 		const std::vector<Pri_values> &privalues,
 		const PriType & pritype)
 		:m_min(primin)
-		,m_max(primax)
-        ,m_type(pritype)
-        ,m_values( privalues )
+		, m_max(primax)
+		, m_type(pritype)
+		, m_values(privalues)
 	{
 	}
 
-//	Pri::~Pri(void)
-//	{
-//		/*std::vector<Pri_values *>::iterator it;
-//		for (it = _priValues.begin(); it != _priValues.end(); it++)
-//		{
-//			delete *it;
-//			*it = nullptr;
-//		}*/
-//	}
+	//	Pri::~Pri(void)
+	//	{
+	//		/*std::vector<Pri_values *>::iterator it;
+	//		for (it = _priValues.begin(); it != _priValues.end(); it++)
+	//		{
+	//			delete *it;
+	//			*it = nullptr;
+	//		}*/
+	//	}
 	const unsigned int & Pri::getPriMin(void) const
 	{
 		return m_min;
@@ -714,7 +751,7 @@ namespace sce
 
 	void Pri::setAllPriValues(const std::vector<Pri_values>&priValues)
 	{
-		m_values=priValues;
+		m_values = priValues;
 	}
 
 	//inline const Pri_values & Pri::operator[](unsigned int valuesOrder) const
@@ -724,22 +761,25 @@ namespace sce
 	//}
 
 	/**************************Scan*************************************/
-	//Scan::Scan(void)
-	//{
-	//}
+	Scan::Scan(void)
+		: m_min(2)
+		, m_max(2)
+		, m_type(ScanType::SECTORIAL)
+	{
+	}
 
 	Scan::Scan(const unsigned int &max,
 		const unsigned int &min,
 		const ScanType &type)
-		:m_min(min)
+		: m_min(min)
 		, m_max(max)
 		, m_type(type)
 	{
 	}
 
-//	Scan::~Scan(void)
-//	{
-//	}
+	//	Scan::~Scan(void)
+	//	{
+	//	}
 
 	const unsigned int & Scan::getScanMin(void) const
 	{
@@ -772,20 +812,22 @@ namespace sce
 	}
 
 	/**************************Erp*************************************/
-	//Erp::Erp(void)
-	//{
-	//}
+	Erp::Erp(void)
+		:m_min(50000)
+		, m_max(50000)
+	{
+	}
 
 	Erp::Erp(const unsigned int &min,
 		const unsigned int &max)
-		:m_min(min),
+		: m_min(min),
 		m_max(max)
 	{
 	}
 
-//	Erp::~Erp(void)
-//	{
-//	}
+	//	Erp::~Erp(void)
+	//	{
+	//	}
 	const unsigned int & Erp::getErpMin(void) const
 	{
 		return m_min;
@@ -802,12 +844,19 @@ namespace sce
 	{
 		m_max = max;
 	}
-	
+
 	/**************************Radar_Mode**********************************/
 	//由于默认构造函数尚未进行Values值初始化，所以调用默认构造后应尽快添加Values值
-	//Radar_Mode::Radar_Mode(void)
-	//{
-	//}
+	Radar_Mode::Radar_Mode(void)
+		: m_modeCode("001")
+		, m_modeType(ModeType::PULSE)
+		, m_rf(Rf())
+		, m_pw(Pw())
+		, m_pri(Pri())
+		, m_scan(Scan())
+		, m_erp(Erp())
+	{
+	}
 
 	Radar_Mode::Radar_Mode(const std::string &modeCode,
 		const ModeType &modeType,
@@ -817,7 +866,7 @@ namespace sce
 		const Scan &scan,
 		const Erp &erp)
 		: m_modeCode(modeCode)
-        , m_modeType(modeType)
+		, m_modeType(modeType)
 		, m_rf(rf)
 		, m_pw(pw)
 		, m_pri(pri)
@@ -827,9 +876,9 @@ namespace sce
 	{
 	}
 
-//	Radar_Mode::~Radar_Mode(void)
-//	{
-//	}
+	//	Radar_Mode::~Radar_Mode(void)
+	//	{
+	//	}
 	const std::string & Radar_Mode::getModeCode(void) const
 	{
 		return m_modeCode;
@@ -879,9 +928,9 @@ namespace sce
 	//的应用会发生常量值与非常量属性值不匹配的情况，后续在深入整理
 	void Radar_Mode::setRf(Rf & rf)
 	{
-		m_rf=rf;
+		m_rf = rf;
 		// m_rf.setRfValues(rf.getRfValues());
-		
+
 	}
 	void Radar_Mode::setPw(Pw & pw)
 	{
@@ -889,7 +938,7 @@ namespace sce
 	}
 	void Radar_Mode::setPri(Pri & pri)
 	{
-		m_pri=pri;
+		m_pri = pri;
 	}
 
 	void Radar_Mode::setScan(const Scan & scan)
@@ -904,9 +953,17 @@ namespace sce
 
 	/***************************Emitter*********************************/
 	//由于默认构造函数尚未进行RadarMode值初始化，所以调用默认构造后应尽快完成RadarMode值初始化操作
-	//Emitter::Emitter(void)
-	//{
-	//}
+	Emitter::Emitter(void)
+		: m_name("Emitter1")
+		, m_ptrRadarMode({ std::make_shared<Radar_Mode>(Radar_Mode()) })
+	{
+	}
+
+	Emitter::Emitter(const std::string & name)
+		: m_name(name)
+		, m_ptrRadarMode({ std::make_shared<Radar_Mode>(Radar_Mode())})
+	{
+	}
 
 	Emitter::Emitter(const std::string &name,
 		std::shared_ptr<Radar_Mode> ptrRadarMode)
@@ -918,11 +975,7 @@ namespace sce
 	Emitter::Emitter(const std::string& name,
 		std::vector<std::shared_ptr<Radar_Mode>>& ptrRadarMode)
 		: m_name(name)
-		, m_ptrRadarMode( ptrRadarMode )
-	{
-	}
-
-	Emitter::~Emitter(void)
+		, m_ptrRadarMode(ptrRadarMode)
 	{
 	}
 
@@ -940,7 +993,7 @@ namespace sce
 
 	bool Emitter::isRadarModeEmpty(void)
 	{
-		return m_ptrRadarMode.empty()?true:false;
+		return m_ptrRadarMode.empty() ? true : false;
 	}
 
 	const std::shared_ptr<Radar_Mode> Emitter::getPtr2RadarMode(unsigned int valueOrder) const
@@ -964,7 +1017,7 @@ namespace sce
 		assert(pos<m_ptrRadarMode.size());
 		if (pos < m_ptrRadarMode.size())
 		{
-			m_ptrRadarMode[pos]=ptr_radarmode;
+			m_ptrRadarMode[pos] = ptr_radarmode;
 			return true;
 		}
 		return false;
@@ -972,8 +1025,8 @@ namespace sce
 
 	bool Emitter::insertRadarMode(unsigned int& pos, std::shared_ptr<Radar_Mode> ptr_radarmode)
 	{
-		assert(pos<=m_ptrRadarMode.size());
-		if (pos<=m_ptrRadarMode.size())
+		assert(pos <= m_ptrRadarMode.size());
+		if (pos <= m_ptrRadarMode.size())
 		{
 			m_ptrRadarMode.insert(m_ptrRadarMode.begin() + pos, ptr_radarmode);
 			return true;
@@ -1001,22 +1054,21 @@ namespace sce
 	{
 		m_ptrRadarMode = ptrRadarModes;
 	}
-	
+
 	/*********************Weapon*********************************/
-	//Weapon::Weapon(void)
-	//{
-	//}
+	Weapon::Weapon(void)
+		:m_name("Weapon 1")
+		, m_cepr(50000)
+		, m_weaponAreaCoverage(100000)
+	{
+	}
 
 	Weapon::Weapon(const std::string& name,
 		const unsigned int& cepr,
 		const unsigned int& weaponAreaCoverage)
 		:m_name(name)
-		,m_cepr(cepr)
-		,m_weaponAreaCoverage(weaponAreaCoverage)
-	{
-	}
-
-	Weapon::~Weapon(void)
+		, m_cepr(cepr)
+		, m_weaponAreaCoverage(weaponAreaCoverage)
 	{
 	}
 
@@ -1054,22 +1106,22 @@ namespace sce
 	}
 
 	/***********************Site*********************************/
-	//Site::Site(void)
-	//{
-	//}
+	Site::Site(void)
+		:m_name("Site1")
+		, m_altitude(100.0)
+		, m_latitude(0.0)
+		, m_longitude(0.0)
+	{
+	}
 
 	Site::Site(const std::string &name,
 		const double &altitude,
 		const double &latitude,
 		const double &longitude)
 		:m_name(name)
-		,m_altitude(altitude)
-		,m_latitude(latitude)
-		,m_longitude(longitude)
-	{
-	}
-
-	Site::~Site(void)
+		, m_altitude(altitude)
+		, m_latitude(latitude)
+		, m_longitude(longitude)
 	{
 	}
 
@@ -1119,6 +1171,11 @@ namespace sce
 
 	/*******************Point*******************************/
 	Point::Point(void)
+		:m_altitude(0.0)
+		, m_latitude(0.0)
+		, m_longitude(0.0)
+		, m_tmin(0.0)
+		, m_tmax(0.0)
 	{
 	}
 
@@ -1128,6 +1185,8 @@ namespace sce
 		:m_altitude(altitude)
 		, m_latitude(latitude)
 		, m_longitude(longitude)
+		, m_tmin(0.0)
+		, m_tmax(0.0)
 	{
 	}
 
@@ -1137,16 +1196,12 @@ namespace sce
 		const double &tmin,
 		const double &tmax)
 		:m_altitude(altitude)
-		,m_latitude(latitude)
-		,m_longitude(longitude)
-		,m_tmin(tmin)
-		,m_tmax(tmax)
+		, m_latitude(latitude)
+		, m_longitude(longitude)
+		, m_tmin(tmin)
+		, m_tmax(tmax)
 	{
 	}
-
-//	Point::~Point(void)
-//	{
-//	}
 
 	const double & Point::getAltitude(void) const
 	{
@@ -1204,18 +1259,22 @@ namespace sce
 	}
 
 	/*******************Mission********************************/
-	//Mission::Mission(void)
-	//{
-	//}
+	Mission::Mission(void)
+		:m_type(MissionType::STRIKE)
+		, m_startPoint(Point())
+		, m_endPoint(Point())
+		, m_targetPoints({ Point() })
+	{
+	}
 
 	Mission::Mission(const MissionType &missionType,
 		const Point &startPoint,
 		const Point &endPoint,
 		const std::vector<Point>&targetPoint)
 		:m_type(missionType)
-		,m_startPoint(startPoint)
-		,m_endPoint(endPoint)
-		,m_targetPoints(targetPoint)
+		, m_startPoint(startPoint)
+		, m_endPoint(endPoint)
+		, m_targetPoints(targetPoint)
 	{
 	}
 
@@ -1235,14 +1294,10 @@ namespace sce
 		const Point &startPoint,
 		const Point &endPoint)
 		:m_type(missionType)
-		,m_startPoint(startPoint)
-		,m_endPoint(endPoint)
+		, m_startPoint(startPoint)
+		, m_endPoint(endPoint)
 	{
 	}
-
-//	Mission::~Mission(void)
-//	{
-//	}
 
 	const MissionType & Mission::getMissionType(void) const
 	{
@@ -1270,7 +1325,7 @@ namespace sce
 
 	bool Mission::isTargetPointEmpty(void)
 	{
-		return m_targetPoints.empty()?true:false;
+		return m_targetPoints.empty() ? true : false;
 	}
 
 	Point & Mission::getTargetPoint(unsigned int& pointOrder)
@@ -1296,7 +1351,7 @@ namespace sce
 		assert(pos < m_targetPoints.size());
 		if (pos < m_targetPoints.size())
 		{
-			m_targetPoints[pos]= targetPoint;
+			m_targetPoints[pos] = targetPoint;
 			return true;
 		}
 		return false;
@@ -1307,7 +1362,7 @@ namespace sce
 		assert(pos <= m_targetPoints.size());
 		if (pos <= m_targetPoints.size())
 		{
-			m_targetPoints.insert(m_targetPoints.begin()+pos,targetPoint);
+			m_targetPoints.insert(m_targetPoints.begin() + pos, targetPoint);
 			return true;
 		}
 		return false;
@@ -1331,12 +1386,12 @@ namespace sce
 
 	void Mission::setStartPoint(const Point &startPoint)
 	{
-		m_startPoint=startPoint;
+		m_startPoint = startPoint;
 	}
 
 	void Mission::setEndPoint(const Point &endPoint)
 	{
-		m_endPoint=endPoint;
+		m_endPoint = endPoint;
 	}
 
 	void Mission::setAllTargetPoints(const std::vector<Point>& targetPoints)
@@ -1345,9 +1400,18 @@ namespace sce
 	}
 
 	/***********************OwnPlatform************************************/
-	//OwnPlatform::OwnPlatform(void)
-	//{
-	//}
+	OwnPlatform::OwnPlatform(void)
+		:m_name("OwnPlatform 1")
+		, m_type(OwnPlatformType::AIR)
+		, m_maxAcceleration(9.8)
+		, m_maxDeceleration(9.8)
+		, m_maxClimbRate(30.0)
+		, m_maxDiveRate(30.0)
+		, m_maxSpeed(340.0)
+		, m_maxTurnRadius(10000)
+		, m_mission(Mission())
+	{
+	}
 
 	OwnPlatform::OwnPlatform(const std::string &name,
 		const OwnPlatformType &ownPlatformType,
@@ -1359,19 +1423,14 @@ namespace sce
 		const double &maxTurnRadius,
 		const Mission &mission)
 		:m_name(name)
-		,m_type(ownPlatformType)
-		,m_maxAcceleration(maxAcceleration)
-		,m_maxDeceleration(maxDeceleration)
-		,m_maxClimbRate(maxClimbRate)
-		,m_maxDiveRate(maxDiveRate)
-		,m_maxSpeed(maxSpeed)
-		,m_maxTurnRadius(maxTurnRadius)
-		,m_mission(mission)
-	{
-
-	}
-
-	OwnPlatform::~OwnPlatform(void)
+		, m_type(ownPlatformType)
+		, m_maxAcceleration(maxAcceleration)
+		, m_maxDeceleration(maxDeceleration)
+		, m_maxClimbRate(maxClimbRate)
+		, m_maxDiveRate(maxDiveRate)
+		, m_maxSpeed(maxSpeed)
+		, m_maxTurnRadius(maxTurnRadius)
+		, m_mission(mission)
 	{
 	}
 
@@ -1475,9 +1534,21 @@ namespace sce
 	}
 
 	/****************************Esm***************************/
-	//Esm::Esm(void)
-	//{
-	//}
+	Esm::Esm(void)
+		:m_name("Esm1")
+		, m_dwellFreqResolution(100.0)
+		, m_tuningStep(20)
+		, m_rfCovMin(500)
+		, m_rfCovMax(12000)
+		, m_numPulsesAcquisition(200)
+		, m_numPulsesAlarm(100)
+		, m_esmMinDwellTime(0.01)
+		, m_nEmitter(2)
+		, m_taoScan(1.0)
+		, m_Pmin(1.0)
+		, m_Aeff(1.0)
+	{
+	}
 
 	Esm::Esm(const std::string &name,
 		const double &dwellFreqResolution,
@@ -1487,16 +1558,44 @@ namespace sce
 		const unsigned int &numPulsesAcquisition,
 		const unsigned int &numPulsesAlarm)
 		:m_name(name)
-		,m_dwellFreqResolution(dwellFreqResolution)
-		,m_tuningStep(tuningStep)
-		,m_rfCovMin(rfCovMin)
-		,m_rfCovMax(rfCovMax)
-		,m_numPulsesAcquisition(numPulsesAcquisition)
-		,m_numPulsesAlarm(numPulsesAlarm)
+		, m_dwellFreqResolution(dwellFreqResolution)
+		, m_tuningStep(tuningStep)
+		, m_rfCovMin(rfCovMin)
+		, m_rfCovMax(rfCovMax)
+		, m_numPulsesAcquisition(numPulsesAcquisition)
+		, m_numPulsesAlarm(numPulsesAlarm)
+		, m_esmMinDwellTime(0.01)
+		, m_nEmitter(2)
+		, m_taoScan(1.0)
+		, m_Pmin(1.0)
+		, m_Aeff(1.0)
 	{
 	}
 
-	Esm::~Esm(void)
+	Esm::Esm(const std::string &name,
+		const double &dwellFreqResolution,
+		const unsigned int &tuningStep,
+		const unsigned int &rfCovMin,
+		const unsigned int &rfCovMax,
+		const unsigned int &numPulsesAcquisition,
+		const unsigned int &numPulsesAlarm,
+		const double &esmMinDwellTime,
+		const unsigned int &nEmitter,
+		const double &taoScan,
+		const double &Pmin,
+		const double &Aeff)
+		:m_name(name)
+		, m_dwellFreqResolution(dwellFreqResolution)
+		, m_tuningStep(tuningStep)
+		, m_rfCovMin(rfCovMin)
+		, m_rfCovMax(rfCovMax)
+		, m_numPulsesAcquisition(numPulsesAcquisition)
+		, m_numPulsesAlarm(numPulsesAlarm)
+		, m_esmMinDwellTime(esmMinDwellTime)
+		, m_nEmitter(nEmitter)
+		, m_taoScan(taoScan)
+		, m_Pmin(Pmin)
+		, m_Aeff(Aeff)
 	{
 	}
 
@@ -1552,35 +1651,86 @@ namespace sce
 		m_dwellFreqResolution = dwellFreqResolution;
 	}
 
-    void Esm::setTuningStep(const unsigned int &tuningStep)
+	void Esm::setTuningStep(const unsigned int &tuningStep)
 	{
 		m_tuningStep = tuningStep;
 	}
 
-    void Esm::setRfCovMin(const unsigned int &rfCovMin)
+	void Esm::setRfCovMin(const unsigned int &rfCovMin)
 	{
 		m_rfCovMin = rfCovMin;
 	}
 
-    void Esm::setRfCovMax(const unsigned int &rfCovMax)
+	void Esm::setRfCovMax(const unsigned int &rfCovMax)
 	{
 		m_rfCovMax = rfCovMax;
 	}
 
-    void Esm::setNumPulsesAcquisition(const unsigned int &numPulsesAcquisition)
+	void Esm::setNumPulsesAcquisition(const unsigned int &numPulsesAcquisition)
 	{
 		m_numPulsesAcquisition = numPulsesAcquisition;
 	}
 
-    void Esm::setNumPulsesAlarm(const unsigned int &numPulsesAlarm)
+	void Esm::setNumPulsesAlarm(const unsigned int &numPulsesAlarm)
 	{
 		m_numPulsesAlarm = numPulsesAlarm;
 	}
 
+	void Esm::setesmMinDwellTime(const double &esmMinDwellTime)
+	{
+		m_esmMinDwellTime = esmMinDwellTime;
+	}
+
+	void Esm::setnEmitter(const int &nEmitter)
+	{
+		m_nEmitter = m_nEmitter;
+	}
+
+	void Esm::settaoScan(const double &taoScan)
+	{
+		m_taoScan = taoScan;
+	}
+
+	void Esm::setPmin(const double &Pmin)
+	{
+		m_Pmin = Pmin;
+	}
+
+	void Esm::setAeff(const double &aeff)
+	{
+		m_Aeff = aeff;
+	}
+
 	/********************Ecm********************************/
-	//Ecm::Ecm(void)
-	//{
-	//}
+	Ecm::Ecm(void)
+		:m_name("Ecm1")
+		,m_pt(20000)
+		,m_gain(10)
+		,m_rfMin(9000)
+		,m_rfMax(9500)
+		,m_techName({ Tech::NOISE })
+		,m_radarMSR(1.0)
+		,m_jammerERP_support(1.0)
+		,m_platformRCS(1.0)
+		,m_radarDangerValue(1.0)
+		,m_jammerERP_attack(1.0)
+	{
+	}
+
+	Ecm::Ecm(const std::string &name, const unsigned int &pt, const unsigned int &gain, const unsigned int &rfMin, const unsigned int &rfMax)
+		:m_name(name)
+		,m_pt(pt)
+		,m_gain(gain)
+		,m_rfMin(rfMin)
+		,m_rfMax(rfMax)
+		,m_techName({ Tech::NOISE })
+		,m_radarMSR(1.0)
+		,m_jammerERP_support(1.0)
+		,m_platformRCS(1.0)
+		,m_radarDangerValue(1.0)
+		,m_jammerERP_attack(1.0)
+	{
+	}
 
 	Ecm::Ecm(const std::string &name,
 		const unsigned int &pt,
@@ -1594,6 +1744,11 @@ namespace sce
 		, m_rfMin(rfmin)
 		, m_rfMax(rfmax)
 		, m_techName({ techName })
+		, m_radarMSR(1.0)
+		, m_jammerERP_support(1.0)
+		, m_platformRCS(1.0)
+		, m_radarDangerValue(1.0)
+		, m_jammerERP_attack(1.0)
 	{
 	}
 
@@ -1602,17 +1757,43 @@ namespace sce
 		const unsigned int &gain,
 		const unsigned int &rfmin,
 		const unsigned int &rfmax,
-		const std::vector<Tech>&techName) 
+		const std::vector<Tech> &techName)
 		:m_name(name)
-		,m_pt(pt)
-		,m_gain(gain)
-		,m_rfMin(rfmin)
-		,m_rfMax(rfmax)
-		,m_techName(techName)
+		, m_pt(pt)
+		, m_gain(gain)
+		, m_rfMin(rfmin)
+		, m_rfMax(rfmax)
+		, m_techName(techName)
+		, m_radarMSR(1.0)
+		, m_jammerERP_support(1.0)
+		, m_platformRCS(1.0)
+		, m_radarDangerValue(1.0)
+		, m_jammerERP_attack(1.0)
 	{
 	}
 
-	Ecm::~Ecm(void)
+	Ecm::Ecm(const std::string &name, 
+		const unsigned int &pt, 
+		const unsigned int &gain, 
+		const unsigned int &rfmin, 
+		const unsigned int &rfmax, 
+		const std::vector<Tech> &techName,
+		const double &radarMSR,
+		const double &jammerERP_support,
+		const double &platformRCS,
+		const double &radarDangerValue,
+		const double &jammerERP_attack)
+		:m_name(name)
+		, m_pt(pt)
+		, m_gain(gain)
+		, m_rfMin(rfmin)
+		, m_rfMax(rfmax)
+		, m_techName(techName)
+		, m_radarMSR(radarMSR)
+		, m_jammerERP_support(jammerERP_support)
+		, m_platformRCS(platformRCS)
+		, m_radarDangerValue(radarDangerValue)
+		, m_jammerERP_attack(jammerERP_attack)
 	{
 	}
 
@@ -1654,7 +1835,7 @@ namespace sce
 
 	bool Ecm::isTechEmpty(void)
 	{
-		return m_techName.size()?true:false;
+		return m_techName.size() ? true : false;
 	}
 
 	const Tech & Ecm::getTech(const unsigned int & order)
@@ -1687,9 +1868,9 @@ namespace sce
 	bool Ecm::insertTech(const unsigned int & pos, const Tech &tech)
 	{
 		assert(pos <= m_techName.size());
-		if (pos<=m_techName.size())
+		if (pos <= m_techName.size())
 		{
-			m_techName.insert(m_techName.begin()+pos,tech);
+			m_techName.insert(m_techName.begin() + pos, tech);
 			return true;
 		}
 		return false;
@@ -1700,7 +1881,7 @@ namespace sce
 		assert(pos < m_techName.size());
 		if (pos<m_techName.size())
 		{
-			m_techName.erase(m_techName.begin()+pos);
+			m_techName.erase(m_techName.begin() + pos);
 			return true;
 		}
 		return false;
@@ -1731,15 +1912,47 @@ namespace sce
 		m_rfMax = rfMax;
 	}
 
+	void Ecm::setradarMSR(const double & radarMSR)
+	{
+		m_radarMSR = radarMSR;
+	}
+
+	void Ecm::setjammerERP_support(const double & jammerERP_support)
+	{
+		m_jammerERP_support = jammerERP_support;
+	}
+
+	void Ecm::setplatformRCS(const double & platformRCS)
+	{
+		m_platformRCS = platformRCS;
+	}
+
+	void Ecm::setradarDangerValue(const double & radarDangerValue)
+	{
+		m_radarDangerValue = radarDangerValue;
+	}
+
+	void Ecm::setjammerERP_attack(const double & jammerERP_attack)
+	{
+		m_jammerERP_attack = jammerERP_attack;
+	}
+
 	void Ecm::setAllTechs(const std::vector<Tech>& techs)
 	{
 		m_techName = techs;
 	}
 
 	/*************************WarPoint********************************/
-	//WayPoint::WayPoint(void)
-	//{
-	//}
+	WayPoint::WayPoint(void)
+		:m_index(1)
+		, m_altitude(0.0)
+		, m_latitude(0.0)
+		, m_longitude(0.0)
+		, m_time(0.0)
+		, m_velocity(200.0)
+		, m_acceleration(0.0)
+	{
+	}
 
 	WayPoint::WayPoint(const unsigned int &index,
 		const double &altitude,
@@ -1749,18 +1962,14 @@ namespace sce
 		const double &velocity,
 		const double &acceleration)
 		:m_index(index)
-		,m_altitude(altitude)
-		,m_latitude(latitude)
-		,m_longitude(longitude)
-		,m_time(time)
-		,m_velocity(velocity)
-		,m_acceleration(acceleration)
+		, m_altitude(altitude)
+		, m_latitude(latitude)
+		, m_longitude(longitude)
+		, m_time(time)
+		, m_velocity(velocity)
+		, m_acceleration(acceleration)
 	{
 	}
-
-//	WayPoint::~WayPoint(void)
-//	{
-//	}
 
 	const unsigned int & WayPoint::getIndex(void) const
 	{
@@ -1840,10 +2049,12 @@ namespace sce
 	}
 
 	/************************Route*****************************/
-	//Route::Route(void)
-	//{
+	Route::Route(void)
+		:m_name("Route1")
+		, m_wayPoints({ WayPoint() })
+	{
 
-	//}
+	}
 
 	Route::Route(const std::string &name,
 		const WayPoint &wayPoint)
@@ -1854,12 +2065,8 @@ namespace sce
 
 	Route::Route(const std::string &name,
 		const std::vector<WayPoint>&wayPoints)
-		:m_name(name)
-		,m_wayPoints(wayPoints)
-	{
-	}
-
-	Route::~Route(void)
+		: m_name(name)
+		, m_wayPoints(wayPoints)
 	{
 	}
 
@@ -1871,7 +2078,7 @@ namespace sce
 
 	bool Route::isWayPointEmpty(void)
 	{
-		return m_wayPoints.empty()?true:false;
+		return m_wayPoints.empty() ? true : false;
 	}
 
 	WayPoint & Route::getWayPoint(const unsigned int &index)
@@ -1899,9 +2106,9 @@ namespace sce
 	bool Route::insertWayPoint(const unsigned int &pos, const WayPoint &wayPoint)
 	{
 		assert(pos <= m_wayPoints.size());
-		if (pos<=m_wayPoints.size())
+		if (pos <= m_wayPoints.size())
 		{
-			m_wayPoints.insert(m_wayPoints.begin()+pos,wayPoint);
+			m_wayPoints.insert(m_wayPoints.begin() + pos, wayPoint);
 			return true;
 		}
 		return false;
@@ -1912,7 +2119,7 @@ namespace sce
 		assert(index < m_wayPoints.size());
 		if (index < m_wayPoints.size())
 		{
-			m_wayPoints[index]= wayPoint;
+			m_wayPoints[index] = wayPoint;
 			return true;
 		}
 		return false;
@@ -1923,7 +2130,7 @@ namespace sce
 		assert(index < m_wayPoints.size());
 		if (index < m_wayPoints.size())
 		{
-			m_wayPoints.erase(m_wayPoints.begin()+index);
+			m_wayPoints.erase(m_wayPoints.begin() + index);
 			return true;
 		}
 		return false;
@@ -1940,22 +2147,21 @@ namespace sce
 	}
 
 	/***************************Location********************************/
-	//Location::Location(void)
-	//{
-	//}
+	Location::Location(void)
+		:m_altitude(0.0)
+		, m_latitude(0.0)
+		, m_longitude(0.0)
+	{
+	}
 
 	Location::Location(const double &altitude,
 		const double &latitude,
 		const double &longitude)
 		:m_altitude(altitude)
-		,m_latitude(latitude)
-		,m_longitude(longitude)
+		, m_latitude(latitude)
+		, m_longitude(longitude)
 	{
 	}
-
-//	Location::~Location(void)
-//	{
-//	}
 
 	const double & Location::getAltitude(void) const
 	{
@@ -1991,9 +2197,14 @@ namespace sce
 	}
 
 	/*********************DwellSquence***********************************/
-	//DwellSquence::DwellSquence(void)
-	//{
-	//}
+	DwellSquence::DwellSquence(void)
+		:m_index(1)
+		, m_minFreq(100)
+		, m_maxFreq(200)
+		, m_startTime(0.0)
+		, m_endTime(30.0)
+	{
+	}
 
 	DwellSquence::DwellSquence(const unsigned int &index,
 		const unsigned int &minFreq,
@@ -2001,16 +2212,12 @@ namespace sce
 		const double &startTime,
 		const double &endTime)
 		:m_index(index)
-		,m_minFreq(minFreq)
-		,m_maxFreq(maxFreq)
-		,m_startTime(startTime)
-		,m_endTime(endTime)
+		, m_minFreq(minFreq)
+		, m_maxFreq(maxFreq)
+		, m_startTime(startTime)
+		, m_endTime(endTime)
 	{
 	}
-
-//	DwellSquence::~DwellSquence(void)
-//	{
-//	}
 
 	const unsigned int & DwellSquence::getIndex(void)
 	{
@@ -2054,7 +2261,7 @@ namespace sce
 
 	void DwellSquence::setMaxFreq(const unsigned int &maxFreq)
 	{
-		m_maxFreq=maxFreq;
+		m_maxFreq = maxFreq;
 	}
 
 	void DwellSquence::setStartTime(const double &startTime)
@@ -2068,9 +2275,14 @@ namespace sce
 	}
 
 	/***********************EsmStrategySection*********************************/
-	//EsmStrategySection::EsmStrategySection(void)
-	//{
-	//}
+	EsmStrategySection::EsmStrategySection(void)
+		:m_startTime(0)
+		, m_endTime(100)
+		, m_startLocation(Location())
+		, m_endLocation(Location())
+		, m_dwellSquences({ DwellSquence() })
+	{
+	}
 
 	EsmStrategySection::EsmStrategySection(const double &startTime,
 		const double &endTime,
@@ -2078,10 +2290,10 @@ namespace sce
 		const Location &endLocation,
 		const DwellSquence &dwellsquence)
 		:m_startTime(startTime)
-		,m_endTime(endTime)
-		,m_startLocation(startLocation)
-		,m_endLocation(endLocation)
-		,m_dwellSquences({ dwellsquence })
+		, m_endTime(endTime)
+		, m_startLocation(startLocation)
+		, m_endLocation(endLocation)
+		, m_dwellSquences({ dwellsquence })
 	{
 	}
 
@@ -2091,14 +2303,10 @@ namespace sce
 		const Location &endLocation,
 		const std::vector<DwellSquence>&dwellsquences)
 		:m_startTime(startTime)
-		,m_endTime(endTime)
-		,m_startLocation(startLocation)
-		,m_endLocation(endLocation)
-		,m_dwellSquences(dwellsquences)
-	{
-	}
-
-	EsmStrategySection::~EsmStrategySection(void)
+		, m_endTime(endTime)
+		, m_startLocation(startLocation)
+		, m_endLocation(endLocation)
+		, m_dwellSquences(dwellsquences)
 	{
 	}
 
@@ -2128,7 +2336,7 @@ namespace sce
 
 	bool EsmStrategySection::isDwellSquenceEmpty(void)
 	{
-		return m_dwellSquences.empty()?true:false;
+		return m_dwellSquences.empty() ? true : false;
 	}
 
 	DwellSquence & EsmStrategySection::getDwellSquence(const unsigned int & index)
@@ -2169,7 +2377,7 @@ namespace sce
 		assert(pos < m_dwellSquences.size());
 		if (pos < m_dwellSquences.size())
 		{
-			m_dwellSquences[pos]= dwellsquence;
+			m_dwellSquences[pos] = dwellsquence;
 			return true;
 		}
 		return false;
@@ -2180,7 +2388,7 @@ namespace sce
 		assert(index < m_dwellSquences.size());
 		if (index < m_dwellSquences.size())
 		{
-			m_dwellSquences.erase(m_dwellSquences.begin()+index);
+			m_dwellSquences.erase(m_dwellSquences.begin() + index);
 			return true;
 		}
 		return false;
@@ -2210,27 +2418,25 @@ namespace sce
 	{
 		m_endLocation = endLocation;
 	}
-	
+
 	/********************EsmStrategy*********************************/
-	//EsmStrategy::EsmStrategy(void)
-	//{
-	//}
+	EsmStrategy::EsmStrategy(void)
+		:m_name("ESM Strategy 1")
+		, m_ptrSections({ std::make_shared<EsmStrategySection>(EsmStrategySection()) })
+	{
+	}
 
 	EsmStrategy::EsmStrategy(const std::string &name,
 		const std::shared_ptr<EsmStrategySection>&ptrEsmStrategySection)
-		:m_name(name)
+		: m_name(name)
 		, m_ptrSections({ ptrEsmStrategySection })
 	{
 	}
 
 	EsmStrategy::EsmStrategy(const std::string &name,
 		const std::vector<std::shared_ptr<EsmStrategySection>>& ptrEsmStrategySections)
-		:m_name(name)
-		,m_ptrSections(ptrEsmStrategySections)
-	{
-	}
-
-	EsmStrategy::~EsmStrategy(void)
+		: m_name(name)
+		, m_ptrSections(ptrEsmStrategySections)
 	{
 	}
 
@@ -2248,7 +2454,7 @@ namespace sce
 
 	bool EsmStrategy::isSectionEmpty(void)
 	{
-		return m_ptrSections.empty()?true:false;
+		return m_ptrSections.empty() ? true : false;
 	}
 
 	const std::shared_ptr<EsmStrategySection> EsmStrategy::getPtr2Section(unsigned int & pos) const
@@ -2280,9 +2486,9 @@ namespace sce
 	bool EsmStrategy::insertSection(unsigned int & pos, std::shared_ptr<EsmStrategySection> ptrSection)
 	{
 		assert(pos <= m_ptrSections.size());
-		if (pos<=m_ptrSections.size())
+		if (pos <= m_ptrSections.size())
 		{
-			m_ptrSections.insert(m_ptrSections.begin() +pos, ptrSection);
+			m_ptrSections.insert(m_ptrSections.begin() + pos, ptrSection);
 			return true;
 		}
 		return false;
@@ -2310,9 +2516,14 @@ namespace sce
 	}
 
 	/*************************EcmStrategySection**********************************/
-	//EcmStrategySection::EcmStrategySection(void)
-	//{
-	//}
+	EcmStrategySection::EcmStrategySection(void)
+		:m_startTime(0.0)
+		, m_endTime(100.0)
+		, m_startLocation(Location())
+		, m_endLocation(Location())
+		, m_tech(Tech::NOISE)
+	{
+	}
 
 	EcmStrategySection::EcmStrategySection(const double &startTime,
 		const double &endTime,
@@ -2320,14 +2531,10 @@ namespace sce
 		const Location &endLocation,
 		const Tech &techName)
 		:m_startTime(startTime)
-		,m_endTime(endTime)
-		,m_startLocation(startLocation)
-		,m_endLocation(endLocation)
-		,m_tech(techName)
-	{
-	}
-
-	EcmStrategySection::~EcmStrategySection(void)
+		, m_endTime(endTime)
+		, m_startLocation(startLocation)
+		, m_endLocation(endLocation)
+		, m_tech(techName)
 	{
 	}
 
@@ -2387,14 +2594,16 @@ namespace sce
 	}
 
 	/***************************EcmStrategy******************************/
-	//EcmStrategy::EcmStrategy(void)
-	//{
-	//}
+	EcmStrategy::EcmStrategy(void)
+		:m_name("ECM Strategy 1")
+		, m_ptrSections({ std::make_shared<EcmStrategySection>(EcmStrategySection()) })
+	{
+	}
 
 	EcmStrategy::EcmStrategy(const std::string &name,
 		const std::shared_ptr<EcmStrategySection>&ptrEcmStrategySection)
-		:m_name(name)
-		,m_ptrSections({ ptrEcmStrategySection })
+		: m_name(name)
+		, m_ptrSections({ ptrEcmStrategySection })
 	{
 	}
 
@@ -2402,10 +2611,6 @@ namespace sce
 		const std::vector<std::shared_ptr<EcmStrategySection>>& ptrEcmStrategySections)
 		: m_name(name)
 		, m_ptrSections(ptrEcmStrategySections)
-	{
-	}
-
-	EcmStrategy::~EcmStrategy(void)
 	{
 	}
 
@@ -2423,7 +2628,7 @@ namespace sce
 
 	bool EcmStrategy::isSectionEmpty(void)
 	{
-		return m_ptrSections.empty()?true:false;
+		return m_ptrSections.empty() ? true : false;
 	}
 
 	const std::shared_ptr<EcmStrategySection> EcmStrategy::getPtr2Section(unsigned int & pos) const
@@ -2486,18 +2691,20 @@ namespace sce
 
 	/**************************PlatformSiteRelation*****************************/
 	//PlatformSiteRelation::PlatformSiteRelation(void)
+	//	:m_ptrPlatform(ptrPlatform)
+	//	,m_ptrSite(ptrSite)
 	//{
 	//}
 
 	PlatformSiteRelation::PlatformSiteRelation(const std::shared_ptr<Platform> ptrPlatform,
 		const std::shared_ptr<Site> ptrSite)
 		:m_ptrPlatform(ptrPlatform)
-		,m_ptrSite(ptrSite)
+		, m_ptrSite(ptrSite)
 	{
 	}
-//	PlatformSiteRelation::~PlatformSiteRelation(void)
-//	{
-//	}
+	//	PlatformSiteRelation::~PlatformSiteRelation(void)
+	//	{
+	//	}
 
 	const std::string & PlatformSiteRelation::getPlatformName(void)
 	{
@@ -2508,6 +2715,14 @@ namespace sce
 	{
 		// TODO: 在此处插入 return 语句
 		return m_ptrSite->getName();
+	}
+	std::shared_ptr<Site> PlatformSiteRelation::getSite(void)
+	{
+		return m_ptrSite;
+	}
+	std::shared_ptr<Platform> PlatformSiteRelation::getPlatform(void)
+	{
+		return m_ptrPlatform;
 	}
 	void PlatformSiteRelation::setPlatform(const std::shared_ptr<Platform> ptrPlatform)
 	{
@@ -2525,12 +2740,12 @@ namespace sce
 	PlatformEmitterRelation::PlatformEmitterRelation(const std::shared_ptr<Platform> ptrPlatform,
 		const std::shared_ptr<Emitter> ptrEmitter)
 		:m_ptrPlatform(ptrPlatform)
-		,m_ptrEmitter(ptrEmitter)
+		, m_ptrEmitter(ptrEmitter)
 	{
 	}
-//	PlatformEmitterRelation::~PlatformEmitterRelation(void)
-//	{
-//	}
+	//	PlatformEmitterRelation::~PlatformEmitterRelation(void)
+	//	{
+	//	}
 	const std::string & PlatformEmitterRelation::getPlatformName(void)
 	{
 		// TODO: 在此处插入 return 语句
@@ -2540,6 +2755,14 @@ namespace sce
 	{
 		// TODO: 在此处插入 return 语句
 		return m_ptrEmitter->getName();
+	}
+	std::shared_ptr<Platform> PlatformEmitterRelation::getPlatform(void)
+	{
+		return m_ptrPlatform;
+	}
+	std::shared_ptr<Emitter> PlatformEmitterRelation::getEmitter(void)
+	{
+		return m_ptrEmitter;
 	}
 	void PlatformEmitterRelation::setPlatform(const std::shared_ptr<Platform> ptrPlatform)
 	{
@@ -2557,12 +2780,12 @@ namespace sce
 	PlatformWeaponRelation::PlatformWeaponRelation(const std::shared_ptr<Platform> ptrPlatform,
 		const std::shared_ptr<Weapon> ptrWeapon)
 		:m_ptrPlatform(ptrPlatform)
-		,m_ptrWeapon(ptrWeapon)
+		, m_ptrWeapon(ptrWeapon)
 	{
 	}
-//	PlatformWeaponRelation::~PlatformWeaponRelation(void)
-//	{
-//	}
+	//	PlatformWeaponRelation::~PlatformWeaponRelation(void)
+	//	{
+	//	}
 	const std::string & PlatformWeaponRelation::getPlatformName(void)
 	{
 		// TODO: 在此处插入 return 语句
@@ -2573,9 +2796,17 @@ namespace sce
 		// TODO: 在此处插入 return 语句
 		return m_ptrWeapon->getName();
 	}
+	std::shared_ptr<Platform> PlatformWeaponRelation::getPlatform(void)
+	{
+		return m_ptrPlatform;
+	}
+	std::shared_ptr<Weapon> PlatformWeaponRelation::getWeapon(void)
+	{
+		return m_ptrWeapon;
+	}
 	void PlatformWeaponRelation::setPlatform(const std::shared_ptr<Platform> ptrPlatform)
 	{
-		m_ptrPlatform=ptrPlatform;
+		m_ptrPlatform = ptrPlatform;
 	}
 	void PlatformWeaponRelation::setWeapon(const std::shared_ptr<Weapon> ptrWeapon)
 	{
@@ -2589,12 +2820,12 @@ namespace sce
 	OwnPlatformEsmRelation::OwnPlatformEsmRelation(const std::shared_ptr<OwnPlatform> ptrOwnPlatform,
 		const std::shared_ptr<Esm> ptrEsm)
 		:m_ptrOwnPlatform(ptrOwnPlatform)
-		,m_ptrEsm(ptrEsm)
+		, m_ptrEsm(ptrEsm)
 	{
 	}
-//	OwnPlatformEsmRelation::~OwnPlatformEsmRelation(void)
-//	{
-//	}
+	//	OwnPlatformEsmRelation::~OwnPlatformEsmRelation(void)
+	//	{
+	//	}
 	const std::string & OwnPlatformEsmRelation::getOwnPlatformName(void)
 	{
 		// TODO: 在此处插入 return 语句
@@ -2604,6 +2835,14 @@ namespace sce
 	{
 		// TODO: 在此处插入 return 语句
 		return m_ptrEsm->getName();
+	}
+	std::shared_ptr<OwnPlatform> OwnPlatformEsmRelation::getOwnPlatform(void)
+	{
+		return m_ptrOwnPlatform;
+	}
+	std::shared_ptr<Esm> OwnPlatformEsmRelation::getEsm(void)
+	{
+		return m_ptrEsm;
 	}
 	void OwnPlatformEsmRelation::setOwnPlatform(const std::shared_ptr<OwnPlatform> ptrOwnPlatform)
 	{
@@ -2621,12 +2860,12 @@ namespace sce
 	EsmEsmStrategyRelation::EsmEsmStrategyRelation(const std::shared_ptr<Esm>ptrEsm,
 		const std::shared_ptr<EsmStrategy> ptrEsmStrategy)
 		:m_ptrEsm(ptrEsm)
-		,m_ptrEsmStrategy(ptrEsmStrategy)
+		, m_ptrEsmStrategy(ptrEsmStrategy)
 	{
 	}
-//	EsmEsmStrategyRelation::~EsmEsmStrategyRelation(void)
-//	{
-//	}
+	//	EsmEsmStrategyRelation::~EsmEsmStrategyRelation(void)
+	//	{
+	//	}
 	const std::string & EsmEsmStrategyRelation::getEsmName(void)
 	{
 		// TODO: 在此处插入 return 语句
@@ -2637,9 +2876,17 @@ namespace sce
 		// TODO: 在此处插入 return 语句
 		return m_ptrEsmStrategy->getName();
 	}
+	std::shared_ptr<EsmStrategy> EsmEsmStrategyRelation::getEsmStrategy(void)
+	{
+		return m_ptrEsmStrategy;
+	}
+	std::shared_ptr<Esm> EsmEsmStrategyRelation::getEsm(void)
+	{
+		return m_ptrEsm;
+	}
 	void EsmEsmStrategyRelation::setEsm(const std::shared_ptr<Esm> ptrEsm)
 	{
-		m_ptrEsm=ptrEsm;
+		m_ptrEsm = ptrEsm;
 	}
 	void EsmEsmStrategyRelation::setEsmStrategy(const std::shared_ptr<EsmStrategy> ptrEsmStrategy)
 	{
@@ -2653,12 +2900,12 @@ namespace sce
 	OwnPlatformEcmRelation::OwnPlatformEcmRelation(const std::shared_ptr<OwnPlatform> ptrOwnPlatform,
 		const std::shared_ptr<Ecm> ptrEcm)
 		:m_ptrOwnPlatform(ptrOwnPlatform)
-		,m_ptrEcm(ptrEcm)
+		, m_ptrEcm(ptrEcm)
 	{
 	}
-//	OwnPlatformEcmRelation::~OwnPlatformEcmRelation(void)
-//	{
-//	}
+	//	OwnPlatformEcmRelation::~OwnPlatformEcmRelation(void)
+	//	{
+	//	}
 	const std::string & OwnPlatformEcmRelation::getOwnPlatformName(void)
 	{
 		// TODO: 在此处插入 return 语句
@@ -2668,6 +2915,14 @@ namespace sce
 	{
 		// TODO: 在此处插入 return 语句
 		return m_ptrEcm->getName();
+	}
+	std::shared_ptr<OwnPlatform> OwnPlatformEcmRelation::getOwnPlatform(void)
+	{
+		return m_ptrOwnPlatform;
+	}
+	std::shared_ptr<Ecm> OwnPlatformEcmRelation::getEcm(void)
+	{
+		return m_ptrEcm;
 	}
 	void OwnPlatformEcmRelation::setOwnPlatform(const std::shared_ptr<OwnPlatform> ptrOwnPlatform)
 	{
@@ -2688,9 +2943,9 @@ namespace sce
 		, m_ptrEcmStrategy(ptrEcmStrategy)
 	{
 	}
-//	EcmEcmStrategyRelation::~EcmEcmStrategyRelation(void)
-//	{
-//	}
+	//	EcmEcmStrategyRelation::~EcmEcmStrategyRelation(void)
+	//	{
+	//	}
 	const std::string & EcmEcmStrategyRelation::getEcmName(void)
 	{
 		// TODO: 在此处插入 return 语句
@@ -2700,6 +2955,14 @@ namespace sce
 	{
 		// TODO: 在此处插入 return 语句
 		return m_ptrEcmStrategy->getName();
+	}
+	std::shared_ptr<EcmStrategy> EcmEcmStrategyRelation::getEcmStrategy(void)
+	{
+		return m_ptrEcmStrategy;
+	}
+	std::shared_ptr<Ecm> EcmEcmStrategyRelation::getEcm(void)
+	{
+		return m_ptrEcm;
 	}
 	void EcmEcmStrategyRelation::setEcm(const std::shared_ptr<Ecm> ptrEcm)
 	{
@@ -2717,12 +2980,12 @@ namespace sce
 	OwnPlatformRouteRelation::OwnPlatformRouteRelation(const std::shared_ptr<OwnPlatform> ptrOwnPlatform,
 		const std::shared_ptr<Route> ptrRoute)
 		:m_ptrOwnPlatform(ptrOwnPlatform)
-		,m_ptrRoute(ptrRoute)
+		, m_ptrRoute(ptrRoute)
 	{
 	}
-//	OwnPlatformRouteRelation::~OwnPlatformRouteRelation(void)
-//	{
-//	}
+	//	OwnPlatformRouteRelation::~OwnPlatformRouteRelation(void)
+	//	{
+	//	}
 	const std::string & OwnPlatformRouteRelation::getOwnPlatformName(void)
 	{
 		// TODO: 在此处插入 return 语句
@@ -2732,6 +2995,14 @@ namespace sce
 	{
 		// TODO: 在此处插入 return 语句
 		return m_ptrRoute->getName();
+	}
+	std::shared_ptr<OwnPlatform> OwnPlatformRouteRelation::getOwnPlatform(void)
+	{
+		return m_ptrOwnPlatform;
+	}
+	std::shared_ptr<Route> OwnPlatformRouteRelation::getRoute(void)
+	{
+		return m_ptrRoute;
 	}
 	void OwnPlatformRouteRelation::setOwnPlatform(const std::shared_ptr<OwnPlatform> ptrOwnPlatform)
 	{
@@ -2743,6 +3014,10 @@ namespace sce
 	}
 
 	/******************************Scenario***********************************/
+	Scenario::Scenario(void)
+	{
+	}
+
 	Scenario::Scenario(std::shared_ptr<Vertex> vertexs,
 		std::shared_ptr<Platform> ptrPlatforms,
 		std::shared_ptr<Emitter> ptrEmitters,
@@ -2762,25 +3037,25 @@ namespace sce
 		OwnPlatformEcmRelation& ownPlatformEcmRelations,
 		EcmEcmStrategyRelation& ecmEcmStrategyRelations,
 		OwnPlatformRouteRelation& ownPlatformRouteRelations)
-		: m_ptrVertex({vertexs})
-		, m_ptrPlatform({ptrPlatforms})
-		, m_ptrEmitter({ptrEmitters})
-		, m_ptrWeapon({ptrWeapons})
-		, m_ptrSite({ptrSites})
-		, m_ptrOwnPlatform({ptrOwnPlatforms})
-		, m_ptrEsm({ptrEsms})
-		, m_ptrEcm({ptrEcms})
-		, m_ptrRoute({ptrRoutes})
-		, m_ptrEsmStrategy({ptrEsmStrategy})
-		, m_ptrEcmStrategy({ptrEcmStrategy})
-		, m_PlatformSiteRelation({platformSiteRelations})
-		, m_PlatformEmitterRelation({platformEmitterRelations})
-		, m_PlatformWeaponRelation({platformWeaponRelations})
-		, m_OwnPlatformEsmRelation({ownPlatformEsmRelations})
-		, m_EsmEsmStrategyRelation({esmEsmStrategyRelations})
-		, m_OwnPlatformEcmRelation({ownPlatformEcmRelations})
-		, m_EcmEcmStrategyRelation({ecmEcmStrategyRelations})
-		, m_OwnPlatformRouteRelation({ownPlatformRouteRelations})
+		: m_ptrVertex({ vertexs })
+		, m_ptrPlatform({ ptrPlatforms })
+		, m_ptrEmitter({ ptrEmitters })
+		, m_ptrWeapon({ ptrWeapons })
+		, m_ptrSite({ ptrSites })
+		, m_ptrOwnPlatform({ ptrOwnPlatforms })
+		, m_ptrEsm({ ptrEsms })
+		, m_ptrEcm({ ptrEcms })
+		, m_ptrRoute({ ptrRoutes })
+		, m_ptrEsmStrategy({ ptrEsmStrategy })
+		, m_ptrEcmStrategy({ ptrEcmStrategy })
+		, m_PlatformSiteRelation({ platformSiteRelations })
+		, m_PlatformEmitterRelation({ platformEmitterRelations })
+		, m_PlatformWeaponRelation({ platformWeaponRelations })
+		, m_OwnPlatformEsmRelation({ ownPlatformEsmRelations })
+		, m_EsmEsmStrategyRelation({ esmEsmStrategyRelations })
+		, m_OwnPlatformEcmRelation({ ownPlatformEcmRelations })
+		, m_EcmEcmStrategyRelation({ ecmEcmStrategyRelations })
+		, m_OwnPlatformRouteRelation({ ownPlatformRouteRelations })
 	{
 	}
 	Scenario::Scenario(std::vector<std::shared_ptr<Vertex>>& vertexs,
@@ -2813,18 +3088,14 @@ namespace sce
 		, m_ptrRoute(ptrRoutes)
 		, m_ptrEsmStrategy(ptrEsmStrategy)
 		, m_ptrEcmStrategy(ptrEcmStrategy)
-		,m_PlatformSiteRelation(platformSiteRelations)
-		,m_PlatformEmitterRelation(platformEmitterRelations)
-		,m_PlatformWeaponRelation(platformWeaponRelations)
-		,m_OwnPlatformEsmRelation(ownPlatformEsmRelations)
-		,m_EsmEsmStrategyRelation(esmEsmStrategyRelations)
-		,m_OwnPlatformEcmRelation(ownPlatformEcmRelations)
-		,m_EcmEcmStrategyRelation(ecmEcmStrategyRelations)
-		,m_OwnPlatformRouteRelation(ownPlatformRouteRelations)
-	{
-	}
-
-	Scenario::~Scenario(void)
+		, m_PlatformSiteRelation(platformSiteRelations)
+		, m_PlatformEmitterRelation(platformEmitterRelations)
+		, m_PlatformWeaponRelation(platformWeaponRelations)
+		, m_OwnPlatformEsmRelation(ownPlatformEsmRelations)
+		, m_EsmEsmStrategyRelation(esmEsmStrategyRelations)
+		, m_OwnPlatformEcmRelation(ownPlatformEcmRelations)
+		, m_EcmEcmStrategyRelation(ecmEcmStrategyRelations)
+		, m_OwnPlatformRouteRelation(ownPlatformRouteRelations)
 	{
 	}
 
@@ -3125,7 +3396,7 @@ namespace sce
 	std::vector<OwnPlatformRouteRelation>& Scenario::getAllOwnPlatformRouteRelation(void)
 	{
 		// TODO: 在此处插入 return 语句
-		return m_OwnPlatformRouteRelation; 
+		return m_OwnPlatformRouteRelation;
 	}
 
 	bool Scenario::setPtr2Vertex(const unsigned int & pos, std::shared_ptr<Vertex> ptr2Entity)
